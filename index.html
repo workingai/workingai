@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>직장인들의 무기가 되는 AI 활용법 Workbook</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Pretendard Font -->
+    <link rel="stylesheet" as="style" crossorigin
+        href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#F2F8F5',
+                            100: '#E6F2ED',
+                            500: '#2A6B52',
+                            600: '#1D4E3A',
+                        },
+                        neutral: {
+                            50: '#F8F7F4',
+                            100: '#F2F1EE',
+                            200: '#E5E3DF',
+                            300: '#DDDBD5',
+                            400: '#B0AEA8',
+                            500: '#8A8881',
+                            600: '#605E59',
+                            900: '#1A1A18',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Pretendard', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Pretendard', -apple-system, sans-serif;
+            background-color: #F2F1EE;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen text-neutral-900 antialiased flex flex-col justify-between">
+    <!-- Top brand bar -->
+    <div class="fixed top-0 left-0 w-full h-[5px] bg-brand-500 z-50"></div>
+
+    <!-- Header -->
+    <header class="w-full max-w-7xl mx-auto pt-16 pb-4 px-6 text-center">
+        <div class="mb-4 inline-flex items-center gap-2">
+            <span
+                class="bg-brand-100 text-brand-600 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">Working
+                AI</span>
+            <span class="bg-neutral-200 text-neutral-600 text-xs font-bold px-3 py-1 rounded-full">실습 인덱스</span>
+        </div>
+        <h1 class="text-3xl md:text-5xl font-black tracking-tight leading-tight text-neutral-900 mb-4">
+            직장인들의 무기가 되는 AI 활용법 <br class="sm:hidden"><span class="text-brand-500">Workbook</span>
+        </h1>
+        <p class="text-neutral-500 text-sm md:text-base max-w-2xl mx-auto">
+            업무 효율성을 극대화하고 크리에이티브를 확장하는 실무 맞춤형 AI 도구 세트입니다. <br class="hidden md:inline">원하는 실습 카드를 선택하여 바로 시작해 보세요.
+        </p>
+    </header>
+
+    <!-- Login Gate -->
+    <div id="login-gate" class="w-full max-w-md mx-auto px-6 mt-2 mb-8 hidden">
+        <div class="bg-white border border-[#DDDBD5] rounded-2xl p-6 md:p-8 shadow-sm text-center">
+            <div class="mb-4 inline-flex items-center justify-center w-12 h-12 rounded-full bg-brand-50 text-2xl">🔑</div>
+            <h2 class="text-xl font-extrabold text-neutral-900 mb-2">AI Workbook 로그인</h2>
+            <p class="text-xs md:text-sm text-neutral-500 mb-6">수업에서 제공된 비밀번호를 입력해 주세요.</p>
+            
+            <form onsubmit="checkLogin(event)" class="space-y-4">
+                <div>
+                    <input id="pwd-input" type="password" placeholder="비밀번호 입력" class="w-full px-4 py-3 border border-[#DDDBD5] bg-white text-neutral-900 text-sm md:text-base rounded-lg focus:border-brand-500 focus:outline-none placeholder-neutral-400 text-center font-mono">
+                </div>
+                <button type="submit" class="w-full h-11 bg-brand-500 hover:bg-brand-600 text-white text-sm md:text-base font-extrabold rounded-lg transition-colors shadow-xs focus:outline-none">
+                    입장하기
+                </button>
+            </form>
+            <div id="error-msg" class="text-red-600 text-xs mt-3 hidden">비밀번호가 올바르지 않습니다.</div>
+        </div>
+    </div>
+
+    <!-- Grid Layout -->
+    <main id="workbook-content" class="w-full max-w-7xl mx-auto px-6 mb-16 flex-1 flex items-center justify-center hidden">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 w-full">
+
+             <!-- 카드 0: 강의 교안 뷰어 -->
+             <a href="pdfviewer.html"
+                 class="group flex flex-col justify-between border border-[#DDDBD5] rounded-2xl p-6 bg-white hover:border-brand-500 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+                 <div>
+                     <div
+                         class="w-12 h-12 rounded-xl bg-brand-50 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">
+                         📖</div>
+                     <h2
+                         class="text-lg font-extrabold text-neutral-900 group-hover:text-brand-500 transition-colors mb-2">
+                         강의 교안 뷰어</h2>
+                     <p class="text-xs md:text-sm text-neutral-500 leading-relaxed">
+                         수업 중에 수강생들이 쉽고 간편하게 슬라이드 강의 교안(PDF)을 볼 수 있는 실시간 뷰어입니다.
+                     </p>
+                 </div>
+                 <div
+                     class="mt-6 flex items-center text-xs font-bold text-neutral-400 group-hover:text-brand-500 transition-colors gap-1">
+                     교안 보기
+                     <svg class="w-3.5 h-3.5 transform group-hover:translate-x-1 transition-transform" fill="none"
+                         stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                         <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3">
+                         </path>
+                     </svg>
+                 </div>
+             </a>
+
+             <!-- 카드 1: 워밍업 실습 -->
+             <a href="01_wamingup.html"
+                 class="group flex flex-col justify-between border border-[#DDDBD5] rounded-2xl p-6 bg-white hover:border-brand-500 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+                <div>
+                    <div
+                        class="w-12 h-12 rounded-xl bg-brand-50 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">
+                        🔥</div>
+                    <h2
+                        class="text-lg font-extrabold text-neutral-900 group-hover:text-brand-500 transition-colors mb-2">
+                        워밍업 실습</h2>
+                    <p class="text-xs md:text-sm text-neutral-500 leading-relaxed">
+                        AI 기본 활용 능력 배양을 위해 가장 먼저 진행하는 단계별 실무 기초 워밍업 프롬프트입니다.
+                    </p>
+                </div>
+                <div
+                    class="mt-6 flex items-center text-xs font-bold text-neutral-400 group-hover:text-brand-500 transition-colors gap-1">
+                    실습 바로가기
+                    <svg class="w-3.5 h-3.5 transform group-hover:translate-x-1 transition-transform" fill="none"
+                        stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3">
+                        </path>
+                    </svg>
+                </div>
+            </a>
+
+            <!-- 카드 2: 프롬프트 빌더 -->
+            <a href="02_prompt.html"
+                class="group flex flex-col justify-between border border-[#DDDBD5] rounded-2xl p-6 bg-white hover:border-brand-500 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+                <div>
+                    <div
+                        class="w-12 h-12 rounded-xl bg-brand-50 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">
+                        🧩</div>
+                    <h2
+                        class="text-lg font-extrabold text-neutral-900 group-hover:text-brand-500 transition-colors mb-2">
+                        프롬프트 빌더</h2>
+                    <p class="text-xs md:text-sm text-neutral-500 leading-relaxed">
+                        목표, 역할, 제한, 출력 형식 조건을 조립하여 완벽하고 구체적인 명령어를 조합해 줍니다.
+                    </p>
+                </div>
+                <div
+                    class="mt-6 flex items-center text-xs font-bold text-neutral-400 group-hover:text-brand-500 transition-colors gap-1">
+                    실습 바로가기
+                    <svg class="w-3.5 h-3.5 transform group-hover:translate-x-1 transition-transform" fill="none"
+                        stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3">
+                        </path>
+                    </svg>
+                </div>
+            </a>
+
+            <!-- 카드 3: 앱스스크립트 자동화 -->
+            <a href="03_apps_scrpt.html"
+                class="group flex flex-col justify-between border border-[#DDDBD5] rounded-2xl p-6 bg-white hover:border-brand-500 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+                <div>
+                    <div
+                        class="w-12 h-12 rounded-xl bg-brand-50 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">
+                        🤖</div>
+                    <h2
+                        class="text-lg font-extrabold text-neutral-900 group-hover:text-brand-500 transition-colors mb-2">
+                        앱스스크립트 자동화</h2>
+                    <p class="text-xs md:text-sm text-neutral-500 leading-relaxed">
+                        구글 스프레드시트와 연동하여 자동으로 정보를 수집하고 배포하는 비즈니스 자동화 코드 실습입니다.
+                    </p>
+                </div>
+                <div
+                    class="mt-6 flex items-center text-xs font-bold text-neutral-400 group-hover:text-brand-500 transition-colors gap-1">
+                    실습 바로가기
+                    <svg class="w-3.5 h-3.5 transform group-hover:translate-x-1 transition-transform" fill="none"
+                        stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3">
+                        </path>
+                    </svg>
+                </div>
+            </a>
+
+            <!-- 카드 4: 노트북LM -->
+            <a href="04_notebooklm.html"
+                class="group flex flex-col justify-between border border-[#DDDBD5] rounded-2xl p-6 bg-white hover:border-brand-500 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+                <div>
+                    <div
+                        class="w-12 h-12 rounded-xl bg-brand-50 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">
+                        🖼️</div>
+                    <h2
+                        class="text-lg font-extrabold text-neutral-900 group-hover:text-brand-500 transition-colors mb-2">
+                        노트북LM</h2>
+                    <p class="text-xs md:text-sm text-neutral-500 leading-relaxed">
+                        다양한 대용량 소스 분석을 바탕으로 맞춤형 기획 요약문 및 동영상 오버뷰 대본 등을 설계합니다.
+                    </p>
+                </div>
+                <div
+                    class="mt-6 flex items-center text-xs font-bold text-neutral-400 group-hover:text-brand-500 transition-colors gap-1">
+                    실습 바로가기
+                    <svg class="w-3.5 h-3.5 transform group-hover:translate-x-1 transition-transform" fill="none"
+                        stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3">
+                        </path>
+                    </svg>
+                </div>
+            </a>
+
+
+            <!-- 카드 5: 미니프로젝트 1 -->
+            <a href="05_miniproject1.html"
+                class="group flex flex-col justify-between border border-[#DDDBD5] rounded-2xl p-6 bg-white hover:border-brand-500 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+                <div>
+                    <div
+                        class="w-12 h-12 rounded-xl bg-brand-50 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">
+                        🚀</div>
+                    <h2
+                        class="text-lg font-extrabold text-neutral-900 group-hover:text-brand-500 transition-colors mb-2">
+                        미니프로젝트 1</h2>
+                    <p class="text-xs md:text-sm text-neutral-500 leading-relaxed">
+                        AI를 활용한 단계별 시장 리서치 진행, 보고서 세부 목차 기획 및 슬라이드 구성안 초안을 설계합니다.
+                    </p>
+                </div>
+                <div
+                    class="mt-6 flex items-center text-xs font-bold text-neutral-400 group-hover:text-brand-500 transition-colors gap-1">
+                    실습 바로가기
+                    <svg class="w-3.5 h-3.5 transform group-hover:translate-x-1 transition-transform" fill="none"
+                        stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3">
+                        </path>
+                    </svg>
+                </div>
+            </a>
+
+            <!-- 카드 6: AI 에이전트 -->
+            <a href="07_aiagent.html"
+                class="group flex flex-col justify-between border border-[#DDDBD5] rounded-2xl p-6 bg-white hover:border-brand-500 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+                <div>
+                    <div
+                        class="w-12 h-12 rounded-xl bg-brand-50 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">
+                        🎨</div>
+                    <h2
+                        class="text-lg font-extrabold text-neutral-900 group-hover:text-brand-500 transition-colors mb-2">
+                        AI 에이전트</h2>
+                    <p class="text-xs md:text-sm text-neutral-500 leading-relaxed">
+                        HTML 및 JS 기능을 구현하고, QR 코드 생성이나 이미지 가공 등 실질적인 브라우저 웹앱 개발 프롬프트를 만듭니다.
+                    </p>
+                </div>
+                <div
+                    class="mt-6 flex items-center text-xs font-bold text-neutral-400 group-hover:text-brand-500 transition-colors gap-1">
+                    실습 바로가기
+                    <svg class="w-3.5 h-3.5 transform group-hover:translate-x-1 transition-transform" fill="none"
+                        stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3">
+                        </path>
+                    </svg>
+                </div>
+            </a>
+
+            <!-- 카드 7: 이미지 생성 및 영상화 -->
+            <a href="06_aivideo.html"
+                class="group flex flex-col justify-between border border-[#DDDBD5] rounded-2xl p-6 bg-white hover:border-brand-500 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+                <div>
+                    <div
+                        class="w-12 h-12 rounded-xl bg-brand-50 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">
+                        🎬</div>
+                    <h2
+                        class="text-lg font-extrabold text-neutral-900 group-hover:text-brand-500 transition-colors mb-2">
+                        이미지 생성 및 영상화</h2>
+                    <p class="text-xs md:text-sm text-neutral-500 leading-relaxed">
+                        가상 모델 생성 프롬프트 및 스케치의 실제품 비디오 변환을 위한 모핑 기획안과 쇼호스트 스크립트 도구입니다.
+                    </p>
+                </div>
+                <div
+                    class="mt-6 flex items-center text-xs font-bold text-neutral-400 group-hover:text-brand-500 transition-colors gap-1">
+                    실습 바로가기
+                    <svg class="w-3.5 h-3.5 transform group-hover:translate-x-1 transition-transform" fill="none"
+                        stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3">
+                        </path>
+                    </svg>
+                </div>
+            </a>
+
+            <!-- 카드 8: 미니프로젝트 2 -->
+            <a href="m2_miniproject2.html"
+                class="group flex flex-col justify-between border border-[#DDDBD5] rounded-2xl p-6 bg-white hover:border-brand-500 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+                <div>
+                    <div
+                        class="w-12 h-12 rounded-xl bg-brand-50 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">
+                        🚀</div>
+                    <h2
+                        class="text-lg font-extrabold text-neutral-900 group-hover:text-brand-500 transition-colors mb-2">
+                        미니프로젝트 2</h2>
+                    <p class="text-xs md:text-sm text-neutral-500 leading-relaxed">
+                        업무 요구사항을 바탕으로 아이디어를 도출하고, AI 작동 지침(시스템 프롬프트)을 거쳐 동작하는 단일 HTML 웹앱을 제작합니다.
+                    </p>
+                </div>
+                <div
+                    class="mt-6 flex items-center text-xs font-bold text-neutral-400 group-hover:text-brand-500 transition-colors gap-1">
+                    실습 바로가기
+                    <svg class="w-3.5 h-3.5 transform group-hover:translate-x-1 transition-transform" fill="none"
+                        stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3">
+                        </path>
+                    </svg>
+                </div>
+            </a>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="w-full border-t border-[#DDDBD5] bg-white py-6 text-center text-xs text-[#8A8881]">
+        <div class="max-w-7xl mx-auto px-6">
+            © 2026 Working AI. All rights reserved. | <a href="https://workingai.kr" target="_blank"
+                class="hover:text-brand-500 underline transition-colors">workingai.kr</a>
+        </div>
+    </footer>
+
+    <script>
+        const PWD_HASH = "workingai";
+
+        function checkLogin(e) {
+            e.preventDefault();
+            const val = document.getElementById('pwd-input').value;
+            const errorMsg = document.getElementById('error-msg');
+            
+            if (val === PWD_HASH) {
+                localStorage.setItem('workbook_logged_in', 'true');
+                showContent();
+            } else {
+                errorMsg.classList.remove('hidden');
+                document.getElementById('pwd-input').focus();
+            }
+        }
+
+        function showContent() {
+            document.getElementById('login-gate').classList.add('hidden');
+            document.getElementById('workbook-content').classList.remove('hidden');
+            document.getElementById('workbook-content').classList.add('flex');
+        }
+
+        // Init check
+        window.addEventListener('DOMContentLoaded', () => {
+            if (localStorage.getItem('workbook_logged_in') === 'true') {
+                showContent();
+            } else {
+                document.getElementById('login-gate').classList.remove('hidden');
+                document.getElementById('workbook-content').classList.add('hidden');
+                document.getElementById('workbook-content').classList.remove('flex');
+            }
+        });
+    </script>
+</body>
+
+</html>
