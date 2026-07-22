@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WORKING AI · 이미지 생성 및 영상화</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Pretendard Font -->
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+  <!-- IBM Plex Mono Font -->
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#F2F8F5',
+              100: '#E6F2ED',
+              500: '#2A6B52',
+              600: '#1D4E3A',
+            },
+            neutral: {
+              50: '#F8F7F4',
+              100: '#F2F1EE',
+              200: '#E5E3DF',
+              300: '#DDDBD5',
+              400: '#B0AEA8',
+              500: '#8A8881',
+              600: '#605E59',
+              900: '#1A1A18',
+            }
+          },
+          fontFamily: {
+            sans: ['Pretendard', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+            mono: ['IBM Plex Mono', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    :root{
+      --bg:#F2F1EE; --card:#FFFFFF; --line:#DDDBD5; --green:#2A6B52; --green-dark:#1D4E3A;
+      --panel:#E6F2ED; --text:#1A1A18; --muted:#77736B; --soft:#F8F7F4;
+    }
+    body {
+      font-family: 'Pretendard', -apple-system, sans-serif;
+      background-color: #F2F1EE;
+    }
+    /* Custom Scrollbars */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #F2F1EE;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #DDDBD5;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #B0AEA8;
+    }
+    .toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%) translateY(20px);opacity:0;background:#1A1A18;color:#fff;border-radius:999px;padding:12px 18px;font-size:13px;font-weight:700;transition:.25s;z-index:20;box-shadow:0 4px 12px rgba(0,0,0,0.15)}
+    .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+  </style>
+</head>
+<body class="min-h-screen text-neutral-900 antialiased flex flex-col h-screen overflow-hidden pt-[5px]">
+  <!-- Top brand bar -->
+  <div class="fixed top-0 left-0 w-full h-[5px] bg-brand-500 z-50"></div>
+
+  <!-- Navigation Bar (Shared) -->
+  <div id="navbar-placeholder"></div>
+  <script src="../navbar.js"></script>
+
+  <!-- Content Container -->
+  <div class="flex-1 flex flex-col lg:flex-row lg:overflow-hidden">
+    <!-- ===== Left Sidebar Navigation ===== -->
+    <aside
+      class="flex-shrink-0 w-full lg:w-64 bg-white border-b lg:border-b-0 lg:border-r border-[#DDDBD5] flex flex-col lg:h-full pt-4">
+    <!-- Nav list -->
+    <p class="hidden lg:block px-5 mb-1.5 text-[11px] font-bold uppercase tracking-wider text-neutral-400">실습 목록</p>
+    <nav class="flex lg:flex-col gap-1 px-3 pb-4 overflow-x-auto lg:overflow-y-auto">
+
+      <a href="01_wamingup.html"
+        class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
+        <span class="text-lg leading-none">🔥</span>
+        <span>워밍업 실습</span>
+      </a>
+      <a href="02_prompt.html"
+        class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
+        <span class="text-lg leading-none">🧩</span>
+        <span>프롬프트 빌더</span>
+      </a>
+      <a href="03_apps_scrpt.html"
+        class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
+        <span class="text-lg leading-none">🤖</span>
+        <span>앱스스크립트 자동화</span>
+      </a>
+      <a href="04_notebooklm.html"
+        class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
+        <span class="text-lg leading-none">🖼️</span>
+        <span>노트북LM</span>
+      </a>
+      <a href="05_miniproject1.html"
+        class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
+        <span class="text-lg leading-none">🚀</span>
+        <span>미니프로젝트 1</span>
+      </a>
+      <a href="07_aiagent.html"
+        class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
+        <span class="text-lg leading-none">🎨</span>
+        <span>AI 에이전트</span>
+      </a>
+      <a href="06_aivideo.html"
+        class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-bold text-brand-600 bg-brand-100 whitespace-nowrap transition-colors">
+        <span class="text-lg leading-none">🎬</span>
+        <span>이미지 생성 및 영상화</span>
+      </a>
+      <a href="m2_miniproject2.html"
+        class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
+        <span class="text-lg leading-none">🚀</span>
+        <span>미니프로젝트 2</span>
+      </a>
+    </nav>
+    <!-- Sidebar Footer (Banner) -->
+    <div class="mt-auto border-t border-[#DDDBD5] p-4 bg-white flex-shrink-0">
+      <!-- Dropup Menu Container -->
+      <div class="relative mb-2.5">
+        <button id="quick-links-btn" onclick="toggleQuickLinks(event)" class="w-full flex items-center justify-between py-2 px-3 border border-[#DDDBD5] hover:border-brand-500 bg-white hover:bg-neutral-50 text-neutral-900 rounded-xl transition-all duration-300 shadow-xs text-sm font-extrabold focus:outline-none">
+          <span class="flex items-center gap-2 text-neutral-600 hover:text-neutral-900">
+            <span>🔗</span> 주요 서비스 바로가기
+          </span>
+          <svg id="quick-links-arrow" class="w-3.5 h-3.5 text-neutral-400 transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5"></path>
+          </svg>
+        </button>
+        <!-- Dropup menu: hidden by default, absolute positioning above the button -->
+        <div id="quick-links-menu" class="hidden absolute bottom-full left-0 w-full mb-2 bg-white border border-[#DDDBD5] rounded-xl shadow-lg z-50 overflow-hidden py-1">
+          <a href="https://chatgpt.com" target="_blank" class="block px-4 py-2.5 text-xs text-neutral-700 hover:bg-brand-50 hover:text-brand-600 transition-colors font-bold border-b border-[#F2F1EE]">챗GPT</a>
+          <a href="https://gemini.google.com" target="_blank" class="block px-4 py-2.5 text-xs text-neutral-700 hover:bg-brand-50 hover:text-brand-600 transition-colors font-bold border-b border-[#F2F1EE]">제미나이</a>
+          <a href="https://claude.ai" target="_blank" class="block px-4 py-2.5 text-xs text-neutral-700 hover:bg-brand-50 hover:text-brand-600 transition-colors font-bold border-b border-[#F2F1EE]">클로드</a>
+          <a href="https://sheets.google.com" target="_blank" class="block px-4 py-2.5 text-xs text-neutral-700 hover:bg-brand-50 hover:text-brand-600 transition-colors font-bold border-b border-[#F2F1EE]">구글 시트</a>
+          <a href="https://docs.google.com/videos/create?usp=vids_alc&authuser=0" target="_blank" class="block px-4 py-2.5 text-xs text-neutral-700 hover:bg-brand-50 hover:text-brand-600 transition-colors font-bold border-b border-[#F2F1EE]">구글 Vids</a>
+          <a href="https://canva.com" target="_blank" class="block px-4 py-2.5 text-xs text-neutral-700 hover:bg-brand-50 hover:text-brand-600 transition-colors font-bold border-b border-[#F2F1EE]">캔바</a>
+          <a href="https://aistudio.google.com" target="_blank" class="block px-4 py-2.5 text-xs text-neutral-700 hover:bg-brand-50 hover:text-brand-600 transition-colors font-bold border-b border-[#F2F1EE]">AI Studio</a>
+          <a href="https://workspace.google.com/experiments" target="_blank" class="block px-4 py-2.5 text-xs text-neutral-700 hover:bg-brand-50 hover:text-brand-600 transition-colors font-bold">Workspace Experiments</a>
+        </div>
+      </div>
+      <script>
+        function toggleQuickLinks(e) {
+          e.stopPropagation();
+          const menu = document.getElementById('quick-links-menu');
+          const arrow = document.getElementById('quick-links-arrow');
+          const isHidden = menu.classList.contains('hidden');
+          if (isHidden) {
+            menu.classList.remove('hidden');
+            arrow.classList.add('rotate-180');
+          } else {
+            menu.classList.add('hidden');
+            arrow.classList.remove('rotate-180');
+          }
+        }
+        document.addEventListener('click', (e) => {
+          const menu = document.getElementById('quick-links-menu');
+          const btn = document.getElementById('quick-links-btn');
+          const arrow = document.getElementById('quick-links-arrow');
+          if (menu && !menu.classList.contains('hidden') && !menu.contains(e.target) && !btn.contains(e.target)) {
+            menu.classList.add('hidden');
+            arrow.classList.remove('rotate-180');
+          }
+        });
+      </script>
+
+      <a href="pdfviewer.html" class="block w-full text-center py-3 px-4 border border-[#DDDBD5] hover:border-brand-500 bg-brand-50 hover:bg-brand-100 text-brand-600 rounded-xl transition-all duration-300 shadow-xs" style="text-decoration: none;">
+        <span class="block text-xs font-bold text-neutral-400 mb-0.5 tracking-wider uppercase">Slide PDF</span>
+        <span class="block text-sm font-extrabold tracking-tight">강의 교안 뷰어</span>
+      </a>
+    </div>
+  </aside>
+
+  <!-- ===== Main Content ===== -->
+  <main class="flex-1 flex flex-col overflow-y-auto pt-8 lg:pt-10 pb-8 px-4 md:px-8 lg:px-10">
+    <!-- Header Area -->
+    <header class="mb-4 flex-shrink-0 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+      <div>
+        <div class="mb-2">
+          <span class="inline-block bg-brand-500 text-white rounded-full px-4 py-1 text-[11.5px] font-mono font-extrabold tracking-wider uppercase">AI Video</span>
+        </div>
+        <h1 id="header-title" class="text-2xl md:text-3xl font-extrabold tracking-tight leading-tight text-neutral-900">
+          AI활용 가상모델 만들기
+        </h1>
+      </div>
+      <!-- Navigation buttons in header -->
+      <div class="flex items-center gap-2 flex-shrink-0 mb-1">
+        <button id="btn-tab-1" class="w-9 h-9 flex items-center justify-center rounded-full font-bold text-sm transition-all focus:outline-none bg-brand-500 text-white border border-brand-500" onclick="showTab(1)">
+          1
+        </button>
+        <button id="btn-tab-2" class="w-9 h-9 flex items-center justify-center rounded-full font-bold text-sm transition-all focus:outline-none bg-white text-brand-500 border border-[#DDDBD5] hover:bg-neutral-50" onclick="showTab(2)">
+          2
+        </button>
+        <button id="btn-tab-3" class="w-9 h-9 flex items-center justify-center rounded-full font-bold text-sm transition-all focus:outline-none bg-white text-brand-500 border border-[#DDDBD5] hover:bg-neutral-50" onclick="showTab(3)">
+          3
+        </button>
+        <button id="btn-tab-4" class="w-9 h-9 flex items-center justify-center rounded-full font-bold text-sm transition-all focus:outline-none bg-white text-brand-500 border border-[#DDDBD5] hover:bg-neutral-50" onclick="showTab(4)">
+          4
+        </button>
+      </div>
+    </header>
+
+    <section class="border border-[#DDDBD5] rounded-2xl p-5 md:p-6 bg-white shadow-sm flex flex-col">
+      <!-- Card Head -->
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#DDDBD5] pb-4 mb-4 flex-shrink-0">
+        <div>
+          <h2 id="tool-title" class="text-lg md:text-xl font-extrabold text-neutral-900">AI활용 가상모델 프롬프트</h2>
+          <p id="tool-desc" class="text-xs md:text-sm text-[#605E59] mt-1">아래 프롬프트를 사용하여 원하는 컨셉의 기업 홍보 및 채용 가상 모델 이미지를 생성합니다.</p>
+        </div>
+        <div class="flex items-center gap-2 flex-shrink-0 animate-fade-in" id="card-links">
+              <!-- Dropdown for Tab 2 (Visualcomm) -->
+              <div id="vis-dropdown-container" class="hidden relative inline-block w-full sm:w-64">
+                <select id="vis-tool-select" onchange="changeVisTool(this.value)" class="w-full bg-white border border-[#DDDBD5] hover:border-brand-500 text-neutral-900 px-4 py-2 rounded-xl shadow-xs font-bold text-xs md:text-sm focus:outline-none appearance-none cursor-pointer pr-10">
+                  <option value="vis">SVG 형식의 차트 만들기</option>
+                  <option value="choro">코로플렉스 형식 인포그래픽 만들기</option>
+                  <option value="poster">공지 포스터 만들기</option>
+                  <option value="signature">이메일 서명 만들기</option>
+                </select>
+                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-neutral-500">
+                  <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                </div>
+              </div>
+
+              <a id="sub-link-chatgpt" href="https://chatgpt.com/" target="_blank" class="flex-shrink-0 inline-flex items-center justify-center gap-2 px-4 h-9 border border-[#DDDBD5] hover:border-emerald-500 bg-white hover:bg-emerald-50 text-neutral-900 hover:text-emerald-700 font-bold text-xs md:text-sm rounded-lg transition-all shadow-xs focus:outline-none" style="text-decoration: none;">
+                <svg class="w-3.5 h-3.5 text-neutral-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"></path>
+                </svg>
+                ChatGPT 바로가기              </a>
+              <a id="sub-link-flow" href="https://flow.google" target="_blank" class="flex-shrink-0 inline-flex items-center justify-center gap-2 px-4 h-9 border border-[#DDDBD5] hover:border-blue-500 bg-white hover:bg-blue-50 text-neutral-900 hover:text-blue-700 font-bold text-xs md:text-sm rounded-lg transition-all shadow-xs focus:outline-none" style="text-decoration: none;">
+                <svg class="w-3.5 h-3.5 text-neutral-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"></path>
+                </svg>
+                Flow 바로가기              </a>
+        </div>
+      </div>
+
+      <!-- ================= CONTAINER 1: AI활용 가상모델 만들기 (탭 1) ================= -->
+      <div id="tab-1-container" class="flex flex-col gap-6">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <section class="flex flex-col border border-[#DDDBD5] rounded-xl bg-brand-100 overflow-hidden shadow-xs">
+            <div class="p-4 pb-2.5 flex-shrink-0 bg-brand-100">
+              <strong class="block text-neutral-900 text-base font-extrabold mb-1">👩 가상모델 생성 프롬프트</strong>
+              <span class="block text-[#605E59] text-xs leading-tight">가상 인물 실사 이미지를 생성하기 위한 기본 프롬프트입니다. (수정 가능)</span>
+            </div>
+            <textarea id="prompt-model" class="w-full p-4 border-t border-b border-l-0 border-r-0 border-[#DDDBD5] bg-white text-neutral-900 text-sm md:text-base leading-relaxed placeholder-neutral-400 focus:border-brand-500 focus:ring-0 outline-none resize-none h-48 font-mono leading-relaxed" style="font-family: 'Pretendard', sans-serif;">30대 초반의 한국인 여성 가상 모델, 기업 홍보 및 채용 커뮤니케이션용 이미지.
+배경: 밝고 깔끔한 흰색 스튜디오.
+표정: 자신감 있고 신뢰감 있는 미소, 카메라를 정면으로 바라보는 시선.
+스타일: 단정한 비즈니스 캐주얼, 고화질 실사 스타일, 브랜드 웹사이트 및 채용 페이지용.
+화각 및 비율: 16:9 가로형 이미지, 가로 화면 (Landscape orientation).</textarea>
+            <div class="p-4 bg-white flex justify-end">
+              <button onclick="copyPrompt('prompt-model')" class="px-6 h-11 bg-brand-500 hover:bg-brand-600 text-white text-sm md:text-base font-extrabold rounded-lg transition-all shadow-sm flex items-center justify-center gap-1.5 focus:outline-none">
+                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="9" y="9" width="11" height="11" rx="2" ry="2" stroke-linecap="round" stroke-linejoin="round"></rect>
+                  <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+                프롬프트 복사
+              </button>
+            </div>
+          </section>
+
+          <section class="flex flex-col border border-[#DDDBD5] rounded-xl bg-brand-100 overflow-hidden shadow-xs">
+            <div class="p-4 pb-2.5 flex-shrink-0 bg-brand-100">
+              <strong class="block text-neutral-900 text-base font-extrabold mb-1">🖼️ 배경 상황 변경</strong>
+              <span class="block text-[#605E59] text-xs leading-tight">동일 모델의 다른 상황/배경을 연출하기 위한 프롬프트입니다. (수정 가능)</span>
+            </div>
+            <textarea id="prompt-bg-change" class="w-full p-4 border-t border-b border-l-0 border-r-0 border-[#DDDBD5] bg-white text-neutral-900 text-sm md:text-base leading-relaxed placeholder-neutral-400 focus:border-brand-500 focus:ring-0 outline-none resize-none h-48 font-mono leading-relaxed" style="font-family: 'Pretendard', sans-serif;">앞서 생성한 모델 이미지를 활용해서
+동일한 인물이 아래 상황에 있는 이미지를 만들어줘.
+- 밝은 카페에서 노트북 작업 중인 모습
+- 회의실에서 프레젠테이션하는 모습
+- 야외 공원에서 걷고 있는 모습</textarea>
+            <div class="p-4 bg-white flex justify-end">
+              <button onclick="copyPrompt('prompt-bg-change')" class="px-6 h-11 bg-brand-500 hover:bg-brand-600 text-white text-sm md:text-base font-extrabold rounded-lg transition-all shadow-sm flex items-center justify-center gap-1.5 focus:outline-none">
+                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="9" y="9" width="11" height="11" rx="2" ry="2" stroke-linecap="round" stroke-linejoin="round"></rect>
+                  <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+                프롬프트 복사
+              </button>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <!-- ================= CONTAINER 2: 문서 시각화 (탭 2) ================= -->
+      <div id="tab-2-container" class="hidden flex flex-col gap-6">
+
+        <!-- Sub Tab Content 1: SVG 차트 -->
+        <div id="vis-content-vis" class="flex flex-col gap-6">
+          <section class="flex flex-col border border-[#DDDBD5] rounded-xl bg-brand-100 overflow-hidden shadow-xs">
+            <div class="p-4 pb-2.5 flex-shrink-0 bg-brand-100">
+              <strong class="block text-neutral-900 text-base font-extrabold mb-1">✍️ 차트 생성 프롬프트</strong>
+              <span class="block text-[#605E59] text-xs leading-tight">아래 지시 사항을 활용해 이미지를 만듭니다. (수정 가능)</span>
+            </div>
+            <textarea id="prompt-vis" class="w-full p-4 border-t border-b border-l-0 border-r-0 border-[#DDDBD5] bg-white text-neutral-900 text-sm md:text-base leading-relaxed placeholder-neutral-400 focus:border-brand-500 focus:ring-0 outline-none resize-none h-64 md:h-80 font-mono leading-relaxed" style="font-family: 'Pretendard', sans-serif;">[관심 있는 주제 (예: 최근 5년간 국내 OTT 서비스 점유율 변화)]에 대해 조사한 뒤,
+그 결과를 16:9 비율의 SVG 포맷의 인포그래픽을 만들어줘.
+
+구성: [원하는 차트 형태 — 예: 범프 차트(순위 변동), 막대 차트, 도넛 차트 등]
+조사한 데이터를 기준으로 직접 항목과 수치를 구성해줘.
+
+디자인 조건:
+- 항목마다 다른 색상의 선 또는 막대로 구분
+- 각 데이터 포인트에 명확한 라벨 표시
+- 선명하고 구분이 잘 되는 색상 사용 (블루, 그린, 코랄, 퍼플, 앰버 등)
+- 가장 중요한 항목(예: 1위, 최고 성장률 등)은 더 굵게 강조
+- 좌측에 세로축 라벨, 하단에 가로축 라벨
+- 배경: 흰색
+- 깔끔한 모던 대시보드 스타일, 색상 구분 명확히</textarea>
+            <div class="p-4 bg-white flex justify-end gap-2 border-t border-[#DDDBD5]">
+              <button onclick="copyPrompt('prompt-vis')" class="px-6 h-11 bg-brand-500 hover:bg-brand-600 text-white text-sm md:text-base font-extrabold rounded-lg transition-all shadow-sm flex items-center justify-center gap-1.5 focus:outline-none">
+                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="9" y="9" width="11" height="11" rx="2" ry="2" stroke-linecap="round" stroke-linejoin="round"></rect>
+                  <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+                프롬프트 복사
+              </button>
+            </div>
+          </section>
+        </div>
+
+        <!-- Sub Tab Content 2: 코로플렉스 지도 -->
+        <div id="vis-content-choro" class="hidden flex flex-col gap-6">
+          <section class="flex flex-col border border-[#DDDBD5] rounded-xl bg-brand-100 overflow-hidden shadow-xs">
+            <div class="p-4 pb-2.5 flex-shrink-0 bg-brand-100">
+              <strong class="block text-neutral-900 text-base font-extrabold mb-1">✍️ 인포그래픽 생성 프롬프트</strong>
+              <span class="block text-[#605E59] text-xs leading-tight">아래 지시 사항을 활용해 이미지를 만듭니다. (수정 가능)</span>
+            </div>
+            <textarea id="prompt-choro" class="w-full p-4 border-t border-b border-l-0 border-r-0 border-[#DDDBD5] bg-white text-neutral-900 text-sm md:text-base leading-relaxed placeholder-neutral-400 focus:border-brand-500 focus:ring-0 outline-none resize-none h-64 md:h-80 font-mono leading-relaxed" style="font-family: 'Pretendard', sans-serif;">최근 1년간 [전 세계 주요국의 기업 생성형 AI 도입률]에 대해 조사한 뒤,
+그 결과를 코로플레스(choropleth) 지도 형태의 인포그래픽으로 만들어줘.
+
+조사한 데이터를 기준으로 직접 국가와 수치를 구성해줘.
+
+구성: [코로플레스 지도 + 범례 + 상/하위 국가 하이라이트 박스]
+
+디자인 조건:
+- 지도 단위: 전 세계 국가별 (G20 + 주요 IT 강국 중심)
+- 도입률이 높을수록 진한 색, 낮을수록 옅은 색으로 그라데이션 표현
+- 색상 스케일: 단일색 그라데이션 (옅은 민트 → 진한 그린)
+- 범례 구간은 5단계로 나누고 각 구간 수치 범위를 명확히 표기
+- 국경선은 얇고 깔끔하게 (옅은 회색 1px)
+- 데이터 없는 국가는 옅은 회색 + 빗금으로 구분
+- 상위 3개국, 하위 3개국은 국가명+수치 라벨로 직접 강조
+- 범례는 하단에 가로형 그라데이션 바 + 구간 수치로 표시
+- 배경: 흰색, 바다는 옅은 회색(#F8F9FA)
+- 깔끔한 모던 대시보드 스타일, 제목·부제·데이터 출처 포함
+- 16:9 비율</textarea>
+            <div class="p-4 bg-white flex justify-end gap-2 border-t border-[#DDDBD5]">
+              <button onclick="copyPrompt('prompt-choro')" class="px-6 h-11 bg-brand-500 hover:bg-brand-600 text-white text-sm md:text-base font-extrabold rounded-lg transition-all shadow-sm flex items-center justify-center gap-1.5 focus:outline-none">
+                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="9" y="9" width="11" height="11" rx="2" ry="2" stroke-linecap="round" stroke-linejoin="round"></rect>
+                  <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+                프롬프트 복사
+              </button>
+            </div>
+          </section>
+        </div>
+
+        <!-- Sub Tab Content 3: 공지 포스터 -->
+        <div id="vis-content-poster" class="hidden flex flex-col gap-6">
+          <section class="flex flex-col border border-[#DDDBD5] rounded-xl bg-brand-100 overflow-hidden shadow-xs">
+            <div class="p-4 pb-2.5 flex-shrink-0 bg-brand-100">
+              <strong class="block text-neutral-900 text-base font-extrabold mb-1">✍️ 공지 포스터 생성 프롬프트</strong>
+              <span class="block text-[#605E59] text-xs leading-tight">아래 지시 사항을 활용해 이미지를 만듭니다. (수정 가능)</span>
+            </div>
+            <textarea id="prompt-poster" class="w-full p-4 border-t border-b border-l-0 border-r-0 border-[#DDDBD5] bg-white text-neutral-900 text-sm md:text-base leading-relaxed placeholder-neutral-400 focus:border-brand-500 focus:ring-0 outline-none resize-none h-64 md:h-80 font-mono leading-relaxed" style="font-family: 'Pretendard', sans-serif;">아래 내용에 대해 조사한 뒤,
+조사한 내용을 바탕으로 사내 공유용 포스터 1장을 만들어줘.
+
+조사 내용: [예: 우리 업무에 적용할 수 있는 AI 도구 5가지]
+
+구성:
+- 제목과 핵심 메시지를 상단에 크게 배치
+- 조사한 내용을 3~5개 항목으로 정리해서 본문에 배치
+- 항목마다 도구명·핵심 기능·활용 시간 절감 효과 등 정보 포함
+
+디자인 조건:
+- 비율: 3:4 (세로형 포스터) 또는 16:9 (사내 게시판용)
+- 포인트 컬러 1~2가지로 통일
+- 항목별로 아이콘 또는 간단한 일러스트 활용
+- 가독성 높은 폰트, 핵심 키워드와 수치는 굵게 강조
+- 배경: 흰색 또는 깔끔한 단색
+- 한눈에 정보가 들어오는 인포그래픽형 포스터 스타일</textarea>
+            <div class="p-4 bg-white flex justify-end gap-2 border-t border-[#DDDBD5]">
+              <button onclick="copyPrompt('prompt-poster')" class="px-6 h-11 bg-brand-500 hover:bg-brand-600 text-white text-sm md:text-base font-extrabold rounded-lg transition-all shadow-sm flex items-center justify-center gap-1.5 focus:outline-none">
+                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="9" y="9" width="11" height="11" rx="2" ry="2" stroke-linecap="round" stroke-linejoin="round"></rect>
+                  <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+                프롬프트 복사
+              </button>
+            </div>
+          </section>
+        </div>
+
+        <!-- Sub Tab Content 4: 이메일 서명 -->
+        <div id="vis-content-signature" class="hidden flex flex-col gap-6">
+          <section class="flex flex-col border border-[#DDDBD5] rounded-xl bg-brand-100 overflow-hidden shadow-xs">
+            <div class="p-4 pb-2.5 flex-shrink-0 bg-brand-100">
+              <strong class="block text-neutral-900 text-base font-extrabold mb-1">✍️ 이메일 서명 생성 프롬프트</strong>
+              <span class="block text-[#605E59] text-xs leading-tight">아래 지시 사항을 활용해 이미지를 만듭니다. (수정 가능)</span>
+            </div>
+            <textarea id="prompt-signature" class="w-full p-4 border-t border-b border-l-0 border-r-0 border-[#DDDBD5] bg-white text-neutral-900 text-sm md:text-base leading-relaxed placeholder-neutral-400 focus:border-brand-500 focus:ring-0 outline-none resize-none h-64 md:h-80 font-mono leading-relaxed" style="font-family: 'Pretendard', sans-serif;">첨부한 로고 이미지를 분석해줘.
+로고의 주요 색상과 브랜드 스타일을 파악한 뒤
+아래 정보로 이메일 서명 이미지를 만들어줘.
+
+[서명 정보]
+이름: [          ]
+직책: [          ]
+부서: [          ]
+회사명: [          ]
+이메일: [          ]
+전화번호: [          ]
+웹사이트: [          ]
+
+[디자인 조건]
+- 비율: 4:1 (가로 600px × 세로 150px)
+- 좌측: 로고 배치
+- 로고 우측에 세로 구분선 후 인적사항 나열
+- 배경색·포인트 컬러는 로고 색상에서 추출
+- 간결하고 전문적인 비즈니스 스타일
+- 한글·영문 텍스트 모두 명확하게 표현
+- 여백을 충분히 줘서 답답하지 않게</textarea>
+            <div class="p-4 bg-white flex justify-end gap-2 border-t border-[#DDDBD5]">
+              <button onclick="copyPrompt('prompt-signature')" class="px-6 h-11 bg-brand-500 hover:bg-brand-600 text-white text-sm md:text-base font-extrabold rounded-lg transition-all shadow-sm flex items-center justify-center gap-1.5 focus:outline-none">
+                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="9" y="9" width="11" height="11" rx="2" ry="2" stroke-linecap="round" stroke-linejoin="round"></rect>
+                  <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+                프롬프트 복사
+              </button>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <!-- ================= CONTAINER 3: 이미지 영상화 (탭 3) ================= -->
+      <div id="tab-3-container" class="hidden flex flex-col gap-6">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          
+          <!-- 카드 1: 시작 이미지 생성 -->
+          <section class="flex flex-col border border-[#DDDBD5] rounded-xl bg-brand-100 overflow-hidden shadow-xs">
+            <div class="p-4 pb-2.5 flex items-center justify-between bg-brand-100 flex-shrink-0">
+              <div>
+                <strong class="block text-neutral-900 text-sm md:text-base font-extrabold mb-0.5">🎨 시작 이미지 생성</strong>
+                <span class="block text-[#605E59] text-xs leading-tight">영상 시작 시점의 스케치 장면 묘사 (수정 가능)</span>
+              </div>
+            </div>
+            <textarea id="prompt-start-img" class="w-full p-4 border-t border-b border-l-0 border-r-0 border-[#DDDBD5] bg-white text-neutral-900 text-xs md:text-sm leading-relaxed placeholder-neutral-400 focus:border-brand-500 focus:ring-0 outline-none resize-none font-mono leading-relaxed" style="height: 352px; font-family: 'Pretendard', sans-serif;">나무 재질의 사무실 책상을 위에서 비스듬히 내려다본 구도.
+책상 정중앙에 놓인 종이 위에 연필로 거칠게 그린 '미래형 스마트 에스프레소 머신'의 디자인 스케치가 있다.
+종이 옆에는 연필 and 지우개가 놓여 있고, 부드러운 아침 햇살이 비치는 16:9 고해상도의 실사 사진 스타일.</textarea>
+            <div class="p-4 bg-white flex justify-end">
+              <button onclick="copyPrompt('prompt-start-img')" class="px-5 h-11 bg-brand-500 hover:bg-brand-600 text-white text-sm font-extrabold rounded-lg transition-all shadow-sm flex items-center justify-center gap-1.5 focus:outline-none">
+                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="9" y="9" width="11" height="11" rx="2" ry="2" stroke-linecap="round" stroke-linejoin="round"></rect>
+                  <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+                프롬프트 복사
+              </button>
+            </div>
+          </section>
+
+          <!-- 카드 2: 종료 이미지 생성 -->
+          <section class="flex flex-col border border-[#DDDBD5] rounded-xl bg-brand-100 overflow-hidden shadow-xs">
+            <div class="p-4 pb-2.5 flex items-center justify-between bg-brand-100 flex-shrink-0">
+              <div>
+                <strong class="block text-neutral-900 text-sm md:text-base font-extrabold mb-0.5">✨ 종료 이미지 생성</strong>
+                <span class="block text-[#605E59] text-xs leading-tight">제품이 실물로 나타난 완성 장면 묘사 (수정 가능)</span>
+              </div>
+            </div>
+            <textarea id="prompt-end-img" class="w-full p-4 border-t border-b border-l-0 border-r-0 border-[#DDDBD5] bg-white text-neutral-900 text-xs md:text-sm leading-relaxed placeholder-neutral-400 focus:border-brand-500 focus:ring-0 outline-none resize-none font-mono leading-relaxed" style="height: 352px; font-family: 'Pretendard', sans-serif;">시작 이미지와 동일한 구도의 나무 재질 사무실 책상.
+종이와 연필이 있던 자리에 스케치와 똑같은 디자인의 실제 '미래형 스마트 에스프레소 머신'이 실물로 놓여 있다.
+매트한 BLACK 메탈과 크롬 소재로 마감된 세련된 외형이며, 머신 옆에는 갓 추출된 에스프레소 잔이 놓여 있는 고해상도 제품 광고 사진 스타일.</textarea>
+            <div class="p-4 bg-white flex justify-end">
+              <button onclick="copyPrompt('prompt-end-img')" class="px-5 h-11 bg-brand-500 hover:bg-brand-600 text-white text-sm font-extrabold rounded-lg transition-all shadow-sm flex items-center justify-center gap-1.5 focus:outline-none">
+                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="9" y="9" width="11" height="11" rx="2" ry="2" stroke-linecap="round" stroke-linejoin="round"></rect>
+                  <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+                프롬프트 복사
+              </button>
+            </div>
+          </section>
+
+          <!-- 카드 3: Flow 비디오 프롬프트 -->
+          <section class="flex flex-col border border-[#DDDBD5] rounded-xl bg-brand-100 overflow-hidden shadow-xs">
+            <div class="p-4 pb-2.5 flex items-center justify-between bg-brand-100 flex-shrink-0">
+              <div>
+                <strong class="block text-neutral-900 text-sm md:text-base font-extrabold mb-0.5">🌊 Flow 비디오 프롬프트</strong>
+                <span class="block text-[#605E59] text-xs leading-tight">스케치가 실물로 모핑되는 트랜지션 연출 효과 (수정 가능)</span>
+              </div>
+            </div>
+            <textarea id="prompt-flow" class="w-full p-4 border-t border-b border-l-0 border-r-0 border-[#DDDBD5] bg-white text-neutral-900 text-xs md:text-sm leading-relaxed placeholder-neutral-400 focus:border-brand-500 focus:ring-0 outline-none resize-none font-mono leading-relaxed" style="height: 352px; font-family: 'Pretendard', sans-serif;">시작 이미지의 연필 스케치 선들이 미세하게 떨리며 황금빛 입자로 변하고, 이 입자들이 모여 실물 제품의 정교한 부품으로 조립되는 모핑 효과를 구현해줘.
+종이의 질감은 서서히 사라지고 실제 나무 책상의 결이 선명해지며 제품이 완성돼.
+카메라 앵글은 고정된 상태에서 아주 천천히 중앙으로 줌인하며 제품의 금속 광택을 강조해줘.
+
+배경음 및 사운드: 영감을 주는 미니멀한 테크 스타일의 앰비언트 배경음악을 깔아줘.</textarea>
+            <div class="p-4 bg-white flex justify-end">
+              <button onclick="copyPrompt('prompt-flow')" class="px-5 h-11 bg-brand-500 hover:bg-brand-600 text-white text-sm font-extrabold rounded-lg transition-all shadow-sm flex items-center justify-center gap-1.5 focus:outline-none">
+                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="9" y="9" width="11" height="11" rx="2" ry="2" stroke-linecap="round" stroke-linejoin="round"></rect>
+                  <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+                프롬프트 복사
+              </button>
+            </div>
+          </section>
+
+        </div>
+      </div>
+
+      <!-- ================= CONTAINER 4: 캐릭터를 활용한 제품 소개 영상 만들기 (탭 4) ================= -->
+      <div id="tab-4-container" class="hidden flex flex-col gap-6">
+        <section class="flex flex-col border border-[#DDDBD5] rounded-xl bg-brand-100 overflow-hidden shadow-xs">
+          <div class="p-4 pb-2.5 flex-shrink-0 bg-brand-100">
+            <strong class="block text-neutral-900 text-base font-extrabold mb-1">🎙️ 제품 소개 영상 프롬프트</strong>
+            <span class="block text-[#605E59] text-xs leading-tight">쇼호스트의 제품 소개 대본 프롬프트입니다. (수정 가능)</span>
+          </div>
+          <textarea id="prompt-pitch" class="w-full p-4 border-t border-b border-l-0 border-r-0 border-[#DDDBD5] bg-white text-neutral-900 text-sm md:text-base leading-relaxed placeholder-neutral-400 focus:border-brand-500 focus:ring-0 outline-none resize-none h-48 font-mono leading-relaxed" style="font-family: 'Pretendard', sans-serif;">[@캐릭터]가 쇼호스트 스타일로 [@제품]을 소개한다.
+"안녕하세요. 오늘 아주 특별한 제품을 소개시켜 드리려고 합니다.
+강력한 압력과 모던한 디자인을 모두 갖춘 에스프레소 머신인데요.
+지금 바로 경험해 보세요"</textarea>
+          <div class="p-4 bg-white flex justify-end">
+            <button onclick="copyPrompt('prompt-pitch')" class="px-6 h-11 bg-brand-500 hover:bg-brand-600 text-white text-sm md:text-base font-extrabold rounded-lg transition-all shadow-sm flex items-center justify-center gap-1.5 focus:outline-none">
+              <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <rect x="9" y="9" width="11" height="11" rx="2" ry="2" stroke-linecap="round" stroke-linejoin="round"></rect>
+                <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+              프롬프트 복사
+            </button>
+          </div>
+        </section>
+      </div>
+
+    </section>
+  </main>
+  </div>
+
+  <div id="toast" class="toast">복사되었습니다.</div>
+
+  <script>
+    if (localStorage.getItem('workbook_logged_in') !== 'true') {
+      window.location.href = '../index.html?redirect=workshop01/06_aivideo.html';
+    }
+
+    function showTab(num) {
+      const tab1Cont = document.getElementById('tab-1-container');
+      const tab2Cont = document.getElementById('tab-2-container');
+      const tab3Cont = document.getElementById('tab-3-container');
+      const tab4Cont = document.getElementById('tab-4-container');
+      const tab1Btn = document.getElementById('btn-tab-1');
+      const tab2Btn = document.getElementById('btn-tab-2');
+      const tab3Btn = document.getElementById('btn-tab-3');
+      const tab4Btn = document.getElementById('btn-tab-4');
+      
+      const headerTitle = document.getElementById('header-title');
+      const toolTitle = document.getElementById('tool-title');
+      const toolDesc = document.getElementById('tool-desc');
+      const flowBtn = document.getElementById('sub-link-flow');
+      const chatgptBtn = document.getElementById('sub-link-chatgpt');
+      const visDropdown = document.getElementById('vis-dropdown-container');
+
+      // Hide all containers
+      tab1Cont.classList.add('hidden');
+      tab2Cont.classList.add('hidden');
+      tab3Cont.classList.add('hidden');
+      tab4Cont.classList.add('hidden');
+
+      // Reset all buttons style
+      const inactive = "w-9 h-9 flex items-center justify-center rounded-full font-bold text-sm transition-all focus:outline-none bg-white text-brand-500 border border-[#DDDBD5] hover:bg-neutral-50";
+      const active = "w-9 h-9 flex items-center justify-center rounded-full font-bold text-sm transition-all focus:outline-none bg-brand-500 text-white border border-brand-500";
+      
+      tab1Btn.className = inactive;
+      tab2Btn.className = inactive;
+      tab3Btn.className = inactive;
+      tab4Btn.className = inactive;
+
+      // Default header button layout
+      if (flowBtn) flowBtn.classList.remove('hidden');
+      if (chatgptBtn) chatgptBtn.classList.remove('hidden');
+      if (visDropdown) visDropdown.classList.add('hidden');
+
+      if (num === 1) {
+        tab1Cont.classList.remove('hidden');
+        tab1Btn.className = active;
+        headerTitle.textContent = "AI활용 가상모델 만들기";
+        toolTitle.textContent = "AI활용 가상모델 프롬프트";
+        toolDesc.textContent = "아래 프롬프트를 사용하여 원하는 컨셉의 기업 홍보 및 채용 가상 모델 이미지를 생성합니다.";
+      } else if (num === 2) {
+        tab2Cont.classList.remove('hidden');
+        tab2Btn.className = active;
+        if (flowBtn) flowBtn.classList.add('hidden');
+        if (chatgptBtn) chatgptBtn.classList.add('hidden');
+        if (visDropdown) visDropdown.classList.remove('hidden');
+        
+        headerTitle.textContent = "차트 및 인포그래픽 디자인";
+        
+        // Initial tool text based on the dropdown selection
+        const currentVisTool = document.getElementById('vis-tool-select').value;
+        changeVisTool(currentVisTool);
+      } else if (num === 3) {
+        tab3Cont.classList.remove('hidden');
+        tab3Btn.className = active;
+        headerTitle.textContent = "이미지 영상화";
+        toolTitle.textContent = "이미지 영상화 기획";
+        toolDesc.textContent = "시작과 종료 이미지 소스 및 흐름 제어 프롬프트를 복사하여 고품질 AI 제품 소개 영상을 제작합니다.";
+      } else if (num === 4) {
+        tab4Cont.classList.remove('hidden');
+        tab4Btn.className = active;
+        if (flowBtn) flowBtn.classList.add('hidden');
+        headerTitle.textContent = "캐릭터를 활용한 제품 소개 영상 만들기";
+        toolTitle.textContent = "제품 소개 영상 프롬프트";
+        toolDesc.textContent = "가상 캐릭터와 대본 설정을 바탕으로 매력적인 제품 소개 쇼호스트 영상을 제작합니다.";
+      }
+    }
+
+    function changeVisTool(val) {
+      const vis = document.getElementById('vis-content-vis');
+      const choro = document.getElementById('vis-content-choro');
+      const poster = document.getElementById('vis-content-poster');
+      const sig = document.getElementById('vis-content-signature');
+      const toolTitle = document.getElementById('tool-title');
+      const toolDesc = document.getElementById('tool-desc');
+      
+      vis.classList.add('hidden');
+      choro.classList.add('hidden');
+      poster.classList.add('hidden');
+      sig.classList.add('hidden');
+      
+      if (val === 'vis') {
+        vis.classList.remove('hidden');
+        toolTitle.textContent = "SVG 차트 생성 프롬프트";
+        toolDesc.textContent = "프롬프트를 복사하여 멋진 SVG 형식 차트 및 다이어그램 이미지를 만듭니다.";
+      } else if (val === 'choro') {
+        choro.classList.remove('hidden');
+        toolTitle.textContent = "지도형 인포그래픽 프롬프트";
+        toolDesc.textContent = "챗GPT를 활용하여 전 세계 도입률 비교 등 지도 형태의 인포그래픽을 제작합니다.";
+      } else if (val === 'poster') {
+        poster.classList.remove('hidden');
+        toolTitle.textContent = "공지 포스터 생성 프롬프트";
+        toolDesc.textContent = "프롬프트를 수정하여 사내 공지용 포스터 이미지를 손쉽게 생성합니다.";
+      } else if (val === 'signature') {
+        sig.classList.remove('hidden');
+        toolTitle.textContent = "이메일 서명 생성 프롬프트";
+        toolDesc.textContent = "브랜드 스타일 로고 분석 후 비즈니스용 이메일 서명 이미지를 만듭니다.";
+      }
+    }
+
+    // copy clipboard helper
+    function copyPrompt(id) {
+      const text = document.getElementById(id).value;
+      
+      const textArea = document.createElement('textarea');
+      textArea.value = text;
+      textArea.style.position = 'fixed';
+      textArea.style.top = '0';
+      textArea.style.left = '0';
+      textArea.style.opacity = '0';
+      document.body.appendChild(textArea);
+      textArea.focus();
+      textArea.select();
+      
+      try {
+        const successful = document.execCommand('copy');
+        if (successful) {
+          showToast('프롬프트가 클립보드에 복사되었습니다.');
+        } else {
+          showToast('복사에 실패했습니다.');
+        }
+      } catch (err) {
+        showToast('복사 기능이 지원되지 않는 브라우저입니다.');
+      }
+      document.body.removeChild(textArea);
+    }
+
+    const DEFAULT_PROMPTS = {
+      'prompt-model': `30대 초반의 한국인 여성 가상 모델, 기업 홍보 및 채용 커뮤니케이션용 이미지.
+배경: 밝고 깔끔한 흰색 스튜디오.
+표정: 자신감 있고 신뢰감 있는 미소, 카메라를 정면으로 바라보는 시선.
+스타일: 단정한 비즈니스 캐주얼, 고화질 실사 스타일, 브랜드 웹사이트 및 채용 페이지용.
+화각 및 비율: 16:9 가로형 이미지, 가로 화면 (Landscape orientation).`,
+      'prompt-bg-change': `앞서 생성한 모델 이미지를 활용해서
+동일한 인물이 아래 상황에 있는 이미지를 만들어줘.
+- 밝은 카페에서 노트북 작업 중인 모습
+- 회의실에서 프레젠테이션하는 모습
+- 야외 공원에서 걷고 있는 모습`,
+      'prompt-vis': `[관심 있는 주제 (예: 최근 5년간 국내 OTT 서비스 점유율 변화)]에 대해 조사한 뒤,
+그 결과를 16:9 비율의 SVG 포맷의 인포그래픽을 만들어줘.
+
+구성: [원하는 차트 형태 — 예: 범프 차트(순위 변동), 막대 차트, 도넛 차트 등]
+조사한 데이터를 기준으로 직접 항목과 수치를 구성해줘.
+
+디자인 조건:
+- 항목마다 다른 색상의 선 또는 막대로 구분
+- 각 데이터 포인트에 명확한 라벨 표시
+- 선명하고 구분이 잘 되는 색상 사용 (블루, 그린, 코랄, 퍼플, 앰버 등)
+- 가장 중요한 항목(예: 1위, 최고 성장률 등)은 더 굵게 강조
+- 좌측에 세로축 라벨, 하단에 가로축 라벨
+- 배경: 흰색
+- 깔끔한 모던 대시보드 스타일, 색상 구분 명확히`,
+      'prompt-choro': `최근 1년간 [전 세계 주요국의 기업 생성형 AI 도입률]에 대해 조사한 뒤,
+그 결과를 코로플레스(choropleth) 지도 형태의 인포그래픽으로 만들어줘.
+
+조사한 데이터를 기준으로 직접 국가와 수치를 구성해줘.
+
+구성: [코로플레스 지도 + 범례 + 상/하위 국가 하이라이트 박스]
+
+디자인 조건:
+- 지도 단위: 전 세계 국가별 (G20 + 주요 IT 강국 중심)
+- 도입률이 높을수록 진한 색, 낮을수록 옅은 색으로 그라데이션 표현
+- 색상 스케일: 단일색 그라데이션 (옅은 민트 → 진한 그린)
+- 범례 구간은 5단계로 나누고 각 구간 수치 범위를 명확히 표기
+- 국경선은 얇고 깔끔하게 (옅은 회색 1px)
+- 데이터 없는 국가는 옅은 회색 + 빗금으로 구분
+- 상위 3개국, 하위 3개국은 국가명+수치 라벨로 직접 강조
+- 범례는 하단에 가로형 그라데이션 바 + 구간 수치로 표시
+- 배경: 흰색, 바다는 옅은 회색(#F8F9FA)
+- 깔끔한 모던 대시보드 스타일, 제목·부제·데이터 출처 포함
+- 16:9 비율`,
+      'prompt-poster': `아래 내용에 대해 조사한 뒤,
+조사한 내용을 바탕으로 사내 공유용 포스터 1장을 만들어줘.
+
+조사 내용: [예: 우리 업무에 적용할 수 있는 AI 도구 5가지]
+
+구성:
+- 제목과 핵심 메시지를 상단에 크게 배치
+- 조사한 내용을 3~5개 항목으로 정리해서 본문에 배치
+- 항목마다 도구명·핵심 기능·활용 시간 절감 효과 등 정보 포함
+
+디자인 조건:
+- 비율: 3:4 (세로형 포스터) 또는 16:9 (사내 게시판용)
+- 포인트 컬러 1~2가지로 통일
+- 항목별로 아이콘 또는 간단한 일러스트 활용
+- 가독성 높은 폰트, 핵심 키워드와 수치는 굵게 강조
+- 배경: 흰색 또는 깔끔한 단색
+- 한눈에 정보가 들어오는 인포그래픽형 포스터 스타일`,
+      'prompt-signature': `첨부한 로고 이미지를 분석해줘.
+로고의 주요 색상과 브랜드 스타일을 파악한 뒤
+아래 정보로 이메일 서명 이미지를 만들어줘.
+
+[서명 정보]
+이름: [          ]
+직책: [          ]
+부서: [          ]
+회사명: [          ]
+이메일: [          ]
+전화번호: [          ]
+웹사이트: [          ]
+
+[디자인 조건]
+- 비율: 4:1 (가로 600px × 세로 150px)
+- 좌측: 로고 배치
+- 로고 우측에 세로 구분선 후 인적사항 나열
+- 배경색·포인트 컬러는 로고 색상에서 추출
+- 간결하고 전문적인 비즈니스 스타일
+- 한글·영문 텍스트 모두 명확하게 표현
+- 여백을 충분히 줘서 답답하지 않게`,
+      'prompt-start-img': `나무 재질의 사무실 책상을 위에서 비스듬히 내려다본 구도.
+책상 정중앙에 놓인 종이 위에 연필로 거칠게 그린 '미래형 스마트 에스프레소 머신'의 디자인 스케치가 있다.
+종이 옆에는 연필 and 지우개가 놓여 있고, 부드러운 아침 햇살이 비치는 16:9 고해상도의 실사 사진 스타일.`,
+      'prompt-end-img': `시작 이미지와 동일한 구도의 나무 재질 사무실 책상.
+종이와 연필이 있던 자리에 스케치와 똑같은 디자인의 실제 '미래형 스마트 에스프레소 머신'이 실물로 놓여 있다.
+매트한 BLACK 메탈과 크롬 소재로 마감된 세련된 외형이며, 머신 옆에는 갓 추출된 에스프레소 잔이 놓여 있는 고해상도 제품 광고 사진 스타일.`,
+      'prompt-flow': `시작 이미지의 연필 스케치 선들이 미세하게 떨리며 황금빛 입자로 변하고, 이 입자들이 모여 실물 제품의 정교한 부품으로 조립되는 모핑 효과를 구현해줘.
+종이의 질감은 서서히 사라지고 실제 나무 책상의 결이 선명해지며 제품이 완성돼.
+카메라 앵글은 고정된 상태에서 아주 천천히 중앙으로 줌인하며 제품의 금속 광택을 강조해줘.
+
+배경음 및 사운드: 영감을 주는 미니멀한 테크 스타일의 앰비언트 배경음악을 깔아줘.`,
+      'prompt-pitch': `[@캐릭터]가 쇼호스트 스타일로 [@제품]을 소개한다.
+"안녕하세요. 오늘 아주 특별한 제품을 소개시켜 드리려고 합니다.
+강력한 압력과 모던한 디자인을 모두 갖춘 에스프레소 머신인데요.
+지금 바로 경험해 보세요"`
+    };
+
+    function resetPrompt(id) {
+      if (DEFAULT_PROMPTS[id] !== undefined) {
+        document.getElementById(id).value = DEFAULT_PROMPTS[id];
+        showToast('프롬프트가 초기화되었습니다.');
+      }
+    }
+
+    let toastTimer;
+    function showToast(message) {
+      const toast = document.getElementById("toast");
+      toast.textContent = message;
+      clearTimeout(toastTimer);
+      toast.classList.add("show");
+      toastTimer = setTimeout(() => toast.classList.remove("show"), 2200);
+    }
+  </script>
+</body>
+</html>

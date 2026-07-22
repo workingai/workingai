@@ -1,0 +1,1 @@
+﻿Get-ChildItem -Path workshop01 -Filter *.html | ForEach-Object { (Get-Content .FullName -Raw) -replace " 직장인 워크숍\, \직장인 AI\ -replace \마케터 워크숍\, \마케터 AI\ -replace \구글 AI 워크숍\, \구글 AI\ | Set-Content .FullName -Encoding utf8 }

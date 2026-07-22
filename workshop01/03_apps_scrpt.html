@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WORKING AI · 앱스스크립트 자동화</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Pretendard Font -->
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+  <!-- IBM Plex Mono Font -->
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#F2F8F5',
+              100: '#E6F2ED',
+              500: '#2A6B52',
+              600: '#1D4E3A',
+            },
+            neutral: {
+              50: '#F8F7F4',
+              100: '#F2F1EE',
+              200: '#E5E3DF',
+              300: '#DDDBD5',
+              400: '#B0AEA8',
+              500: '#8A8881',
+              600: '#605E59',
+              900: '#1A1A18',
+            }
+          },
+          fontFamily: {
+            sans: ['Pretendard', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+            mono: ['IBM Plex Mono', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    :root{
+      --green:#2A6B52; --green-hover:#1D4E3A; --bg:#F2F1EE;
+      --card:#FFFFFF; --line:#DDDBD5; --soft-green:#E6F2ED;
+      --text:#1A1A18; --sub:#605E59; --muted:#908E88;
+      --soft:#F8F7F4; --font:"Pretendard",-apple-system,BlinkMacSystemFont,sans-serif;
+      --mono:"IBM Plex Mono",monospace;
+    }
+    body {
+      font-family: 'Pretendard', -apple-system, sans-serif;
+      background-color: #F2F1EE;
+    }
+    /* Custom scrollbar styling */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #F2F1EE;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #DDDBD5;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #B0AEA8;
+    }
+    
+    .head{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-bottom:16px;margin-bottom:20px;border-bottom:1px solid var(--line)}
+    .head h2{font-size:18px;font-weight:750}
+    .badge{padding:7px 10px;border-radius:999px;background:var(--soft-green);color:var(--green);font:700 11px var(--mono);letter-spacing:.04em;white-space:nowrap}
+    
+    /* Grid structures */
+    .grid-3{display:grid;grid-template-columns:1fr 1.1fr 1fr;gap:16px;align-items:stretch}
+    .grid-2{display:grid;grid-template-columns:1.2fr 1.8fr;gap:16px;align-items:stretch}
+    
+    .panel{display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);border-radius:12px;padding:0;overflow:hidden}
+    .panel-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding:18px;background:var(--soft-green);margin-bottom:16px;border-bottom:1px solid rgba(42,107,82,.22)}
+    .panel-title{font-size:17px;font-weight:800;letter-spacing:-.25px}.panel-desc{font-size:12px;color:var(--sub);line-height:1.45;margin-top:4px}
+    .tag{font:700 10px var(--mono);color:var(--green);white-space:nowrap}
+    .group{margin:0 18px 20px}.group:last-child{margin-bottom:0}
+    label{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:13px;font-weight:750;margin-bottom:7px}
+    label small{font-size:11px;font-weight:500;color:var(--sub)}
+    .keywords{display:flex;flex-direction:column;gap:8px}
+    .tip{margin:18px;padding:12px;background:var(--soft);border:1px solid rgba(42,107,82,.18);border-radius:8px;color:var(--sub);font-size:11px;line-height:1.55;margin-top:auto}
+    .actions{display:flex;justify-content:flex-end;gap:10px;margin-top:20px;padding-top:20px;border-top:1px solid var(--line)}
+    button.btn-base{height:44px;padding:0 18px;border-radius:7px;font:700 14px var(--font);cursor:pointer;transition:.2s}
+    button.btn-primary{background:var(--green);color:#fff;border:0}
+    button.btn-primary:hover{background:var(--green-hover)}
+    button.btn-secondary{background:#fff;color:var(--text);border:1px solid var(--line)}
+    button.btn-secondary:hover{background:var(--soft)}
+    .notice{margin-top:12px;color:var(--sub);font-size:12px;line-height:1.5}
+    .toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%) translateY(100px);opacity:0;z-index:50;padding:12px 22px;border-radius:999px;background:#1A1A18;color:#fff;font-size:14px;font-weight:600;transition:.25s}
+    .toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+    
+    /* AI Newsletter Specific styles */
+    .step-textarea{width:100%;border:1px solid #DDDBD5;border-radius:8px;background:#fff;padding:11px 12px;font:13px/1.55 'Pretendard',-apple-system,BlinkMacSystemFont,system-ui,sans-serif;color:#1A1A18;outline:none;resize:none;height:120px}
+    .step-textarea:focus{border-color:#2A6B52;box-shadow:0 0 0 2px rgba(42,107,82,.08)}
+    
+    @media(max-width:1050px){
+      .grid-3{grid-template-columns:1fr 1fr}
+      .grid-3 .panel:last-child{grid-column:1/-1}
+      .grid-2{grid-template-columns:1fr}
+    }
+    @media(max-width:680px){
+      .head{align-items:flex-start}
+      .grid-3{grid-template-columns:1fr}
+      .grid-3 .panel:last-child{grid-column:auto}
+      .actions button{flex:1}
+      .grid-2{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body class="min-h-screen text-neutral-900 antialiased flex flex-col h-screen overflow-hidden pt-[5px]">
+  <!-- Top brand bar -->
+  <div class="fixed top-0 left-0 w-full h-[5px] bg-brand-500 z-50"></div>
+
+  <!-- Navigation Bar (Shared) -->
+  <div id="navbar-placeholder"></div>
+  <script src="../navbar.js"></script>
+
+  <!-- Content Container -->
+  <div class="flex-1 flex flex-col lg:flex-row lg:overflow-hidden">
+    <!-- ===== Left Sidebar Navigation ===== -->
+    <aside
+      class="flex-shrink-0 w-full lg:w-64 bg-white border-b lg:border-b-0 lg:border-r border-[#DDDBD5] flex flex-col lg:h-full pt-4">
+    <!-- Nav list -->
+    <p class="hidden lg:block px-5 mb-1.5 text-[11px] font-bold uppercase tracking-wider text-neutral-400">실습 목록</p>
+    <nav class="flex lg:flex-col gap-1 px-3 pb-4 overflow-x-auto lg:overflow-y-auto">
+
+      <a href="01_wamingup.html"
+        class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
+        <span class="text-lg leading-none">🔥</span>
+        <span>워밍업 실습</span>
+      </a>
+      <a href="02_prompt.html"
+        class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
+        <span class="text-lg leading-none">🧩</span>
+        <span>프롬프트 빌더</span>
+      </a>
+      <a href="03_apps_scrpt.html"
+        class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-bold text-brand-600 bg-brand-100 whitespace-nowrap transition-colors">
+        <span class="text-lg leading-none">🤖</span>
+        <span>앱스스크립트 자동화</span>
+      </a>
+      <a href="04_notebooklm.html"
+        class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
+        <span class="text-lg leading-none">🖼️</span>
+        <span>노트북LM</span>
+      </a>
+      <a href="05_miniproject1.html"
+        class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
+        <span class="text-lg leading-none">🚀</span>
+        <span>미니프로젝트 1</span>
+      </a>
+      <a href="07_aiagent.html"
+        class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
+        <span class="text-lg leading-none">🎨</span>
+        <span>AI 에이전트</span>
+      </a>
+      <a href="06_aivideo.html"
+        class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
+        <span class="text-lg leading-none">🎬</span>
+        <span>이미지 생성 및 영상화</span>
+      </a>
+      <a href="m2_miniproject2.html"
+        class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
+        <span class="text-lg leading-none">🚀</span>
+        <span>미니프로젝트 2</span>
+      </a>
+    </nav>
+    <!-- Sidebar Footer (Banner) -->
+    <div class="mt-auto border-t border-[#DDDBD5] p-4 bg-white flex-shrink-0">
+      <!-- Dropup Menu Container -->
+      <div class="relative mb-2.5">
+        <button id="quick-links-btn" onclick="toggleQuickLinks(event)" class="w-full flex items-center justify-between py-2 px-3 border border-[#DDDBD5] hover:border-brand-500 bg-white hover:bg-neutral-50 text-neutral-900 rounded-xl transition-all duration-300 shadow-xs text-sm font-extrabold focus:outline-none">
+          <span class="flex items-center gap-2 text-neutral-600 hover:text-neutral-900">
+            <span>🔗</span> 주요 서비스 바로가기
+          </span>
+          <svg id="quick-links-arrow" class="w-3.5 h-3.5 text-neutral-400 transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5"></path>
+          </svg>
+        </button>
+        <!-- Dropup menu: hidden by default, absolute positioning above the button -->
+        <div id="quick-links-menu" class="hidden absolute bottom-full left-0 w-full mb-2 bg-white border border-[#DDDBD5] rounded-xl shadow-lg z-50 overflow-hidden py-1">
+          <a href="https://chatgpt.com" target="_blank" class="block px-4 py-2.5 text-xs text-neutral-700 hover:bg-brand-50 hover:text-brand-600 transition-colors font-bold border-b border-[#F2F1EE]">챗GPT</a>
+          <a href="https://gemini.google.com" target="_blank" class="block px-4 py-2.5 text-xs text-neutral-700 hover:bg-brand-50 hover:text-brand-600 transition-colors font-bold border-b border-[#F2F1EE]">제미나이</a>
+          <a href="https://claude.ai" target="_blank" class="block px-4 py-2.5 text-xs text-neutral-700 hover:bg-brand-50 hover:text-brand-600 transition-colors font-bold border-b border-[#F2F1EE]">클로드</a>
+          <a href="https://sheets.google.com" target="_blank" class="block px-4 py-2.5 text-xs text-neutral-700 hover:bg-brand-50 hover:text-brand-600 transition-colors font-bold border-b border-[#F2F1EE]">구글 시트</a>
+          <a href="https://docs.google.com/videos/create?usp=vids_alc&authuser=0" target="_blank" class="block px-4 py-2.5 text-xs text-neutral-700 hover:bg-brand-50 hover:text-brand-600 transition-colors font-bold border-b border-[#F2F1EE]">구글 Vids</a>
+          <a href="https://canva.com" target="_blank" class="block px-4 py-2.5 text-xs text-neutral-700 hover:bg-brand-50 hover:text-brand-600 transition-colors font-bold border-b border-[#F2F1EE]">캔바</a>
+          <a href="https://aistudio.google.com" target="_blank" class="block px-4 py-2.5 text-xs text-neutral-700 hover:bg-brand-50 hover:text-brand-600 transition-colors font-bold border-b border-[#F2F1EE]">AI Studio</a>
+          <a href="https://workspace.google.com/experiments" target="_blank" class="block px-4 py-2.5 text-xs text-neutral-700 hover:bg-brand-50 hover:text-brand-600 transition-colors font-bold">Workspace Experiments</a>
+        </div>
+      </div>
+      <script>
+        function toggleQuickLinks(e) {
+          e.stopPropagation();
+          const menu = document.getElementById('quick-links-menu');
+          const arrow = document.getElementById('quick-links-arrow');
+          const isHidden = menu.classList.contains('hidden');
+          if (isHidden) {
+            menu.classList.remove('hidden');
+            arrow.classList.add('rotate-180');
+          } else {
+            menu.classList.add('hidden');
+            arrow.classList.remove('rotate-180');
+          }
+        }
+        document.addEventListener('click', (e) => {
+          const menu = document.getElementById('quick-links-menu');
+          const btn = document.getElementById('quick-links-btn');
+          const arrow = document.getElementById('quick-links-arrow');
+          if (menu && !menu.classList.contains('hidden') && !menu.contains(e.target) && !btn.contains(e.target)) {
+            menu.classList.add('hidden');
+            arrow.classList.remove('rotate-180');
+          }
+        });
+      </script>
+
+      <a href="pdfviewer.html" class="block w-full text-center py-3 px-4 border border-[#DDDBD5] hover:border-brand-500 bg-brand-50 hover:bg-brand-100 text-brand-600 rounded-xl transition-all duration-300 shadow-xs" style="text-decoration: none;">
+        <span class="block text-xs font-bold text-neutral-400 mb-0.5 tracking-wider uppercase">Slide PDF</span>
+        <span class="block text-sm font-extrabold tracking-tight">강의 교안 뷰어</span>
+      </a>
+    </div>
+  </aside>
+
+  <!-- ===== Main Content ===== -->
+  <main class="flex-1 flex flex-col overflow-hidden pt-8 lg:pt-10 pb-8 px-4 md:px-8 lg:px-10">
+    <!-- Header Area -->
+    <header class="mb-4 flex-shrink-0 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+      <div>
+        <div class="mb-2">
+          <span class="inline-block bg-brand-500 text-white rounded-full px-4 py-1 text-[11.5px] font-mono font-extrabold tracking-wider uppercase">Apps Script</span>
+        </div>
+        <h1 id="header-title" class="text-2xl md:text-3xl font-extrabold tracking-tight leading-tight text-neutral-900">
+          네이버 뉴스 수집기 제작
+        </h1>
+      </div>
+      <!-- Navigation buttons in header -->
+      <div class="flex items-center gap-2 flex-shrink-0 mb-1">
+        <button id="btn-tab-1" class="w-9 h-9 flex items-center justify-center rounded-full font-bold text-sm transition-all focus:outline-none bg-brand-500 text-white border border-brand-500" onclick="showNaverNews()">
+          1
+        </button>
+        <button id="btn-tab-2" class="w-9 h-9 flex items-center justify-center rounded-full font-bold text-sm transition-all focus:outline-none bg-white text-brand-500 border border-[#DDDBD5] hover:bg-neutral-50" onclick="showAiNews()">
+          2
+        </button>
+      </div>
+    </header>
+
+    <section class="border border-[#DDDBD5] rounded-2xl p-5 md:p-6 bg-white shadow-sm flex-1 flex flex-col overflow-y-auto relative">
+      <!-- Card Sub-Head -->
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#DDDBD5] pb-4 mb-4 flex-shrink-0">
+        <div>
+          <h2 id="tool-title" class="text-lg md:text-xl font-extrabold text-neutral-900">코드 생성 조건 입력</h2>
+          <p id="tool-desc" class="text-xs md:text-sm text-[#605E59] mt-1">각 영역의 값만 입력하면 선택한 검색 조건에 맞는 Apps Script 코드가 자동으로 조합됩니다.</p>
+        </div>
+        
+        <div class="flex items-center gap-2 flex-shrink-0">
+          <a id="naver-dev-link" href="https://developers.naver.com/" target="_blank" class="px-4 h-9 border border-[#DDDBD5] bg-white hover:bg-neutral-50 text-neutral-900 text-xs md:text-sm font-bold rounded-lg transition-all shadow-xs flex items-center justify-center gap-1.5 focus:outline-none" style="text-decoration: none;">
+            <svg class="w-3.5 h-3.5 text-neutral-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"></path>
+            </svg>
+            네이버 디벨로퍼
+          </a>
+          <a id="google-ai-link" href="https://aistudio.google.com/" target="_blank" class="hidden px-4 h-9 border border-[#DDDBD5] bg-white hover:bg-neutral-50 text-neutral-900 text-xs md:text-sm font-bold rounded-lg transition-all shadow-xs flex items-center justify-center gap-1.5 focus:outline-none" style="text-decoration: none;">
+            <svg class="w-3.5 h-3.5 text-neutral-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"></path>
+            </svg>
+            Google AI Studio
+          </a>
+        </div>
+
+      </div>
+
+      <!-- ================= CONTAINER 1: 네이버 뉴스 수집기 ================= -->
+      <div id="naver-news-container" class="flex-1 flex flex-col justify-between">
+        <div>
+          <div class="grid-3">
+            <!-- panel 1 -->
+            <section class="panel">
+              <div class="panel-top">
+                <div>
+                  <h3 class="panel-title">🔑 네이버 API 입력</h3>
+                  <p class="panel-desc">네이버 개발자센터에서 발급한 인증 정보를 입력합니다.</p>
+                </div>
+                <span class="tag">API KEY</span>
+              </div>
+
+              <div class="group">
+                <label for="clientId">Client ID <small>필수</small></label>
+                <input id="clientId" type="text" placeholder="YOUR_CLIENT_ID" class="w-full px-4 py-2.5 border border-[#DDDBD5] bg-white text-neutral-900 text-[15px] rounded-lg focus:border-brand-500 focus:outline-none placeholder-neutral-400">
+              </div>
+              <div class="group">
+                <label for="clientSecret">Client Secret <small>필수</small></label>
+                <input id="clientSecret" type="text" placeholder="YOUR_CLIENT_SECRET" class="w-full px-4 py-2.5 border border-[#DDDBD5] bg-white text-neutral-900 text-[15px] rounded-lg focus:border-brand-500 focus:outline-none placeholder-neutral-400">
+              </div>
+
+              <p class="tip">발급받은 API 키는 코드에 포함됩니다. 공유용 코드에서는 키를 별도 관리하는 것을 권장합니다.</p>
+            </section>
+
+            <!-- panel 2 -->
+            <section class="panel">
+              <div class="panel-top">
+                <div>
+                  <h3 class="panel-title">🔎 키워드 입력</h3>
+                  <p class="panel-desc">수집할 키워드 개수를 정하고, 각 검색어를 입력합니다.</p>
+                </div>
+                <span class="tag">KEYWORDS</span>
+              </div>
+
+              <div class="group">
+                <label for="keywordCount">키워드 개수 <small>1~3개</small></label>
+                <select id="keywordCount" class="w-full px-4 py-2.5 border border-[#DDDBD5] bg-white text-neutral-900 text-[15px] rounded-lg focus:border-brand-500 focus:outline-none cursor-pointer">
+                  <option value="1">1개</option>
+                  <option value="2" selected>2개</option>
+                  <option value="3">3개</option>
+                </select>
+              </div>
+
+              <div class="group">
+                <label>검색 키워드 <small>선택 개수만큼 표시</small></label>
+                <div id="keywords" class="keywords"></div>
+              </div>
+
+              <p class="tip">각 키워드는 별도로 검색한 뒤, 결과 시트의 첫 번째 열에 어떤 키워드의 결과인지 함께 기록됩니다.</p>
+            </section>
+
+            <!-- panel 3 -->
+            <section class="panel">
+              <div class="panel-top">
+                <div>
+                  <h3 class="panel-title">⚙️ 옵션</h3>
+                  <p class="panel-desc">가져올 결과 수, 정렬 방식, 검색 대상을 설정합니다.</p>
+                </div>
+                <span class="tag">OPTIONS</span>
+              </div>
+
+              <div class="group">
+                <label for="displayCount">출력 개수 <small>키워드당 1~100개</small></label>
+                <input id="displayCount" type="number" min="1" max="100" value="20" class="w-full px-4 py-2.5 border border-[#DDDBD5] bg-white text-neutral-900 text-[15px] rounded-lg focus:border-brand-500 focus:outline-none placeholder-neutral-400">
+              </div>
+
+              <div class="group">
+                <label for="sortType">정렬 기준</label>
+                <select id="sortType" class="w-full px-4 py-2.5 border border-[#DDDBD5] bg-white text-neutral-900 text-[15px] rounded-lg focus:border-brand-500 focus:outline-none cursor-pointer">
+                  <option value="sim" selected>관련도순</option>
+                  <option value="date">최신순</option>
+                </select>
+              </div>
+
+              <div class="group">
+                <label for="searchType">검색 대상</label>
+                <select id="searchType" class="w-full px-4 py-2.5 border border-[#DDDBD5] bg-white text-neutral-900 text-[15px] rounded-lg focus:border-brand-500 focus:outline-none cursor-pointer">
+                  <option value="news" selected>뉴스</option>
+                  <option value="blog">블로그</option>
+                </select>
+              </div>
+
+              <p class="tip">뉴스와 블로그는 네이버 검색 API의 서로 다른 엔드포인트를 사용합니다. 선택한 대상에 맞춰 코드가 자동 구성됩니다.</p>
+            </section>
+          </div>
+        </div>
+
+        <div>
+          <div class="actions">
+            <button class="btn-base btn-primary flex items-center justify-center gap-1.5 focus:outline-none" onclick="copyCode()">
+              <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <rect x="9" y="9" width="11" height="11" rx="2" ry="2" stroke-linecap="round" stroke-linejoin="round"></rect>
+                <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+              코드 복사
+            </button>
+            <a href="https://sheets.google.com" target="_blank" class="btn-base btn-secondary flex items-center justify-center gap-1.5 focus:outline-none" style="text-decoration: none;">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M19 3H5C3.9 3 3 3.9 3 5V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19V5C21 3.9 20.1 3 19 3ZM9 17H7V15H9V17ZM9 13H7V11H9V13ZM9 9H7V7H9V9ZM17 17H11V15H17V17ZM17 13H11V11H17V13ZM17 9H11V7H17V9Z" fill="#0F9D58"/>
+              </svg>
+              구글 시트 이동
+            </a>
+          </div>
+          <p class="notice">복사한 코드는 Google 스프레드시트의 <strong>확장 프로그램 → Apps Script</strong>에 붙여 넣어 사용할 수 있습니다.</p>
+        </div>
+      </div>
+
+      <!-- ================= CONTAINER 2: AI 뉴스레터 발송 ================= -->
+      <div id="ai-news-container" class="hidden flex-1 flex flex-col justify-between">
+        <div>
+          <div class="grid-2">
+            <!-- panel 1 -->
+            <section class="panel">
+              <div class="panel-top">
+                <div>
+                  <h3 class="panel-title">✉️ 이메일 및 API 설정</h3>
+                  <p class="panel-desc">이메일 수신 정보 및 Gemini API Key를 설정합니다.</p>
+                </div>
+                <span class="tag">SETTINGS</span>
+              </div>
+
+              <div class="group">
+                <label for="recipientEmail">뉴스레터 받을 이메일</label>
+                <input id="recipientEmail" type="email" placeholder="your_email@gmail.com" class="w-full px-4 py-2.5 border border-[#DDDBD5] bg-white text-neutral-900 text-[15px] rounded-lg focus:border-brand-500 focus:outline-none placeholder-neutral-400">
+              </div>
+              <div class="group">
+                <div class="flex items-center justify-between mb-2">
+                  <label for="geminiApiKey" class="mb-0">Gemini API Key</label>
+                  <button type="button" onclick="fillSavedApiKey()" class="px-2.5 py-1 border border-[#DDDBD5] bg-white hover:bg-neutral-50 text-neutral-900 text-xs font-bold rounded-lg transition-all focus:outline-none shadow-xs">입력</button>
+                </div>
+                <input id="geminiApiKey" type="password" placeholder="키를 입력하세요 (미입력 시 ***** 로 표기)" class="w-full px-4 py-2.5 border border-[#DDDBD5] bg-white text-neutral-900 text-[15px] rounded-lg focus:border-brand-500 focus:outline-none placeholder-neutral-400">
+              </div>
+              <div class="group">
+                <label for="subjectPrefix">이메일 제목 말머리</label>
+                <input id="subjectPrefix" type="text" value="[AI 리포트]" placeholder="예: [일일보고서]" class="w-full px-4 py-2.5 border border-[#DDDBD5] bg-white text-neutral-900 text-[15px] rounded-lg focus:border-brand-500 focus:outline-none">
+              </div>
+              <div class="group">
+                <label for="reportHeader">보고서 본문 헤더</label>
+                <input id="reportHeader" type="text" value="오늘의 주요 뉴스 요약" placeholder="예: 실시간 트렌드 브리핑" class="w-full px-4 py-2.5 border border-[#DDDBD5] bg-white text-neutral-900 text-[15px] rounded-lg focus:border-brand-500 focus:outline-none">
+              </div>
+            </section>
+
+            <!-- panel 2 -->
+            <section class="panel">
+              <div class="panel-top">
+                <div>
+                  <h3 class="panel-title">📝 생성 프롬프트 설정</h3>
+                  <p class="panel-desc">Gemini가 생성할 뉴스 요약 및 이미지 관련 지시사항을 설정합니다.</p>
+                </div>
+                <span class="tag">PROMPTS</span>
+              </div>
+
+              <div class="group">
+                <div class="flex items-center justify-between mb-2">
+                  <label for="textPrompt">뉴스 요약 생성 프롬프트</label>
+                </div>
+                <textarea id="textPrompt" class="step-textarea">최근 24시간 동안 발표된 글로벌 AI 핵심 기술 트렌드와 주요 IT 기업(오픈AI, 구글, 마이크로소프트 등)의 비즈니스 행보를 종합하여, 마크다운 강조 표시(*) 없이 담백하고 전문적인 한국어 요약 보고서(500-600자)를 작성해 주세요.</textarea>
+              </div>
+
+              <div class="group">
+                <label for="imagePrompt">보고서 첨부 이미지 프롬프트</label>
+                <textarea id="imagePrompt" class="step-textarea">인공지능 신경망과 글로벌 기술 트렌드를 친근하고 아기자기하게 표현한 귀여운 두들(Doodle) 스타일의 일러스트, 미니멀하고 깔끔한 드로잉, 흰색 배경.</textarea>
+              </div>
+            </section>
+          </div>
+        </div>
+
+        <div>
+          <div class="actions">
+            <button id="generateBtn" class="btn-base btn-primary flex items-center justify-center gap-1.5 focus:outline-none" type="button">
+              <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <rect x="9" y="9" width="11" height="11" rx="2" ry="2" stroke-linecap="round" stroke-linejoin="round"></rect>
+                <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+              스크립트 복사
+            </button>
+            <a href="https://script.google.com" target="_blank" class="btn-base btn-secondary flex items-center justify-center gap-1.5 focus:outline-none" style="text-decoration: none;">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5"></path>
+              </svg>
+              앱스 스크립트 이동
+            </a>
+          </div>
+          <p class="notice">복사한 코드는 Google Apps Script의 파일 편집기 영역에 붙여 넣어 사용할 수 있습니다.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+  </div>
+
+  <div id="toast" class="toast">코드가 복사되었습니다.</div>
+
+  <!-- Runtime-only elements for AI newsletter script kept hidden in DOM -->
+  <div class="hidden">
+    <pre id="codeOutput"></pre>
+  </div>
+
+  <script>
+    if (localStorage.getItem('workbook_logged_in') !== 'true') {
+      window.location.href = '../index.html?redirect=workshop01/03_apps_scrpt.html';
+    }
+
+    // Navigation / Toggle System
+    function showNaverNews() {
+      // Show container
+      document.getElementById('naver-news-container').classList.remove('hidden');
+      document.getElementById('ai-news-container').classList.add('hidden');
+      
+      // Update header
+      document.getElementById('header-title').textContent = "네이버 뉴스 수집기 제작";
+      document.getElementById('tool-title').textContent = "코드 생성 조건 입력";
+      document.getElementById('tool-desc').textContent = "각 영역의 값만 입력하면 선택한 검색 조건에 맞는 Apps Script 코드가 자동으로 조합됩니다.";
+      
+      // Update toggle tab button classes
+      const tab1 = document.getElementById('btn-tab-1');
+      const tab2 = document.getElementById('btn-tab-2');
+      tab1.className = "w-9 h-9 flex items-center justify-center rounded-full font-bold text-sm transition-all focus:outline-none bg-brand-500 text-white border border-brand-500";
+      tab2.className = "w-9 h-9 flex items-center justify-center rounded-full font-bold text-sm transition-all focus:outline-none bg-white text-brand-500 border border-[#DDDBD5] hover:bg-neutral-50";
+
+      // Update dev links
+      document.getElementById('naver-dev-link').classList.remove('hidden');
+      document.getElementById('google-ai-link').classList.add('hidden');
+    }
+
+    function showAiNews() {
+      // Show container
+      document.getElementById('naver-news-container').classList.add('hidden');
+      document.getElementById('ai-news-container').classList.remove('hidden');
+      
+      // Update header
+      document.getElementById('header-title').textContent = "뉴스레터 발송 자동화";
+      document.getElementById('tool-title').textContent = "제미나이 API를 활용한 뉴스레터 생성";
+      document.getElementById('tool-desc').textContent = "이메일 수신 정보 및 프롬프트 생성 조건을 작성하여 자동 발송 스크립트를 빌드합니다.";
+      
+      // Update toggle tab button classes
+      const tab1 = document.getElementById('btn-tab-1');
+      const tab2 = document.getElementById('btn-tab-2');
+      tab1.className = "w-9 h-9 flex items-center justify-center rounded-full font-bold text-sm transition-all focus:outline-none bg-white text-brand-500 border border-[#DDDBD5] hover:bg-neutral-50";
+      tab2.className = "w-9 h-9 flex items-center justify-center rounded-full font-bold text-sm transition-all focus:outline-none bg-brand-500 text-white border border-brand-500";
+
+      // Update dev links
+      document.getElementById('naver-dev-link').classList.add('hidden');
+      document.getElementById('google-ai-link').classList.remove('hidden');
+
+      // Initialize AI newsletter code
+      updateCode();
+    }
+
+    // ==========================================
+    // [1] 네이버 뉴스 수집기 비즈니스 로직
+    // ==========================================
+    const state = { 1: "AI 자동화", 2: "AX 전략", 3: "생성형 AI" };
+    const $ = (id) => document.getElementById(id);
+
+    function renderKeywords() {
+      const count = Number($("keywordCount").value);
+      const container = $("keywords");
+      container.innerHTML = "";
+      for (let i = 1; i <= count; i++) {
+        const input = document.createElement("input");
+        input.type = "text";
+        input.placeholder = `키워드 ${i} 입력`;
+        input.className = "w-full px-4 py-2.5 border border-[#DDDBD5] bg-white text-neutral-900 text-[15px] rounded-lg focus:border-brand-500 focus:outline-none placeholder-neutral-400";
+        input.value = state[i] || "";
+        input.addEventListener("input", (e) => state[i] = e.target.value);
+        container.appendChild(input);
+      }
+    }
+
+    function getNaverCode() {
+      let display = Number($("displayCount").value);
+      if (!display || display < 1) display = 1;
+      if (display > 100) display = 100;
+      $("displayCount").value = display;
+
+      const clientId = $("clientId").value.trim() || "YOUR_CLIENT_ID";
+      const clientSecret = $("clientSecret").value.trim() || "YOUR_CLIENT_SECRET";
+      const type = $("searchType").value;
+      const sort = $("sortType").value;
+      const typeLabel = type === "news" ? "뉴스" : "블로그";
+
+      const keywords = [...document.querySelectorAll("#keywords input")]
+        .map(i => i.value.trim())
+        .filter(Boolean)
+        .map(k => k.replace(/'/g, "\\'"));
+
+      const keywordLines = (keywords.length ? keywords : ["OOOO"])
+        .map(k => `    '${k}'`).join(",\n");
+
+      return `function searchNaver${type === "news" ? "News" : "Blog"}() {
+  const clientId = '${clientId}'; // 네이버 API Client ID
+  const clientSecret = '${clientSecret}'; // 네이버 API Client Secret
+
+  const keywords = [
+${keywordLines}
+  ];
+
+  const displayCount = ${display}; // 키워드당 출력 개수
+  const sortType = '${sort}'; // 관련도순: sim, 최신순: date
+
+  const sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  sheet.clear();
+
+  // 헤더 작성
+  sheet.getRange(1, 1, 1, 4).setValues([['키워드', '제목', '링크', '요약']]);
+
+  let row = 2;
+
+  keywords.forEach(keyword => {
+    const apiUrl = 'https://openapi.naver.com/v1/search/${type}.json?query='
+      + encodeURIComponent(keyword)
+      + '&display=' + displayCount
+      + '&sort=' + sortType;
+
+    const options = {
+      method: 'get',
+      headers: {
+        'X-Naver-Client-Id': clientId,
+        'X-Naver-Client-Secret': clientSecret
+      }
+    };
+
+    const response = UrlFetchApp.fetch(apiUrl, options);
+    const result = JSON.parse(response.getContentText());
+
+    result.items.forEach(item => {
+      sheet.getRange(row, 1).setValue(keyword);
+      sheet.getRange(row, 2).setValue(stripHtml(item.title));
+      sheet.getRange(row, 3).setValue(item.link);
+      sheet.getRange(row, 4).setValue(stripHtml(item.description));
+      row++;
+    });
+  });
+
+  SpreadsheetApp.getUi().alert('${typeLabel} 검색 결과를 가져왔습니다.');
+}
+
+function stripHtml(html) {
+  return html.replace(/<[^>]+>/g, '');
+}`;
+    }
+
+    async function copyCode() {
+      const code = getNaverCode();
+      await executeCopy(code, "코드가 복사되었습니다.");
+    }
+
+    // Common Copy Function
+    async function executeCopy(text, successMessage) {
+      try {
+        await navigator.clipboard.writeText(text);
+        showToast(successMessage);
+      } catch (error) {
+        const temp = document.createElement("textarea");
+        temp.value = text;
+        temp.style.position = "fixed";
+        temp.style.opacity = "0";
+        document.body.appendChild(temp);
+        temp.select();
+        document.execCommand("copy");
+        temp.remove();
+        showToast(successMessage);
+      }
+    }
+
+    let toastTimer;
+    function showToast(message) {
+      const toast = $("toast");
+      toast.textContent = message;
+      clearTimeout(toastTimer);
+      toast.classList.add("show");
+      toastTimer = setTimeout(() => toast.classList.remove("show"), 2200);
+    }
+
+    function decrypt(encoded, key) {
+      try {
+        const text = decodeURIComponent(escape(atob(encoded)));
+        let result = '';
+        for (let i = 0; i < text.length; i++) {
+          result += String.fromCharCode(text.charCodeAt(i) ^ key.charCodeAt(i % key.length));
+        }
+        return result;
+      } catch (e) {
+        return '';
+      }
+    }
+
+    const HARDCODED_ENCRYPTED_KEY = "Nj5cKgtWNS9fPQMcBCs2IgYNLx0YBgoiFAwmJycGXBlYLjYtJUJKDjgWNw1QQCcfORkmBCA=";
+
+    function fillSavedApiKey() {
+      const savedEncryptedKey = localStorage.getItem('saved_gemini_api_key_encrypted') || HARDCODED_ENCRYPTED_KEY;
+      
+      const userInput = prompt('비밀번호를 입력해 주세요.');
+      if (userInput === null) return; // 취소 버튼
+      
+      if (userInput === 'workingai') {
+        const decrypted = decrypt(savedEncryptedKey, 'workingai');
+        if (decrypted && decrypted.length > 10) {
+          document.getElementById('geminiApiKey').value = decrypted;
+          showToast('Gemini API Key가 자동으로 입력되었습니다.');
+        } else {
+          alert('API Key 데이터가 올바르지 않거나 손상되었습니다.');
+        }
+      } else {
+        alert('비밀번호가 올바르지 않습니다.');
+      }
+    }
+
+    // ==========================================
+    // [2] AI 뉴스레터 비즈니스 로직
+    // ==========================================
+    const recipientEmailInput = document.getElementById('recipientEmail');
+    const geminiApiKeyInput = document.getElementById('geminiApiKey');
+    const subjectPrefixInput = document.getElementById('subjectPrefix');
+    const reportHeaderInput = document.getElementById('reportHeader');
+    const textPromptInput = document.getElementById('textPrompt');
+    const imagePromptInput = document.getElementById('imagePrompt');
+    const generateBtn = document.getElementById('generateBtn');
+    const codeOutput = document.getElementById('codeOutput');
+
+    function updateCode() {
+      const recipientEmail = recipientEmailInput.value.trim() || 'your_email@gmail.com';
+      const geminiApiKey = geminiApiKeyInput.value.trim() || '*****';
+      const subjectPrefix = subjectPrefixInput.value.trim() || '[AI 리포트]';
+      const reportHeader = reportHeaderInput.value.trim() || '오늘의 주요 뉴스 요약';
+      
+      const escapedTextPrompt = textPromptInput.value.replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\n/g, '\\n');
+      const escapedImagePrompt = imagePromptInput.value.replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\n/g, '\\n');
+      const escapedSubjectPrefix = subjectPrefix.replace(/\\/g, '\\\\').replace(/"/g, '\\"');
+      const escapedReportHeader = reportHeader.replace(/\\/g, '\\\\').replace(/"/g, '\\"');
+
+      const gasCode = `// ==========================================
+// [1] 사용자 설정 블록 (수정 가능)
+// ==========================================
+const RECIPIENT_EMAIL = "${recipientEmail}";
+const TEXT_PROMPT = "${escapedTextPrompt}";
+const IMAGE_PROMPT = "${escapedImagePrompt}";
+const EMAIL_SUBJECT_PREFIX = "${escapedSubjectPrefix}";
+const REPORT_HEADER = "${escapedReportHeader}";
+
+/**
+ * ==========================================
+ * [2] API 및 모델 설정 블록 (일반적으로 수정 불필요)
+ * ==========================================
+ */
+const GEMINI_API_KEY = "${geminiApiKey}"; // 여기에 Gemini API 키를 입력하세요.
+const TEXT_MODEL = "gemini-3-flash-preview";
+const IMAGE_MODEL = "gemini-3.1-flash-image-preview";
+
+/**
+ * 메인 실행 함수: 주제에 따른 보고서를 생성하고 이메일로 발송합니다.
+ */
+function sendDailyReport() {
+  console.log("요청하신 주제에 따른 이메일 생성을 시작합니다.");
+  
+  // 1. 오늘 날짜 구하기 (KST 기준)
+  const todayStr = Utilities.formatDate(new Date(), "GMT+9", "yyyy년 M월 d일");
+  
+  // 2. 텍스트 보고서 및 출처 가져오기
+  let reportData = null;
+  try {
+    reportData = generateTextReport(todayStr);
+  } catch (e) {
+    console.error("이메일 생성 중 치명적 오류 발생: " + e.toString());
+    return; // 텍스트가 없으면 메일 발송 불가하므로 중단
+  }
+  
+  // 3. 이미지 생성 (실패하더라도 메일은 발송되도록 예외 처리)
+  let imageBlob = null;
+  try {
+    imageBlob = generateImage();
+  } catch (e) {
+    console.error("이미지 생성 실패 (텍스트로만 메일을 발송합니다): " + e.toString());
+  }
+  
+  // 4. HTML 메일 본문 빌드 및 발송
+  try {
+    sendEmailWithReport(todayStr, reportData, imageBlob);
+    console.log("이메일 발송이 성공적으로 완료되었습니다.");
+  } catch (e) {
+    console.error("이메일 발송 중 오류 발생: " + e.toString());
+  }
+}
+
+/**
+ * Gemini API(with Search 그라운딩)를 사용하여 이메일을 생성합니다.
+ * @param {string} dateStr - 오늘 날짜 문자열
+ * @returns {Object} { text: string, sources: Array<{title: string, uri: string}> }
+ */
+function generateTextReport(dateStr) {
+  const url = "https://generativelanguage.googleapis.com/v1beta/models/" + TEXT_MODEL + ":generateContent?key=" + GEMINI_API_KEY;
+  
+  // '오늘'의 모호성을 제거하기 위해 프롬프트에 구체적인 날짜 삽입
+  const fullPrompt = "기준 날짜: " + dateStr + "\\n\\n" + TEXT_PROMPT;
+  
+  const payload = {
+    contents: [{
+      parts: [{ text: fullPrompt }]
+    }],
+    tools: [{ google_search: {} }], // Google Search 그라운딩 활성화
+    generationConfig: {
+      temperature: 1.0 // 그라운딩 권장값
+    }
+  };
+  
+  const options = {
+    method: "post",
+    contentType: "application/json",
+    payload: JSON.stringify(payload),
+    muteHttpExceptions: true
+  };
+  
+  const response = UrlFetchApp.fetch(url, options);
+  const responseCode = response.getResponseCode();
+  const responseText = response.getContentText();
+  
+  if (responseCode !== 200) {
+    console.error("텍스트 생성 API 오류 [상태 코드: " + responseCode + "]: " + responseText);
+    throw new Error("텍스트 보고서 생성에 실패했습니다.");
+  }
+  
+  const json = JSON.parse(responseText);
+  
+  // 텍스트 추출
+  let text = "";
+  if (json.candidates && json.candidates[0] && json.candidates[0].content && json.candidates[0].content.parts) {
+    text = json.candidates[0].content.parts[0].text;
+  }
+  
+  // 출처(Grounding Metadata) 추출
+  const sources = [];
+  try {
+    const metadata = json.candidates[0].groundingMetadata;
+    if (metadata && metadata.groundingChunks) {
+      metadata.groundingChunks.forEach(chunk => {
+        if (chunk.web && chunk.web.uri) {
+          sources.push({
+            title: chunk.web.title || chunk.web.uri,
+            uri: chunk.web.uri
+          });
+        }
+      });
+    }
+  } catch (e) {
+    console.log("출처 메타데이터를 파싱하는 중 바인딩 건너뜀: " + e.toString());
+  }
+  
+  // 중복 출처 제거 (URI 기준)
+  const uniqueSources = sources.filter((item, index, self) =>
+    index === self.findIndex((t) => t.uri === item.uri)
+  );
+  
+  return { text: text, sources: uniqueSources };
+}
+
+/**
+ * Gemini API를 사용하여 보고서에 어울리는 이미지를 생성합니다.
+ * @returns {Blob|null} 생성된 이미지의 Blob 객체 (실패 시 null)
+ */
+function generateImage() {
+  const url = "https://generativelanguage.googleapis.com/v1beta/models/" + IMAGE_MODEL + ":generateContent?key=" + GEMINI_API_KEY;
+  
+  const payload = {
+    contents: [{
+      parts: [{ text: IMAGE_PROMPT }]
+    }]
+  };
+  
+  const options = {
+    method: "post",
+    contentType: "application/json",
+    payload: JSON.stringify(payload),
+    muteHttpExceptions: true
+  };
+  
+  const response = UrlFetchApp.fetch(url, options);
+  const responseCode = response.getResponseCode();
+  const responseText = response.getContentText();
+  
+  if (responseCode !== 200) {
+    console.error("이미지 생성 API 오류 [상태 코드: " + responseCode + "]: " + responseText);
+    return null;
+  }
+  
+  const json = JSON.parse(responseText);
+  let base64Data = null;
+  let mimeType = "image/jpeg"; // 기본값 설정
+  
+  if (json.candidates && json.candidates[0] && json.candidates[0].content && json.candidates[0].content.parts) {
+    const parts = json.candidates[0].content.parts;
+    for (let i = 0; i < parts.length; i++) {
+      const inlineData = parts[i].inlineData || parts[i].inline_data;
+      if (inlineData && inlineData.data) {
+        base64Data = inlineData.data;
+        mimeType = inlineData.mimeType || inlineData.mime_type || mimeType;
+        break;
+      }
+    }
+  }
+  
+  if (!base64Data) {
+    console.error("응답 데이터에서 이미지 바이너리(base64)를 찾을 수 없습니다.");
+    return null;
+  }
+  
+  const decodedBytes = Utilities.base64Decode(base64Data);
+  return Utilities.newBlob(decodedBytes, mimeType, "report_image");
+}
+
+/**
+ * 수집된 데이터와 이미지를 HTML 양식으로 결합하여 이메일을 발송합니다.
+ * @param {string} dateStr - 오늘 날짜 문자열
+ * @param {Object} reportData - 텍스트 및 출처 객체
+ * @param {Blob|null} imageBlob - 이미지 Blob 객체
+ */
+function sendEmailWithReport(dateStr, reportData, imageBlob) {
+  const subject = EMAIL_SUBJECT_PREFIX + " " + dateStr;
+  
+  // 개행 문자를 HTML 브레이크 태그로 변환
+  const formattedText = reportData.text.replace(/\\n/g, "<br>");
+  
+  // HTML 템플릿 구성 (실습 도구와 일치하는 그린 테마 적용)
+  let htmlBody = '<div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; color: #333333; line-height: 1.6;">' +
+    '<h2 style="color: #1D4E3A; border-bottom: 2px solid #2A6B52; padding-bottom: 10px; margin-bottom: 20px;">' +
+    REPORT_HEADER + ' (' + dateStr + ')' +
+    '</h2>' +
+    '<div style="border-left: 4px solid #2A6B52; background-color: #E6F2ED; padding: 15px; margin-bottom: 25px; font-size: 15px; text-align: justify; border-radius: 0 8px 8px 0; color: #1D4E3A;">' +
+    formattedText +
+    '</div>';
+  
+  // 이미지가 성공적으로 생성된 경우에만 인라인 이미지 태그 추가
+  if (imageBlob) {
+    htmlBody += '<div style="margin-bottom: 25px; text-align: center;">' +
+      '<img src="cid:reportImage" alt="Report AI Image" style="max-width: 100%; height: auto; border-radius: 8px; border: 1px solid #DDDBD5;" />' +
+      '</div>';
+  }
+  
+  // 출처 정보가 있을 때만 리스트 생성
+  if (reportData.sources && reportData.sources.length > 0) {
+    htmlBody += '<div style="margin-top: 20px; padding-top: 15px; border-top: 1px solid #DDDBD5;">' +
+      '<h4 style="margin-bottom: 8px; color: #1D4E3A;">참고 및 검색 출처</h4>' +
+      '<ul style="padding-left: 20px; margin: 0; font-size: 13px; color: #555555;">';
+    
+    reportData.sources.forEach(function(source) {
+      htmlBody += '<li style="margin-bottom: 4px;"><a href="' + source.uri + '" target="_blank" style="color: #2A6B52; text-decoration: none; font-weight: 500;">' + source.title + '</a></li>';
+    });
+    
+    htmlBody += '</ul>' +
+      '</div>';
+  }
+  
+  htmlBody += '</div>';
+  
+  // MailApp 옵션 구성
+  const mailOptions = {
+    to: RECIPIENT_EMAIL,
+    subject: subject,
+    htmlBody: htmlBody
+  };
+  
+  // 이미지가 존재하면 inlineImages 속성 바인딩
+  if (imageBlob) {
+    mailOptions.inlineImages = {
+      reportImage: imageBlob
+    };
+  }
+  
+  MailApp.sendEmail(mailOptions);
+}
+`;
+      codeOutput.textContent = gasCode;
+    }
+
+    // Register event listeners
+    $("keywordCount").addEventListener("change", renderKeywords);
+    $("displayCount").addEventListener("blur", () => getNaverCode());
+    renderKeywords();
+
+    generateBtn.addEventListener('click', async () => {
+      const emailVal = recipientEmailInput.value.trim();
+      const apiKeyVal = geminiApiKeyInput.value.trim();
+      
+      if (!emailVal || !apiKeyVal) {
+        alert('이메일과 Gemini API Key를 모두 입력해 주세요.');
+        return;
+      }
+      
+      updateCode();
+      await executeCopy(codeOutput.textContent, "스크립트가 클립보드에 복사되었습니다.");
+    });
+  </script>
+</body>
+</html>

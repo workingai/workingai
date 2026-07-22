@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WORKING AI · Mini Project 1</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Pretendard Font -->
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+  <!-- IBM Plex Mono Font -->
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#F2F8F5',
+              100: '#E6F2ED',
+              500: '#2A6B52',
+              600: '#1D4E3A',
+            },
+            neutral: {
+              50: '#F8F7F4',
+              100: '#F2F1EE',
+              200: '#E5E3DF',
+              300: '#DDDBD5',
+              400: '#B0AEA8',
+              500: '#8A8881',
+              600: '#605E59',
+              900: '#1A1A18',
+            }
+          },
+          fontFamily: {
+            sans: ['Pretendard', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+            mono: ['IBM Plex Mono', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    :root{
+      --bg:#F2F1EE; --card:#FFFFFF; --line:#DDDBD5; --green:#2A6B52; --green-dark:#1D4E3A;
+      --panel:#E6F2ED; --text:#1A1A18; --muted:#77736B; --soft:#F8F7F4;
+    }
+    body {
+      font-family: 'Pretendard', -apple-system, sans-serif;
+      background-color: #F2F1EE;
+    }
+    /* Custom Scrollbars */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #F2F1EE;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #DDDBD5;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #B0AEA8;
+    }
+    .toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%) translateY(20px);opacity:0;background:#1A1A18;color:#fff;border-radius:999px;padding:12px 18px;font-size:13px;font-weight:700;transition:.25s;z-index:20;box-shadow:0 4px 12px rgba(0,0,0,0.15)}
+    .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+  </style>
+</head>
+<body class="min-h-screen text-neutral-900 antialiased flex flex-col h-screen overflow-hidden pt-[5px]">
+  <!-- Top brand bar -->
+  <div class="fixed top-0 left-0 w-full h-[5px] bg-brand-500 z-50"></div>
+
+  <!-- Navigation Bar (Shared) -->
+  <div id="navbar-placeholder"></div>
+  <script src="../navbar.js"></script>
+
+  <!-- Content Container -->
+  <div class="flex-1 flex flex-col lg:flex-row lg:overflow-hidden">
+    <!-- ===== Left Sidebar Navigation ===== -->
+    <aside
+      class="flex-shrink-0 w-full lg:w-64 bg-white border-b lg:border-b-0 lg:border-r border-[#DDDBD5] flex flex-col lg:h-full pt-4">
+    <!-- Nav list -->
+    <p class="hidden lg:block px-5 mb-1.5 text-[11px] font-bold uppercase tracking-wider text-neutral-400">실습 목록</p>
+    <nav class="flex lg:flex-col gap-1 px-3 pb-4 overflow-x-auto lg:overflow-y-auto">
+
+      <a href="01_wamingup.html"
+        class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
+        <span class="text-lg leading-none">🔥</span>
+        <span>워밍업 실습</span>
+      </a>
+      <a href="02_prompt.html"
+        class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
+        <span class="text-lg leading-none">🧩</span>
+        <span>프롬프트 빌더</span>
+      </a>
+      <a href="03_apps_scrpt.html"
+        class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
+        <span class="text-lg leading-none">🤖</span>
+        <span>앱스스크립트 자동화</span>
+      </a>
+      <a href="04_notebooklm.html"
+        class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
+        <span class="text-lg leading-none">🖼️</span>
+        <span>노트북LM</span>
+      </a>
+      <a href="05_miniproject1.html"
+        class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-bold text-brand-600 bg-brand-100 whitespace-nowrap transition-colors">
+        <span class="text-lg leading-none">🚀</span>
+        <span>미니프로젝트 1</span>
+      </a>
+      <a href="07_aiagent.html"
+        class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
+        <span class="text-lg leading-none">🎨</span>
+        <span>AI 에이전트</span>
+      </a>
+      <a href="06_aivideo.html"
+        class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
+        <span class="text-lg leading-none">🎬</span>
+        <span>이미지 생성 및 영상화</span>
+      </a>
+      <a href="m2_miniproject2.html"
+        class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
+        <span class="text-lg leading-none">🚀</span>
+        <span>미니프로젝트 2</span>
+      </a>
+    </nav>
+    <!-- Sidebar Footer (Banner) -->
+    <div class="mt-auto border-t border-[#DDDBD5] p-4 bg-white flex-shrink-0">
+      <!-- Dropup Menu Container -->
+      <div class="relative mb-2.5">
+        <button id="quick-links-btn" onclick="toggleQuickLinks(event)" class="w-full flex items-center justify-between py-2 px-3 border border-[#DDDBD5] hover:border-brand-500 bg-white hover:bg-neutral-50 text-neutral-900 rounded-xl transition-all duration-300 shadow-xs text-sm font-extrabold focus:outline-none">
+          <span class="flex items-center gap-2 text-neutral-600 hover:text-neutral-900">
+            <span>🔗</span> 주요 서비스 바로가기
+          </span>
+          <svg id="quick-links-arrow" class="w-3.5 h-3.5 text-neutral-400 transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5"></path>
+          </svg>
+        </button>
+        <!-- Dropup menu: hidden by default, absolute positioning above the button -->
+        <div id="quick-links-menu" class="hidden absolute bottom-full left-0 w-full mb-2 bg-white border border-[#DDDBD5] rounded-xl shadow-lg z-50 overflow-hidden py-1">
+          <a href="https://chatgpt.com" target="_blank" class="block px-4 py-2.5 text-xs text-neutral-700 hover:bg-brand-50 hover:text-brand-600 transition-colors font-bold border-b border-[#F2F1EE]">챗GPT</a>
+          <a href="https://gemini.google.com" target="_blank" class="block px-4 py-2.5 text-xs text-neutral-700 hover:bg-brand-50 hover:text-brand-600 transition-colors font-bold border-b border-[#F2F1EE]">제미나이</a>
+          <a href="https://claude.ai" target="_blank" class="block px-4 py-2.5 text-xs text-neutral-700 hover:bg-brand-50 hover:text-brand-600 transition-colors font-bold border-b border-[#F2F1EE]">클로드</a>
+          <a href="https://sheets.google.com" target="_blank" class="block px-4 py-2.5 text-xs text-neutral-700 hover:bg-brand-50 hover:text-brand-600 transition-colors font-bold border-b border-[#F2F1EE]">구글 시트</a>
+          <a href="https://docs.google.com/videos/create?usp=vids_alc&authuser=0" target="_blank" class="block px-4 py-2.5 text-xs text-neutral-700 hover:bg-brand-50 hover:text-brand-600 transition-colors font-bold border-b border-[#F2F1EE]">구글 Vids</a>
+          <a href="https://canva.com" target="_blank" class="block px-4 py-2.5 text-xs text-neutral-700 hover:bg-brand-50 hover:text-brand-600 transition-colors font-bold border-b border-[#F2F1EE]">캔바</a>
+          <a href="https://aistudio.google.com" target="_blank" class="block px-4 py-2.5 text-xs text-neutral-700 hover:bg-brand-50 hover:text-brand-600 transition-colors font-bold border-b border-[#F2F1EE]">AI Studio</a>
+          <a href="https://workspace.google.com/experiments" target="_blank" class="block px-4 py-2.5 text-xs text-neutral-700 hover:bg-brand-50 hover:text-brand-600 transition-colors font-bold">Workspace Experiments</a>
+        </div>
+      </div>
+      <script>
+        function toggleQuickLinks(e) {
+          e.stopPropagation();
+          const menu = document.getElementById('quick-links-menu');
+          const arrow = document.getElementById('quick-links-arrow');
+          const isHidden = menu.classList.contains('hidden');
+          if (isHidden) {
+            menu.classList.remove('hidden');
+            arrow.classList.add('rotate-180');
+          } else {
+            menu.classList.add('hidden');
+            arrow.classList.remove('rotate-180');
+          }
+        }
+        document.addEventListener('click', (e) => {
+          const menu = document.getElementById('quick-links-menu');
+          const btn = document.getElementById('quick-links-btn');
+          const arrow = document.getElementById('quick-links-arrow');
+          if (menu && !menu.classList.contains('hidden') && !menu.contains(e.target) && !btn.contains(e.target)) {
+            menu.classList.add('hidden');
+            arrow.classList.remove('rotate-180');
+          }
+        });
+      </script>
+
+      <a href="pdfviewer.html" class="block w-full text-center py-3 px-4 border border-[#DDDBD5] hover:border-brand-500 bg-brand-50 hover:bg-brand-100 text-brand-600 rounded-xl transition-all duration-300 shadow-xs" style="text-decoration: none;">
+        <span class="block text-xs font-bold text-neutral-400 mb-0.5 tracking-wider uppercase">Slide PDF</span>
+        <span class="block text-sm font-extrabold tracking-tight">강의 교안 뷰어</span>
+      </a>
+    </div>
+  </aside>
+
+  <!-- ===== Main Content ===== -->
+  <main class="flex-1 flex flex-col overflow-y-auto pt-8 lg:pt-10 pb-8 px-4 md:px-8 lg:px-10">
+    <!-- Header Area -->
+    <header class="mb-4 flex-shrink-0 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+      <div>
+        <div class="mb-2">
+          <span class="inline-block bg-brand-500 text-white rounded-full px-4 py-1 text-[11.5px] font-mono font-extrabold tracking-wider uppercase">Mini Project 1</span>
+        </div>
+        <h1 id="header-title" class="text-2xl md:text-3xl font-extrabold tracking-tight leading-tight text-neutral-900">
+          AI 활용 시장 조사 및 보고서 초안 작성
+        </h1>
+      </div>
+      <!-- Navigation buttons in header -->
+      <div class="flex items-center gap-2 flex-shrink-0 mb-1">
+        <button onclick="showTab(0)" id="tab-btn-0" class="px-4 h-9 flex items-center justify-center rounded-full font-bold text-sm transition-all focus:outline-none bg-brand-500 text-white border border-brand-500">
+          실습 안내
+        </button>
+        <button onclick="showTab(1)" id="tab-btn-1" class="w-9 h-9 flex items-center justify-center rounded-full font-bold text-sm transition-all focus:outline-none bg-white text-brand-500 border border-[#DDDBD5] hover:bg-neutral-50">
+          1
+        </button>
+        <button onclick="showTab(2)" id="tab-btn-2" class="w-9 h-9 flex items-center justify-center rounded-full font-bold text-sm transition-all focus:outline-none bg-white text-brand-500 border border-[#DDDBD5] hover:bg-neutral-50">
+          2
+        </button>
+        <button onclick="showTab(3)" id="tab-btn-3" class="w-9 h-9 flex items-center justify-center rounded-full font-bold text-sm transition-all focus:outline-none bg-white text-brand-500 border border-[#DDDBD5] hover:bg-neutral-50">
+          3
+        </button>
+      </div>
+    </header>
+
+    <section class="border border-[#DDDBD5] rounded-2xl p-5 md:p-6 bg-white shadow-sm flex flex-col flex-1">
+      <!-- Practice Content Container -->
+      <div class="flex-1 flex flex-col gap-6">
+
+        <!-- =================== 실습 인트로 (Tab 0) =================== -->
+        <div id="content-intro" class="flex flex-col gap-6">
+          <!-- Mission Card -->
+          <div class="bg-brand-600 rounded-2xl p-6 text-white shadow-xs">
+            <div class="flex items-center gap-2 text-brand-100 mb-3 text-xs md:text-sm font-extrabold uppercase tracking-wider">
+              <span>✦</span> MISSION
+            </div>
+            <h3 class="text-xl md:text-2xl font-extrabold leading-snug">
+              우리 회사의 경쟁사 또는 시장 동향을 조사하고 보고 슬라이드를 제작하세요.
+            </h3>
+          </div>
+
+          <!-- Steps Flowcard -->
+          <div class="border border-[#DDDBD5] rounded-2xl p-6 bg-[#F8F7F4] flex flex-col justify-center">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+              
+              <!-- Step 1 -->
+              <div class="flex-1 bg-white border border-[#DDDBD5] rounded-xl p-4 flex flex-col items-center text-center shadow-xs border-t-4 border-t-emerald-600 w-full">
+                <span class="text-xs font-bold text-neutral-400 self-start">01</span>
+                <div class="w-12 h-12 my-2 flex items-center justify-center text-3xl bg-brand-50 rounded-full">🔍</div>
+                <h3 class="text-lg md:text-xl font-extrabold text-neutral-900 mb-1">리서치 진행</h3>
+                <span class="text-neutral-500 text-xs leading-normal">조사할 사항 명확히 지시하기</span>
+              </div>
+
+              <!-- Arrow 1 -->
+              <div class="flex-shrink-0 flex items-center justify-center text-brand-500 rotate-90 md:rotate-0 my-1 md:my-0">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"></path>
+                </svg>
+              </div>
+
+              <!-- Step 2 -->
+              <div class="flex-1 bg-white border border-[#DDDBD5] rounded-xl p-4 flex flex-col items-center text-center shadow-xs border-t-4 border-t-emerald-600 w-full">
+                <span class="text-xs font-bold text-neutral-400 self-start">02</span>
+                <div class="w-12 h-12 my-2 flex items-center justify-center text-3xl bg-brand-50 rounded-full">📖</div>
+                <h3 class="text-lg md:text-xl font-extrabold text-neutral-900 mb-1">목차 및 디자인 가이드 제작</h3>
+                <span class="text-neutral-500 text-xs leading-normal">핵심 내용 파악 및 필요 소스 추가</span>
+              </div>
+
+              <!-- Arrow 2 -->
+              <div class="flex-shrink-0 flex items-center justify-center text-brand-500 rotate-90 md:rotate-0 my-1 md:my-0">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"></path>
+                </svg>
+              </div>
+
+              <!-- Step 3 -->
+              <div class="flex-1 bg-white border border-[#DDDBD5] rounded-xl p-4 flex flex-col items-center text-center shadow-xs border-t-4 border-t-emerald-600 w-full">
+                <span class="text-xs font-bold text-neutral-400 self-start">03</span>
+                <div class="w-12 h-12 my-2 flex items-center justify-center text-3xl bg-brand-50 rounded-full">📊</div>
+                <h3 class="text-lg md:text-xl font-extrabold text-neutral-900 mb-1">슬라이드 제작</h3>
+                <span class="text-neutral-500 text-xs leading-normal">목차 제시 및 핵심 인사이트 작성</span>
+              </div>
+
+            </div>
+          </div>
+        </div>
+        
+        <!-- =================== 실습 1. 리서치 진행 =================== -->
+        <div id="content-step1" class="hidden flex flex-col gap-6">
+          <!-- Card Head 1 -->
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#DDDBD5] pb-4 mb-2 flex-shrink-0">
+            <div>
+              <h2 class="text-lg md:text-xl font-extrabold text-neutral-900">1단계: 시장 리서치 진행</h2>
+              <p class="text-xs md:text-sm text-[#605E59] mt-1">시장 분석 및 경쟁사 조사를 진행하기 위해 AI 모델에 입력할 리서치 프롬프트입니다.</p>
+            </div>
+            <div class="flex items-center gap-2 flex-shrink-0">
+              <a href="https://chatgpt.com/" target="_blank" class="flex-shrink-0 inline-flex items-center justify-center gap-2 px-4 h-9 border border-[#DDDBD5] hover:border-emerald-500 bg-white hover:bg-emerald-50 text-neutral-900 hover:text-emerald-700 font-bold text-xs md:text-sm rounded-lg transition-all shadow-xs focus:outline-none" style="text-decoration: none;">
+                <svg class="w-3.5 h-3.5 text-neutral-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"></path>
+                </svg>
+                ChatGPT 바로가기              </a>
+              <a href="https://gemini.google.com/" target="_blank" class="flex-shrink-0 inline-flex items-center justify-center gap-2 px-4 h-9 border border-[#DDDBD5] hover:border-blue-500 bg-white hover:bg-blue-50 text-neutral-900 hover:text-blue-700 font-bold text-xs md:text-sm rounded-lg transition-all shadow-xs focus:outline-none" style="text-decoration: none;">
+                <svg class="w-3.5 h-3.5 text-neutral-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"></path>
+                </svg>
+                Gemini 바로가기              </a>
+            </div>
+          </div>
+
+          <!-- 실습 프롬프트 -->
+          <section class="flex flex-col border border-[#DDDBD5] rounded-xl bg-brand-100 overflow-hidden shadow-xs">
+            <div class="p-4 pb-2.5 flex-shrink-0 bg-brand-100">
+              <strong class="block text-neutral-900 text-base font-extrabold mb-1">✍️ 시장 리서치 프롬프트</strong>
+              <span class="block text-[#605E59] text-xs leading-tight">아래 지시 사항을 활용해 시장 조사를 수행합니다. (수정 가능)</span>
+            </div>
+            <textarea id="prompt-step1" class="w-full p-4 border-t border-b border-l-0 border-r-0 border-[#DDDBD5] bg-white text-neutral-900 text-sm md:text-base leading-relaxed placeholder-neutral-400 focus:border-brand-500 focus:ring-0 outline-none resize-none h-64 md:h-80 font-mono leading-relaxed" style="font-family: 'Pretendard', sans-serif;">너는 10년 차 [업종] 시장 분석 전문가야.
+
+[조사 목표]
+우리 회사는 현재 [예: 신제품 개발 / 하반기 전략 수립]을 추진하고 있고, 이를 위해 경쟁사 현황과 시장 동향에 대한 근거 자료가 필요해.
+
+[대상]
+우리 회사는 [회사명/제품명]이라는 [제품·서비스 한 줄 설명]을 제공하고 있어. 이 제품과 관련된 경쟁사 현황 및 시장 동향을 조사해줘.
+
+[조사 범위]
+- 최근 1~2년 이내 자료를 기준으로
+- [국내/글로벌] [업종] 시장을 중심으로 조사해줘
+
+[결과물 구성]
+위 목표에 맞게, 아래 순서로 정리해줘.
+1. 주요 경쟁사 현황 (제품 특징, 가격, 최근 동향)
+2. 시장 트렌드 및 소비자 반응
+3. 우리 제품/서비스에 주는 시사점 3가지
+
+출처가 명확한 정보 위주로 조사하고, 각 항목마다 근거 출처를 함께 표기해줘.</textarea>
+            <div class="p-4 bg-white flex justify-end gap-2 border-t border-[#DDDBD5]">
+              <button onclick="copyPrompt('prompt-step1')" class="px-6 h-11 bg-brand-500 hover:bg-brand-600 text-white text-sm md:text-base font-extrabold rounded-lg transition-all shadow-sm flex items-center justify-center gap-1.5 focus:outline-none">
+                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="9" y="9" width="11" height="11" rx="2" ry="2" stroke-linecap="round" stroke-linejoin="round"></rect>
+                  <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+                프롬프트 복사
+              </button>
+            </div>
+          </section>
+        </div>
+
+        <!-- =================== 실습 2. 목차 및 디자인 가이드 구성 =================== -->
+        <div id="content-step2" class="hidden flex flex-col gap-6">
+          <!-- Card Head 2 -->
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#DDDBD5] pb-4 mb-2 flex-shrink-0">
+            <div>
+              <h2 class="text-lg md:text-xl font-extrabold text-neutral-900">2단계: 목차 및 디자인 가이드 구성</h2>
+              <p class="text-xs md:text-sm text-[#605E59] mt-1">조사된 데이터를 기반으로 보고서의 세부 목차와 시각적 디자인 방향성을 설정하기 위한 프롬프트입니다.</p>
+            </div>
+            <div class="flex items-center gap-2 flex-shrink-0">
+              <a href="https://notebooklm.google/" target="_blank" class="flex-shrink-0 inline-flex items-center justify-center gap-2 px-4 h-9 border border-[#DDDBD5] hover:border-emerald-500 bg-white hover:bg-emerald-50 text-neutral-900 hover:text-emerald-700 font-bold text-xs md:text-sm rounded-lg transition-all shadow-xs focus:outline-none" style="text-decoration: none;">
+                <svg class="w-3.5 h-3.5 text-neutral-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"></path>
+                </svg>
+                NotebookLM 바로가기              </a>
+            </div>
+          </div>
+
+          <!-- 실습 프롬프트 -->
+          <section class="flex flex-col border border-[#DDDBD5] rounded-xl bg-brand-100 overflow-hidden shadow-xs">
+            <div class="p-4 pb-2.5 flex-shrink-0 bg-brand-100">
+              <strong class="block text-neutral-900 text-base font-extrabold mb-1">✍️ 목차 및 시각 기획 프롬프트</strong>
+              <span class="block text-[#605E59] text-xs leading-tight">아래 지시 사항을 활용해 상세 목차와 디자인 테마를 기획합니다. (수정 가능)</span>
+            </div>
+            <textarea id="prompt-step2" class="w-full p-4 border-t border-b border-l-0 border-r-0 border-[#DDDBD5] bg-white text-neutral-900 text-sm md:text-base leading-relaxed placeholder-neutral-400 focus:border-brand-500 focus:ring-0 outline-none resize-none h-64 md:h-80 font-mono leading-relaxed" style="font-family: 'Pretendard', sans-serif;">업로드된 소스를 바탕으로, [예: 신제품 개발 / 하반기 전략 수립]에 대한 경영진 의사결정용 보고 슬라이드 구성안을 만들어줘.
+
+[전체 구성]
+- 전체 슬라이드 수: [예: 8장]
+- 핵심 메시지 한 줄: [이 보고서를 통해 가장 전달하고 싶은 한 문장]
+
+[슬라이드별 구성]
+슬라이드 번호 — 제목
+- 핵심 메시지:
+- 핵심 내용 또는 수치:
+- 추천 시각화:
+
+[원칙]
+- 표지에는 주제·기준 시점·핵심 메시지만
+- 정량 성과는 차트·숫자 카드로 표현
+- 인사이트는 3개 이내 카드형 구조
+- 마지막은 실행계획 또는 핵심 메시지 재요약
+- 마크다운 사용 금지</textarea>
+            <div class="p-4 bg-white flex justify-end gap-2 border-t border-[#DDDBD5]">
+              <button onclick="copyPrompt('prompt-step2')" class="px-6 h-11 bg-brand-500 hover:bg-brand-600 text-white text-sm md:text-base font-extrabold rounded-lg transition-all shadow-sm flex items-center justify-center gap-1.5 focus:outline-none">
+                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="9" y="9" width="11" height="11" rx="2" ry="2" stroke-linecap="round" stroke-linejoin="round"></rect>
+                  <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+                프롬프트 복사
+              </button>
+            </div>
+          </section>
+        </div>
+
+        <!-- =================== 실습 3. 슬라이드 제작 =================== -->
+        <div id="content-step3" class="hidden flex flex-col gap-6">
+          <!-- Card Head 3 -->
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#DDDBD5] pb-4 mb-2 flex-shrink-0">
+            <div>
+              <h2 class="text-lg md:text-xl font-extrabold text-neutral-900">3단계: 슬라이드 제작 요청</h2>
+              <p class="text-xs md:text-sm text-[#605E59] mt-1">슬라이드 내용에 들어갈 구체적인 원고 텍스트와 발표 스크립트를 도출하기 위한 프롬프트입니다.</p>
+            </div>
+            <div class="flex items-center gap-2 flex-shrink-0">
+              <a href="https://notebooklm.google/" target="_blank" class="flex-shrink-0 inline-flex items-center justify-center gap-2 px-4 h-9 border border-[#DDDBD5] hover:border-emerald-500 bg-white hover:bg-emerald-50 text-neutral-900 hover:text-emerald-700 font-bold text-xs md:text-sm rounded-lg transition-all shadow-xs focus:outline-none" style="text-decoration: none;">
+                <svg class="w-3.5 h-3.5 text-neutral-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"></path>
+                </svg>
+                NotebookLM 바로가기              </a>
+              <a href="https://claude.ai/" target="_blank" class="flex-shrink-0 inline-flex items-center justify-center gap-2 px-4 h-9 border border-[#DDDBD5] hover:border-orange-500 bg-white hover:bg-orange-50 text-neutral-900 hover:text-orange-700 font-bold text-xs md:text-sm rounded-lg transition-all shadow-xs focus:outline-none" style="text-decoration: none;">
+                <svg class="w-3.5 h-3.5 text-neutral-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"></path>
+                </svg>
+                Claude 바로가기              </a>
+            </div>
+          </div>
+
+          <!-- 실습 프롬프트 -->
+          <section class="flex flex-col border border-[#DDDBD5] rounded-xl bg-brand-100 overflow-hidden shadow-xs">
+            <div class="p-4 pb-2.5 flex-shrink-0 bg-brand-100">
+              <strong class="block text-neutral-900 text-base font-extrabold mb-1">✍️ 슬라이드 상세 내용 구성 프롬프트</strong>
+              <span class="block text-[#605E59] text-xs leading-tight">생성한 슬라이드 목차 및 핵심 내용을 아래에 붙여 넣으세요.</span>
+            </div>
+            <textarea id="prompt-step3" placeholder="이곳에 목차 및 구성안을 넣어주세요. &#10;디자인 가이드는 자동으로 추가 됩니다." class="w-full p-4 border-t border-b border-l-0 border-r-0 border-[#DDDBD5] bg-white text-neutral-900 text-sm md:text-base leading-relaxed placeholder-neutral-400 focus:border-brand-500 focus:ring-0 outline-none resize-none h-64 md:h-80 font-mono leading-relaxed" style="font-family: 'Pretendard', sans-serif;"></textarea>
+            <div class="p-4 bg-white flex justify-end gap-2 border-t border-[#DDDBD5]">
+              <button onclick="copyPrompt('prompt-step3')" class="px-6 h-11 bg-brand-500 hover:bg-brand-600 text-white text-sm md:text-base font-extrabold rounded-lg transition-all shadow-sm flex items-center justify-center gap-1.5 focus:outline-none">
+                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="9" y="9" width="11" height="11" rx="2" ry="2" stroke-linecap="round" stroke-linejoin="round"></rect>
+                  <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+                프롬프트 복사
+              </button>
+            </div>
+          </section>
+        </div>
+
+      </div>
+    </section>
+  </main>
+  </div>
+
+  <div id="toast" class="toast">복사되었습니다.</div>
+
+  <script>
+    if (localStorage.getItem('workbook_logged_in') !== 'true') {
+      window.location.href = '../index.html?redirect=workshop01/05_miniproject1.html';
+    }
+
+    function showTab(num) {
+      const intro = document.getElementById('content-intro');
+      const step1 = document.getElementById('content-step1');
+      const step2 = document.getElementById('content-step2');
+      const step3 = document.getElementById('content-step3');
+      
+      const buttons = {
+        0: document.getElementById('tab-btn-0'),
+        1: document.getElementById('tab-btn-1'),
+        2: document.getElementById('tab-btn-2'),
+        3: document.getElementById('tab-btn-3')
+      };
+
+      const activeClass = ['bg-brand-500', 'text-white', 'border-brand-500'];
+      const inactiveClass = ['bg-white', 'text-brand-500', 'border-[#DDDBD5]', 'hover:bg-neutral-50'];
+
+      // Hide all sections
+      intro.classList.add('hidden');
+      step1.classList.add('hidden');
+      step2.classList.add('hidden');
+      step3.classList.add('hidden');
+
+      // Reset all buttons style
+      Object.values(buttons).forEach(btn => {
+        if (btn) {
+          btn.classList.remove(...activeClass);
+          btn.classList.add(...inactiveClass);
+        }
+      });
+
+      // Set active button style and content visibility
+      if (num === 0) {
+        intro.classList.remove('hidden');
+      } else if (num === 1) {
+        step1.classList.remove('hidden');
+      } else if (num === 2) {
+        step2.classList.remove('hidden');
+      } else if (num === 3) {
+        step3.classList.remove('hidden');
+      }
+
+      if (buttons[num]) {
+        buttons[num].classList.remove(...inactiveClass);
+        buttons[num].classList.add(...activeClass);
+      }
+    }
+
+    // Set tab 0 as active by default on load
+    window.addEventListener('DOMContentLoaded', () => {
+      showTab(0);
+    });
+
+    const DEFAULT_PROMPTS = {
+      'prompt-step1': `너는 10년 차 [업종] 시장 분석 전문가야.
+
+[조사 목표]
+우리 회사는 현재 [예: 신제품 개발 / 하반기 전략 수립]을 추진하고 있고, 이를 위해 경쟁사 현황과 시장 동향에 대한 근거 자료가 필요해.
+
+[대상]
+우리 회사는 [회사명/제품명]이라는 [제품·서비스 한 줄 설명]을 제공하고 있어. 이 제품과 관련된 경쟁사 현황 및 시장 동향을 조사해줘.
+
+[조사 범위]
+- 최근 1~2년 이내 자료를 기준으로
+- [국내/글로벌] [업종] 시장을 중심으로 조사해줘
+
+[결과물 구성]
+위 목표에 맞게, 아래 순서로 정리해줘.
+1. 주요 경쟁사 현황 (제품 특징, 가격, 최근 동향)
+2. 시장 트렌드 및 소비자 반응
+3. 우리 제품/서비스에 주는 시사점 3가지
+
+출처가 명확한 정보 위주로 조사하고, 각 항목마다 근거 출처를 함께 표기해줘.`,
+      'prompt-step2': `업로드된 소스를 바탕으로, [예: 신제품 개발 / 하반기 전략 수립]에 대한 경영진 의사결정용 보고 슬라이드 구성안을 만들어줘.
+
+[전체 구성]
+- 전체 슬라이드 수: [예: 8장]
+- 핵심 메시지 한 줄: [이 보고서를 통해 가장 전달하고 싶은 한 문장]
+
+[슬라이드별 구성]
+슬라이드 번호 — 제목
+- 핵심 메시지:
+- 핵심 내용 또는 수치:
+- 추천 시각화:
+
+[원칙]
+- 표지에는 주제·기준 시점·핵심 메시지만
+- 정량 성과는 차트·숫자 카드로 표현
+- 인사이트는 3개 이내 카드형 구조
+- 마지막은 실행계획 또는 핵심 메시지 재요약
+- 마크다운 사용 금지`,
+      'prompt-step3': ``
+    };
+
+    const SLIDE_DESIGN_GUIDE = `
+
+[슬라이드 디자인 가이드]
+
+1. 전체 톤앤매너
+전문적이고 모던한 미니멀리즘. 불필요한 장식을 배제하고 넓은 여백으로 핵심 메시지에 시선을 집중시킵니다. 1슬라이드 1메시지 원칙을 반드시 준수합니다.
+
+2. 색상 규칙
+- 배경: 크림 베이지 #EDE8DC (기본) / 거의 검정 #1A1A1A (대비 카드·클로징 한정)
+- 텍스트: #1A1A1A (제목) / #6A6460 (본문)
+- 포인트 컬러: 레드오렌지 #D44920 — 핵심 키워드·숫자·도트에만, 슬라이드당 1~2곳 집중 사용
+- 구분선·카드 테두리: #D0C8B8
+- 절대 금지: 위 목록 외 임의 색상, 그라디언트, 그림자·3D 효과
+
+3. 타이포그래피 규칙
+커버(1페이지)
+- 디스플레이 타이틀: 72pt Bold, 3줄 이내, 핵심 단어 1~2개만 레드오렌지 처리, 마침표도 레드오렌지
+- 서브텍스트: 14pt Regular 1~2줄
+
+콘텐츠 슬라이드(2페이지 이후) — 3종 고정
+- T1 제목: 34pt Bold
+- T2 본문: 16pt Regular/Bold
+- T3 레이블/내비: 10pt, 대문자, 자간 2.5
+- 예외(그래픽 요소): 비교 카드 내 핵심 숫자만 68pt Bold 허용
+- 강조 방법: 레드오렌지 + Bold만 허용. 밑줄·이탤릭 금지.
+
+4. 레이아웃 규칙
+- 헤더 좌: ● 레드오렌지 도트 + 챕터 레이블 (T3, 대문자)
+- 헤더 우: 페이지 번호 002 / 005 형식 (T3)
+- 푸터 좌: LOGO 플레이스홀더 박스 / 푸터 우: 챕터 브레드크럼 (T3)
+- 여백: 상하좌우 최소 0.65" 유지, 텍스트는 항상 좌측 정렬
+
+5. 시각화 규칙
+- 비교 카드: 베이지 카드(좌) + 검정 카드(우) 병치, 핵심 숫자 68pt로 시각화
+- 번호 리스트: 01/02/03을 T1 크기·레드오렌지로 좌측 고정, 항목 사이 헤어라인 구분, 불릿 금지
+- 프로세스: 원형 번호(active=레드오렌지 채움, inactive=베이지+테두리) + 얇은 수평 연결선
+- 강조 배너: 검정 전폭 직사각형 + 백색 T2 텍스트, 슬라이드당 1회 이내
+
+6. 반드시 지킬 것 / 피할 것
+지킬 것: 폰트 크기는 커버 72pt + 콘텐츠 3종(T1/T2/T3)만 사용, 헤더·푸터 형식 전 슬라이드 동일하게 유지
+피할 것: 표(table) 형식, 4종 이상 폰트 크기 혼용, 레드오렌지를 배경·라인 등 장식 용도로 사용하는 것`;
+
+    function resetPrompt(id) {
+      if (DEFAULT_PROMPTS[id] !== undefined) {
+        document.getElementById(id).value = DEFAULT_PROMPTS[id];
+        showToast('기본 프롬프트로 초기화되었습니다.');
+      }
+    }
+
+    // copy clipboard helper
+    function copyPrompt(id) {
+      let text = document.getElementById(id).value;
+      if (id === 'prompt-step3') {
+        text = text + SLIDE_DESIGN_GUIDE;
+      }
+      
+      const textArea = document.createElement('textarea');
+      textArea.value = text;
+      textArea.style.position = 'fixed';
+      textArea.style.top = '0';
+      textArea.style.left = '0';
+      textArea.style.opacity = '0';
+      document.body.appendChild(textArea);
+      textArea.focus();
+      textArea.select();
+      
+      try {
+        const successful = document.execCommand('copy');
+        if (successful) {
+          showToast('프롬프트가 클립보드에 복사되었습니다.');
+        } else {
+          showToast('복사에 실패했습니다.');
+        }
+      } catch (err) {
+        showToast('복사 기능이 지원되지 않는 브라우저입니다.');
+      }
+      document.body.removeChild(textArea);
+    }
+
+    let toastTimer;
+    function showToast(message) {
+      const toast = document.getElementById("toast");
+      toast.textContent = message;
+      clearTimeout(toastTimer);
+      toast.classList.add("show");
+      toastTimer = setTimeout(() => toast.classList.remove("show"), 2200);
+    }
+  </script>
+</body>
+</html>

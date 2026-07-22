@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WORKING AI - PROMPT BUILDER</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Pretendard Font -->
+  <link rel="stylesheet" as="style" crossorigin
+    href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+  <!-- IBM Plex Mono Font -->
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#F2F8F5',
+              100: '#E6F2ED',
+              500: '#2A6B52',
+              600: '#1D4E3A',
+            },
+            neutral: {
+              50: '#F8F7F4',
+              100: '#F2F1EE',
+              200: '#E5E3DF',
+              300: '#DDDBD5',
+              400: '#B0AEA8',
+              500: '#8A8881',
+              600: '#605E59',
+              900: '#1A1A18',
+            }
+          },
+          fontFamily: {
+            sans: ['Pretendard', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+            mono: ['IBM Plex Mono', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      font-family: 'Pretendard', -apple-system, sans-serif;
+      background-color: #F2F1EE;
+    }
+
+    /* Custom scrollbar styling */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #F2F1EE;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #DDDBD5;
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #B0AEA8;
+    }
+  </style>
+</head>
+
+<body class="min-h-screen text-neutral-900 antialiased flex flex-col h-screen overflow-hidden pt-[5px]">
+  <!-- Top brand bar -->
+  <div class="fixed top-0 left-0 w-full h-[5px] bg-brand-500 z-50"></div>
+
+  <!-- Navigation Bar (Shared) -->
+  <div id="navbar-placeholder"></div>
+  <script src="../navbar.js"></script>
+
+  <!-- Content Container -->
+  <div class="flex-1 flex flex-col lg:flex-row lg:overflow-hidden">
+    <!-- ===== Left Sidebar Navigation ===== -->
+    <aside
+      class="flex-shrink-0 w-full lg:w-64 bg-white border-b lg:border-b-0 lg:border-r border-[#DDDBD5] flex flex-col lg:h-full pt-4">
+    <!-- Nav list -->
+    <p class="hidden lg:block px-5 mb-1.5 text-[11px] font-bold uppercase tracking-wider text-neutral-400">실습 목록</p>
+    <nav class="flex lg:flex-col gap-1 px-3 pb-4 overflow-x-auto lg:overflow-y-auto">
+
+      <a href="01_wamingup.html"
+        class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
+        <span class="text-lg leading-none">🔥</span>
+        <span>워밍업 실습</span>
+      </a>
+      <a href="02_prompt.html"
+        class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-bold text-brand-600 bg-brand-100 whitespace-nowrap transition-colors">
+        <span class="text-lg leading-none">🧩</span>
+        <span>프롬프트 빌더</span>
+      </a>
+      <a href="03_apps_scrpt.html"
+        class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
+        <span class="text-lg leading-none">🤖</span>
+        <span>앱스스크립트 자동화</span>
+      </a>
+      <a href="04_notebooklm.html"
+        class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
+        <span class="text-lg leading-none">🖼️</span>
+        <span>노트북LM</span>
+      </a>
+      <a href="05_miniproject1.html"
+        class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
+        <span class="text-lg leading-none">🚀</span>
+        <span>미니프로젝트 1</span>
+      </a>
+      <a href="07_aiagent.html"
+        class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
+        <span class="text-lg leading-none">🎨</span>
+        <span>AI 에이전트</span>
+      </a>
+      <a href="06_aivideo.html"
+        class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
+        <span class="text-lg leading-none">🎬</span>
+        <span>이미지 생성 및 영상화</span>
+      </a>
+      <a href="m2_miniproject2.html"
+        class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
+        <span class="text-lg leading-none">🚀</span>
+        <span>미니프로젝트 2</span>
+      </a>
+    </nav>
+    <!-- Sidebar Footer (Banner) -->
+    <div class="mt-auto border-t border-[#DDDBD5] p-4 bg-white flex-shrink-0">
+      <!-- Dropup Menu Container -->
+      <div class="relative mb-2.5">
+        <button id="quick-links-btn" onclick="toggleQuickLinks(event)" class="w-full flex items-center justify-between py-2 px-3 border border-[#DDDBD5] hover:border-brand-500 bg-white hover:bg-neutral-50 text-neutral-900 rounded-xl transition-all duration-300 shadow-xs text-sm font-extrabold focus:outline-none">
+          <span class="flex items-center gap-2 text-neutral-600 hover:text-neutral-900">
+            <span>🔗</span> 주요 서비스 바로가기
+          </span>
+          <svg id="quick-links-arrow" class="w-3.5 h-3.5 text-neutral-400 transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5"></path>
+          </svg>
+        </button>
+        <!-- Dropup menu: hidden by default, absolute positioning above the button -->
+        <div id="quick-links-menu" class="hidden absolute bottom-full left-0 w-full mb-2 bg-white border border-[#DDDBD5] rounded-xl shadow-lg z-50 overflow-hidden py-1">
+          <a href="https://chatgpt.com" target="_blank" class="block px-4 py-2.5 text-xs text-neutral-700 hover:bg-brand-50 hover:text-brand-600 transition-colors font-bold border-b border-[#F2F1EE]">챗GPT</a>
+          <a href="https://gemini.google.com" target="_blank" class="block px-4 py-2.5 text-xs text-neutral-700 hover:bg-brand-50 hover:text-brand-600 transition-colors font-bold border-b border-[#F2F1EE]">제미나이</a>
+          <a href="https://claude.ai" target="_blank" class="block px-4 py-2.5 text-xs text-neutral-700 hover:bg-brand-50 hover:text-brand-600 transition-colors font-bold border-b border-[#F2F1EE]">클로드</a>
+          <a href="https://sheets.google.com" target="_blank" class="block px-4 py-2.5 text-xs text-neutral-700 hover:bg-brand-50 hover:text-brand-600 transition-colors font-bold border-b border-[#F2F1EE]">구글 시트</a>
+          <a href="https://docs.google.com/videos/create?usp=vids_alc&authuser=0" target="_blank" class="block px-4 py-2.5 text-xs text-neutral-700 hover:bg-brand-50 hover:text-brand-600 transition-colors font-bold border-b border-[#F2F1EE]">구글 Vids</a>
+          <a href="https://canva.com" target="_blank" class="block px-4 py-2.5 text-xs text-neutral-700 hover:bg-brand-50 hover:text-brand-600 transition-colors font-bold border-b border-[#F2F1EE]">캔바</a>
+          <a href="https://aistudio.google.com" target="_blank" class="block px-4 py-2.5 text-xs text-neutral-700 hover:bg-brand-50 hover:text-brand-600 transition-colors font-bold border-b border-[#F2F1EE]">AI Studio</a>
+          <a href="https://workspace.google.com/experiments" target="_blank" class="block px-4 py-2.5 text-xs text-neutral-700 hover:bg-brand-50 hover:text-brand-600 transition-colors font-bold">Workspace Experiments</a>
+        </div>
+      </div>
+      <script>
+        function toggleQuickLinks(e) {
+          e.stopPropagation();
+          const menu = document.getElementById('quick-links-menu');
+          const arrow = document.getElementById('quick-links-arrow');
+          const isHidden = menu.classList.contains('hidden');
+          if (isHidden) {
+            menu.classList.remove('hidden');
+            arrow.classList.add('rotate-180');
+          } else {
+            menu.classList.add('hidden');
+            arrow.classList.remove('rotate-180');
+          }
+        }
+        document.addEventListener('click', (e) => {
+          const menu = document.getElementById('quick-links-menu');
+          const btn = document.getElementById('quick-links-btn');
+          const arrow = document.getElementById('quick-links-arrow');
+          if (menu && !menu.classList.contains('hidden') && !menu.contains(e.target) && !btn.contains(e.target)) {
+            menu.classList.add('hidden');
+            arrow.classList.remove('rotate-180');
+          }
+        });
+      </script>
+
+      <a href="pdfviewer.html" class="block w-full text-center py-3 px-4 border border-[#DDDBD5] hover:border-brand-500 bg-brand-50 hover:bg-brand-100 text-brand-600 rounded-xl transition-all duration-300 shadow-xs" style="text-decoration: none;">
+        <span class="block text-xs font-bold text-neutral-400 mb-0.5 tracking-wider uppercase">Slide PDF</span>
+        <span class="block text-sm font-extrabold tracking-tight">강의 교안 뷰어</span>
+      </a>
+    </div>
+  </aside>
+
+  <!-- ===== Main Content ===== -->
+  <main class="flex-1 flex flex-col overflow-hidden pt-8 lg:pt-10 pb-8 px-4 md:px-8 lg:px-10">
+    <!-- Header Area -->
+    <header class="mb-4 flex-shrink-0">
+      <div class="mb-2">
+        <span class="inline-block bg-brand-500 text-white rounded-full px-4 py-1 text-[11.5px] font-mono font-extrabold tracking-wider uppercase">PROMPT BUILDER</span>
+      </div>
+      <h1 class="text-2xl md:text-3xl font-extrabold tracking-tight leading-tight text-neutral-900">
+        프롬프트 빌더
+      </h1>
+    </header>
+
+    <!-- Main Builder Card -->
+    <section class="border border-[#DDDBD5] rounded-2xl p-5 md:p-6 bg-white shadow-sm flex-1 flex flex-col overflow-hidden">
+      <!-- Card Head -->
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#DDDBD5] pb-4 mb-4 flex-shrink-0">
+        <div>
+          <h2 class="text-lg md:text-xl font-extrabold text-neutral-900">프롬프트 구성 요소 입력</h2>
+          <p class="text-xs md:text-sm text-[#605E59] mt-1">각 항목을 작성하면 순서대로 하나의 프롬프트로 조합됩니다.</p>
+        </div>
+        
+        <div>
+          <select id="sample-select" onchange="selectSample(this.value)" class="text-base font-bold border border-[#DDDBD5] bg-white text-neutral-700 rounded-lg px-4 py-2.5 w-64 md:w-80 focus:border-brand-500 focus:outline-none cursor-pointer">
+            <option value="ax">AX 보고서</option>
+            <option value="sales">영업 메일</option>
+            <option value="announcement">공지문 작성</option>
+            <option value="ideas">아이디어 요청</option>
+            <option value="codereview">코드 분석 및 최적화</option>
+            <option value="pr">보도자료</option>
+            <option value="">직접 입력</option>
+          </select>
+        </div>
+
+      </div>
+
+      <!-- Input Fields Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 flex-1 overflow-y-auto lg:overflow-hidden mb-4">
+        <!-- Goal Input (Step 1) -->
+        <section id="step-sec-1" class="step-section flex flex-col border border-[#DDDBD5] rounded-xl bg-brand-100 overflow-hidden h-64 md:h-80 lg:h-full">
+          <div class="p-4 pb-2.5 flex-shrink-0">
+            <strong class="block text-neutral-900 text-base font-extrabold mb-1">🎯 목표</strong>
+            <span class="block text-[#605E59] text-xs leading-tight">무엇을, 왜 요청하나요?</span>
+          </div>
+          <textarea id="goal" placeholder="예: 필요한 업무와 요청 목적을 작성해 주세요."
+            class="w-full flex-1 p-4 border-t border-b-0 border-l-0 border-r-0 border-[#DDDBD5] bg-white text-neutral-900 text-base leading-relaxed placeholder-neutral-400 focus:border-brand-500 focus:ring-0 outline-none resize-none overflow-y-auto"></textarea>
+        </section>
+
+        <!-- Role Input (Step 2) -->
+        <section id="step-sec-2" class="step-section flex flex-col border border-[#DDDBD5] rounded-xl bg-brand-100 overflow-hidden h-64 md:h-80 lg:h-full">
+          <div class="p-4 pb-2.5 flex-shrink-0">
+            <strong class="block text-neutral-900 text-base font-extrabold mb-1">👤 역할</strong>
+            <span class="block text-[#605E59] text-xs leading-tight">AI에게 어떤 역할을 맡기나요?</span>
+          </div>
+          <textarea id="role" placeholder="예: 너는 10년 차 디지털 전환 전문 컨설턴트야."
+            class="w-full flex-1 p-4 border-t border-b-0 border-l-0 border-r-0 border-[#DDDBD5] bg-white text-neutral-900 text-base leading-relaxed placeholder-neutral-400 focus:border-brand-500 focus:ring-0 outline-none resize-none overflow-y-auto"></textarea>
+        </section>
+
+        <!-- Limit Input (Step 3) -->
+        <section id="step-sec-3" class="step-section flex flex-col border border-[#DDDBD5] rounded-xl bg-brand-100 overflow-hidden h-64 md:h-80 lg:h-full">
+          <div class="p-4 pb-2.5 flex-shrink-0">
+            <strong class="block text-neutral-900 text-base font-extrabold mb-1">📌 제한</strong>
+            <span class="block text-[#605E59] text-xs leading-tight">기간, 범위, 톤, 분량 등 조건</span>
+          </div>
+          <textarea id="limit" placeholder="예: 최근 6개월 이내 사례 중심으로 정리해줘."
+            class="w-full flex-1 p-4 border-t border-b-0 border-l-0 border-r-0 border-[#DDDBD5] bg-white text-neutral-900 text-base leading-relaxed placeholder-neutral-400 focus:border-brand-500 focus:ring-0 outline-none resize-none overflow-y-auto"></textarea>
+        </section>
+
+        <!-- Output Input (Step 4) -->
+        <section id="step-sec-4" class="step-section flex flex-col border border-[#DDDBD5] rounded-xl bg-brand-100 overflow-hidden h-64 md:h-80 lg:h-full">
+          <div class="p-4 pb-2.5 flex-shrink-0">
+            <strong class="block text-neutral-900 text-base font-extrabold mb-1">📄 출력</strong>
+            <span class="block text-[#605E59] text-xs leading-tight">어떤 형식으로 받고 싶나요?</span>
+          </div>
+          <textarea id="output" placeholder="예: 핵심 요약, 사례 표, 인사이트 순으로 작성해줘."
+            class="w-full flex-1 p-4 border-t border-b-0 border-l-0 border-r-0 border-[#DDDBD5] bg-white text-neutral-900 text-base leading-relaxed placeholder-neutral-400 focus:border-brand-500 focus:ring-0 outline-none resize-none overflow-y-auto"></textarea>
+        </section>
+      </div>
+
+      <!-- Actions Bottom Panel -->
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pt-4 border-t border-[#DDDBD5] flex-shrink-0">
+        <!-- Form Notice -->
+        <p class="text-[#605E59] text-xs md:text-sm leading-relaxed">
+          내용을 직접 수정 후 복사하거나 복사 후 메모장에서 수정하세요.
+        </p>
+        <!-- Action Buttons -->
+        <div class="flex justify-end gap-3">
+          <button
+            class="px-6 h-11 bg-brand-500 hover:bg-brand-600 text-white text-sm md:text-base font-extrabold rounded-lg transition-all shadow-sm flex items-center justify-center gap-1.5 focus:outline-none"
+            onclick="copyPrompt()">
+            <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <rect x="9" y="9" width="11" height="11" rx="2" ry="2" stroke-linecap="round" stroke-linejoin="round"></rect>
+              <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+            프롬프트 복사
+          </button>
+        </div>
+      </div>
+    </section>
+  </main>
+  </div>
+
+  <!-- Toast Notification -->
+  <div
+    class="toast fixed left-1/2 bottom-8 -translate-x-1/2 opacity-0 z-50 px-6 py-3 rounded-full bg-neutral-900 text-white text-sm font-bold transition-all duration-200 pointer-events-none shadow-lg"
+    id="toast">
+    프롬프트가 복사되었습니다.
+  </div>
+
+  <script>
+    if (localStorage.getItem('workbook_logged_in') !== 'true') {
+      window.location.href = '../index.html?redirect=workshop01/02_prompt.html';
+    }
+
+    // Elements mapping
+    const el = {
+      goal: document.getElementById('goal'),
+      role: document.getElementById('role'),
+      limit: document.getElementById('limit'),
+      output: document.getElementById('output')
+    };
+
+    // Preloaded prompt template library
+    const samples = {
+      ax: {
+        goal: '나는 [ 광고회사 ]에서 일을 하고 있어. 향후 우리 회사의 AX 추진 방향을 검토하기 위해 국내외 기업들의 AI 전환(AX) 도입 사례와 최신 동향을 조사해줘.',
+        role: '너는 10년 차 디지털 전환(DX/AX) 전문 컨설턴트야. 기업의 AI 전환 전략, 업무 자동화, 조직 적용 방안을 실무 관점에서 분석할 수 있어.',
+        limit: '최근 6개월 이내 사례를 중심으로 조사해줘. 가능하면 우리 회사와 유사한 업종 또는 업무 방식이 비슷한 기업 사례를 우선적으로 정리해줘. 단순 기술 소개가 아니라, 실제 업무 방식이 어떻게 바뀌었는지 중심으로 설명해줘. 전문용어는 임원이나 비전문가도 이해할 수 있게 쉽게 풀어줘.',
+        output: '아래 순서로 작성해줘.\n\n1. AX 트렌드 요약 3줄\n2. 주요 도입 사례 표\n3. 핵심 인사이트 3가지\n4. 우리 회사 적용 시 시사점\n5. 우선 추진하면 좋은 업무 영역 제안'
+      },
+      sales: {
+        goal: '신규 고객사에게 우리 제품 또는 서비스를 소개하고, 미팅을 제안하는 영업 메일 초안을 작성해줘.',
+        role: '너는 B2B 세일즈 경험이 풍부한 마케팅 컨설턴트야. 고객의 문제를 먼저 짚고, 제품의 가치를 자연스럽게 제안하는 영업 메일을 잘 작성해.',
+        limit: '너무 과장된 표현은 피하고, 정중하지만 부담스럽지 않은 톤으로 작성해줘. 문제 제기 → 해결 제안 → 기대 효과 → 미팅 요청 흐름으로 구성해줘. 메일 길이는 600자 이내로 작성해줘.',
+        output: '메일 제목 후보 3개와 추천 제목 1개를 먼저 제시해줘. 인사말, 고객 상황 또는 문제 제기, 제품/서비스 소개, 기대 효과, 미팅 제안, 마무리 인사 순서로 메일 본문을 작성해줘.'
+      },
+      announcement: {
+        goal: '직원들에게 새로운 사내 제도, 행사, 교육, 캠페인 또는 변경 사항을 안내하는 공지문을 작성해줘.',
+        role: '너는 사내 커뮤니케이션을 담당하는 인사·총무팀 실무자야. 직원들이 필요한 정보를 빠르게 이해하고 행동할 수 있도록 명확한 공지문을 작성해.',
+        limit: '일정, 대상, 신청 방법, 준비물, 유의사항이 빠지지 않게 정리해줘. 딱딱한 행정 문서보다는 친절하고 이해하기 쉬운 톤으로 작성해줘. 불필요하게 긴 배경 설명은 줄여줘.',
+        output: '공지 제목, 안내 배경, 주요 내용, 일정 및 대상, 신청 또는 참여 방법, 준비물 또는 유의사항, 문의처, 마지막 안내 문구 순으로 작성해줘.'
+      },
+      ideas: {
+        goal: '새로운 캠페인, 서비스, 콘텐츠, 교육 프로그램 또는 업무 개선에 활용할 수 있는 실무형 아이디어를 제안해줘.',
+        role: '너는 10년 차 신사업 기획자이자 마케팅 전략가야. 시장성, 실행 가능성, 차별점을 고려해 실무에서 바로 검토할 수 있는 아이디어를 제안해.',
+        limit: '아이디어는 너무 추상적이지 않게 작성해줘. 타깃 고객과 활용 상황이 명확하게 드러나야 해. 각 아이디어는 서로 차별점이 분명해야 하며, 예산과 운영 난이도도 함께 고려해줘.',
+        output: '총 5개의 아이디어를 아이디어명, 핵심 콘셉트, 타깃 고객, 해결하는 문제, 실행 방법, 차별점, 기대 효과, 실행 난이도 순으로 정리해줘. 마지막에는 가장 추천하는 아이디어 1개와 추천 이유를 따로 정리해줘.'
+      },
+      codereview: {
+        goal: '내가 작성한 소스코드의 문제점 및 성능 개선 포인트를 진단하고 리팩토링된 최적의 코드를 제안해줘.',
+        role: '너는 15년 차 시니어 소프트웨어 아키텍트이자 코드 품질 리뷰어야. 효율성, 보안, 가독성, 그리고 에러 가능성을 날카롭게 집어내 줄 수 있어.',
+        limit: '시간 복잡도를 개선할 수 있는 아이디어와 예외 처리가 부족한 구간을 명시해줘. 기존 비즈니스 로직이 완전히 깨지지 않도록 호환성을 염두에 두며 수정안을 설계해줘.',
+        output: '1) 발견한 성능 병목지점 또는 잠재 버그 분석 목록\n2) 가독성과 안전성을 한 층 끌어올린 리팩토링된 새로운 전체 코드\n3) 코드에 적용된 주요 변경 설계 핵심 요약'
+      },
+      pr: {
+        goal: '신규 출시하는 제품의 강점을 알리고 미디어의 관심을 극대화할 수 있는 정식 배포용 보도자료를 작성해줘.',
+        role: '너는 국내 대표 IT 전문 매체 출신의 테크 저널리스트이자 베테랑 홍보 전문가야. 대중의 시선을 사로잡는 강력한 헤드라인과 논리정연한 보도자료 문맥을 설계하는 데 능통해.',
+        limit: '자랑 일색의 주관적 수식어는 배제하고 객관적 지표와 실무적 변화를 중심으로 사실 위주로 서술해줘. 업계 리서치 결과나 트렌드 통계를 인용해 제품 도입 필요성을 간접 증명해줘.',
+        output: '1) 눈길을 끄는 메인 헤드라인 3개 및 리드문\n2) 본문 (배경 - 특장점 - 시장의 반응 및 향후 로드맵)\n3) 기사 작성자 바이라인 예시 및 기업 간략 소개 양식'
+      }
+    };
+
+    // Active sample tracking
+    let activeSampleKey = '';
+
+    function selectSample(key) {
+      activeSampleKey = key;
+      loadSample(key);
+      const selectEl = document.getElementById('sample-select');
+      if (selectEl && selectEl.value !== key) {
+        selectEl.value = key;
+      }
+    }
+
+    // Load sample directly into textarea values
+    function loadSample(key) {
+      if (!key) {
+        el.goal.value = '';
+        el.role.value = '';
+        el.limit.value = '';
+        el.output.value = '';
+      } else {
+        const d = samples[key];
+        el.goal.value = d.goal;
+        el.role.value = d.role;
+        el.limit.value = d.limit;
+        el.output.value = d.output;
+      }
+    }
+
+    // Combine active text fields into a cohesive structured prompt
+    function compiled() {
+      return [
+        ['목표', el.goal.value.trim()],
+        ['역할', el.role.value.trim()],
+        ['제한', el.limit.value.trim()],
+        ['출력', el.output.value.trim()]
+      ].filter(([, v]) => v).map(([k, v]) => '[' + k + ']\n' + v).join('\n\n');
+    }
+
+    // Handles fallback clipboard copy mechanism and UI Toast triggers
+    async function copyPrompt() {
+      const text = compiled();
+      if (!text) {
+        showToast('복사할 내용을 먼저 작성해 주세요.');
+        return;
+      }
+
+      try {
+        await navigator.clipboard.writeText(text);
+      } catch (e) {
+        const temp = document.createElement('textarea');
+        temp.value = text;
+        temp.style.position = 'fixed';
+        temp.style.opacity = '0';
+        document.body.appendChild(temp);
+        temp.select();
+        document.execCommand('copy');
+        temp.remove();
+      }
+      showToast('프롬프트가 복사되었습니다.');
+    }
+
+    // Resets all input forms back to active sample or empty state
+    function resetForm() {
+      loadSample(activeSampleKey);
+    }
+
+    // Elegant non-blocking popup notification
+    let timer;
+    function showToast(text) {
+      const t = document.getElementById('toast');
+      t.textContent = text;
+      clearTimeout(timer);
+
+      t.classList.remove('opacity-0', 'translate-y-4');
+      t.classList.add('opacity-100', 'translate-y-0');
+
+      timer = setTimeout(() => {
+        t.classList.remove('opacity-100', 'translate-y-0');
+        t.classList.add('opacity-0', 'translate-y-4');
+      }, 2200);
+    }
+
+    // Bootstraps state load sequence on initial render
+    window.addEventListener('DOMContentLoaded', () => {
+      selectSample('ax');
+    });
+  </script>
+</body>
+
+</html>

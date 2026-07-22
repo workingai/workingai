@@ -1,0 +1,99 @@
+/**
+ * 공통 네비게이션 바 동적 로딩 및 인증 상태 제어 스크립트 (navbar.js)
+ */
+document.addEventListener('DOMContentLoaded', () => {
+  const placeholder = document.getElementById('navbar-placeholder');
+  if (!placeholder) return;
+
+  // 1. 현재 폴더 위치 분석 (workshop01 하위 폴더 여부 확인)
+  const isSubdir = window.location.pathname.includes('/workshop01/');
+  const prefix = isSubdir ? '../' : '';
+
+  // 2. 공통 navbar.html 로드
+  fetch(prefix + 'navbar.html')
+    .then(res => {
+      if (!res.ok) throw new Error('Navbar load error');
+      return res.text();
+    })
+    .then(html => {
+      // 서브디렉토리인 경우 경로를 상대경로(../)로 자동 보정
+      let processedHtml = html;
+      if (isSubdir) {
+        processedHtml = processedHtml
+          .replace(/href="index\.html"/g, 'href="../index.html"')
+          .replace(/href="workshop01\//g, 'href="');
+      }
+
+      placeholder.innerHTML = processedHtml;
+
+      // 3. 네비게이션 이벤트 핸들러 및 인증 상태 연동 초기화
+      initNavbar(isSubdir);
+    })
+    .catch(err => console.error('Failed to load shared navbar:', err));
+});
+
+// 모바일 햄버거 메뉴 토글 기능 정의
+window.toggleMobileMenu = () => {
+  const menu = document.getElementById('mobile-menu');
+  if (menu) menu.classList.toggle('hidden');
+};
+
+function initNavbar(isSubdir) {
+  const loginBtn = document.getElementById('nav-login-btn');
+  const logoutBtn = document.getElementById('nav-logout-btn');
+  const mobileLoginBtn = document.getElementById('mobile-login-btn');
+  const mobileLogoutBtn = document.getElementById('mobile-logout-btn');
+
+  // [로그인 버튼 클릭 시 처리]
+  const handleLoginClick = () => {
+    if (isSubdir) {
+      // 서브디렉토리 내부에서는 index.html로 리디렉션하며 로그인 후 다시 돌아올 주소 지정
+      const relativePath = window.location.pathname.split('/').slice(-2).join('/'); // 예: "workshop01/ws01_index.html"
+      window.location.href = '../index.html?redirect=' + relativePath;
+    } else {
+      // 메인 홈 화면에서는 내장 모달창 즉시 열기
+      if (typeof openEntranceModal === 'function') {
+        openEntranceModal();
+      }
+    }
+  };
+
+  if (loginBtn) {
+    loginBtn.addEventListener('click', handleLoginClick);
+  }
+  if (mobileLoginBtn) {
+    mobileLoginBtn.addEventListener('click', () => {
+      handleLoginClick();
+      window.toggleMobileMenu();
+    });
+  }
+
+  // [로그아웃 버튼 클릭 시 처리]
+  const handleLogoutClick = () => {
+    localStorage.removeItem('workbook_logged_in');
+    localStorage.removeItem('workbook_access_code');
+    localStorage.removeItem('workbook_course_code');
+    window.location.href = isSubdir ? '../index.html' : 'index.html';
+  };
+
+  if (logoutBtn) {
+    logoutBtn.addEventListener('click', handleLogoutClick);
+  }
+  if (mobileLogoutBtn) {
+    mobileLogoutBtn.addEventListener('click', handleLogoutClick);
+  }
+
+  // [인증 상태 기반 버튼 숨김/노출 상태값 제어]
+  const isLoggedIn = localStorage.getItem('workbook_logged_in') === 'true';
+  if (isLoggedIn) {
+    if (loginBtn) loginBtn.classList.add('hidden');
+    if (logoutBtn) logoutBtn.classList.remove('hidden');
+    if (mobileLoginBtn) mobileLoginBtn.classList.add('hidden');
+    if (mobileLogoutBtn) mobileLogoutBtn.classList.remove('hidden');
+  } else {
+    if (loginBtn) loginBtn.classList.remove('hidden');
+    if (logoutBtn) logoutBtn.classList.add('hidden');
+    if (mobileLoginBtn) mobileLoginBtn.classList.remove('hidden');
+    if (mobileLogoutBtn) mobileLogoutBtn.classList.add('hidden');
+  }
+}

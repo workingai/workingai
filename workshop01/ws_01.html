@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>직장인 AI 워크숍 - Working AI</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Pretendard Font -->
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#F2F8F5',
+              100: '#E6F2ED',
+              500: '#2A6B52', // Green
+              600: '#1D4E3A', // Darker Green
+            },
+            neutral: {
+              50: '#F8F7F4',
+              100: '#F2F1EE',
+              200: '#E5E3DF',
+              300: '#DDDBD5',
+              400: '#B0AEA8',
+              500: '#8A8881',
+              600: '#605E59',
+              900: '#1A1A18',
+            }
+          },
+          fontFamily: {
+            sans: ['Pretendard', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      font-family: 'Pretendard', -apple-system, sans-serif;
+      background-color: #F2F1EE;
+      color: #1A1A18;
+    }
+  </style>
+</head>
+<body class="min-h-screen antialiased flex flex-col justify-between pt-[5px]">
+  <!-- Top brand bar -->
+  <div class="fixed top-0 left-0 w-full h-[5px] bg-brand-500 z-50"></div>
+
+  <!-- Navigation Bar (Shared) -->
+  <div id="navbar-placeholder"></div>
+  <script src="../navbar.js"></script>
+
+  <!-- Main Content Container -->
+  <main class="w-full max-w-[1200px] mx-auto px-6 py-12 flex-1 flex flex-col gap-12">
+    
+    <!-- Top Introduction Area -->
+    <section class="flex flex-col items-start gap-4">
+      <span class="inline-block bg-brand-50 text-brand-500 text-xs font-extrabold px-3 py-1 rounded-md tracking-wider">
+        직장인 워크숍
+      </span>
+      <h1 class="text-3xl md:text-4xl font-extrabold tracking-tight leading-tight text-neutral-900">
+        업무 자동화로 시간을 되찾는 AI 실습
+      </h1>
+      <p class="text-neutral-700 text-sm md:text-base leading-relaxed">
+        복잡한 코딩이나 개발 지식 없이도 바로 시작할 수 있습니다. 생성형 AI 핵심 개념부터 템플릿 제작까지, 직장인들의 하루를 가볍게 만드는 대면 실습 과정입니다.
+      </p>
+      
+      <!-- Meta Information -->
+      <div class="flex flex-wrap items-center gap-6 text-xs md:text-sm text-neutral-700 font-bold mt-2">
+        <div class="flex items-center gap-1.5">
+          <!-- Calendar Icon -->
+          <svg class="w-4 h-4 text-brand-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5"></path>
+          </svg>
+          <span>1 day 교육</span>
+        </div>
+        <div class="flex items-center gap-1.5">
+          <!-- User Icon -->
+          <svg class="w-4 h-4 text-brand-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"></path>
+          </svg>
+          <span>비개발자 직장인</span>
+        </div>
+        <div class="flex items-center gap-1.5">
+          <!-- Location Icon -->
+          <svg class="w-4 h-4 text-brand-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"></path>
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25s-7.5-4.108-7.5-11.25a7.5 7.5 0 1115 0z"></path>
+          </svg>
+          <span>대면</span>
+        </div>
+      </div>
+    </section>
+
+    <hr class="border-neutral-200">
+
+    <!-- Curriculum Highlights Section -->
+    <section class="flex flex-col gap-6">
+      <h3 class="text-lg font-extrabold text-neutral-900">
+        커리큘럼 하이라이트
+      </h3>
+      <ul class="flex flex-col gap-4 text-sm md:text-base text-neutral-700">
+        <li class="flex items-start gap-3">
+          <!-- Check Icon -->
+          <svg class="w-5 h-5 text-brand-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"></path>
+          </svg>
+          <div>
+            <span class="font-bold text-neutral-900">업무 자동화 프롬프트 설계</span>
+            <p class="text-xs md:text-sm text-neutral-500 mt-0.5">반복적인 이메일 작성, 요약, 번역 등의 핵심 프롬프트 엔지니어링 패턴 실무 적용</p>
+          </div>
+        </li>
+        <li class="flex items-start gap-3">
+          <svg class="w-5 h-5 text-brand-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"></path>
+          </svg>
+          <div>
+            <span class="font-bold text-neutral-900">AI 챗봇 실습</span>
+            <p class="text-xs md:text-sm text-neutral-500 mt-0.5">업무 매뉴얼이나 문서를 학습시켜 부서 내에서 직접 사용하는 전용 AI 비서 챗봇 구축</p>
+          </div>
+        </li>
+        <li class="flex items-start gap-3">
+          <svg class="w-5 h-5 text-brand-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"></path>
+          </svg>
+          <div>
+            <span class="font-bold text-neutral-900">업무 문서 자동 생성 실습</span>
+            <p class="text-xs md:text-sm text-neutral-500 mt-0.5">스프레드시트 및 워드 프로세서와 생성형 AI를 연동하여 맞춤 보고서 및 문서 데이터 자동 생성</p>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <hr class="border-neutral-200">
+
+    <!-- Link Cards Section -->
+    <section class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      
+      <!-- Card 1: 강의안 보기 -->
+      <div class="bg-white border border-neutral-200 rounded-[12px] p-6 md:p-8 flex flex-col justify-between min-h-[220px]">
+        <div>
+          <!-- Document Icon -->
+          <div class="w-10 h-10 rounded-lg bg-brand-50 text-brand-500 flex items-center justify-center mb-4">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"></path>
+            </svg>
+          </div>
+          <h4 class="text-lg font-extrabold text-neutral-900 mb-1">강의안 보기</h4>
+          <p class="text-xs md:text-sm text-neutral-500 leading-relaxed mb-6">전체 커리큘럼과 슬라이드 자료</p>
+        </div>
+        <a href="pdfviewer.html" class="w-full h-11 bg-brand-500 hover:bg-brand-600 text-white text-sm font-extrabold rounded-lg flex items-center justify-center transition-colors">
+          강의안 열기
+        </a>
+      </div>
+
+      <!-- Card 2: 실습 페이지로 이동 -->
+      <div class="bg-white border border-neutral-200 rounded-[12px] p-6 md:p-8 flex flex-col justify-between min-h-[220px]">
+        <div>
+          <!-- Laptop/Device Icon -->
+          <div class="w-10 h-10 rounded-lg bg-brand-50 text-brand-500 flex items-center justify-center mb-4">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 17.25v1.007a3 3 0 01-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0115 18.257V17.25m6-12V15a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 15V5.25m18 0A2.25 2.25 0 0018.75 3H5.25A2.25 2.25 0 003 5.25m18 0V12a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 12V5.25"></path>
+            </svg>
+          </div>
+          <h4 class="text-lg font-extrabold text-neutral-900 mb-1">실습 페이지로 이동</h4>
+          <p class="text-xs md:text-sm text-neutral-500 leading-relaxed mb-6">직접 따라 하는 실습 워크북</p>
+        </div>
+        <a href="ws01_index.html" class="w-full h-11 bg-brand-500 hover:bg-brand-600 text-white text-sm font-extrabold rounded-lg flex items-center justify-center transition-colors">
+          실습 시작하기
+        </a>
+      </div>
+
+    </section>
+
+    <!-- Bottom CTA -->
+    <section class="mt-4">
+      <a href="https://open.kakao.com" target="_blank" class="w-full h-14 bg-brand-500 hover:bg-brand-600 text-white text-base font-extrabold rounded-xl flex items-center justify-center transition-all shadow-md focus:outline-none">
+        이 워크숍 신청하기
+      </a>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="w-full border-t border-neutral-200 bg-white py-6 text-center text-xs text-neutral-700 flex-shrink-0 mt-8">
+    <div class="max-w-[1200px] mx-auto px-6">
+      © 2026 Working AI. All rights reserved. | <a href="https://workingai.kr" target="_blank" class="hover:text-brand-500 underline transition-colors">workingai.kr</a>
+    </div>
+  </footer>
+
+</body>
+</html>
