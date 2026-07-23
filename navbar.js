@@ -1,9 +1,32 @@
 /**
  * 공통 네비게이션 바 동적 로딩 및 인증 상태 제어 스크립트 (navbar.js)
  */
+
+/**
+ * [레이아웃 시프트 & FOUC 방지]
+ * 이 IIFE는 스크립트 태그가 파싱되는 즉시 동기적으로 실행됩니다.
+ * DOMContentLoaded를 기다리지 않고 <style>을 <head>에 삽입해
+ * 브라우저가 body를 렌더링하기 전에 아래 CSS가 적용됩니다:
+ *   1. body { opacity: 0 } — 콘텐츠 깜빡임 방지
+ *   2. #navbar-placeholder { min-height: 64px } — navbar 공간 미리 예약
+ *      (이 값이 없으면 navbar 삽입 시 콘텐츠가 아래로 밀림)
+ */
+(function () {
+  const style = document.createElement('style');
+  style.id = '__navbar-preload-style';
+  style.textContent = [
+    'body{opacity:0;transition:opacity 0.2s ease;}',
+    '#navbar-placeholder{min-height:64px;}',
+  ].join('');
+  document.head.appendChild(style);
+})();
+
 document.addEventListener('DOMContentLoaded', () => {
   const placeholder = document.getElementById('navbar-placeholder');
-  if (!placeholder) return;
+  if (!placeholder) {
+    document.body.style.opacity = '1';
+    return;
+  }
 
   // 1. 현재 폴더 위치 분석 (workshop01 하위 폴더 여부 확인)
   const isSubdir = window.location.pathname.includes('/workshop01/');
@@ -28,10 +51,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
       placeholder.innerHTML = processedHtml;
 
+      // navbar 삽입 완료 후 body 페이드인
+      requestAnimationFrame(() => {
+        document.body.style.opacity = '1';
+      });
+
       // 3. 네비게이션 이벤트 핸들러 및 인증 상태 연동 초기화
       initNavbar(isSubdir);
     })
-    .catch(err => console.error('Failed to load shared navbar:', err));
+    .catch(err => {
+    console.error('Failed to load shared navbar:', err);
+    // 로드 실패해도 페이지는 보여줌
+    document.body.style.opacity = '1';
+  });
 });
 
 // 모바일 햄버거 메뉴 토글 기능 정의
