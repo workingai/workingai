@@ -83,7 +83,8 @@
     button{height:46px;padding:0 24px;border-radius:999px;border:0;font:800 14px "Pretendard",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;cursor:pointer}
     .primary{background:var(--green);color:#fff}.primary:hover{background:var(--green-dark)}
     .secondary{background:var(--soft);color:var(--text);border:1px solid var(--line)}.secondary:hover{background:#EAE8E3}
-    .toast{position:fixed;left:50%;bottom:25px;transform:translateX(-50%) translateY(24px);opacity:0;z-index:10;border-radius:999px;background:#1A1A18;color:#fff;padding:11px 16px;font-size:13px;font-weight:750;transition:.2s}.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+    .toast{position:fixed;left:50%;bottom:25px;transform:translateX(-50%) translateY(24px);opacity:0;z-index:10;border-radius:999px;background:#1A1A18;color:#fff;padding:11px 16px;font-size:13px;font-weight:750;transition:.25s}.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+    .steps{display:flex;gap:20px;margin-top:20px;align-items:flex-start}
     @media(max-width:760px){.sample-bar{grid-template-columns:1fr}.flow{grid-template-columns:1fr}.arrow{height:32px;transform:rotate(90deg)}}
   </style>
 </head>
@@ -98,171 +99,225 @@
   <!-- Content Container -->
   <div class="flex-1 flex flex-col lg:flex-row lg:overflow-hidden">
     <!-- ===== Left Sidebar Navigation ===== -->
-    <aside
-      class="flex-shrink-0 w-full lg:w-64 bg-white border-b lg:border-b-0 lg:border-r border-[#DDDBD5] flex flex-col lg:h-full pt-4">
-    <!-- Nav list -->
-    <p class="hidden lg:block px-5 mb-1.5 text-[11px] font-bold uppercase tracking-wider text-neutral-400">실습 목록</p>
-    <nav class="flex lg:flex-col gap-1 px-3 pb-4 overflow-x-auto lg:overflow-y-auto">
-
-      <a href="01_wamingup.html"
-        class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
-        <span class="text-lg leading-none">🔥</span>
-        <span>워밍업 실습</span>
-      </a>
-      <a href="02_prompt.html"
-        class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
-        <span class="text-lg leading-none">🧩</span>
-        <span>프롬프트 빌더</span>
-      </a>
-      <a href="03_apps_scrpt.html"
-        class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
-        <span class="text-lg leading-none">🤖</span>
-        <span>앱스스크립트 자동화</span>
-      </a>
-      <a href="04_notebooklm.html"
-        class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
-        <span class="text-lg leading-none">🖼️</span>
-        <span>노트북LM</span>
-      </a>
-      <a href="05_miniproject1.html"
-        class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
-        <span class="text-lg leading-none">🚀</span>
-        <span>미니프로젝트 1</span>
-      </a>
-      <a href="07_aiagent.html"
-        class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-bold text-brand-600 bg-brand-100 whitespace-nowrap transition-colors">
-        <span class="text-lg leading-none">🎨</span>
-        <span>AI 에이전트</span>
-      </a>
-      <a href="06_aivideo.html"
-        class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
-        <span class="text-lg leading-none">🎬</span>
-        <span>이미지 생성 및 영상화</span>
-      </a>
-      <a href="m2_miniproject2.html"
-        class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
-        <span class="text-lg leading-none">🚀</span>
-        <span>미니프로젝트 2</span>
-      </a>
-    </nav>
-    <!-- Sidebar Footer (Banner) -->
-    <div class="mt-auto border-t border-[#DDDBD5] p-4 bg-white flex-shrink-0">
-      <!-- Dropup Menu Container -->
-      <div class="relative mb-2.5">
-        <button id="quick-links-btn" onclick="toggleQuickLinks(event)" class="w-full flex items-center justify-between py-2 px-3 border border-[#DDDBD5] hover:border-brand-500 bg-white hover:bg-neutral-50 text-neutral-900 rounded-xl transition-all duration-300 shadow-xs text-sm font-extrabold focus:outline-none">
-          <span class="flex items-center gap-2 text-neutral-600 hover:text-neutral-900">
-            <span>🔗</span> 주요 서비스 바로가기
-          </span>
-          <svg id="quick-links-arrow" class="w-3.5 h-3.5 text-neutral-400 transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5"></path>
-          </svg>
-        </button>
-        <!-- Dropup menu: hidden by default, absolute positioning above the button -->
-        <div id="quick-links-menu" class="hidden absolute bottom-full left-0 w-full mb-2 bg-white border border-[#DDDBD5] rounded-xl shadow-lg z-50 overflow-hidden py-1">
-          <a href="https://chatgpt.com" target="_blank" class="block px-4 py-2.5 text-xs text-neutral-700 hover:bg-brand-50 hover:text-brand-600 transition-colors font-bold border-b border-[#F2F1EE]">챗GPT</a>
-          <a href="https://gemini.google.com" target="_blank" class="block px-4 py-2.5 text-xs text-neutral-700 hover:bg-brand-50 hover:text-brand-600 transition-colors font-bold border-b border-[#F2F1EE]">제미나이</a>
-          <a href="https://claude.ai" target="_blank" class="block px-4 py-2.5 text-xs text-neutral-700 hover:bg-brand-50 hover:text-brand-600 transition-colors font-bold border-b border-[#F2F1EE]">클로드</a>
-          <a href="https://sheets.google.com" target="_blank" class="block px-4 py-2.5 text-xs text-neutral-700 hover:bg-brand-50 hover:text-brand-600 transition-colors font-bold border-b border-[#F2F1EE]">구글 시트</a>
-          <a href="https://docs.google.com/videos/create?usp=vids_alc&authuser=0" target="_blank" class="block px-4 py-2.5 text-xs text-neutral-700 hover:bg-brand-50 hover:text-brand-600 transition-colors font-bold border-b border-[#F2F1EE]">구글 Vids</a>
-          <a href="https://canva.com" target="_blank" class="block px-4 py-2.5 text-xs text-neutral-700 hover:bg-brand-50 hover:text-brand-600 transition-colors font-bold border-b border-[#F2F1EE]">캔바</a>
-          <a href="https://aistudio.google.com" target="_blank" class="block px-4 py-2.5 text-xs text-neutral-700 hover:bg-brand-50 hover:text-brand-600 transition-colors font-bold border-b border-[#F2F1EE]">AI Studio</a>
-          <a href="https://workspace.google.com/experiments" target="_blank" class="block px-4 py-2.5 text-xs text-neutral-700 hover:bg-brand-50 hover:text-brand-600 transition-colors font-bold">Workspace Experiments</a>
+    <aside class="flex-shrink-0 w-full lg:w-64 bg-white border-b lg:border-b-0 lg:border-r border-[#DDDBD5] flex flex-col lg:h-full pt-4">
+      <!-- Nav list -->
+      <p class="hidden lg:block px-5 mb-1.5 text-[11px] font-bold uppercase tracking-wider text-neutral-400">실습 목록</p>
+      <nav class="flex lg:flex-col gap-1 px-3 pb-4 overflow-x-auto lg:overflow-y-auto">
+        <a href="01_wamingup.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
+          <span class="text-lg leading-none">🔥</span>
+          <span>워밍업 실습</span>
+        </a>
+        <a href="02_prompt.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
+          <span class="text-lg leading-none">🧩</span>
+          <span>프롬프트 빌더</span>
+        </a>
+        <a href="03_apps_scrpt.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
+          <span class="text-lg leading-none">🤖</span>
+          <span>앱스스크립트 자동화</span>
+        </a>
+        <a href="04_notebooklm.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
+          <span class="text-lg leading-none">🖼️</span>
+          <span>노트북LM</span>
+        </a>
+        <a href="05_miniproject1.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
+          <span class="text-lg leading-none">🚀</span>
+          <span>미니프로젝트 1</span>
+        </a>
+        <a href="07_aiagent.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-bold text-brand-600 bg-brand-100 whitespace-nowrap transition-colors">
+          <span class="text-lg leading-none">🎨</span>
+          <span>AI 에이전트</span>
+        </a>
+        <a href="06_aivideo.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
+          <span class="text-lg leading-none">🎬</span>
+          <span>이미지 생성 및 영상화</span>
+        </a>
+        <a href="m2_miniproject2.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
+          <span class="text-lg leading-none">🚀</span>
+          <span>미니프로젝트 2</span>
+        </a>
+      </nav>
+      <!-- Sidebar Footer (Banner) -->
+      <div class="mt-auto border-t border-[#DDDBD5] p-4 bg-white flex-shrink-0">
+        <!-- Dropup Menu Container -->
+        <div class="relative mb-2.5">
+          <button id="quick-links-btn" onclick="toggleQuickLinks(event)" class="w-full flex items-center justify-between py-2 px-3 border border-[#DDDBD5] hover:border-brand-500 bg-white hover:bg-neutral-50 text-neutral-900 rounded-xl transition-all duration-300 shadow-xs text-sm font-extrabold focus:outline-none">
+            <span class="flex items-center gap-2 text-neutral-600 hover:text-neutral-900">
+              <span>🔗</span> 주요 서비스 바로가기
+            </span>
+            <svg id="quick-links-arrow" class="w-3.5 h-3.5 text-neutral-400 transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5"></path>
+            </svg>
+          </button>
+          <!-- Dropup menu -->
+          <div id="quick-links-menu" class="hidden absolute bottom-full left-0 w-full mb-2 bg-white border border-[#DDDBD5] rounded-xl shadow-lg z-50 overflow-hidden py-1">
+            <a href="https://chatgpt.com" target="_blank" class="block px-4 py-2.5 text-xs text-neutral-700 hover:bg-brand-50 hover:text-brand-600 transition-colors font-bold border-b border-[#F2F1EE]">챗GPT</a>
+            <a href="https://gemini.google.com" target="_blank" class="block px-4 py-2.5 text-xs text-neutral-700 hover:bg-brand-50 hover:text-brand-600 transition-colors font-bold border-b border-[#F2F1EE]">제미나이</a>
+            <a href="https://claude.ai" target="_blank" class="block px-4 py-2.5 text-xs text-neutral-700 hover:bg-brand-50 hover:text-brand-600 transition-colors font-bold border-b border-[#F2F1EE]">클로드</a>
+            <a href="https://sheets.google.com" target="_blank" class="block px-4 py-2.5 text-xs text-neutral-700 hover:bg-brand-50 hover:text-brand-600 transition-colors font-bold border-b border-[#F2F1EE]">구글 시트</a>
+            <a href="https://docs.google.com/videos/create?usp=vids_alc&authuser=0" target="_blank" class="block px-4 py-2.5 text-xs text-neutral-700 hover:bg-brand-50 hover:text-brand-600 transition-colors font-bold border-b border-[#F2F1EE]">구글 Vids</a>
+            <a href="https://canva.com" target="_blank" class="block px-4 py-2.5 text-xs text-neutral-700 hover:bg-brand-50 hover:text-brand-600 transition-colors font-bold border-b border-[#F2F1EE]">캔바</a>
+            <a href="https://aistudio.google.com" target="_blank" class="block px-4 py-2.5 text-xs text-neutral-700 hover:bg-brand-50 hover:text-brand-600 transition-colors font-bold border-b border-[#F2F1EE]">AI Studio</a>
+            <a href="https://workspace.google.com/experiments" target="_blank" class="block px-4 py-2.5 text-xs text-neutral-700 hover:bg-brand-50 hover:text-brand-600 transition-colors font-bold">Workspace Experiments</a>
+          </div>
         </div>
+        <script>
+          function toggleQuickLinks(e) {
+            e.stopPropagation();
+            const menu = document.getElementById('quick-links-menu');
+            const arrow = document.getElementById('quick-links-arrow');
+            const isHidden = menu.classList.contains('hidden');
+            if (isHidden) {
+              menu.classList.remove('hidden');
+              arrow.classList.add('rotate-180');
+            } else {
+              menu.classList.add('hidden');
+              arrow.classList.remove('rotate-180');
+            }
+          }
+          document.addEventListener('click', (e) => {
+            const menu = document.getElementById('quick-links-menu');
+            const btn = document.getElementById('quick-links-btn');
+            const arrow = document.getElementById('quick-links-arrow');
+            if (menu && !menu.classList.contains('hidden') && !menu.contains(e.target) && !btn.contains(e.target)) {
+              menu.classList.add('hidden');
+              arrow.classList.remove('rotate-180');
+            }
+          });
+        </script>
+
+        <a href="pdfviewer.html" class="block w-full text-center py-3 px-4 border border-[#DDDBD5] hover:border-brand-500 bg-brand-50 hover:bg-brand-100 text-brand-600 rounded-xl transition-all duration-300 shadow-xs" style="text-decoration: none;">
+          <span class="block text-xs font-bold text-neutral-400 mb-0.5 tracking-wider uppercase">Slide PDF</span>
+          <span class="block text-sm font-extrabold tracking-tight">강의 교안 뷰어</span>
+        </a>
       </div>
-      <script>
-        function toggleQuickLinks(e) {
-          e.stopPropagation();
-          const menu = document.getElementById('quick-links-menu');
-          const arrow = document.getElementById('quick-links-arrow');
-          const isHidden = menu.classList.contains('hidden');
-          if (isHidden) {
-            menu.classList.remove('hidden');
-            arrow.classList.add('rotate-180');
-          } else {
-            menu.classList.add('hidden');
-            arrow.classList.remove('rotate-180');
-          }
-        }
-        document.addEventListener('click', (e) => {
-          const menu = document.getElementById('quick-links-menu');
-          const btn = document.getElementById('quick-links-btn');
-          const arrow = document.getElementById('quick-links-arrow');
-          if (menu && !menu.classList.contains('hidden') && !menu.contains(e.target) && !btn.contains(e.target)) {
-            menu.classList.add('hidden');
-            arrow.classList.remove('rotate-180');
-          }
-        });
-      </script>
+    </aside>
 
-      <a href="pdfviewer.html" class="block w-full text-center py-3 px-4 border border-[#DDDBD5] hover:border-brand-500 bg-brand-50 hover:bg-brand-100 text-brand-600 rounded-xl transition-all duration-300 shadow-xs" style="text-decoration: none;">
-        <span class="block text-xs font-bold text-neutral-400 mb-0.5 tracking-wider uppercase">Slide PDF</span>
-        <span class="block text-sm font-extrabold tracking-tight">강의 교안 뷰어</span>
-      </a>
-    </div>
-  </aside>
-
-  <!-- ===== Main Content ===== -->
-  <main class="flex-1 flex flex-col overflow-hidden pt-8 lg:pt-10 pb-8 px-4 md:px-8 lg:px-10">
-    <!-- Header Area -->
-    <header class="mb-4 flex-shrink-0 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
-      <div>
-        <div class="mb-2">
-          <span class="inline-block bg-brand-500 text-white rounded-full px-4 py-1 text-[11.5px] font-mono font-extrabold tracking-wider uppercase">AI Agent</span>
+    <!-- ===== Main Content ===== -->
+    <main class="flex-1 flex flex-col overflow-hidden pt-8 lg:pt-10 pb-8 px-4 md:px-8 lg:px-10">
+      <!-- Header Area -->
+      <header class="mb-4 flex-shrink-0 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+        <div>
+          <div class="mb-2">
+            <span class="inline-block bg-brand-500 text-white rounded-full px-4 py-1 text-[11.5px] font-mono font-extrabold tracking-wider uppercase">AI Agent</span>
+          </div>
+          <h1 id="header-title" class="text-2xl md:text-3xl font-extrabold tracking-tight leading-tight text-neutral-900">
+            챗봇을 활용한 운세 서비스 만들기
+          </h1>
         </div>
-        <h1 id="header-title" class="text-2xl md:text-3xl font-extrabold tracking-tight leading-tight text-neutral-900">
-          강의 자료를 활용한 AI 튜터 만들기
-        </h1>
-      </div>
-      <!-- Navigation buttons in header -->
-      <div class="flex items-center gap-2 flex-shrink-0 mb-1">
-        <button onclick="showTab(1)" id="tab-btn-1" class="w-9 h-9 flex items-center justify-center rounded-full font-bold text-sm transition-all focus:outline-none bg-brand-500 text-white border border-brand-500">
-          1
-        </button>
-        <button onclick="showTab(2)" id="tab-btn-2" class="w-9 h-9 flex items-center justify-center rounded-full font-bold text-sm transition-all focus:outline-none bg-white text-brand-500 border border-[#DDDBD5] hover:bg-neutral-50">
-          2
-        </button>
-      </div>
-    </header>
+        <!-- Navigation buttons in header -->
+        <div class="flex items-center gap-2 flex-shrink-0 mb-1">
+          <button onclick="showTab(1)" id="tab-btn-1" class="w-9 h-9 flex items-center justify-center rounded-full font-bold text-sm transition-all focus:outline-none bg-brand-500 text-white border border-brand-500">
+            1
+          </button>
+          <button onclick="showTab(2)" id="tab-btn-2" class="w-9 h-9 flex items-center justify-center rounded-full font-bold text-sm transition-all focus:outline-none bg-white text-brand-500 border border-[#DDDBD5] hover:bg-neutral-50">
+            2
+          </button>
+          <button onclick="showTab(3)" id="tab-btn-3" class="w-9 h-9 flex items-center justify-center rounded-full font-bold text-sm transition-all focus:outline-none bg-white text-brand-500 border border-[#DDDBD5] hover:bg-neutral-50">
+            3
+          </button>
+        </div>
+      </header>
 
-    <section class="border border-[#DDDBD5] rounded-2xl p-5 md:p-6 bg-white shadow-sm flex-1 flex flex-col overflow-y-auto">
-      <!-- Practice Content Container -->
-      <div class="flex-1 flex flex-col gap-6">
+      <section class="border border-[#DDDBD5] rounded-2xl p-5 md:p-6 bg-white shadow-sm flex-1 flex flex-col overflow-y-auto">
+        <!-- Practice Content Container -->
+        <div class="flex-1 flex flex-col gap-6">
 
-        <!-- =================== 실습 1. 강의 자료를 활용한 AI 튜터 만들기 =================== -->
-        <div id="content-meta" class="flex flex-col gap-6">
-          <!-- Card Head 1 -->
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#DDDBD5] pb-4 mb-2 flex-shrink-0">
-            <div>
-              <h2 class="text-lg md:text-xl font-extrabold text-neutral-900">강의 자료를 활용한 AI 튜터 만들기</h2>
-              <p class="text-xs md:text-sm text-[#605E59] mt-1">아래 프롬프트를 복사하여 ChatGPT나 Gemini 등에서 실행해 보세요.</p>
-            </div>
-            
-            
-                                    <div class="flex items-center gap-2 flex-shrink-0">
-              <a href="https://gemini.google.com/" target="_blank" class="flex-shrink-0 inline-flex items-center justify-center gap-2 px-4 h-9 border border-[#DDDBD5] hover:border-blue-500 bg-white hover:bg-blue-50 text-neutral-900 hover:text-blue-700 font-bold text-xs md:text-sm rounded-lg transition-all shadow-xs focus:outline-none" style="text-decoration: none;">
-                <svg class="w-3.5 h-3.5 text-neutral-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"></path>
-                </svg>
-                Gemini 바로가기
-              </a>
-              <a href="https://claude.ai/" target="_blank" class="flex-shrink-0 inline-flex items-center justify-center gap-2 px-4 h-9 border border-[#DDDBD5] hover:border-orange-500 bg-white hover:bg-orange-50 text-neutral-900 hover:text-orange-700 font-bold text-xs md:text-sm rounded-lg transition-all shadow-xs focus:outline-none" style="text-decoration: none;">
-                <svg class="w-3.5 h-3.5 text-neutral-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"></path>
-                </svg>
-                Claude 바로가기
-              </a>
+          <!-- =================== 실습 1. 챗봇을 활용한 운세 서비스 만들기 =================== -->
+          <div id="content-fortune" class="flex flex-col gap-6">
+            <!-- Card Head Fortune -->
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#DDDBD5] pb-4 mb-2 flex-shrink-0">
+              <div>
+                <h2 class="text-lg md:text-xl font-extrabold text-neutral-900">인풋과 아웃풋 만으로 챗봇 생성을 할 수 있습니다.</h2>
+              </div>
+              <div class="flex items-center gap-2 flex-shrink-0">
+                <a href="https://gemini.google.com/gems/view" target="_blank" class="flex-shrink-0 inline-flex items-center justify-center gap-2 px-4 h-9 border border-[#DDDBD5] hover:border-blue-500 bg-white hover:bg-blue-50 text-neutral-900 hover:text-blue-700 font-bold text-xs md:text-sm rounded-lg transition-all shadow-xs focus:outline-none" style="text-decoration: none;">
+                  <svg class="w-3.5 h-3.5 text-neutral-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"></path>
+                  </svg>
+                  GEM 바로 가기
+                </a>
+              </div>
             </div>
 
+            <!-- Accordion cards wrapper -->
+            <div class="steps-wrapper">
+              <section class="steps" style="margin-top: 10px;">
+                <!-- Fortune Card 1 -->
+                <article class="card transition-all duration-300 flex-1" id="fortune-step1-card">
+                  <div class="card-head flex items-center justify-between cursor-pointer select-none" style="padding: 16px 20px !important; gap: 4px !important;" onclick="setFortuneStep(1)">
+                    <div class="flex flex-col flex-1">
+                      <h2 id="fortune-step1-title" class="text-base font-extrabold text-neutral-900 flex items-center gap-2 m-0" style="margin-bottom: 0px !important;">📥 Input. 사용자가 입력할 사항은 무엇인가요?</h2>
+                    </div>
+                  </div>
+                  <div id="fortune-step1-body" class="card-body flex-grow flex flex-col gap-4">
+                    <textarea id="prompt-fortune-step1" placeholder="사용자가 입력할 사항을 적어보세요." class="w-full p-4 border border-[#DDDBD5] bg-white text-neutral-900 text-sm md:text-base leading-relaxed placeholder-neutral-400 focus:border-brand-500 focus:ring-0 outline-none resize-none flex-grow font-mono leading-relaxed" style="font-family: 'Pretendard', sans-serif; min-height: 180px; height: 200px;"></textarea>
+                    </div>
+                  <!-- Collapsed body -->
+                  <div id="fortune-step1-collapsed-body" class="p-4 bg-white flex items-center justify-center flex-grow hidden cursor-pointer select-none" onclick="setFortuneStep(1)">
+                    <span class="text-sm font-bold text-neutral-500">Input 입력 사항</span>
+                  </div>
+                </article>
 
+                <!-- Fortune Card 2 -->
+                <article class="card transition-all duration-300 opacity-60 flex-1" id="fortune-step2-card">
+                  <div class="card-head flex items-center justify-between cursor-pointer select-none bg-neutral-50" style="padding: 16px 20px !important; gap: 4px !important;" onclick="setFortuneStep(2)">
+                    <div class="flex flex-col flex-1">
+                      <h2 id="fortune-step2-title" class="text-base font-extrabold text-neutral-900 flex items-center gap-2 m-0" style="margin-bottom: 0px !important;">📤 Output</h2>
+                    </div>
+                  </div>
+                  <div id="fortune-step2-body" class="card-body flex-grow flex flex-col gap-4 hidden">
+                    <textarea id="prompt-fortune-step2" placeholder="Output으로 나올 결과를 적어보세요." class="w-full p-4 border border-[#DDDBD5] bg-white text-neutral-900 text-sm md:text-base leading-relaxed placeholder-neutral-400 focus:border-brand-500 focus:ring-0 outline-none resize-none flex-grow font-mono leading-relaxed" style="font-family: 'Pretendard', sans-serif; min-height: 180px; height: 200px;"></textarea>
+                  </div>
+                  <!-- Collapsed body -->
+                  <div id="fortune-step2-collapsed-body" class="p-4 bg-white flex items-center justify-center flex-grow cursor-pointer select-none" onclick="setFortuneStep(2)">
+                    <span class="text-sm font-bold text-neutral-500">Output 결과</span>
+                  </div>
+                </article>
+              </section>
+              <!-- 전체 복사 버튼 - 카드 하단 -->
+              <div class="flex justify-end mt-4">
+                <button onclick="copyAllFortunePrompts()" class="px-6 h-11 bg-brand-500 hover:bg-brand-600 text-white text-sm md:text-base font-extrabold rounded-lg transition-all shadow-sm flex items-center justify-center gap-2 focus:outline-none">
+                  <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="9" y="9" width="11" height="11" rx="2" ry="2" stroke-linecap="round" stroke-linejoin="round"></rect>
+                    <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" stroke-linecap="round" stroke-linejoin="round"></path>
+                  </svg>
+                  프롬프트 복사
+                </button>
+              </div>
+            </div>
           </div>
 
-          <!-- 실습 프롬프트 -->
-          <section class="flex flex-col border border-[#DDDBD5] rounded-xl bg-brand-100 overflow-hidden shadow-xs">
-            <div class="p-4 pb-2.5 flex-shrink-0 bg-brand-100">
-              <strong class="block text-neutral-900 text-base font-extrabold mb-1">✍️ 실습 프롬프트</strong>
-              <span class="block text-[#605E59] text-xs leading-tight">아래 지시 사항을 활용해 챗봇 지침을 만듭니다. (수정 가능)</span>
+          <!-- =================== 실습 2. 메타 프롬프트 활용 =================== -->
+          <div id="content-meta" class="hidden flex flex-col gap-6">
+            <!-- Card Head 1 -->
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#DDDBD5] pb-4 mb-2 flex-shrink-0">
+              <div>
+                <h2 class="text-lg md:text-xl font-extrabold text-neutral-900">메타 프롬프트를 활용해 프롬프트를 설계합니다.</h2>
+                <p class="text-xs md:text-sm text-[#605E59] mt-1">제미나이나 클로드를 활용해 챗봇 생성을 위한 프롬프트를 만듭니다.</p>
+              </div>
+              <div class="flex items-center gap-2 flex-shrink-0">
+                <a href="https://gemini.google.com/" target="_blank" class="flex-shrink-0 inline-flex items-center justify-center gap-2 px-4 h-9 border border-[#DDDBD5] hover:border-blue-500 bg-white hover:bg-blue-50 text-neutral-900 hover:text-blue-700 font-bold text-xs md:text-sm rounded-lg transition-all shadow-xs focus:outline-none" style="text-decoration: none;">
+                  <svg class="w-3.5 h-3.5 text-neutral-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"></path>
+                  </svg>
+                  Gemini 바로가기
+                </a>
+                <a href="https://claude.ai/" target="_blank" class="flex-shrink-0 inline-flex items-center justify-center gap-2 px-4 h-9 border border-[#DDDBD5] hover:border-orange-500 bg-white hover:bg-orange-50 text-neutral-900 hover:text-orange-700 font-bold text-xs md:text-sm rounded-lg transition-all shadow-xs focus:outline-none" style="text-decoration: none;">
+                  <svg class="w-3.5 h-3.5 text-neutral-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"></path>
+                  </svg>
+                  Claude 바로가기
+                </a>
+              </div>
             </div>
-            <textarea id="prompt-meta" class="w-full p-4 border-t border-b border-l-0 border-r-0 border-[#DDDBD5] bg-white text-neutral-900 text-sm md:text-base leading-relaxed placeholder-neutral-400 focus:border-brand-500 focus:ring-0 outline-none resize-none h-64 md:h-80 font-mono leading-relaxed" style="font-family: 'Pretendard', sans-serif;">너는 챗봇 설계 전문가야.
+
+            <!-- 실습 프롬프트 -->
+            <section class="flex flex-col border border-[#DDDBD5] rounded-xl bg-brand-100 overflow-hidden shadow-xs">
+              <div class="p-4 pb-2.5 flex-shrink-0 bg-brand-100">
+                <strong class="block text-neutral-900 text-base font-extrabold mb-1">✍️ 실습 프롬프트</strong>
+                <span class="block text-[#605E59] text-xs leading-tight">아래 지시 사항을 활용해 챗봇 지침을 만듭니다. (수정 가능)</span>
+              </div>
+              <textarea id="prompt-meta" class="w-full p-4 border-t border-b border-l-0 border-r-0 border-[#DDDBD5] bg-white text-neutral-900 text-sm md:text-base leading-relaxed placeholder-neutral-400 focus:border-brand-500 focus:ring-0 outline-none resize-none h-64 md:h-80 font-mono leading-relaxed" style="font-family: 'Pretendard', sans-serif;">너는 챗봇 설계 전문가야.
 AI 강의 자료를 활용해 실무에 바로 적용할 수 있도록 돕는
 AI 튜터 챗봇을 만들 '지침(시스템 프롬프트)'을 작성해줘.
 
@@ -281,8 +336,69 @@ AI 튜터 챗봇을 만들 '지침(시스템 프롬프트)'을 작성해줘.
 
 위 내용을 반영해서, 챗봇에게 그대로 입력할 수 있도록 
 시스템 프롬프트(지침)를 코드박스에 넣어서 작성해줘.</textarea>
-            <div class="p-4 bg-white flex justify-end gap-2 border-t border-[#DDDBD5]">
-              <button onclick="copyMetaPrompt()" class="px-6 h-11 bg-brand-500 hover:bg-brand-600 text-white text-sm md:text-base font-extrabold rounded-lg transition-all shadow-sm flex items-center justify-center gap-1.5 focus:outline-none">
+              <div class="p-4 bg-white flex justify-end gap-2 border-t border-[#DDDBD5]">
+                <button onclick="copyMetaPrompt()" class="px-6 h-11 bg-brand-500 hover:bg-brand-600 text-white text-sm md:text-base font-extrabold rounded-lg transition-all shadow-sm flex items-center justify-center gap-1.5 focus:outline-none">
+                  <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="9" y="9" width="11" height="11" rx="2" ry="2" stroke-linecap="round" stroke-linejoin="round"></rect>
+                    <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" stroke-linecap="round" stroke-linejoin="round"></path>
+                  </svg>
+                  프롬프트 복사
+                </button>
+              </div>
+            </section>
+          </div>
+
+          <!-- =================== 실습 3. 웹앱 프롬프트 생성기 =================== -->
+          <div id="content-webapp" class="hidden flex flex-col gap-6">
+            <!-- Card Head -->
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#DDDBD5] pb-4 mb-2 flex-shrink-0">
+              <div>
+                <h2 class="text-lg md:text-xl font-extrabold text-neutral-900">웹앱 프롬프트 생성 조건 입력</h2>
+                <p class="text-xs md:text-sm text-[#605E59] mt-1">선택한 예시의 Input·Output·기능 설명이 자동으로 입력됩니다. 내용을 자유롭게 바꿔보세요.</p>
+              </div>
+              <div>
+                <select id="sampleSelect" class="text-base font-bold border border-[#DDDBD5] bg-white text-neutral-700 rounded-lg px-4 py-2.5 w-64 md:w-80 focus:border-brand-500 focus:outline-none cursor-pointer">
+                  <option value="qr">QR 코드 생성기</option>
+                  <option value="color">컬러코드 추출기</option>
+                  <option value="pdf">PDF 분리기</option>
+                  <option value="resize">이미지 규격 변환기</option>
+                  <option value="minutes">회의록 작성기</option>
+                </select>
+              </div>
+            </div>
+
+            <section class="flow">
+              <article class="card">
+                <div class="card-head">
+                  <div><h2>📥 Input. 사용자가 입력할 부분</h2><p>웹앱에서 사용자가 입력해야 할 사항을 구체적으로 작성합니다.</p></div>
+                  <span class="badge">INPUT</span>
+                </div>
+                <div class="card-body">
+                  <div class="input-list">
+                    <div><label for="inputText">사용자 입력</label><textarea id="inputText" class="w-full p-4 border border-[#DDDBD5] bg-white text-[#333330] text-base rounded-lg focus:border-brand-500 focus:outline-none resize-none h-32">웹사이트 주소(URL)</textarea></div>
+                    <div><label for="inputDetail">입력 방식 및 조건 (선택 영역)</label><textarea id="inputDetail" class="w-full p-4 border border-[#DDDBD5] bg-white text-[#333330] text-base rounded-lg focus:border-brand-500 focus:outline-none resize-none h-32">URL 입력창 1개, https:// 형식 검증</textarea></div>
+                  </div>
+                </div>
+              </article>
+
+              <div class="arrow">→</div>
+
+              <article class="card">
+                <div class="card-head">
+                  <div><h2>📤 Output. 챗봇이 생성하는 결과</h2><p>인풋을 토대로 어떤 결과물을 만들지 정의합니다.</p></div>
+                  <span class="badge">OUTPUT</span>
+                </div>
+                <div class="card-body">
+                  <div class="input-list">
+                    <div><label for="outputText">결과물</label><textarea id="outputText" class="w-full p-4 border border-[#DDDBD5] bg-white text-[#333330] text-base rounded-lg focus:border-brand-500 focus:outline-none resize-none h-32">입력한 URL을 QR 코드 이미지로 변환해 표시</textarea></div>
+                    <div><label for="featureText">추가 기능 (선택 영역)</label><textarea id="featureText" class="w-full p-4 border border-[#DDDBD5] bg-white text-[#333330] text-base rounded-lg focus:border-brand-500 focus:outline-none resize-none h-32">생성 버튼 클릭 시 QR 코드 표시\nQR 코드 이미지 아래 다운로드 버튼 제공\n초기화 버튼 제공</textarea></div>
+                  </div>
+                </div>
+              </article>
+            </section>
+
+            <div class="flex justify-end gap-3 mt-6 pt-4 border-t border-[#DDDBD5]">
+              <button class="px-6 h-11 bg-brand-500 hover:bg-brand-600 text-white text-sm md:text-base font-extrabold rounded-lg transition-all shadow-sm flex items-center justify-center gap-1.5 focus:outline-none" id="copyBtn">
                 <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                   <rect x="9" y="9" width="11" height="11" rx="2" ry="2" stroke-linecap="round" stroke-linejoin="round"></rect>
                   <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -290,72 +406,11 @@ AI 튜터 챗봇을 만들 '지침(시스템 프롬프트)'을 작성해줘.
                 프롬프트 복사
               </button>
             </div>
-          </section>
-        </div>
-
-        <!-- =================== 실습 2. 웹앱 프롬프트 생성기 =================== -->
-        <div id="content-webapp" class="hidden flex flex-col gap-6">
-          <!-- Card Head -->
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#DDDBD5] pb-4 mb-2 flex-shrink-0">
-            <div>
-              <h2 class="text-lg md:text-xl font-extrabold text-neutral-900">웹앱 프롬프트 생성 조건 입력</h2>
-              <p class="text-xs md:text-sm text-[#605E59] mt-1">선택한 예시의 Input·Output·기능 설명이 자동으로 입력됩니다. 내용을 자유롭게 바꿔보세요.</p>
-            </div>
-            <div>
-              <select id="sampleSelect" class="text-base font-bold border border-[#DDDBD5] bg-white text-neutral-700 rounded-lg px-4 py-2.5 w-64 md:w-80 focus:border-brand-500 focus:outline-none cursor-pointer">
-                <option value="qr">QR 코드 생성기</option>
-                <option value="color">컬러코드 추출기</option>
-                <option value="pdf">PDF 분리기</option>
-                <option value="resize">이미지 규격 변환기</option>
-                <option value="minutes">회의록 작성기</option>
-              </select>
-            </div>
           </div>
 
-          <section class="flow">
-            <article class="card">
-              <div class="card-head">
-                <div><h2>📥 Input. 사용자가 입력할 부분</h2><p>웹앱에서 사용자가 입력해야 할 사항을 구체적으로 작성합니다.</p></div>
-                <span class="badge">INPUT</span>
-              </div>
-              <div class="card-body">
-                <div class="input-list">
-                  <div><label for="inputText">사용자 입력</label><textarea id="inputText" class="w-full p-4 border border-[#DDDBD5] bg-white text-[#333330] text-base rounded-lg focus:border-brand-500 focus:outline-none resize-none h-32">웹사이트 주소(URL)</textarea></div>
-                  <div><label for="inputDetail">입력 방식 및 조건 (선택 영역)</label><textarea id="inputDetail" class="w-full p-4 border border-[#DDDBD5] bg-white text-[#333330] text-base rounded-lg focus:border-brand-500 focus:outline-none resize-none h-32">URL 입력창 1개, https:// 형식 검증</textarea></div>
-                </div>
-              </div>
-            </article>
-
-            <div class="arrow">→</div>
-
-            <article class="card">
-              <div class="card-head">
-                <div><h2>📤 Output. 챗봇이 생성하는 결과</h2><p>인풋을 토대로 어떤 결과물을 만들지 정의합니다.</p></div>
-                <span class="badge">OUTPUT</span>
-              </div>
-              <div class="card-body">
-                <div class="input-list">
-                  <div><label for="outputText">결과물</label><textarea id="outputText" class="w-full p-4 border border-[#DDDBD5] bg-white text-[#333330] text-base rounded-lg focus:border-brand-500 focus:outline-none resize-none h-32">입력한 URL을 QR 코드 이미지로 변환해 표시</textarea></div>
-                  <div><label for="featureText">추가 기능 (선택 영역)</label><textarea id="featureText" class="w-full p-4 border border-[#DDDBD5] bg-white text-[#333330] text-base rounded-lg focus:border-brand-500 focus:outline-none resize-none h-32">생성 버튼 클릭 시 QR 코드 표시\nQR 코드 이미지 아래 다운로드 버튼 제공\n초기화 버튼 제공</textarea></div>
-                </div>
-              </div>
-            </article>
-          </section>
-
-          <div class="flex justify-end gap-3 mt-6 pt-4 border-t border-[#DDDBD5]">
-            <button class="px-6 h-11 bg-brand-500 hover:bg-brand-600 text-white text-sm md:text-base font-extrabold rounded-lg transition-all shadow-sm flex items-center justify-center gap-1.5 focus:outline-none" id="copyBtn">
-              <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <rect x="9" y="9" width="11" height="11" rx="2" ry="2" stroke-linecap="round" stroke-linejoin="round"></rect>
-                <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" stroke-linecap="round" stroke-linejoin="round"></path>
-              </svg>
-              프롬프트 복사
-            </button>
-          </div>
         </div>
-
-      </div>
-    </section>
-  </main>
+      </section>
+    </main>
   </div>
   <div id="toast" class="toast"></div>
 
@@ -364,34 +419,110 @@ AI 튜터 챗봇을 만들 '지침(시스템 프롬프트)'을 작성해줘.
       window.location.href = '../index.html?redirect=workshop01/07_aiagent.html';
     }
 
+    let activeFortuneStep = 1;
+
+    function setFortuneStep(stepNum) {
+      activeFortuneStep = stepNum;
+      updateFortuneStepsUI();
+    }
+
+    function updateFortuneStepsUI() {
+      const card1 = document.getElementById('fortune-step1-card');
+      const card2 = document.getElementById('fortune-step2-card');
+      const body1 = document.getElementById('fortune-step1-body');
+      const body2 = document.getElementById('fortune-step2-body');
+      const collapsedBody1 = document.getElementById('fortune-step1-collapsed-body');
+      const collapsedBody2 = document.getElementById('fortune-step2-collapsed-body');
+      const title1 = document.getElementById('fortune-step1-title');
+      const title2 = document.getElementById('fortune-step2-title');
+      const head1 = card1.querySelector('.card-head');
+      const head2 = card2.querySelector('.card-head');
+
+      if (activeFortuneStep === 1) {
+        body1.classList.remove('hidden');
+        collapsedBody1.classList.add('hidden');
+        title1.textContent = "📥 Input. 사용자가 입력할 사항은 무엇인가요?";
+
+        body2.classList.add('hidden');
+        collapsedBody2.classList.remove('hidden');
+        title2.textContent = "📤 Output";
+
+        card1.classList.remove('opacity-60');
+        card2.classList.add('opacity-60');
+
+        head1.classList.add('bg-[#EAF2EE]');
+        head1.classList.remove('bg-neutral-50');
+        head2.classList.remove('bg-[#EAF2EE]');
+        head2.classList.add('bg-neutral-50');
+      } else {
+        body1.classList.add('hidden');
+        collapsedBody1.classList.remove('hidden');
+        title1.textContent = "📥 Input";
+
+        body2.classList.remove('hidden');
+        collapsedBody2.classList.add('hidden');
+        title2.textContent = "📤 Output으로 나올 결과는 무엇인가요?";
+
+        card1.classList.add('opacity-60');
+        card2.classList.remove('opacity-60');
+
+        head1.classList.remove('bg-[#EAF2EE]');
+        head1.classList.add('bg-neutral-50');
+        head2.classList.add('bg-[#EAF2EE]');
+        head2.classList.remove('bg-neutral-50');
+      }
+    }
+
     function showTab(num) {
+      const fortuneSection = document.getElementById('content-fortune');
       const metaSection = document.getElementById('content-meta');
       const webappSection = document.getElementById('content-webapp');
       const headerTitle = document.getElementById('header-title');
       const btn1 = document.getElementById('tab-btn-1');
       const btn2 = document.getElementById('tab-btn-2');
+      const btn3 = document.getElementById('tab-btn-3');
 
       const activeClass = ['bg-brand-500', 'text-white', 'border-brand-500'];
       const inactiveClass = ['bg-white', 'text-brand-500', 'border-[#DDDBD5]', 'hover:bg-neutral-50'];
 
       if (num === 1) {
-        metaSection.classList.remove('hidden');
+        fortuneSection.classList.remove('hidden');
+        metaSection.classList.add('hidden');
         webappSection.classList.add('hidden');
-        headerTitle.textContent = "강의 자료를 활용한 AI 튜터 만들기";
+        headerTitle.textContent = "챗봇을 활용한 운세 서비스 만들기";
         
         btn1.classList.remove(...inactiveClass);
         btn1.classList.add(...activeClass);
         btn2.classList.remove(...activeClass);
         btn2.classList.add(...inactiveClass);
+        btn3.classList.remove(...activeClass);
+        btn3.classList.add(...inactiveClass);
+
+        updateFortuneStepsUI();
+      } else if (num === 2) {
+        fortuneSection.classList.add('hidden');
+        metaSection.classList.remove('hidden');
+        webappSection.classList.add('hidden');
+        headerTitle.textContent = "강의 자료를 활용한 AI 튜터 만들기";
+        
+        btn1.classList.remove(...activeClass);
+        btn1.classList.add(...inactiveClass);
+        btn2.classList.remove(...inactiveClass);
+        btn2.classList.add(...activeClass);
+        btn3.classList.remove(...activeClass);
+        btn3.classList.add(...inactiveClass);
       } else {
+        fortuneSection.classList.add('hidden');
         metaSection.classList.add('hidden');
         webappSection.classList.remove('hidden');
         headerTitle.textContent = "웹앱 프롬프트 생성기";
 
         btn1.classList.remove(...activeClass);
         btn1.classList.add(...inactiveClass);
-        btn2.classList.remove(...inactiveClass);
-        btn2.classList.add(...activeClass);
+        btn2.classList.remove(...activeClass);
+        btn2.classList.add(...inactiveClass);
+        btn3.classList.remove(...inactiveClass);
+        btn3.classList.add(...activeClass);
       }
     }
 
@@ -432,6 +563,33 @@ AI 튜터 챗봇을 만들 '지침(시스템 프롬프트)'을 작성해줘.
       showToast('프롬프트가 복사되었습니다.');
     }
 
+    async function copyFortunePrompt(id) {
+      const text = document.getElementById(id).value;
+      try {
+        await navigator.clipboard.writeText(text);
+      } catch {
+        const ta = document.createElement('textarea');
+        ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+        document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove();
+      }
+      showToast('프롬프트가 클립보드에 복사되었습니다.');
+    }
+
+    // Copy both input and output prompts together
+    async function copyAllFortunePrompts() {
+      const inputText = document.getElementById('prompt-fortune-step1').value;
+      const outputText = document.getElementById('prompt-fortune-step2').value;
+      const combined = `${inputText}\n\n${outputText}`;
+      try {
+        await navigator.clipboard.writeText(combined);
+      } catch {
+        const ta = document.createElement('textarea');
+        ta.value = combined; ta.style.position = 'fixed'; ta.style.opacity = '0';
+        document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove();
+      }
+      showToast('전체 프롬프트가 복사되었습니다.');
+    }
+
     const samples = {
       qr: {
         name:'QR 코드 생성기',
@@ -445,7 +603,7 @@ AI 튜터 챗봇을 만들 '지침(시스템 프롬프트)'을 작성해줘.
         input:'이미지 파일',
         detail:'이미지 업로드 버튼 또는 드래그앤드롭,\nJPG·PNG 형식 지원',
         output:'업로드한 이미지를 캔버스에 미리보기로 표시\n- 사용자가 이미지 위에 마우스를 올리면\n  해당 픽셀의 컬러 정보를 실시간으로 표시\n- 마우스 클릭 시 해당 위치의 HEX 코드와 RGB 값을\n  색상 칩과 함께 하단에 저장·표시',
-        features:'- 마우스 커서 위치의 컬러 실시간 미리보기\n- 클릭으로 컬러 추출 및 HEX/RGB 동시 표시\n- 추출한 코드 클릭 시 클립보드 복사\n- 최근 추출한 색상 최대 10개 이력 표시\n- 초기화 버튼 제공'
+        features:'- 마우스 커서 위치 of 컬러 실시간 미리보기\n- 클릭으로 컬러 추출 및 HEX/RGB 동시 표시\n- 추출한 코드 클릭 시 클립보드 복사\n- 최근 추출한 색상 최대 10개 이력 표시\n- 초기화 버튼 제공'
       },
       pdf: {
         name:'PDF 분리기',
@@ -556,6 +714,11 @@ ${$('featureText').value}
     $('copyBtn').addEventListener('click', copyPrompt);
     $('resetBtn').addEventListener('click', resetCurrent);
     loadSample('qr');
+
+    // Default load Tab 1
+    window.addEventListener('DOMContentLoaded', () => {
+      showTab(1);
+    });
   </script>
 </body>
 </html>
