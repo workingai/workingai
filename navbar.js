@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
           .replace(/href="index\.html"/g, 'href="../index.html"')
           .replace(/href="mulcam01\.html"/g, 'href="../mulcam01.html"')
           .replace(/href="workshop01\//g, 'href="')
-          .replace(/src="logo\.png"/g, 'src="../logo.png"');
+          .replace(/src="images\/logo\.png"/g, 'src="../images/logo.png"');
       }
 
       placeholder.innerHTML = processedHtml;
