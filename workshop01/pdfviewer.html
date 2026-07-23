@@ -342,11 +342,12 @@
       }
 
       const fileName = pdfUrl.split('/').pop();
+      const relativePdfUrl = `../download/${fileName}`;
       
       // Set dynamic download button link
       const downloadBtn = document.getElementById('download-btn');
       if (downloadBtn) {
-        downloadBtn.setAttribute('href', pdfUrl);
+        downloadBtn.setAttribute('href', relativePdfUrl);
       }
 
       // Set fallback overlay text dynamically
@@ -355,7 +356,7 @@
       if (fallbackCode) fallbackCode.textContent = 'download/' + fileName;
       if (fallbackBtn) fallbackBtn.textContent = '교안 파일 선택하기 (' + fileName + ')';
 
-      pdfjsLib.getDocument(pdfUrl).promise.then(pdf => {
+      pdfjsLib.getDocument(relativePdfUrl).promise.then(pdf => {
         initPDF(pdf);
       }).catch(err => {
         console.error('PDF Load Error:', err);
