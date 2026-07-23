@@ -315,30 +315,57 @@
     const loadingOverlay = document.getElementById('loading-overlay');
     const pageInput = document.getElementById('page-input');
 
+    // GAS API URL
+    const GAS_API_URL = "https://script.google.com/macros/s/AKfycbztn6cdfX14ZmqAmc-RbST7L6-B6h959d4bJctqDFL_2MylpN9QvBqPytNdp9bTxHblyA/exec";
+
     // Load PDF Document
-    const pdfUrl = localStorage.getItem('workbook_file_address') || 'https://workingai-nine.vercel.app/download/multicampus_0722.pdf';
-    const fileName = pdfUrl.split('/').pop();
-    
-    // Set dynamic download button link
-    const downloadBtn = document.getElementById('download-btn');
-    if (downloadBtn) {
-      downloadBtn.setAttribute('href', pdfUrl);
+    let cachedPdfUrl = localStorage.getItem('workbook_file_address') || 'https://workingai-nine.vercel.app/download/multicampus_0722.pdf';
+    const accessCode = localStorage.getItem('workbook_access_code');
+
+    async function loadLatestPDF() {
+      let pdfUrl = cachedPdfUrl;
+      
+      // If we have an access code, try to fetch the latest file URL from the spreadsheet
+      if (accessCode && GAS_API_URL) {
+        try {
+          const response = await fetch(`${GAS_API_URL}?code=${encodeURIComponent(accessCode)}`, {
+            method: "GET"
+          });
+          const result = await response.json();
+          if (result.success && result.fileAddress && result.fileAddress !== cachedPdfUrl) {
+            pdfUrl = result.fileAddress;
+            localStorage.setItem('workbook_file_address', pdfUrl);
+          }
+        } catch (err) {
+          console.warn("최신 교안 파일 주소를 불러오는 데 실패했습니다. 캐시된 파일을 사용합니다.", err);
+        }
+      }
+
+      const fileName = pdfUrl.split('/').pop();
+      
+      // Set dynamic download button link
+      const downloadBtn = document.getElementById('download-btn');
+      if (downloadBtn) {
+        downloadBtn.setAttribute('href', pdfUrl);
+      }
+
+      // Set fallback overlay text dynamically
+      const fallbackCode = document.getElementById('fallback-filename-code');
+      const fallbackBtn = document.getElementById('fallback-filename-btn');
+      if (fallbackCode) fallbackCode.textContent = 'download/' + fileName;
+      if (fallbackBtn) fallbackBtn.textContent = '교안 파일 선택하기 (' + fileName + ')';
+
+      pdfjsLib.getDocument(pdfUrl).promise.then(pdf => {
+        initPDF(pdf);
+      }).catch(err => {
+        console.error('PDF Load Error:', err);
+        // Auto-load failed (CORS block under file:// protocol) -> Show manual file selector
+        loadingOverlay.classList.add('hidden');
+        document.getElementById('local-file-overlay').classList.remove('hidden');
+      });
     }
 
-    // Set fallback overlay text dynamically
-    const fallbackCode = document.getElementById('fallback-filename-code');
-    const fallbackBtn = document.getElementById('fallback-filename-btn');
-    if (fallbackCode) fallbackCode.textContent = 'download/' + fileName;
-    if (fallbackBtn) fallbackBtn.textContent = '교안 파일 선택하기 (' + fileName + ')';
-
-    pdfjsLib.getDocument(pdfUrl).promise.then(pdf => {
-      initPDF(pdf);
-    }).catch(err => {
-      console.error('PDF Load Error:', err);
-      // Auto-load failed (CORS block under file:// protocol) -> Show manual file selector
-      loadingOverlay.classList.add('hidden');
-      document.getElementById('local-file-overlay').classList.remove('hidden');
-    });
+    loadLatestPDF();
 
     function initPDF(pdf) {
       pdfDoc = pdf;
