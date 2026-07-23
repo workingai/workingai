@@ -21,7 +21,9 @@ document.addEventListener('DOMContentLoaded', () => {
       if (isSubdir) {
         processedHtml = processedHtml
           .replace(/href="index\.html"/g, 'href="../index.html"')
-          .replace(/href="workshop01\//g, 'href="');
+          .replace(/href="mulcam01\.html"/g, 'href="../mulcam01.html"')
+          .replace(/href="workshop01\//g, 'href="')
+          .replace(/src="logo\.png"/g, 'src="../logo.png"');
       }
 
       placeholder.innerHTML = processedHtml;
@@ -46,15 +48,13 @@ function initNavbar(isSubdir) {
 
   // [로그인 버튼 클릭 시 처리]
   const handleLoginClick = () => {
-    if (isSubdir) {
-      // 서브디렉토리 내부에서는 index.html로 리디렉션하며 로그인 후 다시 돌아올 주소 지정
-      const relativePath = window.location.pathname.split('/').slice(-2).join('/'); // 예: "workshop01/ws01_index.html"
-      window.location.href = '../index.html?redirect=' + relativePath;
+    const isIndexPage = window.location.pathname.endsWith('index.html') || window.location.pathname.endsWith('/');
+    if (isIndexPage && typeof openEntranceModal === 'function') {
+      openEntranceModal();
     } else {
-      // 메인 홈 화면에서는 내장 모달창 즉시 열기
-      if (typeof openEntranceModal === 'function') {
-        openEntranceModal();
-      }
+      const pageName = isSubdir ? 'workshop01/' + window.location.pathname.split('/').pop() : window.location.pathname.split('/').pop();
+      const destIndex = isSubdir ? '../index.html' : 'index.html';
+      window.location.href = destIndex + '?redirect=' + pageName;
     }
   };
 
