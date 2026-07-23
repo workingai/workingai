@@ -249,8 +249,8 @@
       <div id="modal-login-form" class="flex flex-col gap-4">
         <!-- 1. Entrance Code Input -->
         <div>
-          <label class="text-xs font-bold text-neutral-600 mb-1.5 block">입장 코드 입력</label>
-          <input type="text" id="input-login-code" placeholder="원하는 코드 입력 (영문/한글 가능)" class="w-full h-11 border border-neutral-200 rounded-xl px-4 text-sm font-bold text-center focus:border-brand-500 focus:outline-none">
+          <label class="text-xs font-bold text-neutral-600 mb-1.5 block">개인접속코드 입력</label>
+          <input type="text" id="input-login-code" placeholder="본인의 코드를 입력하세요 (영문/한글)" class="w-full h-11 border border-neutral-200 rounded-xl px-4 text-sm font-bold text-center focus:border-brand-500 focus:outline-none">
         </div>
 
         <!-- 2. Checkbox: First visit -->
@@ -261,8 +261,8 @@
 
         <!-- 3. Validation ID Input (Toggled by Checkbox) -->
         <div id="validation-id-container" class="transition-all duration-300 hidden">
-          <label class="text-xs font-bold text-neutral-600 mb-1.5 block">강의 중 안내한 ID를 입력하세요</label>
-          <input type="password" id="input-pwd" placeholder="비밀번호(workingai)를 입력하세요" class="w-full h-11 border border-neutral-200 rounded-xl px-4 text-sm font-bold text-center focus:border-brand-500 focus:outline-none">
+          <label class="text-xs font-bold text-neutral-600 mb-1.5 block">클래스 ID를 입력하세요</label>
+          <input type="password" id="input-pwd" placeholder="클래스 ID를 입력하세요" class="w-full h-11 border border-neutral-200 rounded-xl px-4 text-sm font-bold text-center focus:border-brand-500 focus:outline-none">
         </div>
 
         <button onclick="handleEntrance()" class="w-full h-11 bg-brand-500 hover:bg-brand-600 text-white text-sm font-extrabold rounded-xl transition-all shadow-sm flex items-center justify-center gap-2">
@@ -273,10 +273,10 @@
       <!-- Success Screen (Hidden by default) -->
       <div id="modal-success-screen" class="flex flex-col items-center text-center gap-4 py-4 hidden">
         <div class="w-16 h-16 rounded-full bg-brand-50 text-brand-500 text-3xl flex items-center justify-center">🎉</div>
-        <h4 class="text-xl font-bold text-neutral-900">입장코드 생성 완료!</h4>
+        <h4 class="text-xl font-bold text-neutral-900">개인접속코드 생성 완료!</h4>
         <p class="text-xs text-neutral-500 leading-relaxed">
           구글 시트에 등록이 완료되었습니다.<br>
-          아래 코드를 복사해서 향후 비밀번호 없이 입장하실 수 있습니다.
+          아래 코드를 복사해서 향후 클래스 ID 없이 입장하실 수 있습니다.
         </p>
         <div class="w-full bg-neutral-50 border border-neutral-200 rounded-xl p-3.5 font-mono text-lg font-bold tracking-widest text-brand-600 select-all cursor-pointer" id="success-code-display">
           WA-123456
@@ -293,7 +293,7 @@
 
   <script>
     // Set your Deployed Google Apps Script Web App URL here
-    const GAS_API_URL = "https://script.google.com/macros/s/AKfycbzUJ1365of8Zv9qNW50OvUcdCoxeZajhjr5FMwMnJvfwKLhdQWyEkEAlomWwOurKHYFsg/exec"; 
+    const GAS_API_URL = "https://script.google.com/macros/s/AKfycbztn6cdfX14ZmqAmc-RbST7L6-B6h959d4bJctqDFL_2MylpN9QvBqPytNdp9bTxHblyA/exec"; 
 
     let pendingRedirectUrl = "";
 
@@ -372,7 +372,12 @@
       const firstVisit = document.getElementById('checkbox-first-visit').checked;
       
       if (!codeInput) {
-        showModalError("입장 코드를 입력해 주세요.");
+        showModalError("개인접속코드를 입력해 주세요.");
+        return;
+      }
+
+      if (codeInput.toLowerCase() === "workingai") {
+        showModalError("클래스 코드는 입력할 수 없습니다");
         return;
       }
 
@@ -380,7 +385,7 @@
         // [Flow 1] First visit registration: requires "ID" (workingai)
         const pwdInput = document.getElementById('input-pwd').value.trim();
         if (pwdInput !== "workingai") {
-          showModalError("강의 중 안내한 ID가 올바르지 않습니다.");
+          showModalError("클래스 ID가 올바르지 않습니다.");
           return;
         }
 
@@ -397,7 +402,7 @@
           return;
         }
 
-        showModalError("입장 코드를 생성하고 구글 시트에 기록 중입니다...");
+        showModalError("개인접속코드를 등록하고 구글 시트에 기록 중입니다...");
         try {
           const response = await fetch(GAS_API_URL, {
             method: "POST",
@@ -415,6 +420,7 @@
             localStorage.setItem('workbook_logged_in', 'true');
             localStorage.setItem('workbook_access_code', codeInput);
             localStorage.setItem('workbook_course_code', result.courseCode);
+            localStorage.setItem('workbook_file_address', result.fileAddress || '');
 
             document.getElementById('modal-login-form').classList.add('hidden');
             document.getElementById('modal-success-screen').classList.remove('hidden');
@@ -454,9 +460,10 @@
             localStorage.setItem('workbook_logged_in', 'true');
             localStorage.setItem('workbook_access_code', codeInput);
             localStorage.setItem('workbook_course_code', result.courseCode);
+            localStorage.setItem('workbook_file_address', result.fileAddress || '');
             closeEntranceModal();
           } else {
-            showModalError(result.message || "유효하지 않은 입장 코드입니다.");
+            showModalError(result.message || "유효하지 않은 개인접속코드입니다.");
           }
         } catch (err) {
           showModalError("네트워크 오류가 발생했습니다. 구글 앱스 스크립트 배포 상태와 CORS 구성을 확인해 주세요.");

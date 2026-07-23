@@ -196,7 +196,7 @@
             <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75v4.5m0-4.5h-4.5m4.5 0L15 9m5.25 11.25v-4.5m0 4.5h-4.5m4.5 0L15 15"></path>
           </svg>
         </button>
-        <a href="https://workingai-nine.vercel.app/download/multicampus_0722.pdf" download class="inline-flex items-center gap-1.5 px-3.5 h-9 bg-brand-500 hover:bg-brand-600 text-white text-xs md:text-sm font-extrabold rounded-lg transition-all shadow-xs focus:outline-none">
+        <a id="download-btn" href="https://workingai-nine.vercel.app/download/multicampus_0722.pdf" download class="inline-flex items-center gap-1.5 px-3.5 h-9 bg-brand-500 hover:bg-brand-600 text-white text-xs md:text-sm font-extrabold rounded-lg transition-all shadow-xs focus:outline-none">
           <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"></path>
           </svg>
@@ -225,12 +225,12 @@
         <div class="bg-neutral-950 p-4 rounded-xl border border-neutral-800 text-left mb-6">
           <p class="text-xs font-bold text-brand-500 mb-1">💡 해결 방법:</p>
           <p class="text-xs text-neutral-400 leading-relaxed">
-            아래 버튼을 클릭하여 <code class="text-white font-mono">download/multicampus_0722.pdf</code> 파일을 한 번만 선택해 주시면 보안 제약 없이 즉시 한 페이지씩 감상하실 수 있습니다.
+            아래 버튼을 클릭하여 <code id="fallback-filename-code" class="text-white font-mono">download/multicampus_0722.pdf</code> 파일을 한 번만 선택해 주시면 보안 제약 없이 즉시 한 페이지씩 감상하실 수 있습니다.
           </p>
         </div>
         
         <input type="file" id="local-file-input" accept=".pdf" class="hidden" onchange="handleLocalFile(event)">
-        <button onclick="document.getElementById('local-file-input').click()" class="w-full h-11 bg-brand-500 hover:bg-brand-600 text-white text-sm font-extrabold rounded-lg transition-all shadow-sm">
+        <button id="fallback-filename-btn" onclick="document.getElementById('local-file-input').click()" class="w-full h-11 bg-brand-500 hover:bg-brand-600 text-white text-sm font-extrabold rounded-lg transition-all shadow-sm">
           교안 파일 선택하기 (multicampus_0722.pdf)
         </button>
       </div>
@@ -316,7 +316,22 @@
     const pageInput = document.getElementById('page-input');
 
     // Load PDF Document
-    pdfjsLib.getDocument('https://workingai-nine.vercel.app/download/multicampus_0722.pdf').promise.then(pdf => {
+    const pdfUrl = localStorage.getItem('workbook_file_address') || 'https://workingai-nine.vercel.app/download/multicampus_0722.pdf';
+    const fileName = pdfUrl.split('/').pop();
+    
+    // Set dynamic download button link
+    const downloadBtn = document.getElementById('download-btn');
+    if (downloadBtn) {
+      downloadBtn.setAttribute('href', pdfUrl);
+    }
+
+    // Set fallback overlay text dynamically
+    const fallbackCode = document.getElementById('fallback-filename-code');
+    const fallbackBtn = document.getElementById('fallback-filename-btn');
+    if (fallbackCode) fallbackCode.textContent = 'download/' + fileName;
+    if (fallbackBtn) fallbackBtn.textContent = '교안 파일 선택하기 (' + fileName + ')';
+
+    pdfjsLib.getDocument(pdfUrl).promise.then(pdf => {
       initPDF(pdf);
     }).catch(err => {
       console.error('PDF Load Error:', err);
