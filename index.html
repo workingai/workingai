@@ -374,6 +374,12 @@
           <input type="password" id="input-pwd" placeholder="클래스 ID를 입력하세요" class="w-full h-11 border border-neutral-200 rounded-xl px-4 text-sm font-bold text-center focus:border-brand-500 focus:outline-none">
         </div>
 
+        <!-- 4. Admin Password Input (Shown only for jhchoi when no local cache is found) -->
+        <div id="admin-pwd-container" class="transition-all duration-300 hidden">
+          <label class="text-xs font-bold text-red-500 mb-1.5 block">이 ID는 Admin입니다. 별도의 패스워드를 입력하세요</label>
+          <input type="password" id="input-admin-pwd" placeholder="어드민 비밀번호를 입력하세요" class="w-full h-11 border border-red-200 rounded-xl px-4 text-sm font-bold text-center focus:border-red-500 focus:outline-none">
+        </div>
+
         <button id="modal-submit-btn" onclick="handleEntrance()" class="w-full h-11 bg-brand-500 hover:bg-brand-600 text-white text-sm font-extrabold rounded-xl transition-all shadow-sm flex items-center justify-center gap-2">
           <svg id="btn-spinner" class="w-4 h-4 animate-spin hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
             <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
@@ -456,6 +462,8 @@
       document.getElementById('input-pwd').value = "";
       document.getElementById('input-login-code').value = "";
       document.getElementById('checkbox-first-visit').checked = false;
+      document.getElementById('admin-pwd-container').classList.add('hidden');
+      document.getElementById('input-admin-pwd').value = "";
       toggleFirstVisitInput();
     }
 
@@ -490,7 +498,7 @@
     // Combined Entrance handler (Normal login or First-time registration)
     async function handleEntrance() {
       const codeInput = document.getElementById('input-login-code').value.trim();
-      const firstVisit = document.getElementById('checkbox-first-visit').checked;
+      let firstVisit = document.getElementById('checkbox-first-visit').checked;
       
       const submitBtn = document.getElementById('modal-submit-btn');
       const spinner = document.getElementById('btn-spinner');
@@ -525,8 +533,28 @@
         const isLocalCached = (localStorage.getItem('workbook_access_code') && localStorage.getItem('workbook_access_code').toLowerCase() === "jhchoi") ||
                               (localStorage.getItem('jhchoi_master_bypass') === "true");
         if (!isLocalCached) {
-          showModalError("이 ID로는 접속할 수 없습니다.");
-          return;
+          const adminPwdContainer = document.getElementById('admin-pwd-container');
+          const adminPwdInput = document.getElementById('input-admin-pwd');
+          
+          if (adminPwdContainer.classList.contains('hidden')) {
+            // 어드민 비밀번호 입력창 노출 및 진행 차단
+            adminPwdContainer.classList.remove('hidden');
+            adminPwdInput.focus();
+            showModalError("이 ID는 Admin입니다. 별도의 패스워드를 입력하세요.");
+            return;
+          } else {
+            // 어드민 비밀번호 검증
+            const adminPwd = adminPwdInput.value.trim();
+            if (adminPwd !== "admin123!") {
+              showModalError("어드민 비밀번호가 일치하지 않습니다.");
+              adminPwdInput.focus();
+              return;
+            }
+            // 비밀번호 일치 시 바이패스 및 중복가입 방지를 위해 일반 로그인(GET)으로 강제 전환
+            localStorage.setItem('jhchoi_master_bypass', 'true');
+            document.getElementById('checkbox-first-visit').checked = false;
+            firstVisit = false;
+          }
         }
       }
 
