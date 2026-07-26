@@ -1,7 +1,7 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
-  <link rel="icon" href="../favicon.png" type="image/png">
+  <link rel="icon" href="../favicon.png?v=2" type="image/png">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>노트북LM 슬라이드 플래너</title>
@@ -9,6 +9,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Pretendard Font -->
   <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+  <link rel="stylesheet" href="../global.css">
   <!-- IBM Plex Mono Font -->
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
   <script>
@@ -198,10 +199,10 @@
       <header class="mb-4 flex-shrink-0 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
         <div>
           <div class="mb-2">
-            <span class="inline-block bg-brand-500 text-white rounded-full px-4 py-1 text-[11.5px] font-mono font-extrabold tracking-wider uppercase">Notebook LM</span>
+            <span class="inline-block bg-brand-500 text-white rounded-full px-4 py-1 text-[11.5px] font-mono font-extrabold tracking-wider uppercase">Gemini Notebook</span>
           </div>
           <h1 id="header-title" class="text-2xl md:text-3xl font-extrabold tracking-tight leading-tight text-neutral-900">
-            구글 NotebookLM 시작하기
+            제미나이 Notebook 시작하기
           </h1>
         </div>
         <!-- Navigation buttons in header -->
@@ -222,17 +223,11 @@
         <!-- Card Head -->
         <div id="card-head-container" class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#DDDBD5] pb-4 mb-4 flex-shrink-0">
           <div>
-            <h2 id="tool-title" class="text-lg md:text-xl font-extrabold text-neutral-900">구글 NotebookLM 개요</h2>
+            <h2 id="tool-title" class="text-lg md:text-xl font-extrabold text-neutral-900">제미나이 Notebook 개요</h2>
             <p id="tool-desc" class="text-xs md:text-sm text-[#605E59] mt-1">나만의 다양한 소스 파일을 업로드하고 인공지능을 이용해 교차 분석 및 핵심 요약을 생성하는 똑똑한 학습/연구용 노트입니다.</p>
           </div>
           <div class="flex items-center gap-2 flex-shrink-0" id="card-links">
             <a id="link-notebook" href="https://notebooklm.google/" target="_blank" class="hidden" style="display: none !important;"></a>
-            <a id="link-youtube" href="https://youtu.be/_La55mgUv4M" target="_blank" class="px-4 h-9 border border-[#DDDBD5] bg-white hover:bg-neutral-50 text-neutral-900 text-xs md:text-sm font-bold rounded-lg transition-all shadow-xs flex items-center justify-center gap-1.5 focus:outline-none" style="text-decoration: none;">
-              <svg class="w-3.5 h-3.5 text-red-600 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path d="M23.498 6.163a3.003 3.003 0 0 0-2.11-2.108C19.524 3.545 12 3.545 12 3.545s-7.525 0-9.387.51A3.004 3.004 0 0 0 .502 6.163C0 8.025 0 12 0 12s0 3.975.502 5.837a3.003 3.003 0 0 0 2.11 2.108c1.862.51 9.387.51 9.387.51s7.525 0 9.387-.51a3.004 3.004 0 0 0 2.11-2.108C24 15.975 24 12 24 12s0-3.975-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
-              </svg>
-              유튜브 가이드
-            </a>
             <a id="link-template-download" href="https://prompt-makers.vercel.app/download/master_template.pdf" target="_blank" class="hidden px-4 h-9 border border-[#DDDBD5] bg-white hover:bg-neutral-50 text-neutral-900 text-xs md:text-sm font-bold rounded-lg transition-all shadow-xs flex items-center justify-center gap-1.5 focus:outline-none" style="text-decoration: none;">
               <svg class="w-3.5 h-3.5 text-neutral-600" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"></path>
@@ -243,7 +238,7 @@
               <svg class="w-3.5 h-3.5 text-neutral-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"></path>
               </svg>
-              공유노트북LM 바로가기
+              공유 제미나이 Notebook 바로가기
             </a>
             <a id="link-claude" href="https://claude.ai/" target="_blank" class="hidden px-4 h-9 border border-[#DDDBD5] hover:border-orange-500 bg-white hover:bg-orange-50 text-neutral-900 hover:text-orange-700 font-bold text-xs md:text-sm rounded-lg transition-all shadow-xs flex items-center justify-center gap-1.5 focus:outline-none" style="text-decoration: none;">
               <svg class="w-3.5 h-3.5 text-neutral-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -292,12 +287,20 @@
           <!-- Call To Action (Go to NotebookLM) -->
           <div class="bg-neutral-50 border border-neutral-200/80 rounded-xl p-6 flex flex-col sm:flex-row items-center justify-between gap-4 mt-2">
             <div class="flex flex-col gap-1 text-center sm:text-left">
-              <h4 class="text-sm md:text-base font-extrabold text-neutral-900">지금 바로 NotebookLM을 시작해보세요</h4>
+              <h4 class="text-sm md:text-base font-extrabold text-neutral-900">지금 바로 제미나이 Notebook을 시작해보세요</h4>
               <p class="text-xs text-neutral-500 font-medium">구글 계정만 있다면 누구나 무료로 강력한 AI 연구실을 만들 수 있습니다.</p>
             </div>
-            <a href="https://notebooklm.google/" target="_blank" class="flex-shrink-0 inline-flex items-center gap-1.5 px-4 h-10 bg-brand-500 hover:bg-brand-600 text-white font-extrabold text-xs md:text-sm rounded-lg transition-all shadow-xs" style="text-decoration: none;">
-              🚀 NotebookLM 홈페이지 이동
-            </a>
+            <div class="flex items-center gap-2 flex-shrink-0">
+              <a href="https://youtu.be/_La55mgUv4M" target="_blank" class="inline-flex items-center gap-1.5 px-4 h-10 border border-[#DDDBD5] bg-white hover:bg-neutral-50 text-neutral-900 font-extrabold text-xs md:text-sm rounded-lg transition-all shadow-xs" style="text-decoration: none;">
+                <svg class="w-3.5 h-3.5 text-red-600 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M23.498 6.163a3.003 3.003 0 0 0-2.11-2.108C19.524 3.545 12 3.545 12 3.545s-7.525 0-9.387.51A3.004 3.004 0 0 0 .502 6.163C0 8.025 0 12 0 12s0 3.975.502 5.837a3.003 3.003 0 0 0 2.11 2.108c1.862.51 9.387.51 9.387.51s7.525 0 9.387-.51a3.004 3.004 0 0 0 2.11-2.108C24 15.975 24 12 24 12s0-3.975-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                </svg>
+                유튜브 가이드
+              </a>
+              <a href="https://notebooklm.google/" target="_blank" class="inline-flex items-center gap-1.5 px-4 h-10 bg-brand-500 hover:bg-brand-600 text-white font-extrabold text-xs md:text-sm rounded-lg transition-all shadow-xs" style="text-decoration: none;">
+                🚀 제미나이 Notebook 홈페이지 이동
+              </a>
+            </div>
           </div>
         </div>
 
@@ -309,7 +312,7 @@
             <div class="border border-[#DDDBD5] rounded-xl bg-white overflow-hidden shadow-xs flex flex-col h-full">
               <div class="p-4 pb-2.5 bg-brand-50 border-b border-[#DDDBD5] flex-shrink-0">
                 <strong class="block text-neutral-900 text-base font-extrabold mb-1">🎬 오버뷰 영상 예시</strong>
-                <span class="block text-[#605E59] text-xs leading-tight">노트북LM에서 추출한 대본으로 완성된 가이드 영상입니다.</span>
+                <span class="block text-[#605E59] text-xs leading-tight">제미나이 Notebook에서 추출한 대본으로 완성된 가이드 영상입니다.</span>
               </div>
               <div class="p-4 flex-grow flex items-center justify-center bg-neutral-50/50">
                 <div class="w-full aspect-video rounded-xl overflow-hidden border border-neutral-200 shadow-sm bg-black">
@@ -355,7 +358,7 @@
               <article class="card transition-all duration-300 lg:col-span-4" id="step1-card">
                 <div class="card-head flex flex-col cursor-pointer select-none" style="padding: 16px 20px !important; gap: 4px !important;" onclick="setActiveStep(1)">
                   <h2 id="step1-title" class="text-base font-extrabold text-neutral-900 flex items-center gap-2 m-0" style="margin-bottom: 0px !important;">📝 Step I. 목차 설계</h2>
-                  <p id="step1-desc" class="text-xs text-neutral-500 m-0" style="margin-top: 0px !important;">노트북LM에 현재 등록된 소스를 토대로 목차 구성을 지시합니다.</p>
+                  <p id="step1-desc" class="text-xs text-neutral-500 m-0" style="margin-top: 0px !important;">제미나이 Notebook에 현재 등록된 소스를 토대로 목차 구성을 지시합니다.</p>
                 </div>
 
                 <div id="step1-body" class="card-body flex-grow flex flex-col gap-4">
@@ -430,16 +433,16 @@
                   <div class="flex flex-col gap-4 mt-2 flex-grow">
                     <!-- Step 3 Description label -->
                     <p class="text-sm font-bold text-neutral-800 leading-relaxed text-center">
-                      💡 최종 프롬프트를 수정한 뒤 노트북LM에서 슬라이드 생성을 요청합니다.
+                      💡 최종 프롬프트를 수정한 뒤 제미나이 Notebook에서 슬라이드 생성을 요청합니다.
                     </p>
 
                     <!-- Flowchart Container -->
                     <div class="flex flex-col md:flex-row items-stretch justify-between gap-3 my-4 bg-neutral-50 p-4 rounded-xl border border-neutral-200">
                       <!-- Box 1 -->
-                      <div class="flex-1 flex flex-col items-center justify-center text-center p-3 bg-white border border-[#DDDBD5] rounded-lg shadow-2xs">
+                      <div class="flex-grow flex flex-col items-center justify-center text-center p-3 bg-white border border-[#DDDBD5] rounded-lg shadow-2xs">
                         <span class="text-xs font-bold text-brand-600 mb-1">Step I</span>
                         <span class="text-xs font-extrabold text-neutral-900">목차 설계 복사</span>
-                        <span class="text-[10px] text-neutral-500 mt-1">노트북LM에 입력</span>
+                        <span class="text-[10px] text-neutral-500 mt-1">제미나이 Notebook에 입력</span>
                       </div>
                       
                       <!-- Arrow -->
@@ -498,14 +501,24 @@
 
   <script>
   let activeStep = 1;
-  const contentRequest = `업로드된 소스 파일을 분석하여, 경영진 대상 프레젠테이션용 슬라이드 구성안(목차 및 슬라이드별 핵심 내용)을 작성해줘. 
+  const contentRequest = `업로드된 소스를 바탕으로 경영진 보고용 슬라이드 구성안을 만들어줘.
 
-요구 조건:
-1. 전체 분량은 5~7개 슬라이드 내외로 구성해줘.
-2. 각 슬라이드는 [슬라이드 번호. 슬라이드 제목], [핵심 메시지], [세부 내용 구성]을 순서대로 명확히 포함해야 해.
-3. [핵심 메시지]는 1~2문장의 명확한 문장으로 결론부터 제시해줘.
-4. [세부 내용 구성]은 3~4개의 핵심 항목으로 구성하고, 각 항목마다 구체적인 데이터(수치, 사례)나 근거가 들어갈 자리를 표시하거나 소스 파일의 내용을 기반으로 채워줘.
-5. 경영진이 직관적으로 빠르게 이해할 수 있도록 간결하고 격식 있는 비즈니스 톤으로 써줘.`;
+[전체 구성]
+- 전체 슬라이드 수:
+- 핵심 메시지 한 줄:
+
+[슬라이드별 구성]
+슬라이드 번호 — 제목
+- 핵심 메시지:
+- 핵심 내용 또는 수치:
+- 추천 시각화:
+
+원칙:
+- 표지에는 주제·기준 시점·핵심 메시지만
+- 정량 성과는 차트·숫자 카드로 표현
+- 인사이트는 3개 이내 카드형 구조
+- 마지막은 실행계획 또는 핵심 메시지 재요약
+- 마크다운 사용 금지`;
 
   const designRequest = `내가 작성한 슬라이드 구성안(목차 및 내용)을 읽고, 다음 디자인 템플릿의 가이드에 맞추어 슬라이드별 최적의 '시각 구조 및 디자인 가이드'를 작성해줘.
 
@@ -594,8 +607,8 @@
     document.getElementById('card-head-container').classList.remove('hidden');
     
     // Update header
-    document.getElementById('header-title').textContent = "구글 NotebookLM 시작하기";
-    document.getElementById('tool-title').textContent = "구글 NotebookLM 개요";
+    document.getElementById('header-title').textContent = "제미나이 Notebook 시작하기";
+    document.getElementById('tool-title').textContent = "제미나이 Notebook 개요";
     document.getElementById('tool-desc').textContent = "나만의 다양한 소스 파일을 업로드하고 인공지능을 이용해 교차 분석 및 핵심 요약을 생성하는 똑똑한 학습/연구용 노트입니다.";
     
     // Update tab button classes
@@ -608,7 +621,6 @@
 
     // Manage link buttons visibility in header card-links
     document.getElementById('link-notebook').classList.remove('hidden');
-    document.getElementById('link-youtube').classList.add('hidden');
     document.getElementById('shared-notebook-link').classList.add('hidden');
     document.getElementById('link-template-download').classList.add('hidden');
     document.getElementById('link-claude').classList.add('hidden');
@@ -638,7 +650,6 @@
 
     // Manage link buttons visibility
     document.getElementById('link-notebook').classList.remove('hidden');
-    document.getElementById('link-youtube').classList.remove('hidden');
     document.getElementById('shared-notebook-link').classList.remove('hidden');
     document.getElementById('link-template-download').classList.add('hidden');
     document.getElementById('link-claude').classList.add('hidden');
@@ -650,13 +661,13 @@
     document.getElementById('video-overview-container').classList.add('hidden');
     document.getElementById('slide-planner-container').classList.remove('hidden');
     
-    // Hide card-head-container for clean direct layout
-    document.getElementById('card-head-container').classList.add('hidden');
+    // Show card-head-container
+    document.getElementById('card-head-container').classList.remove('hidden');
     
     // Update header
-    document.getElementById('header-title').textContent = "노트북LM에서 슬라이드 제작하기";
-    document.getElementById('tool-title').textContent = "노트북LM에서 목차 및 디자인 가이드 생성";
-    document.getElementById('tool-desc').textContent = "각 단계의 요청문을 노트북LM에 입력한 후, 반환된 목차 구성안과 디자인 가이드를 기록해 합쳐진 프롬프트를 완성합니다.";
+    document.getElementById('header-title').textContent = "제미나이 Notebook에서 슬라이드 제작하기";
+    document.getElementById('tool-title').textContent = "목차와 디자인 가이드로 슬라이드를 만들 수 있습니다.";
+    document.getElementById('tool-desc').textContent = "아래의 순서에 따라 목차를 구성하고 디자인 가이드를 입력해서 원하는 슬라이드를 완성해 보세요.";
     
     // Update tab button classes
     const tabi = document.getElementById('btn-tab-i');
@@ -668,7 +679,6 @@
 
     // Manage link buttons visibility
     document.getElementById('link-notebook').classList.add('hidden');
-    document.getElementById('link-youtube').classList.add('hidden');
     document.getElementById('shared-notebook-link').classList.remove('hidden');
     document.getElementById('link-template-download').classList.remove('hidden');
     document.getElementById('link-claude').classList.remove('hidden');

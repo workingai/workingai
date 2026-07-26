@@ -21,6 +21,9 @@
   document.head.appendChild(style);
 })();
 
+// 모든 페이지 마우스 우클릭 방지
+document.addEventListener('contextmenu', event => event.preventDefault());
+
 document.addEventListener('DOMContentLoaded', () => {
   const placeholder = document.getElementById('navbar-placeholder');
   if (!placeholder) {

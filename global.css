@@ -1,0 +1,41 @@
+/* global.css */
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css");
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&display=swap");
+
+/* Base styling based on 02_prompt.html */
+body {
+  font-family: 'Pretendard', -apple-system, sans-serif !important;
+  background-color: #F2F1EE !important;
+}
+
+/* Custom scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px !important;
+  height: 6px !important;
+}
+
+::-webkit-scrollbar-track {
+  background: #F2F1EE !important;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #DDDBD5 !important;
+  border-radius: 4px !important;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #B0AEA8 !important;
+}
+
+/* Force consistency on sidebar fonts & styling */
+aside, aside * {
+  font-family: 'Pretendard', -apple-system, sans-serif !important;
+}
+
+aside a {
+  font-size: 14px !important; /* text-sm equivalent */
+}
+
+aside p {
+  font-size: 11px !important; /* text-[11px] equivalent */
+}
