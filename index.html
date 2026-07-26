@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Working AI - 현업에 바로 적용하는 AI 실습 워크숍</title>
-  <link rel="icon" href="favicon.png" type="image/png">
+  <link rel="icon" href="favicon.png?v=2" type="image/png">
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Pretendard Font -->
@@ -409,6 +409,14 @@
 
     let pendingRedirectUrl = "";
 
+    function saveLoginCode(code) {
+      localStorage.setItem('workbook_logged_in', 'true');
+      localStorage.setItem('workbook_access_code', code);
+      if (code.toLowerCase() === "jhchoi") {
+        localStorage.setItem('jhchoi_master_bypass', 'true');
+      }
+    }
+
     function toggleMobileMenu() {
       const menu = document.getElementById('mobile-menu');
       menu.classList.toggle('hidden');
@@ -512,6 +520,15 @@
         return;
       }
 
+      if (codeInput.toLowerCase() === "jhchoi") {
+        const isLocalCached = (localStorage.getItem('workbook_access_code') && localStorage.getItem('workbook_access_code').toLowerCase() === "jhchoi") ||
+                              (localStorage.getItem('jhchoi_master_bypass') === "true");
+        if (!isLocalCached) {
+          showModalError("이 ID로는 접속할 수 없습니다.");
+          return;
+        }
+      }
+
       if (firstVisit) {
         // [Flow 1] First visit registration: requires "ID" (workingai)
         const pwdInput = document.getElementById('input-pwd').value.trim();
@@ -524,8 +541,7 @@
 
         if (!GAS_API_URL || GAS_API_URL.includes("YOUR_DEPLOYED_GAS_URL")) {
           console.warn("GAS_API_URL이 설정되지 않아 로컬 테스트용 코드로 진행합니다.");
-          localStorage.setItem('workbook_logged_in', 'true');
-          localStorage.setItem('workbook_access_code', codeInput);
+          saveLoginCode(codeInput);
           
           document.getElementById('modal-login-form').classList.add('hidden');
           document.getElementById('modal-success-screen').classList.remove('hidden');
@@ -548,8 +564,7 @@
           const result = await response.json();
           
           if (result.success) {
-            localStorage.setItem('workbook_logged_in', 'true');
-            localStorage.setItem('workbook_access_code', codeInput);
+            saveLoginCode(codeInput);
             localStorage.setItem('workbook_course_code', result.courseCode);
             localStorage.setItem('workbook_file_address', result.fileAddress || '');
 
@@ -562,8 +577,7 @@
           }
         } catch (err) {
           console.warn("구글 시트 통신 실패, 로컬 캐시 모드로 강제 진입 처리합니다.", err);
-          localStorage.setItem('workbook_logged_in', 'true');
-          localStorage.setItem('workbook_access_code', codeInput);
+          saveLoginCode(codeInput);
           
           document.getElementById('modal-login-form').classList.add('hidden');
           document.getElementById('modal-success-screen').classList.remove('hidden');
@@ -576,8 +590,7 @@
         // [Flow 2] Regular Login: verify existing code
         if (!GAS_API_URL || GAS_API_URL.includes("YOUR_DEPLOYED_GAS_URL")) {
           console.warn("GAS_API_URL이 설정되지 않아 로컬 테스트용 코드로 진행합니다.");
-          localStorage.setItem('workbook_logged_in', 'true');
-          localStorage.setItem('workbook_access_code', codeInput);
+          saveLoginCode(codeInput);
           closeEntranceModal();
           return;
         }
@@ -590,8 +603,7 @@
           const result = await response.json();
           
           if (result.success) {
-            localStorage.setItem('workbook_logged_in', 'true');
-            localStorage.setItem('workbook_access_code', codeInput);
+            saveLoginCode(codeInput);
             localStorage.setItem('workbook_course_code', result.courseCode);
             localStorage.setItem('workbook_file_address', result.fileAddress || '');
             closeEntranceModal();
