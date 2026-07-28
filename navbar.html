@@ -40,12 +40,27 @@
     </button>
   </div>
   
-  <!-- Mobile Navigation Drawer / Dropdown Menu -->
-  <div id="mobile-menu" class="hidden md:hidden border-t border-neutral-200 bg-white px-6 py-4 flex flex-col gap-3 text-sm font-bold shadow-sm">
-    <a href="mulcam01.html" class="text-neutral-700 hover:text-brand-500 transition-colors py-1.5">직장인 AI</a>
-    <a href="#" class="text-neutral-700 hover:text-brand-500 transition-colors py-1.5">마케터 AI</a>
-    <a href="#" class="text-neutral-700 hover:text-brand-500 transition-colors py-1.5">구글 AI</a>
-    <button id="mobile-login-btn" class="w-full h-10 border border-neutral-200 text-neutral-700 hover:text-brand-500 rounded-lg text-center font-extrabold transition-colors mt-2">로그인</button>
-    <button id="mobile-logout-btn" class="w-full h-10 border border-neutral-200 text-neutral-400 hover:text-red-500 rounded-lg text-center font-bold hidden transition-colors mt-2">로그아웃</button>
+  <!-- Overlay Backdrop -->
+  <div id="mobile-menu-backdrop" class="hidden fixed inset-0 bg-black/40 z-40 transition-opacity duration-300 opacity-0" onclick="toggleMobileMenu()"></div>
+  
+  <!-- Mobile Navigation Drawer (Sidebar Drawer from Left) -->
+  <div id="mobile-menu" class="fixed top-0 left-0 h-full w-64 bg-white z-50 shadow-2xl transition-transform duration-300 transform -translate-x-full flex flex-col p-6 gap-4 text-sm font-bold">
+    <!-- Header with Close Button -->
+    <div class="flex items-center justify-between border-b border-neutral-100 pb-4 mb-2">
+      <span class="text-neutral-900 font-extrabold text-base">전체 메뉴</span>
+      <button class="p-1 text-neutral-500 hover:text-brand-500 focus:outline-none" onclick="toggleMobileMenu()">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+    </div>
+    
+    <!-- Links -->
+    <a href="mulcam01.html" class="text-neutral-700 hover:text-brand-500 transition-colors py-2 border-b border-neutral-50/80">직장인 AI</a>
+    <a href="#" class="text-neutral-700 hover:text-brand-500 transition-colors py-2 border-b border-neutral-50/80">마케터 AI</a>
+    <a href="#" class="text-neutral-700 hover:text-brand-500 transition-colors py-2 border-b border-neutral-50/80">구글 AI</a>
+    
+    <button id="mobile-login-btn" class="w-full h-11 border border-neutral-200 text-neutral-700 hover:text-brand-500 rounded-xl text-center font-extrabold transition-colors mt-auto">로그인</button>
+    <button id="mobile-logout-btn" class="w-full h-11 border border-neutral-200 text-neutral-400 hover:text-red-500 rounded-xl text-center font-bold hidden transition-colors mt-auto">로그아웃</button>
   </div>
 </nav>

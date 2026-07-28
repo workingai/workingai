@@ -99,10 +99,36 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-// 모바일 햄버거 메뉴 토글 기능 정의
+// 모바일/세로 햄버거 메뉴 토글 기능 정의 (왼쪽에서 슬라이딩되는 드로어 방식)
 window.toggleMobileMenu = () => {
   const menu = document.getElementById('mobile-menu');
-  if (menu) menu.classList.toggle('hidden');
+  const backdrop = document.getElementById('mobile-menu-backdrop');
+  if (menu && backdrop) {
+    const isClosed = menu.classList.contains('-translate-x-full');
+    if (isClosed) {
+      // 열기
+      backdrop.classList.remove('hidden');
+      // 브라우저가 display 변경을 반영한 후 트랜지션이 시작되도록 함
+      requestAnimationFrame(() => {
+        menu.classList.remove('-translate-x-full');
+        backdrop.classList.remove('opacity-0');
+        backdrop.classList.add('opacity-100');
+      });
+    } else {
+      // 닫기
+      menu.classList.add('-translate-x-full');
+      backdrop.classList.remove('opacity-100');
+      backdrop.classList.add('opacity-0');
+      
+      // 트랜지션 완료 후 backdrop 숨김 (300ms)
+      setTimeout(() => {
+        // 이미 그 사이에 열리지 않았는지 더블체크
+        if (menu.classList.contains('-translate-x-full')) {
+          backdrop.classList.add('hidden');
+        }
+      }, 300);
+    }
+  }
 };
 
 function initNavbar(isSubdir) {
