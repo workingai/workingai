@@ -15,7 +15,10 @@
   const style = document.createElement('style');
   style.id = '__navbar-preload-style';
   style.textContent = [
-    'body{opacity:0;transition:opacity 0.2s ease;}',
+    'html{overflow-x:hidden;}',
+    'body{opacity:0;transition:opacity 0.2s ease, transform 0.3s ease-in-out;overflow-x:hidden;position:relative;}',
+    'body.menu-open{transform: translateX(-256px);}',
+    'body.menu-open #mobile-menu-backdrop{transform: translateX(256px);}',
     '#navbar-placeholder{min-height:64px;}',
   ].join('');
   document.head.appendChild(style);
@@ -36,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const prefix = isSubdir ? '../' : '';
 
   // 2. 공통 navbar.html 로드 (캐시 방지를 위해 버전 쿼리 추가)
-  fetch(prefix + 'navbar.html?v=4')
+  fetch(prefix + 'navbar.html?v=5')
     .then(res => {
       if (!res.ok) throw new Error('Navbar load error');
       return res.text();
@@ -99,31 +102,28 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-// 모바일/세로 햄버거 메뉴 토글 기능 정의 (오른쪽에서 슬라이딩되는 드로어 방식)
+// 모바일/세로 햄버거 메뉴 토글 기능 정의 (화면이 왼쪽으로 밀리며 오른쪽에서 드로어가 나타나는 방식)
 window.toggleMobileMenu = () => {
-  const menu = document.getElementById('mobile-menu');
   const backdrop = document.getElementById('mobile-menu-backdrop');
-  if (menu && backdrop) {
-    const isClosed = menu.classList.contains('translate-x-full');
+  if (backdrop) {
+    const isClosed = !document.body.classList.contains('menu-open');
     if (isClosed) {
       // 열기
       backdrop.classList.remove('hidden');
-      // 브라우저가 display 변경을 반영한 후 트랜지션이 시작되도록 함
       requestAnimationFrame(() => {
-        menu.classList.remove('translate-x-full');
+        document.body.classList.add('menu-open');
         backdrop.classList.remove('opacity-0');
         backdrop.classList.add('opacity-100');
       });
     } else {
       // 닫기
-      menu.classList.add('translate-x-full');
+      document.body.classList.remove('menu-open');
       backdrop.classList.remove('opacity-100');
       backdrop.classList.add('opacity-0');
       
       // 트랜지션 완료 후 backdrop 숨김 (300ms)
       setTimeout(() => {
-        // 이미 그 사이에 열리지 않았는지 더블체크
-        if (menu.classList.contains('translate-x-full')) {
+        if (!document.body.classList.contains('menu-open')) {
           backdrop.classList.add('hidden');
         }
       }, 300);
