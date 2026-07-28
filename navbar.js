@@ -16,10 +16,14 @@
   style.id = '__navbar-preload-style';
   style.textContent = [
     'html{overflow-x:hidden;}',
-    'body{opacity:0;transition:opacity 0.2s ease, transform 0.3s ease-in-out;overflow-x:hidden;position:relative;}',
-    'body.menu-open{transform: translateX(-256px);}',
-    'body.menu-open #mobile-menu-backdrop{transform: translateX(256px);}',
+    'body{opacity:0;transition:opacity 0.2s ease, transform 0.3s ease-in-out;overflow-x:hidden;}',
+    'body.menu-open{transform:translateX(-256px);}',
     '#navbar-placeholder{min-height:64px;}',
+    // 드로어 & 백드롭은 <html> 직속으로 이동되므로 body transform에 영향 받지 않음
+    '#mobile-menu-backdrop{position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:110;opacity:0;transition:opacity 0.3s ease;pointer-events:none;}',
+    '#mobile-menu-backdrop.active{opacity:1;pointer-events:auto;}',
+    '#mobile-menu{position:fixed;top:0;right:0;height:100%;width:256px;background:#fff;z-index:120;box-shadow:-4px 0 24px rgba(0,0,0,0.12);transform:translateX(100%);transition:transform 0.3s ease-in-out;display:flex;flex-direction:column;padding:24px;gap:16px;font-size:14px;font-weight:700;}',
+    '#mobile-menu.open{transform:translateX(0);}',
   ].join('');
   document.head.appendChild(style);
 })();
@@ -39,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const prefix = isSubdir ? '../' : '';
 
   // 2. 공통 navbar.html 로드 (캐시 방지를 위해 버전 쿼리 추가)
-  fetch(prefix + 'navbar.html?v=7')
+  fetch(prefix + 'navbar.html?v=8')
     .then(res => {
       if (!res.ok) throw new Error('Navbar load error');
       return res.text();
@@ -56,6 +60,14 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       placeholder.innerHTML = processedHtml;
+
+      // ★ 핵심: 드로어와 백드롭을 <html> 직속 자식으로 이동
+      // body에 transform이 적용되면 fixed 요소의 기준이 body로 바뀌므로,
+      // <html> 직속으로 이동시켜 뷰포트 기준 고정을 유지합니다.
+      const drawer = document.getElementById('mobile-menu');
+      const backdrop = document.getElementById('mobile-menu-backdrop');
+      if (drawer) document.documentElement.appendChild(drawer);
+      if (backdrop) document.documentElement.appendChild(backdrop);
 
       // index 페이지를 제외한 나머지 메뉴에서 상단 네비게이션을 좌우 끝으로 정렬 (로고 왼쪽 정렬) 및 메뉴 간소화
       const pathname = window.location.pathname;
@@ -79,12 +91,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (hamburgerBtn) {
           hamburgerBtn.classList.remove('md:hidden');
         }
-
-        // 4. 모바일 메뉴(더보기 메뉴)가 데스크톱에서도 표시되도록 md:hidden 제거
-        const mobileMenu = document.getElementById('mobile-menu');
-        if (mobileMenu) {
-          mobileMenu.classList.remove('md:hidden');
-        }
       }
 
       // navbar 삽입 완료 후 body 페이드인
@@ -102,33 +108,25 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-// 모바일/세로 햄버거 메뉴 토글 기능 정의 (화면이 왼쪽으로 밀리며 오른쪽에서 드로어가 나타나는 방식)
+// 더보기 메뉴 토글 (화면이 왼쪽으로 밀리며 오른쪽에서 드로어가 나타나는 방식)
 window.toggleMobileMenu = () => {
   const menu = document.getElementById('mobile-menu');
   const backdrop = document.getElementById('mobile-menu-backdrop');
-  if (menu && backdrop) {
-    const isClosed = !document.body.classList.contains('menu-open');
-    if (isClosed) {
-      // 열기
-      backdrop.classList.remove('hidden');
-      requestAnimationFrame(() => {
-        document.body.classList.add('menu-open');
-        backdrop.classList.remove('opacity-0');
-        backdrop.classList.add('opacity-100');
-      });
-    } else {
-      // 닫기
-      document.body.classList.remove('menu-open');
-      backdrop.classList.remove('opacity-100');
-      backdrop.classList.add('opacity-0');
-      
-      // 트랜지션 완료 후 backdrop 숨김 (300ms)
-      setTimeout(() => {
-        if (!document.body.classList.contains('menu-open')) {
-          backdrop.classList.add('hidden');
-        }
-      }, 300);
-    }
+  if (!menu || !backdrop) return;
+
+  const isOpen = document.body.classList.contains('menu-open');
+  if (!isOpen) {
+    // 열기: body를 왼쪽으로 밀고, 드로어를 오른쪽에서 슬라이드인
+    requestAnimationFrame(() => {
+      document.body.classList.add('menu-open');
+      menu.classList.add('open');
+      backdrop.classList.add('active');
+    });
+  } else {
+    // 닫기
+    document.body.classList.remove('menu-open');
+    menu.classList.remove('open');
+    backdrop.classList.remove('active');
   }
 };
 
