@@ -54,14 +54,33 @@ document.addEventListener('DOMContentLoaded', () => {
 
       placeholder.innerHTML = processedHtml;
 
-      // index 페이지를 제외한 나머지 메뉴에서 상단 네비게이션을 좌우 끝으로 정렬 (로고 왼쪽 정렬)
+      // index 페이지를 제외한 나머지 메뉴에서 상단 네비게이션을 좌우 끝으로 정렬 (로고 왼쪽 정렬) 및 메뉴 간소화
       const pathname = window.location.pathname;
       const isIndex = pathname.endsWith('index.html') || pathname.endsWith('/') || pathname === '' || pathname.includes('ws01_index.html');
       if (!isIndex) {
+        // 1. 네비게이션 컨테이너를 전체 너비로 변경
         const navContainer = placeholder.querySelector('nav > div');
         if (navContainer) {
           navContainer.classList.remove('max-w-[1200px]', 'mx-auto');
           navContainer.classList.add('max-w-full');
+        }
+
+        // 2. 데스크톱 기본 링크 숨기기
+        const desktopLinks = placeholder.querySelector('nav .hidden.md\\:flex');
+        if (desktopLinks) {
+          desktopLinks.classList.remove('md:flex');
+        }
+
+        // 3. 햄버거 버튼을 데스크톱에서도 표시
+        const hamburgerBtn = document.getElementById('nav-hamburger-btn');
+        if (hamburgerBtn) {
+          hamburgerBtn.classList.remove('md:hidden');
+        }
+
+        // 4. 모바일 메뉴(더보기 메뉴)가 데스크톱에서도 표시되도록 md:hidden 제거
+        const mobileMenu = document.getElementById('mobile-menu');
+        if (mobileMenu) {
+          mobileMenu.classList.remove('md:hidden');
         }
       }
 
