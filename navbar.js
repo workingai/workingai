@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const prefix = isSubdir ? '../' : '';
 
   // 2. 공통 navbar.html 로드 (캐시 방지를 위해 버전 쿼리 추가)
-  fetch(prefix + 'navbar.html?v=3')
+  fetch(prefix + 'navbar.html?v=4')
     .then(res => {
       if (!res.ok) throw new Error('Navbar load error');
       return res.text();

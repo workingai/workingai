@@ -1,5 +1,5 @@
 <!-- Navigation Bar -->
-<nav class="w-full bg-white/95 backdrop-blur-md border-b border-neutral-200/80 sticky top-[5px] z-40 shadow-[0_2px_8px_rgba(0,0,0,0.06)]">
+<nav class="w-full bg-white/95 backdrop-blur-md border-b border-neutral-200/80 sticky top-[5px] z-[100] shadow-[0_2px_8px_rgba(0,0,0,0.06)]">
   <div class="w-full max-w-[1200px] mx-auto px-6 h-16 flex items-center justify-between">
     <!-- Logo -->
     <a href="index.html" class="hover:opacity-90 transition-opacity flex items-center">
@@ -41,10 +41,10 @@
   </div>
   
   <!-- Overlay Backdrop -->
-  <div id="mobile-menu-backdrop" class="hidden fixed inset-0 bg-black/40 z-40 transition-opacity duration-300 opacity-0" onclick="toggleMobileMenu()"></div>
+  <div id="mobile-menu-backdrop" class="hidden fixed inset-0 bg-black/40 z-[110] transition-opacity duration-300 opacity-0" onclick="toggleMobileMenu()"></div>
   
   <!-- Mobile Navigation Drawer (Sidebar Drawer from Right) -->
-  <div id="mobile-menu" class="fixed top-0 right-0 h-full w-64 bg-white opacity-100 z-50 shadow-2xl transition-transform duration-300 transform translate-x-full flex flex-col p-6 gap-4 text-sm font-bold">
+  <div id="mobile-menu" class="fixed top-0 right-0 h-full w-64 bg-white opacity-100 z-[120] shadow-2xl transition-transform duration-300 transform translate-x-full flex flex-col p-6 gap-4 text-sm font-bold">
     <!-- Header with Close Button -->
     <div class="flex items-center justify-between border-b border-neutral-100 pb-4 mb-2">
       <span class="text-neutral-900 font-extrabold text-base">전체 메뉴</span>
