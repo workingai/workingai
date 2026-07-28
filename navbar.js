@@ -54,6 +54,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
       placeholder.innerHTML = processedHtml;
 
+      // index 페이지를 제외한 나머지 메뉴에서 상단 네비게이션을 좌우 끝으로 정렬 (로고 왼쪽 정렬)
+      const pathname = window.location.pathname;
+      const isIndex = pathname.endsWith('index.html') || pathname.endsWith('/') || pathname === '' || pathname.includes('ws01_index.html');
+      if (!isIndex) {
+        const navContainer = placeholder.querySelector('nav > div');
+        if (navContainer) {
+          navContainer.classList.remove('max-w-[1200px]', 'mx-auto');
+          navContainer.classList.add('max-w-full');
+        }
+      }
+
       // navbar 삽입 완료 후 body 페이드인
       requestAnimationFrame(() => {
         document.body.style.opacity = '1';
