@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const prefix = isSubdir ? '../' : '';
 
   // 2. 공통 navbar.html 로드 (캐시 방지를 위해 버전 쿼리 추가)
-  fetch(prefix + 'navbar.html?v=5')
+  fetch(prefix + 'navbar.html?v=6')
     .then(res => {
       if (!res.ok) throw new Error('Navbar load error');
       return res.text();
@@ -104,20 +104,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // 모바일/세로 햄버거 메뉴 토글 기능 정의 (화면이 왼쪽으로 밀리며 오른쪽에서 드로어가 나타나는 방식)
 window.toggleMobileMenu = () => {
+  const menu = document.getElementById('mobile-menu');
   const backdrop = document.getElementById('mobile-menu-backdrop');
-  if (backdrop) {
+  if (menu && backdrop) {
     const isClosed = !document.body.classList.contains('menu-open');
     if (isClosed) {
       // 열기
       backdrop.classList.remove('hidden');
       requestAnimationFrame(() => {
         document.body.classList.add('menu-open');
+        menu.classList.remove('-right-64');
+        menu.classList.add('right-0');
         backdrop.classList.remove('opacity-0');
         backdrop.classList.add('opacity-100');
       });
     } else {
       // 닫기
       document.body.classList.remove('menu-open');
+      menu.classList.remove('right-0');
+      menu.classList.add('-right-64');
       backdrop.classList.remove('opacity-100');
       backdrop.classList.add('opacity-0');
       
