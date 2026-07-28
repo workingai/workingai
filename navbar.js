@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const prefix = isSubdir ? '../' : '';
 
   // 2. 공통 navbar.html 로드 (캐시 방지를 위해 버전 쿼리 추가)
-  fetch(prefix + 'navbar.html?v=8')
+  fetch(prefix + 'navbar.html?v=9')
     .then(res => {
       if (!res.ok) throw new Error('Navbar load error');
       return res.text();
@@ -69,10 +69,10 @@ document.addEventListener('DOMContentLoaded', () => {
       if (drawer) document.documentElement.appendChild(drawer);
       if (backdrop) document.documentElement.appendChild(backdrop);
 
-      // index 페이지를 제외한 나머지 메뉴에서 상단 네비게이션을 좌우 끝으로 정렬 (로고 왼쪽 정렬) 및 메뉴 간소화
+      // workshop01 폴더 아래의 파일이면서 ws01_index.html이 아닌 경우에만 상단 네비게이션 좌우 끝 정렬 및 메뉴 간소화 적용
       const pathname = window.location.pathname;
-      const isIndex = pathname.endsWith('index.html') || pathname.endsWith('/') || pathname === '' || pathname.includes('ws01_index.html');
-      if (!isIndex) {
+      const isWorkshopSubpage = pathname.includes('/workshop01/') && !pathname.includes('ws01_index.html');
+      if (isWorkshopSubpage) {
         // 1. 네비게이션 컨테이너를 전체 너비로 변경
         const navContainer = placeholder.querySelector('nav > div');
         if (navContainer) {
