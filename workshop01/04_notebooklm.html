@@ -431,47 +431,33 @@
 
                 <div id="step3-body" class="card-body flex-grow flex flex-col gap-4 hidden">
                   <div class="flex flex-col gap-4 mt-2 flex-grow">
-                    <!-- Step 3 Description label -->
-                    <p class="text-sm font-bold text-neutral-800 leading-relaxed text-center">
-                      💡 최종 프롬프트를 수정한 뒤 제미나이 Notebook에서 슬라이드 생성을 요청합니다.
-                    </p>
+                    <!-- Step 1 목차 붙여 넣기 -->
+                    <div class="flex flex-col flex-1">
+                      <label class="text-xs font-extrabold text-neutral-800 mb-1.5 flex items-center justify-between">
+                        <span>📝 Step 1 목차 붙여넣기</span>
+                        <small class="text-[10px] text-neutral-400 font-medium">NotebookLM에서 생성된 목차를 붙여넣으세요</small>
+                      </label>
+                      <textarea id="contentResult" class="w-full p-3 border border-[#DDDBD5] bg-white text-neutral-900 text-sm leading-relaxed placeholder-neutral-400 focus:border-brand-500 focus:ring-0 outline-none resize-none h-32" placeholder="이곳에 Step 1 목차(슬라이드 구성안)를 붙여넣으세요."></textarea>
+                    </div>
 
-                    <!-- Flowchart Container -->
-                    <div class="flex flex-col md:flex-row items-stretch justify-between gap-3 my-4 bg-neutral-50 p-4 rounded-xl border border-neutral-200">
-                      <!-- Box 1 -->
-                      <div class="flex-grow flex flex-col items-center justify-center text-center p-3 bg-white border border-[#DDDBD5] rounded-lg shadow-2xs">
-                        <span class="text-xs font-bold text-brand-600 mb-1">Step I</span>
-                        <span class="text-xs font-extrabold text-neutral-900">목차 설계 복사</span>
-                        <span class="text-[10px] text-neutral-500 mt-1">제미나이 Notebook에 입력</span>
-                      </div>
-                      
-                      <!-- Arrow -->
-                      <div class="flex items-center justify-center text-neutral-400 font-bold self-center">
-                        <svg class="w-4 h-4 transform rotate-90 md:rotate-0" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                          <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path>
+                    <!-- Step 2 디자인 가이드 붙여 넣기 -->
+                    <div class="flex flex-col flex-1">
+                      <label class="text-xs font-extrabold text-neutral-800 mb-1.5 flex items-center justify-between">
+                        <span>🎨 Step 2 디자인 가이드 붙여넣기</span>
+                        <small class="text-[10px] text-neutral-400 font-medium">NotebookLM에서 생성된 디자인 가이드를 붙여넣으세요</small>
+                      </label>
+                      <textarea id="designResultPaste" class="w-full p-3 border border-[#DDDBD5] bg-white text-neutral-900 text-sm leading-relaxed placeholder-neutral-400 focus:border-brand-500 focus:ring-0 outline-none resize-none h-32" placeholder="이곳에 Step 2 디자인 가이드를 붙여넣으세요."></textarea>
+                    </div>
+
+                    <!-- 합쳐서 복사하기 버튼 -->
+                    <div class="flex justify-end mt-1">
+                      <button onclick="copyBothResults()" class="px-6 h-11 bg-brand-500 hover:bg-brand-600 text-white text-sm md:text-base font-extrabold rounded-lg transition-all shadow-sm flex items-center justify-center gap-1.5 focus:outline-none">
+                        <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                          <rect x="9" y="9" width="11" height="11" rx="2" ry="2" stroke-linecap="round" stroke-linejoin="round"></rect>
+                          <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" stroke-linecap="round" stroke-linejoin="round"></path>
                         </svg>
-                      </div>
-
-                      <!-- Box 2 -->
-                      <div class="flex-1 flex flex-col items-center justify-center text-center p-3 bg-white border border-[#DDDBD5] rounded-lg shadow-2xs">
-                        <span class="text-xs font-bold text-brand-600 mb-1">Step II</span>
-                        <span class="text-xs font-extrabold text-neutral-900">디자인 가이드 복사</span>
-                        <span class="text-[10px] text-neutral-500 mt-1">마스터 템플릿 참조</span>
-                      </div>
-
-                      <!-- Arrow -->
-                      <div class="flex items-center justify-center text-neutral-400 font-bold self-center">
-                        <svg class="w-4 h-4 transform rotate-90 md:rotate-0" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                          <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path>
-                        </svg>
-                      </div>
-
-                      <!-- Box 3 -->
-                      <div class="flex-1 flex flex-col items-center justify-center text-center p-3 bg-brand-50 border border-brand-200 rounded-lg shadow-2xs">
-                        <span class="text-xs font-bold text-brand-700 mb-1">Step III</span>
-                        <span class="text-xs font-extrabold text-neutral-900">슬라이드 생성</span>
-                        <span class="text-[10px] text-neutral-600 mt-1">최종 파일 확인</span>
-                      </div>
+                        합쳐서 복사하기
+                      </button>
                     </div>
                   </div>
 
@@ -590,7 +576,11 @@
 
   function copyBothResults() {
     const content = document.getElementById('contentResult').value;
-    const design = document.getElementById('designResult').value;
+    const design = document.getElementById('designResultPaste').value;
+    if (!content.trim() && !design.trim()) {
+      showToast('입력된 내용이 없습니다.');
+      return;
+    }
     const combined = `[슬라이드 목차 및 구성안]\n\n${content}\n\n=========================================\n\n[슬라이드 디자인 가이드]\n\n${design}`;
     executeCopy(combined, "목차와 디자인 가이드가 복사되었습니다.");
   }
