@@ -548,7 +548,7 @@
     const $ = (id) => document.getElementById(id);
 
     function fillNaverApiKey() {
-      const userInput = prompt('鍮꾨?踰덊샇瑜??낅젰??二쇱꽭??');
+      const userInput = prompt('비밀번호를 입력해 주세요.');
       if (userInput === null) return;
       if (userInput === 'workingai') {
         const idField = document.getElementById('ncloudId');
@@ -565,12 +565,12 @@
           idField.value = clientId;
           secretField.value = clientSecret;
           updateNaverPreview();
-          showToast('?ㅼ씠踰?API Key媛 ?먮룞?쇰줈 ?낅젰?섏뿀?듬땲??');
+          showToast('네이버 API Key가 자동으로 입력되었습니다.');
         } else {
-          alert('?ㅽ봽?덈뱶?쒗듃?먯꽌 ?ㅼ씠踰?API ?뺣낫瑜?媛?몄삤吏 紐삵뻽嫄곕굹 濡쒓렇???뺣낫媛 ?좎떎?섏뿀?듬땲?? ?щ줈洹몄씤 ?댁＜?몄슂.');
+          alert('스프레드시트에서 네이버 API 정보를 가져오지 못했거나 로그인 정보가 유실되었습니다. 재로그인 해주세요.');
         }
       } else {
-        alert('鍮꾨?踰덊샇媛 ?щ컮瑜댁? ?딆뒿?덈떎.');
+        alert('비밀번호가 올바르지 않습니다.');
       }
     }
 
@@ -849,19 +849,19 @@ function stripHtml(html) {
     const HARDCODED_ENCRYPTED_KEY = "Nj5cKgtWNS9fPQMcBCs2IgYNLx0YBgoiFAwmJycGXBlYLjYtJUJKDjgWNw1QQCcfORkmBCA=";
 
     function fillSavedApiKey() {
-      const userInput = prompt('鍮꾨?踰덊샇瑜??낅젰??二쇱꽭??');
+      const userInput = prompt('비밀번호를 입력해 주세요.');
       if (userInput === null) return; // 痍⑥냼 踰꾪듉
       
       if (userInput === 'workingai') {
         const apiKey = localStorage.getItem('gemini_api_key');
         if (apiKey) {
           document.getElementById('geminiApiKey').value = apiKey;
-          showToast('Gemini API Key媛 ?먮룞?쇰줈 ?낅젰?섏뿀?듬땲??');
+          showToast('Gemini API Key가 자동으로 입력되었습니다.');
         } else {
-          alert('?ㅽ봽?덈뱶?쒗듃?먯꽌 Gemini API ?뺣낫瑜?媛?몄삤吏 紐삵뻽嫄곕굹 濡쒓렇???뺣낫媛 ?좎떎?섏뿀?듬땲?? ?щ줈洹몄씤 ?댁＜?몄슂.');
+          alert('스프레드시트에서 Gemini API 정보를 가져오지 못했거나 로그인 정보가 유실되었습니다. 재로그인 해주세요.');
         }
       } else {
-        alert('鍮꾨?踰덊샇媛 ?щ컮瑜댁? ?딆뒿?덈떎.');
+        alert('비밀번호가 올바르지 않습니다.');
       }
     }
 
