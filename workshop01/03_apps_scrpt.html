@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
   <link rel="icon" href="../favicon.png?v=2" type="image/png">
@@ -493,6 +493,26 @@
   <script>
     if (localStorage.getItem('workbook_logged_in') !== 'true') {
       window.location.href = '../index.html?redirect=workshop01/03_apps_scrpt.html';
+    } else {
+      // Automatically sync API keys in background if logged in but keys are missing
+      const accessCode = localStorage.getItem('workbook_access_code');
+      const gasApiUrl = localStorage.getItem('gas_api_url') || "https://script.google.com/macros/s/AKfycbztn6cdfX14ZmqAmc-RbST7L6-B6h959d4bJctqDFL_2MylpN9QvBqPytNdp9bTxHblyA/exec";
+      const hasApiKeys = localStorage.getItem('naver_client_id') && localStorage.getItem('gemini_api_key');
+      
+      if (accessCode && !hasApiKeys && gasApiUrl) {
+        fetch(`${gasApiUrl}?code=${encodeURIComponent(accessCode)}`, { method: "GET" })
+          .then(res => res.json())
+          .then(result => {
+            if (result.success) {
+              localStorage.setItem('workbook_course_code', result.courseCode);
+              localStorage.setItem('workbook_file_address', result.fileAddress || '');
+              localStorage.setItem('naver_client_id', result.naverClientId || '');
+              localStorage.setItem('naver_client_secret', result.naverClientSecret || '');
+              localStorage.setItem('gemini_api_key', result.geminiApiKey || '');
+            }
+          })
+          .catch(err => console.warn("Background API key sync failed:", err));
+      }
     }
 
     // Navigation / Toggle System
