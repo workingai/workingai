@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ko">
 <head>
   <link rel="icon" href="../favicon.png?v=2" type="image/png">
@@ -548,7 +548,7 @@
     const $ = (id) => document.getElementById(id);
 
     function fillNaverApiKey() {
-      const userInput = prompt('비밀번호를 입력해 주세요.');
+      const userInput = prompt('鍮꾨?踰덊샇瑜??낅젰??二쇱꽭??');
       if (userInput === null) return;
       if (userInput === 'workingai') {
         const idField = document.getElementById('ncloudId');
@@ -558,13 +558,19 @@
         idField.removeAttribute('readonly');
         secretField.removeAttribute('readonly');
         
-        idField.value = 'zq6einu5gw';
-        secretField.value = 'epkBbkrgthgrh6152vyUwDwYV5GwBApIetgFDq74';
+        const clientId = localStorage.getItem('naver_client_id');
+        const clientSecret = localStorage.getItem('naver_client_secret');
         
-        updateNaverPreview();
-        showToast('네이버 API Key가 자동으로 입력되었습니다.');
+        if (clientId && clientSecret) {
+          idField.value = clientId;
+          secretField.value = clientSecret;
+          updateNaverPreview();
+          showToast('?ㅼ씠踰?API Key媛 ?먮룞?쇰줈 ?낅젰?섏뿀?듬땲??');
+        } else {
+          alert('?ㅽ봽?덈뱶?쒗듃?먯꽌 ?ㅼ씠踰?API ?뺣낫瑜?媛?몄삤吏 紐삵뻽嫄곕굹 濡쒓렇???뺣낫媛 ?좎떎?섏뿀?듬땲?? ?щ줈洹몄씤 ?댁＜?몄슂.');
+        }
       } else {
-        alert('비밀번호가 올바르지 않습니다.');
+        alert('鍮꾨?踰덊샇媛 ?щ컮瑜댁? ?딆뒿?덈떎.');
       }
     }
 
@@ -843,21 +849,19 @@ function stripHtml(html) {
     const HARDCODED_ENCRYPTED_KEY = "Nj5cKgtWNS9fPQMcBCs2IgYNLx0YBgoiFAwmJycGXBlYLjYtJUJKDjgWNw1QQCcfORkmBCA=";
 
     function fillSavedApiKey() {
-      const savedEncryptedKey = localStorage.getItem('saved_gemini_api_key_encrypted') || HARDCODED_ENCRYPTED_KEY;
-      
-      const userInput = prompt('비밀번호를 입력해 주세요.');
-      if (userInput === null) return; // 취소 버튼
+      const userInput = prompt('鍮꾨?踰덊샇瑜??낅젰??二쇱꽭??');
+      if (userInput === null) return; // 痍⑥냼 踰꾪듉
       
       if (userInput === 'workingai') {
-        const decrypted = decrypt(savedEncryptedKey, 'workingai');
-        if (decrypted && decrypted.length > 10) {
-          document.getElementById('geminiApiKey').value = decrypted;
-          showToast('Gemini API Key가 자동으로 입력되었습니다.');
+        const apiKey = localStorage.getItem('gemini_api_key');
+        if (apiKey) {
+          document.getElementById('geminiApiKey').value = apiKey;
+          showToast('Gemini API Key媛 ?먮룞?쇰줈 ?낅젰?섏뿀?듬땲??');
         } else {
-          alert('API Key 데이터가 올바르지 않거나 손상되었습니다.');
+          alert('?ㅽ봽?덈뱶?쒗듃?먯꽌 Gemini API ?뺣낫瑜?媛?몄삤吏 紐삵뻽嫄곕굹 濡쒓렇???뺣낫媛 ?좎떎?섏뿀?듬땲?? ?щ줈洹몄씤 ?댁＜?몄슂.');
         }
       } else {
-        alert('비밀번호가 올바르지 않습니다.');
+        alert('鍮꾨?踰덊샇媛 ?щ컮瑜댁? ?딆뒿?덈떎.');
       }
     }
 
