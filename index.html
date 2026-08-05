@@ -512,6 +512,7 @@
     function saveLoginCode(code) {
       localStorage.setItem('workbook_logged_in', 'true');
       localStorage.setItem('workbook_access_code', code);
+      localStorage.setItem('gas_api_url', GAS_API_URL);
       if (code.toLowerCase() === "jhchoi") {
         localStorage.setItem('jhchoi_master_bypass', 'true');
       }
