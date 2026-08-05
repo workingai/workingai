@@ -31,6 +31,53 @@
 // 모든 페이지 마우스 우클릭 방지
 document.addEventListener('contextmenu', event => event.preventDefault());
 
+// migration 시트 기반 리다이렉트 처리 (5분 캐시 적용)
+(async function checkMigrationRedirect() {
+  const GAS_API_URL = "https://script.google.com/macros/s/AKfycbztn6cdfX14ZmqAmc-RbST7L6-B6h959d4bJctqDFL_2MylpN9QvBqPytNdp9bTxHblyA/exec";
+  const CACHE_KEY = 'wa_redirect_rules';
+  const CACHE_TTL = 5 * 60 * 1000; // 5분
+
+  let rules = null;
+  try {
+    const cached = localStorage.getItem(CACHE_KEY);
+    if (cached) {
+      const { data, ts } = JSON.parse(cached);
+      if (Date.now() - ts < CACHE_TTL) {
+        rules = data;
+      }
+    }
+  } catch (e) {}
+
+  // 1. 캐시된 규칙이 있으면 즉시 비교 후 리다이렉트 (깜빡임 최소화)
+  if (rules) {
+    const currentUrl = window.location.href;
+    const match = rules.find(r => currentUrl.includes(r.before) || currentUrl === r.before);
+    if (match && match.redirect) {
+      window.location.replace(match.redirect);
+      return;
+    }
+  }
+
+  // 2. 캐시가 없거나 만료된 경우 백그라운드에서 신규 규칙 로드 및 캐시 갱신
+  try {
+    const res = await fetch(GAS_API_URL + '?action=getRedirects');
+    const json = await res.json();
+    const freshRules = json.rules || [];
+    localStorage.setItem(CACHE_KEY, JSON.stringify({ data: freshRules, ts: Date.now() }));
+    
+    // 이전에 캐시가 없었을 때만 갱신된 규칙으로 한 번 더 확인
+    if (!rules) {
+      const currentUrl = window.location.href;
+      const match = freshRules.find(r => currentUrl.includes(r.before) || currentUrl === r.before);
+      if (match && match.redirect) {
+        window.location.replace(match.redirect);
+      }
+    }
+  } catch (e) {
+    console.warn("리다이렉트 체크 실패:", e);
+  }
+})();
+
 document.addEventListener('DOMContentLoaded', () => {
   const placeholder = document.getElementById('navbar-placeholder');
   if (!placeholder) {
