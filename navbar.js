@@ -163,6 +163,10 @@ function initNavbar(isSubdir) {
     localStorage.removeItem('workbook_logged_in');
     localStorage.removeItem('workbook_access_code');
     localStorage.removeItem('workbook_course_code');
+    localStorage.removeItem('workbook_file_address');
+    localStorage.removeItem('naver_client_id');
+    localStorage.removeItem('naver_client_secret');
+    localStorage.removeItem('gemini_api_key');
     window.location.href = isSubdir ? '../index.html' : 'index.html';
   };
 
