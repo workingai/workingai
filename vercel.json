@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/(?!images/|global.css|navbar.js|navbar.html|favicon.png|images/partners/).*",
+      "destination": "/index.html"
+    }
+  ]
+}
