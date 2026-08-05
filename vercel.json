@@ -1,7 +1,8 @@
 {
+  "cleanUrls": true,
   "rewrites": [
     {
-      "source": "/(?!images/|global.css|navbar.js|navbar.html|favicon.png|images/partners/).*",
+      "source": "/:path*",
       "destination": "/index.html"
     }
   ]
