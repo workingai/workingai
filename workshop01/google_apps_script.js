@@ -14,6 +14,7 @@ const SPREADSHEET_ID = "18hzAVTjAXrYdT2DRelm3b4IED0KCIFWzaV6fn6dseq0";
 const ACCESS_SHEET_NAME = "Access";
 const CLASS_CODE_SHEET_NAME = "classcode";
 const FILE_SHEET_NAME = "file";
+const API_SHEET_NAME = "API";
 
 // CORS 대응 응답 생성용 헬퍼 함수
 function createResponse(data) {
@@ -60,10 +61,29 @@ function doGet(e) {
       }
     }
 
+    // API 시트에서 Naver 및 Gemini 키 조회
+    let naverClientId = "";
+    let naverClientSecret = "";
+    let geminiApiKey = "";
+    const apiSheet = ss.getSheetByName(API_SHEET_NAME);
+    if (apiSheet) {
+      const apiData = apiSheet.getDataRange().getValues();
+      if (apiData.length >= 2) {
+        naverClientId = apiData[1][0] ? apiData[1][0].toString().trim() : "";
+        geminiApiKey = apiData[1][1] ? apiData[1][1].toString().trim() : "";
+      }
+      if (apiData.length >= 3) {
+        naverClientSecret = apiData[2][0] ? apiData[2][0].toString().trim() : "";
+      }
+    }
+
     return createResponse({ 
       success: true, 
       courseCode: courseCode,
-      fileAddress: fileAddress
+      fileAddress: fileAddress,
+      naverClientId: naverClientId,
+      naverClientSecret: naverClientSecret,
+      geminiApiKey: geminiApiKey
     });
 
   } catch (err) {
@@ -129,11 +149,30 @@ function doPost(e) {
       }
     }
 
+    // API 시트에서 Naver 및 Gemini 키 조회
+    let naverClientId = "";
+    let naverClientSecret = "";
+    let geminiApiKey = "";
+    const apiSheet = ss.getSheetByName(API_SHEET_NAME);
+    if (apiSheet) {
+      const apiData = apiSheet.getDataRange().getValues();
+      if (apiData.length >= 2) {
+        naverClientId = apiData[1][0] ? apiData[1][0].toString().trim() : "";
+        geminiApiKey = apiData[1][1] ? apiData[1][1].toString().trim() : "";
+      }
+      if (apiData.length >= 3) {
+        naverClientSecret = apiData[2][0] ? apiData[2][0].toString().trim() : "";
+      }
+    }
+
     return createResponse({ 
       success: true, 
       code: code, 
       courseCode: courseCode,
-      fileAddress: fileAddress
+      fileAddress: fileAddress,
+      naverClientId: naverClientId,
+      naverClientSecret: naverClientSecret,
+      geminiApiKey: geminiApiKey
     });
 
   } catch (error) {
