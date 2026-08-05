@@ -610,6 +610,7 @@
       document.getElementById('input-login-code').value = "";
       document.getElementById('checkbox-first-visit').checked = false;
       document.getElementById('admin-pwd-container').classList.add('hidden');
+      document.getElementById('class-id-container').classList.remove('hidden'); // 클래스 ID 영역 보이도록 리셋
       document.getElementById('input-admin-pwd').value = "";
       toggleFirstVisitInput();
     }
@@ -694,12 +695,14 @@
         if (!isLocalCached) {
           const adminPwdContainer = document.getElementById('admin-pwd-container');
           const adminPwdInput = document.getElementById('input-admin-pwd');
+          const classIdContainer = document.getElementById('class-id-container');
 
           if (adminPwdContainer.classList.contains('hidden')) {
-            // 어드민 비밀번호 입력창 노출 및 진행 차단
+            // 어드민 비밀번호 입력창 노출 및 클래스 ID 입력창 숨김 처리
             adminPwdContainer.classList.remove('hidden');
+            classIdContainer.classList.add('hidden');
             adminPwdInput.focus();
-            showModalError("이 ID는 Admin입니다. 별도의 패스워드를 입력하세요.");
+            showModalError("이 ID는 Admin입니다. 클래스 ID 대신 비밀번호를 입력하세요.");
             return;
           } else {
             // 어드민 비밀번호 검증 (gobd1219)
