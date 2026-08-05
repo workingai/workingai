@@ -118,20 +118,16 @@
     <section class="py-16 border-b border-neutral-200/60">
       <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 px-6">
         <!-- Card 1: 직장인 과정 -->
-        <a href="workshop01/ws01_index.html" class="group relative flex flex-col justify-between overflow-hidden rounded-[2rem] bg-[#7E24C3] p-8 text-white min-h-[460px] shadow-md hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1.5">
+        <div class="group relative flex flex-col justify-between overflow-hidden rounded-[2rem] bg-gradient-to-br from-[#7227E1] to-[#480FA2] p-8 text-white min-h-[460px] shadow-md hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1.5">
           <div class="flex flex-col gap-4">
             <h4 class="text-3xl font-extrabold tracking-tight">직장인 과정</h4>
-            <p class="text-[13px] opacity-90 leading-relaxed font-semibold">
-              현업 밀착형 프롬프트 설계부터<br>
-              업무 자동화 앱스스크립트 제작까지<br>
-              실제 업무 프로세스 효율화를 즉시 실현
+            <p class="text-sm opacity-90 leading-relaxed font-semibold">
+              현업 직무에 바로 적용 가능한<br>
+              AI 도구 활용과 업무 자동화 중심 과정
             </p>
-            <div class="flex flex-wrap gap-1.5 mt-2">
-              <span class="bg-[#933CD9] text-[#F3E8FF] text-[10px] font-extrabold px-2.5 py-1 rounded-md">국비지원</span>
-              <span class="bg-[#933CD9] text-[#F3E8FF] text-[10px] font-extrabold px-2.5 py-1 rounded-md">실무 프로젝트</span>
-            </div>
           </div>
-          <div class="flex justify-center items-end mt-4 h-40">
+          
+          <div class="flex justify-center items-end mt-4 h-36">
             <svg class="h-full w-auto object-contain transform group-hover:scale-105 transition-transform duration-300" viewBox="0 0 200 150" fill="none" xmlns="http://www.w3.org/2000/svg">
               <ellipse cx="100" cy="130" rx="55" ry="10" fill="#000000" fill-opacity="0.25"/>
               <ellipse cx="100" cy="80" rx="52" ry="42" fill="#5F0FAD"/>
@@ -145,23 +141,28 @@
               <polygon points="108,71 100,79 108,79" fill="#FFFFFF"/>
             </svg>
           </div>
-        </a>
+
+          <div class="grid grid-cols-2 gap-3 mt-6 z-10">
+            <a href="workshop01/ws01_index.html" class="flex items-center justify-center bg-white/10 hover:bg-white/20 border border-white/20 rounded-lg py-2.5 text-center text-xs font-bold text-white transition-all">
+              과정 보러가기
+            </a>
+            <button onclick="alert('준비 중입니다.');" class="flex items-center justify-center bg-white/10 hover:bg-white/20 border border-white/20 rounded-lg py-2.5 text-center text-xs font-bold text-white transition-all">
+              상세 커리큘럼
+            </button>
+          </div>
+        </div>
 
         <!-- Card 2: 마케터 과정 -->
-        <a href="#" onclick="alert('준비 중입니다.'); return false;" class="group relative flex flex-col justify-between overflow-hidden rounded-[2rem] bg-[#0A4D5C] p-8 text-white min-h-[460px] shadow-md hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1.5">
+        <div class="group relative flex flex-col justify-between overflow-hidden rounded-[2rem] bg-gradient-to-br from-[#02565A] to-[#003739] p-8 text-white min-h-[460px] shadow-md hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1.5">
           <div class="flex flex-col gap-4">
             <h4 class="text-3xl font-extrabold tracking-tight">마케터 과정</h4>
-            <p class="text-[13px] opacity-90 leading-relaxed font-semibold">
-              카피라이팅 기획 및<br>
-              SNS 비주얼/영상 소스 생성<br>
-              자동화 훈련을 진행합니다.
+            <p class="text-sm opacity-90 leading-relaxed font-semibold">
+              마케팅 전략 수립부터 콘텐츠 제작,<br>
+              분석까지 AI를 활용한 마케팅 실전 과정
             </p>
-            <div class="flex flex-wrap gap-1.5 mt-2">
-              <span class="bg-[#1D606F] text-[#CCF3F9] text-[10px] font-extrabold px-2.5 py-1 rounded-md">국비지원</span>
-              <span class="bg-[#1D606F] text-[#CCF3F9] text-[10px] font-extrabold px-2.5 py-1 rounded-md">AI 활용 역량</span>
-            </div>
           </div>
-          <div class="flex justify-center items-end mt-4 h-40">
+          
+          <div class="flex justify-center items-end mt-4 h-36">
             <svg class="h-full w-auto object-contain transform group-hover:scale-105 transition-transform duration-300" viewBox="0 0 200 150" fill="none" xmlns="http://www.w3.org/2000/svg">
               <ellipse cx="100" cy="130" rx="50" ry="10" fill="#000000" fill-opacity="0.25"/>
               <polygon points="80,115 120,115 125,124 75,124" fill="#007E94"/>
@@ -176,24 +177,28 @@
               <rect x="95" y="86" width="10" height="4" fill="#007E94"/>
             </svg>
           </div>
-        </a>
+
+          <div class="grid grid-cols-2 gap-3 mt-6 z-10">
+            <button onclick="alert('준비 중입니다.');" class="flex items-center justify-center bg-white/10 hover:bg-white/20 border border-white/20 rounded-lg py-2.5 text-center text-xs font-bold text-white transition-all">
+              과정 보러가기
+            </button>
+            <button onclick="alert('준비 중입니다.');" class="flex items-center justify-center bg-white/10 hover:bg-white/20 border border-white/20 rounded-lg py-2.5 text-center text-xs font-bold text-white transition-all">
+              상세 커리큘럼
+            </button>
+          </div>
+        </div>
 
         <!-- Card 3: 구글 AI 과정 -->
-        <a href="#" onclick="alert('준비 중입니다.'); return false;" class="group relative flex flex-col justify-between overflow-hidden rounded-[2rem] bg-[#D60A27] p-8 text-white min-h-[460px] shadow-md hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1.5">
+        <div class="group relative flex flex-col justify-between overflow-hidden rounded-[2rem] bg-gradient-to-br from-[#127A4D] to-[#0A5132] p-8 text-white min-h-[460px] shadow-md hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1.5">
           <div class="flex flex-col gap-4">
             <h4 class="text-3xl font-extrabold tracking-tight">구글 AI 과정</h4>
-            <p class="text-[13px] opacity-90 leading-relaxed font-semibold">
-              구글 워크스페이스 연동<br>
-              앱스스크립트 자동화 및 노트북LM<br>
-              소스 코드 활용 실무 분석을 진행
+            <p class="text-sm opacity-90 leading-relaxed font-semibold">
+              구글 최신 AI 기술을 활용한<br>
+              노코드 ML/AI를 활용한 AI 실무 과정
             </p>
-            <div class="flex flex-wrap gap-1.5 mt-2">
-              <span class="bg-white text-[#D60A27] text-[10px] font-extrabold px-2.5 py-1 rounded-md">국비지원</span>
-              <span class="bg-white text-[#D60A27] text-[10px] font-extrabold px-2.5 py-1 rounded-md">AI 활용 포트폴리오</span>
-              <span class="bg-white text-[#D60A27] text-[10px] font-extrabold px-2.5 py-1 rounded-md">인턴십</span>
-            </div>
           </div>
-          <div class="flex justify-center items-end mt-4 h-40">
+          
+          <div class="flex justify-center items-end mt-4 h-36">
             <svg class="h-full w-auto object-contain transform group-hover:scale-105 transition-transform duration-300" viewBox="0 0 200 150" fill="none" xmlns="http://www.w3.org/2000/svg">
               <ellipse cx="100" cy="130" rx="55" ry="12" fill="#000000" fill-opacity="0.25"/>
               <polygon points="100,55 50,115 100,123" fill="#A50826"/>
@@ -203,7 +208,16 @@
               <polygon points="100,20 145,32 100,45" fill="#FF5E7E"/>
             </svg>
           </div>
-        </a>
+
+          <div class="grid grid-cols-2 gap-3 mt-6 z-10">
+            <button onclick="alert('준비 중입니다.');" class="flex items-center justify-center bg-white/10 hover:bg-white/20 border border-white/20 rounded-lg py-2.5 text-center text-xs font-bold text-white transition-all">
+              과정 보러가기
+            </button>
+            <button onclick="alert('준비 중입니다.');" class="flex items-center justify-center bg-white/10 hover:bg-white/20 border border-white/20 rounded-lg py-2.5 text-center text-xs font-bold text-white transition-all">
+              상세 커리큘럼
+            </button>
+          </div>
+        </div>
       </div>
     </section>
 
