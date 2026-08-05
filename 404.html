@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>Working AI - 페이지 이동 중</title>
+  <script>
+    (async function checkMigrationRedirect() {
+      const GAS_API_URL = "https://script.google.com/macros/s/AKfycbztn6cdfX14ZmqAmc-RbST7L6-B6h959d4bJctqDFL_2MylpN9QvBqPytNdp9bTxHblyA/exec";
+      const CACHE_KEY = 'wa_redirect_rules';
+      const CACHE_TTL = 5 * 60 * 1000; // 5분
+
+      let rules = null;
+      try {
+        const cached = localStorage.getItem(CACHE_KEY);
+        if (cached) {
+          const { data, ts } = JSON.parse(cached);
+          if (Date.now() - ts < CACHE_TTL) {
+            rules = data;
+          }
+        }
+      } catch (e) {}
+
+      const normalizeUrl = (url) => {
+        if (!url) return '';
+        return url.toLowerCase()
+          .replace(/^(https?:\/\/)?(www\.)?/, '')
+          .replace(/\/+$/, '');
+      };
+
+      const checkRedirect = (rulesList) => {
+        const normalizedCurrent = normalizeUrl(window.location.href);
+        return rulesList.find(r => {
+          const normalizedBefore = normalizeUrl(r.before);
+          return normalizedBefore && (normalizedCurrent.includes(normalizedBefore) || normalizedCurrent === normalizedBefore);
+        });
+      };
+
+      // 1. 캐시된 규칙이 있으면 즉시 비교 후 리다이렉트
+      if (rules) {
+        const match = checkRedirect(rules);
+        if (match && match.redirect) {
+          window.location.replace(match.redirect);
+          return;
+        }
+      }
+
+      // 2. 캐시가 없거나 만료된 경우 백그라운드에서 신규 규칙 로드 및 비교
+      try {
+        const res = await fetch(GAS_API_URL + '?action=getRedirects');
+        const json = await res.json();
+        const freshRules = json.rules || [];
+        localStorage.setItem(CACHE_KEY, JSON.stringify({ data: freshRules, ts: Date.now() }));
+        
+        const match = checkRedirect(freshRules);
+        if (match && match.redirect) {
+          window.location.replace(match.redirect);
+          return;
+        }
+      } catch (e) {
+        console.warn("리다이렉트 체크 실패:", e);
+      }
+
+      // 3. 일치하는 규칙이 없는 진짜 존재하지 않는 경로인 경우 메인 페이지로 복귀
+      window.location.replace('/');
+    })();
+  </script>
+</head>
+<body>
+  <div style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#4a5568;">
+    <p style="font-size:18px;font-weight:600;margin-bottom:8px;">페이지를 이동하는 중입니다...</p>
+    <p style="font-size:14px;color:#a0aec0;">잠시만 기다려 주세요.</p>
+  </div>
+</body>
+</html>
