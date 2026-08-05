@@ -1,5 +1,6 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ko">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +9,8 @@
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Pretendard Font -->
-  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+  <link rel="stylesheet" as="style" crossorigin
+    href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
   <link rel="stylesheet" href="global.css">
   <script>
     tailwind.config = {
@@ -47,6 +49,7 @@
     }
   </style>
 </head>
+
 <body class="min-h-screen antialiased flex flex-col justify-between pt-[5px]">
   <!-- Top brand bar -->
   <div class="fixed top-0 left-0 w-full h-[5px] bg-brand-500 z-50"></div>
@@ -56,8 +59,10 @@
   <script src="navbar.js"></script>
 
   <!-- Full-Width Hero Section -->
-  <section class="w-full relative overflow-hidden bg-[#041326] flex items-center justify-center aspect-[16/9] md:aspect-auto md:h-[220px] lg:h-[260px]">
-    <img src="images/main_hero.png" alt="Working AI Banner" class="w-full h-full object-contain md:object-cover md:object-center block">
+  <section
+    class="w-full relative overflow-hidden bg-[#041326] flex items-center justify-center aspect-[16/9] md:aspect-auto md:h-[220px] lg:h-[260px]">
+    <img src="images/main_hero.png" alt="Working AI Banner"
+      class="w-full h-full object-contain md:object-cover md:object-center block">
   </section>
 
   <!-- Main Container (Full Width for Alternating Backgrounds) -->
@@ -69,36 +74,173 @@
         <div class="flex flex-col md:flex-row items-start justify-between gap-12">
           <!-- Text Left Column -->
           <div class="flex-1 flex flex-col gap-4 text-base text-neutral-600 font-medium leading-relaxed">
-            <h3 class="text-[28px] md:text-[32px] lg:text-[37.3px] font-black tracking-tight text-neutral-900 text-left mb-2">
-              지금 우리는 AI를 제대로 활용하고 있나요?
+            <h3
+              class="text-[28px] md:text-[32px] lg:text-[37.3px] font-black tracking-tight text-neutral-900 text-left mb-2">
+              아직도 AI를 검색 대용으로만 쓰고 있나요?
             </h3>
             <p class="mt-3">
-              많은 사람들이 ChatGPT나 Gemini를 단순한 검색기나 번역 도구로만 사용하고 있습니다. 하지만 AI의 진정한 가치는 나의 실무 흐름에 맞는 맞춤형 프롬프트를 설계하고, 반복적인 작업을 자동화하여 나만의 인공지능 비서를 구축하는 데 있습니다.
+              같은 시간 일하고도 누군가는 보고서 초안을 5분 만에 뽑고, 누군가는 여전히 빈 화면 앞에서 프롬프트를 고민합니다. 차이는 AI를 얼마나 똑똑하게 쓰느냐입니다.
             </p>
             <p>
-              WORKING AI와 함께 비즈니스 생산성을 즉각 극대화할 수 있는 실전 활용법을 알아봅니다.
+              진짜 AI 활용은 검색이 아니라, 내 업무 흐름에 맞춘 맞춤형 프롬프트를 설계하고 반복 작업을 자동화해 나만의 인공지능 비서를 만드는 것입니다. WORKING AI가 그 격차를 좁히는 실전 활용법을 알려드립니다.
             </p>
+            <div class="mt-4 flex">
+              <a href="#" class="inline-flex items-center justify-center bg-[#1D9E75] hover:bg-[#157A5a] text-white text-sm md:text-base font-extrabold px-6 py-3 rounded-xl shadow-md hover:shadow-lg transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0">
+                지금 나에게 맞는 과정 확인하기
+              </a>
+            </div>
           </div>
           <!-- Illustration Right Column -->
           <div class="w-full md:w-1/2 flex justify-center">
-            <img src="images/intro_illustration.png" alt="Working AI Illustration" class="w-full max-w-[460px] h-auto object-contain">
+            <img src="images/intro_illustration.png" alt="Working AI Illustration"
+              class="w-full max-w-[460px] h-auto object-contain">
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Contents Section (Gray Background) -->
+    <!-- AI 실무 클래스 Section (Gray Background) -->
     <section class="w-full bg-[#F2F1EE] py-16 border-b border-neutral-200/40">
+      <div class="max-w-[1200px] mx-auto px-6">
+        <h3
+          class="text-[28px] md:text-[32px] lg:text-[37.3px] font-black tracking-tight text-neutral-900 text-left mb-10">
+          AI 실무 클래스
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <!-- Card 1: 직장인 과정 -->
+          <div
+            class="group relative flex flex-col justify-between overflow-hidden rounded-[2rem] bg-gradient-to-br from-[#7227E1] to-[#480FA2] p-8 text-white min-h-[460px] shadow-md hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1.5">
+            <div class="flex flex-col gap-4">
+              <h4 class="text-3xl font-extrabold tracking-tight">직장인 과정</h4>
+              <p class="text-[15px] opacity-90 leading-relaxed font-semibold">
+                현업 직무에 바로 적용 가능한<br>
+                AI 도구 활용과 업무 자동화 중심 과정
+              </p>
+            </div>
+
+            <div class="flex justify-center items-end mt-4 h-36">
+              <svg
+                class="h-full w-auto object-contain transform group-hover:scale-105 transition-transform duration-300"
+                viewBox="0 0 200 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <ellipse cx="100" cy="130" rx="55" ry="10" fill="#000000" fill-opacity="0.25" />
+                <ellipse cx="100" cy="80" rx="52" ry="42" fill="#5F0FAD" />
+                <ellipse cx="100" cy="80" rx="48" ry="38" fill="#8C34E6" />
+                <ellipse cx="100" cy="80" rx="36" ry="28" fill="#FFFFFF" />
+                <ellipse cx="100" cy="80" rx="24" ry="18" fill="#8C34E6" />
+                <ellipse cx="100" cy="80" rx="12" ry="9" fill="#FFFFFF" />
+                <line x1="145" y1="35" x2="105" y2="75" stroke="#FFFFFF" stroke-width="4.5" stroke-linecap="round" />
+                <polygon points="145,35 153,27 158,32 150,40" fill="#FFB703" />
+                <polygon points="142,38 150,30 155,35 147,43" fill="#FFB703" />
+                <polygon points="108,71 100,79 108,79" fill="#FFFFFF" />
+              </svg>
+            </div>
+
+            <div class="grid grid-cols-2 gap-3 mt-6 z-10">
+              <a href="workshop01/ws01_index.html"
+                class="flex items-center justify-center bg-white/10 hover:bg-white/20 border border-white/20 rounded-lg py-2.5 text-center text-xs font-bold text-white transition-all">
+                과정 보러가기
+              </a>
+              <button onclick="alert('준비 중입니다.');"
+                class="flex items-center justify-center bg-white/10 hover:bg-white/20 border border-white/20 rounded-lg py-2.5 text-center text-xs font-bold text-white transition-all">
+                상세 커리큘럼
+              </button>
+            </div>
+          </div>
+
+          <!-- Card 2: 마케터 과정 -->
+          <div
+            class="group relative flex flex-col justify-between overflow-hidden rounded-[2rem] bg-gradient-to-br from-[#02565A] to-[#003739] p-8 text-white min-h-[460px] shadow-md hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1.5">
+            <div class="flex flex-col gap-4">
+              <h4 class="text-3xl font-extrabold tracking-tight">마케터 과정</h4>
+              <p class="text-[15px] opacity-90 leading-relaxed font-semibold">
+                마케팅 전략 수립부터 콘텐츠 제작,<br>
+                분석까지 AI를 활용한 마케팅 실전 과정
+              </p>
+            </div>
+
+            <div class="flex justify-center items-end mt-4 h-36">
+              <svg
+                class="h-full w-auto object-contain transform group-hover:scale-105 transition-transform duration-300"
+                viewBox="0 0 200 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <ellipse cx="100" cy="130" rx="50" ry="10" fill="#000000" fill-opacity="0.25" />
+                <polygon points="80,115 120,115 125,124 75,124" fill="#007E94" />
+                <polygon points="94,95 106,95 110,115 90,115" fill="#00A2C0" />
+                <polygon points="65,30 135,30 155,50 155,90 135,110 65,110 45,90 45,50" fill="#00A2C0" />
+                <polygon points="68,34 132,34 150,52 150,88 132,106 68,106 50,88 50,52" fill="#005B6E" />
+                <rect x="76" y="52" width="48" height="34" rx="7" fill="#FFFFFF" />
+                <circle cx="100" cy="45" r="3.5" fill="#FFFFFF" />
+                <line x1="100" y1="45" x2="100" y2="52" stroke="#FFFFFF" stroke-width="2.5" />
+                <circle cx="88" cy="69" r="4.5" fill="#005B6E" />
+                <circle cx="112" cy="69" r="4.5" fill="#005B6E" />
+                <rect x="95" y="86" width="10" height="4" fill="#007E94" />
+              </svg>
+            </div>
+
+            <div class="grid grid-cols-2 gap-3 mt-6 z-10">
+              <button onclick="alert('준비 중입니다.');"
+                class="flex items-center justify-center bg-white/10 hover:bg-white/20 border border-white/20 rounded-lg py-2.5 text-center text-xs font-bold text-white transition-all">
+                과정 보러가기
+              </button>
+              <button onclick="alert('준비 중입니다.');"
+                class="flex items-center justify-center bg-white/10 hover:bg-white/20 border border-white/20 rounded-lg py-2.5 text-center text-xs font-bold text-white transition-all">
+                상세 커리큘럼
+              </button>
+            </div>
+          </div>
+
+          <!-- Card 3: 구글 AI 과정 -->
+          <div
+            class="group relative flex flex-col justify-between overflow-hidden rounded-[2rem] bg-gradient-to-br from-[#127A4D] to-[#0A5132] p-8 text-white min-h-[460px] shadow-md hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1.5">
+            <div class="flex flex-col gap-4">
+              <h4 class="text-3xl font-extrabold tracking-tight">구글 AI 과정</h4>
+              <p class="text-[15px] opacity-90 leading-relaxed font-semibold">
+                구글 최신 AI 기술을 활용한<br>
+                노코드 ML/AI를 활용한 AI 실무 과정
+              </p>
+            </div>
+
+            <div class="flex justify-center items-end mt-4 h-36">
+              <svg
+                class="h-full w-auto object-contain transform group-hover:scale-105 transition-transform duration-300"
+                viewBox="0 0 200 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <ellipse cx="100" cy="130" rx="55" ry="12" fill="#000000" fill-opacity="0.25" />
+                <polygon points="100,55 50,115 100,123" fill="#A50826" />
+                <polygon points="100,55 100,123 150,115" fill="#EA1D43" />
+                <line x1="100" y1="55" x2="100" y2="123" stroke="#84021A" stroke-width="1" />
+                <line x1="100" y1="20" x2="100" y2="55" stroke="#FFFFFF" stroke-width="4" />
+                <polygon points="100,20 145,32 100,45" fill="#FF5E7E" />
+              </svg>
+            </div>
+
+            <div class="grid grid-cols-2 gap-3 mt-6 z-10">
+              <button onclick="alert('준비 중입니다.');"
+                class="flex items-center justify-center bg-white/10 hover:bg-white/20 border border-white/20 rounded-lg py-2.5 text-center text-xs font-bold text-white transition-all">
+                과정 보러가기
+              </button>
+              <button onclick="alert('준비 중입니다.');"
+                class="flex items-center justify-center bg-white/10 hover:bg-white/20 border border-white/20 rounded-lg py-2.5 text-center text-xs font-bold text-white transition-all">
+                상세 커리큘럼
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contents Section (White Background) -->
+    <section class="w-full bg-white py-16 border-b border-neutral-200/40">
       <div class="max-w-[1200px] mx-auto px-6">
         <div class="flex flex-col md:flex-row items-center md:items-start justify-between gap-12">
           <!-- Book Cover Left Column -->
           <div class="flex-shrink-0 w-full md:w-2/5 flex justify-center">
-            <img src="images/book.png" alt="어쩌다 마케터를 위한 AI 활용법" class="w-56 md:w-72 h-auto object-contain drop-shadow-2xl">
+            <img src="images/book.png" alt="어쩌다 마케터를 위한 AI 활용법"
+              class="w-56 md:w-72 h-auto object-contain drop-shadow-2xl">
           </div>
           <!-- Book Description Right Column -->
           <div class="flex-1 flex flex-col gap-4 text-base text-neutral-600 font-semibold leading-relaxed">
             <div>
-              <h3 class="text-[28px] md:text-[32px] lg:text-[37.3px] font-black tracking-tight text-neutral-900 text-left mb-2">
+              <h3
+                class="text-[28px] md:text-[32px] lg:text-[37.3px] font-black tracking-tight text-neutral-900 text-left mb-2">
                 Contents
               </h3>
               <h4 class="text-lg md:text-xl font-extrabold text-neutral-900">
@@ -106,16 +248,21 @@
               </h4>
             </div>
             <p class="text-neutral-600 font-medium text-sm md:text-base">
-              현업 마케터의 시선에서 브랜딩, 기획, 카피라이팅, SNS 운영 및 콘텐츠 비주얼 제작까지 마케팅 전 과정을 AI로 효율화하는 실무 노하우를 담았습니다. 책 한 권으로 이론과 실습을 함께 학습하세요.
+              현업 마케터의 시선에서 브랜딩, 기획, 카피라이팅, SNS 운영 및 콘텐츠 비주얼 제작까지 마케팅 전 과정을 AI로 효율화하는 실무 노하우를 담았습니다. 책 한 권으로 이론과 실습을 함께
+              학습하세요.
             </p>
             <div class="flex flex-wrap items-center gap-3 mt-2">
-              <a href="https://search.shopping.naver.com/book/search?query=%EC%96%B4%EC%A9%A1%EB%8B%A4%20%EB%A7%88%EC%BC%80%ED%84%B0%EB%A5%BC%20%EC%9C%84%ED%95%9C%20AI%20%ED%99%9C%EC%9A%A9%EB%B2%95" target="_blank" class="px-4 py-2 border border-neutral-200 hover:border-brand-500/40 text-neutral-700 hover:text-brand-500 text-sm font-bold rounded-lg transition-colors bg-white shadow-xs">
+              <a href="https://search.shopping.naver.com/book/search?query=%EC%96%B4%EC%A9%A1%EB%8B%A4%20%EB%A7%88%EC%BC%80%ED%84%B0%EB%A5%BC%20%EC%9C%84%ED%95%9C%20AI%20%ED%99%9C%EC%9A%A9%EB%B2%95"
+                target="_blank"
+                class="px-4 py-2 border border-neutral-200 hover:border-brand-500/40 text-neutral-700 hover:text-brand-500 text-sm font-bold rounded-lg transition-colors bg-white shadow-xs">
                 네이버 도서
               </a>
-              <a href="https://www.yes24.com" target="_blank" class="px-4 py-2 border border-neutral-200 hover:border-brand-500/40 text-neutral-700 hover:text-brand-500 text-sm font-bold rounded-lg transition-colors bg-white shadow-xs">
+              <a href="https://www.yes24.com" target="_blank"
+                class="px-4 py-2 border border-neutral-200 hover:border-brand-500/40 text-neutral-700 hover:text-brand-500 text-sm font-bold rounded-lg transition-colors bg-white shadow-xs">
                 예스24
               </a>
-              <a href="https://www.kyobobook.co.kr" target="_blank" class="px-4 py-2 border border-neutral-200 hover:border-brand-500/40 text-neutral-700 hover:text-brand-500 text-sm font-bold rounded-lg transition-colors bg-white shadow-xs">
+              <a href="https://www.kyobobook.co.kr" target="_blank"
+                class="px-4 py-2 border border-neutral-200 hover:border-brand-500/40 text-neutral-700 hover:text-brand-500 text-sm font-bold rounded-lg transition-colors bg-white shadow-xs">
                 교보문고
               </a>
             </div>
@@ -124,311 +271,231 @@
       </div>
     </section>
 
-    <!-- 멀티캠퍼스 AI 과정 Section (White Background) -->
-    <section class="w-full bg-white py-16 border-b border-neutral-200/40">
+    <!-- Partners Section (Gray Background) -->
+    <section class="w-full bg-[#F2F1EE] py-16 border-b border-neutral-200/40">
       <div class="max-w-[1200px] mx-auto px-6">
-        <h3 class="text-[28px] md:text-[32px] lg:text-[37.3px] font-black tracking-tight text-neutral-900 text-left mb-10">
-          멀티캠퍼스 AI 과정
+        <h3
+          class="text-[28px] md:text-[32px] lg:text-[37.3px] font-black tracking-tight text-neutral-900 text-left mb-10">
+          Partners
         </h3>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <!-- Card 1: 직장인 과정 -->
-        <div class="group relative flex flex-col justify-between overflow-hidden rounded-[2rem] bg-gradient-to-br from-[#7227E1] to-[#480FA2] p-8 text-white min-h-[460px] shadow-md hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1.5">
-          <div class="flex flex-col gap-4">
-            <h4 class="text-3xl font-extrabold tracking-tight">직장인 과정</h4>
-            <p class="text-[15px] opacity-90 leading-relaxed font-semibold">
-              현업 직무에 바로 적용 가능한<br>
-              AI 도구 활용과 업무 자동화 중심 과정
-            </p>
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 w-full items-start">
+          <!-- Partner Card 1: 멀티캠퍼스 -->
+          <div class="flex flex-col items-center gap-2">
+            <div
+              class="w-full bg-white border border-neutral-200/60 rounded-xl p-4 flex items-center justify-center shadow-xs hover:border-brand-500/40 transition-all min-h-[56px] text-center">
+              <img src="images/partners/logo_multicampus.png" alt="멀티캠퍼스" class="h-6 max-w-full object-contain">
+            </div>
+            <span class="text-[11px] md:text-xs font-semibold text-neutral-500">멀티캠퍼스</span>
           </div>
-          
-          <div class="flex justify-center items-end mt-4 h-36">
-            <svg class="h-full w-auto object-contain transform group-hover:scale-105 transition-transform duration-300" viewBox="0 0 200 150" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <ellipse cx="100" cy="130" rx="55" ry="10" fill="#000000" fill-opacity="0.25"/>
-              <ellipse cx="100" cy="80" rx="52" ry="42" fill="#5F0FAD"/>
-              <ellipse cx="100" cy="80" rx="48" ry="38" fill="#8C34E6"/>
-              <ellipse cx="100" cy="80" rx="36" ry="28" fill="#FFFFFF"/>
-              <ellipse cx="100" cy="80" rx="24" ry="18" fill="#8C34E6"/>
-              <ellipse cx="100" cy="80" rx="12" ry="9" fill="#FFFFFF"/>
-              <line x1="145" y1="35" x2="105" y2="75" stroke="#FFFFFF" stroke-width="4.5" stroke-linecap="round"/>
-              <polygon points="145,35 153,27 158,32 150,40" fill="#FFB703"/>
-              <polygon points="142,38 150,30 155,35 147,43" fill="#FFB703"/>
-              <polygon points="108,71 100,79 108,79" fill="#FFFFFF"/>
+          <!-- Partner Card 2: 하나생명 -->
+          <div class="flex flex-col items-center gap-2">
+            <div
+              class="w-full bg-white border border-neutral-200/60 rounded-xl p-4 flex items-center justify-center shadow-xs hover:border-brand-500/40 transition-all min-h-[56px] text-center">
+              <img src="images/partners/logo_hanalife.png" alt="하나생명" class="h-6 max-w-full object-contain">
+            </div>
+            <span class="text-[11px] md:text-xs font-semibold text-neutral-500">하나생명</span>
+          </div>
+          <!-- Partner Card 3: 제일기획 -->
+          <div class="flex flex-col items-center gap-2">
+            <div
+              class="w-full bg-white border border-neutral-200/60 rounded-xl p-4 flex items-center justify-center shadow-xs hover:border-brand-500/40 transition-all min-h-[56px] text-center">
+              <img src="images/partners/logo_cheil.png" alt="제일기획" class="h-6 max-w-full object-contain">
+            </div>
+            <span class="text-[11px] md:text-xs font-semibold text-neutral-500">제일기획</span>
+          </div>
+          <!-- Partner Card 4: 지엔텔 -->
+          <div class="flex flex-col items-center gap-2">
+            <div
+              class="w-full bg-white border border-neutral-200/60 rounded-xl p-4 flex items-center justify-center shadow-xs hover:border-brand-500/40 transition-all min-h-[56px] text-center">
+              <img src="images/partners/logo_gntel.png" alt="지엔텔" class="h-6 max-w-full object-contain">
+            </div>
+            <span class="text-[11px] md:text-xs font-semibold text-neutral-500">지엔텔</span>
+          </div>
+          <!-- Partner Card 5: 삼양식품 -->
+          <div class="flex flex-col items-center gap-2">
+            <div
+              class="w-full bg-white border border-neutral-200/60 rounded-xl p-4 flex items-center justify-center shadow-xs hover:border-brand-500/40 transition-all min-h-[56px] text-center">
+              <img src="images/partners/logo_samyang.png" alt="삼양식품" class="h-6 max-w-full object-contain">
+            </div>
+            <span class="text-[11px] md:text-xs font-semibold text-neutral-500">삼양식품</span>
+          </div>
+          <!-- Partner Card 6: SK Planet -->
+          <div class="flex flex-col items-center gap-2">
+            <div
+              class="w-full bg-white border border-neutral-200/60 rounded-xl py-2 px-3 flex items-center justify-center shadow-xs hover:border-brand-500/40 transition-all min-h-[56px] text-center">
+              <img src="images/partners/logo_skplanet.png" alt="SK planet" class="h-[38px] max-w-full object-contain">
+            </div>
+            <span class="text-[11px] md:text-xs font-semibold text-neutral-500">SK planet</span>
+          </div>
+          <!-- Partner Card 7: 농협 -->
+          <div class="flex flex-col items-center gap-2">
+            <div
+              class="w-full bg-white border border-neutral-200/60 rounded-xl p-4 flex items-center justify-center shadow-xs hover:border-brand-500/40 transition-all min-h-[56px] text-center">
+              <img src="images/partners/logo_nonghyup.png" alt="농협" class="h-6 max-w-full object-contain">
+            </div>
+            <span class="text-[11px] md:text-xs font-semibold text-neutral-500">농협</span>
+          </div>
+          <!-- Partner Card 8: 한겨레교육 -->
+          <div class="flex flex-col items-center gap-2">
+            <div
+              class="w-full bg-white border border-neutral-200/60 rounded-xl p-4 flex items-center justify-center shadow-xs hover:border-brand-500/40 transition-all min-h-[56px] text-center">
+              <img src="images/partners/logo_hanedut.png" alt="한겨레교육" class="h-6 max-w-full object-contain">
+            </div>
+            <span class="text-[11px] md:text-xs font-semibold text-neutral-500">한겨레교육</span>
+          </div>
+          <!-- Partner Card 9: 종근당 -->
+          <div class="flex flex-col items-center gap-2">
+            <div
+              class="w-full bg-white border border-neutral-200/60 rounded-xl p-4 flex items-center justify-center shadow-xs hover:border-brand-500/40 transition-all min-h-[56px] text-center">
+              <img src="images/partners/logo_ckd.png" alt="종근당" class="h-6 max-w-full object-contain">
+            </div>
+            <span class="text-[11px] md:text-xs font-semibold text-neutral-500">종근당</span>
+          </div>
+          <!-- Partner Card 10: 오리온 -->
+          <div class="flex flex-col items-center gap-2">
+            <div
+              class="w-full bg-white border border-neutral-200/60 rounded-xl p-4 flex items-center justify-center shadow-xs hover:border-brand-500/40 transition-all min-h-[56px] text-center">
+              <img src="images/partners/logo_orion.png" alt="오리온" class="h-6 max-w-full object-contain">
+            </div>
+            <span class="text-[11px] md:text-xs font-semibold text-neutral-500">오리온</span>
+          </div>
+          <!-- Partner Card 11: 패스트캠퍼스 -->
+          <div class="flex flex-col items-center gap-2">
+            <div
+              class="w-full bg-white border border-neutral-200/60 rounded-xl p-4 flex items-center justify-center shadow-xs hover:border-brand-500/40 transition-all min-h-[56px] text-center">
+              <img src="images/partners/logo_fastcampus.png" alt="패스트캠퍼스" class="h-6 max-w-full object-contain">
+            </div>
+            <span class="text-[11px] md:text-xs font-semibold text-neutral-500">패스트캠퍼스</span>
+          </div>
+          <!-- Partner Card 12: 동아방송예술대학교 -->
+          <div class="flex flex-col items-center gap-2">
+            <div
+              class="w-full bg-white border border-neutral-200/60 rounded-xl p-4 flex items-center justify-center shadow-xs hover:border-brand-500/40 transition-all min-h-[56px] text-center">
+              <img src="images/partners/logo_dima.png" alt="동아방송예술대학교" class="h-6 max-w-full object-contain">
+            </div>
+            <span class="text-[11px] md:text-xs font-semibold text-neutral-500">동아방송예술대</span>
+          </div> <!-- Partner Card 13: 서울교통공사 -->
+          <div class="flex flex-col items-center gap-2">
+            <div
+              class="w-full bg-white border border-neutral-200/60 rounded-xl p-4 flex items-center justify-center shadow-xs hover:border-brand-500/40 transition-all min-h-[56px] text-center">
+              <img src="images/partners/logo_seoulmetro.png" alt="서울교통공사" class="h-6 max-w-full object-contain">
+            </div>
+            <span class="text-[11px] md:text-xs font-semibold text-neutral-500">서울교통공사</span>
+          </div>
+          <!-- Partner Card 17: 한국남동발전 -->
+          <div class="flex flex-col items-center gap-2">
+            <div
+              class="w-full bg-white border border-neutral-200/60 rounded-xl p-4 flex items-center justify-center shadow-xs hover:border-brand-500/40 transition-all min-h-[56px] text-center">
+              <img src="images/partners/logo_koen.png" alt="한국남동발전" class="h-6 max-w-full object-contain">
+            </div>
+            <span class="text-[11px] md:text-xs font-semibold text-neutral-500">한국남동발전</span>
+          </div>
+          <!-- Partner Card: 우리은행 -->
+          <div class="flex flex-col items-center gap-2">
+            <div
+              class="w-full bg-white border border-neutral-200/60 rounded-xl p-4 flex items-center justify-center shadow-xs hover:border-brand-500/40 transition-all min-h-[56px] text-center">
+              <img src="images/partners/logo_woori.png" alt="우리은행" class="h-6 max-w-full object-contain">
+            </div>
+            <span class="text-[11px] md:text-xs font-semibold text-neutral-500">우리은행</span>
+          </div>
+          <!-- Partner Card 14: 현대약품 -->
+          <div class="flex flex-col items-center gap-2">
+            <div
+              class="w-full bg-white border border-neutral-200/60 rounded-xl py-2 px-3 flex items-center justify-center shadow-xs hover:border-brand-500/40 transition-all min-h-[56px] text-center">
+              <img src="images/partners/logo_hyundaipharm.png" alt="현대약품" class="h-[38px] max-w-full object-contain">
+            </div>
+            <span class="text-[11px] md:text-xs font-semibold text-neutral-500">현대약품</span>
+          </div>
+          <!-- Partner Card 15: 안전보건공단 -->
+          <div class="flex flex-col items-center gap-2">
+            <div
+              class="w-full bg-white border border-neutral-200/60 rounded-xl py-2 px-3 flex items-center justify-center shadow-xs hover:border-brand-500/40 transition-all min-h-[56px] text-center">
+              <img src="images/partners/logo_kosha.png" alt="안전보건공단" class="h-[38px] max-w-full object-contain">
+            </div>
+            <span class="text-[11px] md:text-xs font-semibold text-neutral-500">안전보건공단</span>
+          </div>
+          <!-- Partner Card: 한국폴리텍대학 -->
+          <div class="flex flex-col items-center gap-2">
+            <div
+              class="w-full bg-white border border-neutral-200/60 rounded-xl py-2 px-3 flex items-center justify-center shadow-xs hover:border-brand-500/40 transition-all min-h-[56px] text-center">
+              <img src="images/partners/logo_polytechnic.png" alt="한국폴리텍대학" class="h-[38px] max-w-full object-contain">
+            </div>
+            <span class="text-[11px] md:text-xs font-semibold text-neutral-500">한국폴리텍대학</span>
+          </div>
+          <!-- Partner Card 16: 파버카스텔 -->
+          <div class="flex flex-col items-center gap-2">
+            <div
+              class="w-full bg-white border border-neutral-200/60 rounded-xl py-2 px-3 flex items-center justify-center shadow-xs hover:border-brand-500/40 transition-all min-h-[56px] text-center">
+              <img src="images/partners/logo_fabercastell.png" alt="파버카스텔" class="h-[38px] max-w-full object-contain">
+            </div>
+            <span class="text-[11px] md:text-xs font-semibold text-neutral-500">파버카스텔</span>
+          </div>
+
+          <!-- Partner Card 19: 트레바리 -->
+          <div class="flex flex-col items-center gap-2">
+            <div
+              class="w-full bg-white border border-neutral-200/60 rounded-xl p-4 flex items-center justify-center shadow-xs hover:border-brand-500/40 transition-all min-h-[56px] text-center">
+              <img src="images/partners/logo_trevari.png" alt="트레바리" class="h-6 max-w-full object-contain">
+            </div>
+            <span class="text-[11px] md:text-xs font-semibold text-neutral-500">트레바리</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bottom Action Banner Section -->
+    <section class="w-full bg-[#1D9E75] py-16 md:py-20 text-white">
+      <div
+        class="max-w-[1200px] mx-auto px-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-12">
+        <!-- Text & Logo Left Column -->
+        <div class="flex-1 flex flex-col gap-6">
+          <h3 class="text-3xl md:text-4xl font-extrabold tracking-tight leading-tight">
+            지금 Working AI에서<br>잠재력을 깨우세요.
+          </h3>
+          <p class="text-white/90 text-sm md:text-base font-semibold leading-relaxed max-w-xl">
+            나만의 인공지능 비서를 구축하고, 반복적인 업무를 자동화하는 실무 활용 파트너, Working AI
+          </p>
+          <div class="mt-4">
+            <img src="images/logo_workingai_white.png" alt="Working AI" class="h-12 md:h-16 w-auto object-contain">
+          </div>
+        </div>
+        <!-- Contact Button Right Column -->
+        <div class="flex-shrink-0">
+          <a href="https://open.kakao.com" target="_blank"
+            class="inline-flex items-center gap-2 px-8 py-3.5 bg-white hover:bg-neutral-100 text-[#1D9E75] font-extrabold text-sm rounded-none transition-colors focus:outline-none shadow-md">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M3 8l7.89 5.26a2 2 0 002.22 0L22 8m-9 11h.01M21 16V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2h14a2 2 0 002-2z">
+              </path>
             </svg>
-          </div>
-
-          <div class="grid grid-cols-2 gap-3 mt-6 z-10">
-            <a href="workshop01/ws01_index.html" class="flex items-center justify-center bg-white/10 hover:bg-white/20 border border-white/20 rounded-lg py-2.5 text-center text-xs font-bold text-white transition-all">
-              과정 보러가기
-            </a>
-            <button onclick="alert('준비 중입니다.');" class="flex items-center justify-center bg-white/10 hover:bg-white/20 border border-white/20 rounded-lg py-2.5 text-center text-xs font-bold text-white transition-all">
-              상세 커리큘럼
-            </button>
-          </div>
-        </div>
-
-        <!-- Card 2: 마케터 과정 -->
-        <div class="group relative flex flex-col justify-between overflow-hidden rounded-[2rem] bg-gradient-to-br from-[#02565A] to-[#003739] p-8 text-white min-h-[460px] shadow-md hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1.5">
-          <div class="flex flex-col gap-4">
-            <h4 class="text-3xl font-extrabold tracking-tight">마케터 과정</h4>
-            <p class="text-[15px] opacity-90 leading-relaxed font-semibold">
-              마케팅 전략 수립부터 콘텐츠 제작,<br>
-              분석까지 AI를 활용한 마케팅 실전 과정
-            </p>
-          </div>
-          
-          <div class="flex justify-center items-end mt-4 h-36">
-            <svg class="h-full w-auto object-contain transform group-hover:scale-105 transition-transform duration-300" viewBox="0 0 200 150" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <ellipse cx="100" cy="130" rx="50" ry="10" fill="#000000" fill-opacity="0.25"/>
-              <polygon points="80,115 120,115 125,124 75,124" fill="#007E94"/>
-              <polygon points="94,95 106,95 110,115 90,115" fill="#00A2C0"/>
-              <polygon points="65,30 135,30 155,50 155,90 135,110 65,110 45,90 45,50" fill="#00A2C0"/>
-              <polygon points="68,34 132,34 150,52 150,88 132,106 68,106 50,88 50,52" fill="#005B6E"/>
-              <rect x="76" y="52" width="48" height="34" rx="7" fill="#FFFFFF"/>
-              <circle cx="100" cy="45" r="3.5" fill="#FFFFFF"/>
-              <line x1="100" y1="45" x2="100" y2="52" stroke="#FFFFFF" stroke-width="2.5"/>
-              <circle cx="88" cy="69" r="4.5" fill="#005B6E"/>
-              <circle cx="112" cy="69" r="4.5" fill="#005B6E"/>
-              <rect x="95" y="86" width="10" height="4" fill="#007E94"/>
-            </svg>
-          </div>
-
-          <div class="grid grid-cols-2 gap-3 mt-6 z-10">
-            <button onclick="alert('준비 중입니다.');" class="flex items-center justify-center bg-white/10 hover:bg-white/20 border border-white/20 rounded-lg py-2.5 text-center text-xs font-bold text-white transition-all">
-              과정 보러가기
-            </button>
-            <button onclick="alert('준비 중입니다.');" class="flex items-center justify-center bg-white/10 hover:bg-white/20 border border-white/20 rounded-lg py-2.5 text-center text-xs font-bold text-white transition-all">
-              상세 커리큘럼
-            </button>
-          </div>
-        </div>
-
-        <!-- Card 3: 구글 AI 과정 -->
-        <div class="group relative flex flex-col justify-between overflow-hidden rounded-[2rem] bg-gradient-to-br from-[#127A4D] to-[#0A5132] p-8 text-white min-h-[460px] shadow-md hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1.5">
-          <div class="flex flex-col gap-4">
-            <h4 class="text-3xl font-extrabold tracking-tight">구글 AI 과정</h4>
-            <p class="text-[15px] opacity-90 leading-relaxed font-semibold">
-              구글 최신 AI 기술을 활용한<br>
-              노코드 ML/AI를 활용한 AI 실무 과정
-            </p>
-          </div>
-          
-          <div class="flex justify-center items-end mt-4 h-36">
-            <svg class="h-full w-auto object-contain transform group-hover:scale-105 transition-transform duration-300" viewBox="0 0 200 150" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <ellipse cx="100" cy="130" rx="55" ry="12" fill="#000000" fill-opacity="0.25"/>
-              <polygon points="100,55 50,115 100,123" fill="#A50826"/>
-              <polygon points="100,55 100,123 150,115" fill="#EA1D43"/>
-              <line x1="100" y1="55" x2="100" y2="123" stroke="#84021A" stroke-width="1"/>
-              <line x1="100" y1="20" x2="100" y2="55" stroke="#FFFFFF" stroke-width="4"/>
-              <polygon points="100,20 145,32 100,45" fill="#FF5E7E"/>
-            </svg>
-          </div>
-
-          <div class="grid grid-cols-2 gap-3 mt-6 z-10">
-            <button onclick="alert('준비 중입니다.');" class="flex items-center justify-center bg-white/10 hover:bg-white/20 border border-white/20 rounded-lg py-2.5 text-center text-xs font-bold text-white transition-all">
-              과정 보러가기
-            </button>
-            <button onclick="alert('준비 중입니다.');" class="flex items-center justify-center bg-white/10 hover:bg-white/20 border border-white/20 rounded-lg py-2.5 text-center text-xs font-bold text-white transition-all">
-              상세 커리큘럼
-            </button>
-          </div>
+            Contact
+          </a>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- Partners Section (Gray Background) -->
-  <section class="w-full bg-[#F2F1EE] py-16 border-b border-neutral-200/40">
-    <div class="max-w-[1200px] mx-auto px-6">
-      <h3 class="text-[28px] md:text-[32px] lg:text-[37.3px] font-black tracking-tight text-neutral-900 text-left mb-10">
-        Partners
-      </h3>
-      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 w-full items-start">
-        <!-- Partner Card 1: 멀티캠퍼스 -->
-        <div class="flex flex-col items-center gap-2">
-          <div class="w-full bg-white border border-neutral-200/60 rounded-xl p-4 flex items-center justify-center shadow-xs hover:border-brand-500/40 transition-all min-h-[56px] text-center">
-            <img src="images/partners/logo_multicampus.png" alt="멀티캠퍼스" class="h-6 max-w-full object-contain">
-          </div>
-          <span class="text-[11px] md:text-xs font-semibold text-neutral-500">멀티캠퍼스</span>
-        </div>
-        <!-- Partner Card 2: 하나생명 -->
-        <div class="flex flex-col items-center gap-2">
-          <div class="w-full bg-white border border-neutral-200/60 rounded-xl p-4 flex items-center justify-center shadow-xs hover:border-brand-500/40 transition-all min-h-[56px] text-center">
-            <img src="images/partners/logo_hanalife.png" alt="하나생명" class="h-6 max-w-full object-contain">
-          </div>
-          <span class="text-[11px] md:text-xs font-semibold text-neutral-500">하나생명</span>
-        </div>
-        <!-- Partner Card 3: 제일기획 -->
-        <div class="flex flex-col items-center gap-2">
-          <div class="w-full bg-white border border-neutral-200/60 rounded-xl p-4 flex items-center justify-center shadow-xs hover:border-brand-500/40 transition-all min-h-[56px] text-center">
-            <img src="images/partners/logo_cheil.png" alt="제일기획" class="h-6 max-w-full object-contain">
-          </div>
-          <span class="text-[11px] md:text-xs font-semibold text-neutral-500">제일기획</span>
-        </div>
-        <!-- Partner Card 4: 지엔텔 -->
-        <div class="flex flex-col items-center gap-2">
-          <div class="w-full bg-white border border-neutral-200/60 rounded-xl p-4 flex items-center justify-center shadow-xs hover:border-brand-500/40 transition-all min-h-[56px] text-center">
-            <img src="images/partners/logo_gntel.png" alt="지엔텔" class="h-6 max-w-full object-contain">
-          </div>
-          <span class="text-[11px] md:text-xs font-semibold text-neutral-500">지엔텔</span>
-        </div>
-        <!-- Partner Card 5: 삼양식품 -->
-        <div class="flex flex-col items-center gap-2">
-          <div class="w-full bg-white border border-neutral-200/60 rounded-xl p-4 flex items-center justify-center shadow-xs hover:border-brand-500/40 transition-all min-h-[56px] text-center">
-            <img src="images/partners/logo_samyang.png" alt="삼양식품" class="h-6 max-w-full object-contain">
-          </div>
-          <span class="text-[11px] md:text-xs font-semibold text-neutral-500">삼양식품</span>
-        </div>
-        <!-- Partner Card 6: SK Planet -->
-        <div class="flex flex-col items-center gap-2">
-          <div class="w-full bg-white border border-neutral-200/60 rounded-xl py-2 px-3 flex items-center justify-center shadow-xs hover:border-brand-500/40 transition-all min-h-[56px] text-center">
-            <img src="images/partners/logo_skplanet.png" alt="SK planet" class="h-[38px] max-w-full object-contain">
-          </div>
-          <span class="text-[11px] md:text-xs font-semibold text-neutral-500">SK planet</span>
-        </div>
-        <!-- Partner Card 7: 농협 -->
-        <div class="flex flex-col items-center gap-2">
-          <div class="w-full bg-white border border-neutral-200/60 rounded-xl p-4 flex items-center justify-center shadow-xs hover:border-brand-500/40 transition-all min-h-[56px] text-center">
-            <img src="images/partners/logo_nonghyup.png" alt="농협" class="h-6 max-w-full object-contain">
-          </div>
-          <span class="text-[11px] md:text-xs font-semibold text-neutral-500">농협</span>
-        </div>
-        <!-- Partner Card 8: 한겨레교육 -->
-        <div class="flex flex-col items-center gap-2">
-          <div class="w-full bg-white border border-neutral-200/60 rounded-xl p-4 flex items-center justify-center shadow-xs hover:border-brand-500/40 transition-all min-h-[56px] text-center">
-            <img src="images/partners/logo_hanedut.png" alt="한겨레교육" class="h-6 max-w-full object-contain">
-          </div>
-          <span class="text-[11px] md:text-xs font-semibold text-neutral-500">한겨레교육</span>
-        </div>
-        <!-- Partner Card 9: 종근당 -->
-        <div class="flex flex-col items-center gap-2">
-          <div class="w-full bg-white border border-neutral-200/60 rounded-xl p-4 flex items-center justify-center shadow-xs hover:border-brand-500/40 transition-all min-h-[56px] text-center">
-            <img src="images/partners/logo_ckd.png" alt="종근당" class="h-6 max-w-full object-contain">
-          </div>
-          <span class="text-[11px] md:text-xs font-semibold text-neutral-500">종근당</span>
-        </div>
-        <!-- Partner Card 10: 오리온 -->
-        <div class="flex flex-col items-center gap-2">
-          <div class="w-full bg-white border border-neutral-200/60 rounded-xl p-4 flex items-center justify-center shadow-xs hover:border-brand-500/40 transition-all min-h-[56px] text-center">
-            <img src="images/partners/logo_orion.png" alt="오리온" class="h-6 max-w-full object-contain">
-          </div>
-          <span class="text-[11px] md:text-xs font-semibold text-neutral-500">오리온</span>
-        </div>
-        <!-- Partner Card 11: 패스트캠퍼스 -->
-        <div class="flex flex-col items-center gap-2">
-          <div class="w-full bg-white border border-neutral-200/60 rounded-xl p-4 flex items-center justify-center shadow-xs hover:border-brand-500/40 transition-all min-h-[56px] text-center">
-            <img src="images/partners/logo_fastcampus.png" alt="패스트캠퍼스" class="h-6 max-w-full object-contain">
-          </div>
-          <span class="text-[11px] md:text-xs font-semibold text-neutral-500">패스트캠퍼스</span>
-        </div>
-        <!-- Partner Card 12: 동아방송예술대학교 -->
-        <div class="flex flex-col items-center gap-2">
-          <div class="w-full bg-white border border-neutral-200/60 rounded-xl p-4 flex items-center justify-center shadow-xs hover:border-brand-500/40 transition-all min-h-[56px] text-center">
-            <img src="images/partners/logo_dima.png" alt="동아방송예술대학교" class="h-6 max-w-full object-contain">
-          </div>
-          <span class="text-[11px] md:text-xs font-semibold text-neutral-500">동아방송예술대</span>
-        </div>        <!-- Partner Card 13: 서울교통공사 -->
-        <div class="flex flex-col items-center gap-2">
-          <div class="w-full bg-white border border-neutral-200/60 rounded-xl p-4 flex items-center justify-center shadow-xs hover:border-brand-500/40 transition-all min-h-[56px] text-center">
-            <img src="images/partners/logo_seoulmetro.png" alt="서울교통공사" class="h-6 max-w-full object-contain">
-          </div>
-          <span class="text-[11px] md:text-xs font-semibold text-neutral-500">서울교통공사</span>
-        </div>
-        <!-- Partner Card 17: 한국남동발전 -->
-        <div class="flex flex-col items-center gap-2">
-          <div class="w-full bg-white border border-neutral-200/60 rounded-xl p-4 flex items-center justify-center shadow-xs hover:border-brand-500/40 transition-all min-h-[56px] text-center">
-            <img src="images/partners/logo_koen.png" alt="한국남동발전" class="h-6 max-w-full object-contain">
-          </div>
-          <span class="text-[11px] md:text-xs font-semibold text-neutral-500">한국남동발전</span>
-        </div>
-        <!-- Partner Card: 우리은행 -->
-        <div class="flex flex-col items-center gap-2">
-          <div class="w-full bg-white border border-neutral-200/60 rounded-xl p-4 flex items-center justify-center shadow-xs hover:border-brand-500/40 transition-all min-h-[56px] text-center">
-            <img src="images/partners/logo_woori.png" alt="우리은행" class="h-6 max-w-full object-contain">
-          </div>
-          <span class="text-[11px] md:text-xs font-semibold text-neutral-500">우리은행</span>
-        </div>
-        <!-- Partner Card 14: 현대약품 -->
-        <div class="flex flex-col items-center gap-2">
-          <div class="w-full bg-white border border-neutral-200/60 rounded-xl py-2 px-3 flex items-center justify-center shadow-xs hover:border-brand-500/40 transition-all min-h-[56px] text-center">
-            <img src="images/partners/logo_hyundaipharm.png" alt="현대약품" class="h-[38px] max-w-full object-contain">
-          </div>
-          <span class="text-[11px] md:text-xs font-semibold text-neutral-500">현대약품</span>
-        </div>
-        <!-- Partner Card 15: 안전보건공단 -->
-        <div class="flex flex-col items-center gap-2">
-          <div class="w-full bg-white border border-neutral-200/60 rounded-xl py-2 px-3 flex items-center justify-center shadow-xs hover:border-brand-500/40 transition-all min-h-[56px] text-center">
-            <img src="images/partners/logo_kosha.png" alt="안전보건공단" class="h-[38px] max-w-full object-contain">
-          </div>
-          <span class="text-[11px] md:text-xs font-semibold text-neutral-500">안전보건공단</span>
-        </div>
-        <!-- Partner Card: 한국폴리텍대학 -->
-        <div class="flex flex-col items-center gap-2">
-          <div class="w-full bg-white border border-neutral-200/60 rounded-xl py-2 px-3 flex items-center justify-center shadow-xs hover:border-brand-500/40 transition-all min-h-[56px] text-center">
-            <img src="images/partners/logo_polytechnic.png" alt="한국폴리텍대학" class="h-[38px] max-w-full object-contain">
-          </div>
-          <span class="text-[11px] md:text-xs font-semibold text-neutral-500">한국폴리텍대학</span>
-        </div>
-        <!-- Partner Card 16: 파버카스텔 -->
-        <div class="flex flex-col items-center gap-2">
-          <div class="w-full bg-white border border-neutral-200/60 rounded-xl py-2 px-3 flex items-center justify-center shadow-xs hover:border-brand-500/40 transition-all min-h-[56px] text-center">
-            <img src="images/partners/logo_fabercastell.png" alt="파버카스텔" class="h-[38px] max-w-full object-contain">
-          </div>
-          <span class="text-[11px] md:text-xs font-semibold text-neutral-500">파버카스텔</span>
-        </div>
-
-        <!-- Partner Card 19: 트레바리 -->
-        <div class="flex flex-col items-center gap-2">
-          <div class="w-full bg-white border border-neutral-200/60 rounded-xl p-4 flex items-center justify-center shadow-xs hover:border-brand-500/40 transition-all min-h-[56px] text-center">
-            <img src="images/partners/logo_trevari.png" alt="트레바리" class="h-6 max-w-full object-contain">
-          </div>
-          <span class="text-[11px] md:text-xs font-semibold text-neutral-500">트레바리</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Bottom Action Banner Section -->
-  <section class="w-full bg-[#1D9E75] py-16 md:py-20 text-white">
-    <div class="max-w-[1200px] mx-auto px-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-12">
-      <!-- Text & Logo Left Column -->
-      <div class="flex-1 flex flex-col gap-6">
-        <h3 class="text-3xl md:text-4xl font-extrabold tracking-tight leading-tight">
-          지금 Working AI에서<br>잠재력을 깨우세요.
-        </h3>
-        <p class="text-white/90 text-sm md:text-base font-semibold leading-relaxed max-w-xl">
-          나만의 인공지능 비서를 구축하고, 반복적인 업무를 자동화하는 실무 활용 파트너, Working AI
-        </p>
-        <div class="mt-4">
-          <img src="images/logo_workingai_white.png" alt="Working AI" class="h-12 md:h-16 w-auto object-contain">
-        </div>
-      </div>
-      <!-- Contact Button Right Column -->
-      <div class="flex-shrink-0">
-        <a href="https://open.kakao.com" target="_blank" class="inline-flex items-center gap-2 px-8 py-3.5 bg-white hover:bg-neutral-100 text-[#1D9E75] font-extrabold text-sm rounded-none transition-colors focus:outline-none shadow-md">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L22 8m-9 11h.01M21 16V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2h14a2 2 0 002-2z"></path>
-          </svg>
-          Contact
-        </a>
-      </div>
-    </div>
-  </section>
+    </section>
 
   </main>
 
   <!-- Footer -->
-  <footer class="w-full border-t border-neutral-200 bg-white py-6 text-center text-xs text-neutral-700 flex-shrink-0 mt-8">
+  <footer
+    class="w-full border-t border-neutral-200 bg-white py-6 text-center text-xs text-neutral-700 flex-shrink-0 mt-8">
     <div class="max-w-[1200px] mx-auto px-6">
-      © 2026 Working AI. All rights reserved. | <a href="https://workingai.kr" target="_blank" class="hover:text-brand-500 underline transition-colors">workingai.kr</a>
+      © 2026 Working AI. All rights reserved. | <a href="https://workingai.kr" target="_blank"
+        class="hover:text-brand-500 underline transition-colors">workingai.kr</a>
     </div>
   </footer>
 
   <!-- Entrance Code Registration / Verification Modal -->
-  <div id="entrance-modal" class="fixed inset-0 bg-neutral-900/60 backdrop-blur-md flex items-center justify-center z-50 p-4 hidden">
-    <div class="bg-white border border-neutral-200 rounded-3xl p-6 md:p-8 max-w-md w-full shadow-2xl transition-all duration-300 relative">
-      
+  <div id="entrance-modal"
+    class="fixed inset-0 bg-neutral-900/60 backdrop-blur-md flex items-center justify-center z-50 p-4 hidden">
+    <div
+      class="bg-white border border-neutral-200 rounded-3xl p-6 md:p-8 max-w-md w-full shadow-2xl transition-all duration-300 relative">
+
       <!-- Close Button -->
-      <button onclick="closeEntranceModalDirect()" class="absolute top-5 right-5 text-neutral-400 hover:text-neutral-600 focus:outline-none transition-colors" aria-label="Close modal">
+      <button onclick="closeEntranceModalDirect()"
+        class="absolute top-5 right-5 text-neutral-400 hover:text-neutral-600 focus:outline-none transition-colors"
+        aria-label="Close modal">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
         </svg>
@@ -436,7 +503,9 @@
 
       <!-- Logo inside Modal -->
       <div class="text-center mb-6">
-        <span class="text-xs font-bold text-brand-500 uppercase tracking-widest bg-brand-50 px-3 py-1 rounded-full">Workbook Access</span>
+        <span
+          class="text-xs font-bold text-brand-500 uppercase tracking-widest bg-brand-50 px-3 py-1 rounded-full">Workbook
+          Access</span>
         <h3 class="text-2xl font-black text-neutral-900 mt-3">Working AI 실습 워크북</h3>
         <p class="text-xs text-neutral-500 mt-1">실습실 입장 승인이 필요합니다.</p>
       </div>
@@ -446,31 +515,39 @@
         <!-- 1. Entrance Code Input -->
         <div>
           <label class="text-xs font-bold text-neutral-600 mb-1.5 block">개인접속코드 입력</label>
-          <input type="text" id="input-login-code" placeholder="본인의 코드를 입력하세요 (영문/한글)" class="w-full h-11 border border-neutral-200 rounded-xl px-4 text-sm font-bold text-center focus:border-brand-500 focus:outline-none">
+          <input type="text" id="input-login-code" placeholder="본인의 코드를 입력하세요 (영문/한글)"
+            class="w-full h-11 border border-neutral-200 rounded-xl px-4 text-sm font-bold text-center focus:border-brand-500 focus:outline-none">
         </div>
 
         <!-- 2. Checkbox: First visit -->
         <label class="flex items-center gap-2.5 cursor-pointer mt-1 select-none">
-          <input type="checkbox" id="checkbox-first-visit" onchange="toggleFirstVisitInput()" class="w-4 h-4 rounded border-neutral-300 text-brand-500 focus:ring-brand-500">
+          <input type="checkbox" id="checkbox-first-visit" onchange="toggleFirstVisitInput()"
+            class="w-4 h-4 rounded border-neutral-300 text-brand-500 focus:ring-brand-500">
           <span class="text-xs font-bold text-neutral-600">최초 방문이면 체크하세요.</span>
         </label>
 
         <!-- 3. Validation ID Input (Toggled by Checkbox) -->
         <div id="validation-id-container" class="transition-all duration-300 hidden">
           <label class="text-xs font-bold text-neutral-600 mb-1.5 block">클래스 ID를 입력하세요</label>
-          <input type="password" id="input-pwd" placeholder="클래스 ID를 입력하세요" class="w-full h-11 border border-neutral-200 rounded-xl px-4 text-sm font-bold text-center focus:border-brand-500 focus:outline-none">
+          <input type="password" id="input-pwd" placeholder="클래스 ID를 입력하세요"
+            class="w-full h-11 border border-neutral-200 rounded-xl px-4 text-sm font-bold text-center focus:border-brand-500 focus:outline-none">
         </div>
 
         <!-- 4. Admin Password Input (Shown only for jhchoi when no local cache is found) -->
         <div id="admin-pwd-container" class="transition-all duration-300 hidden">
           <label class="text-xs font-bold text-red-500 mb-1.5 block">이 ID는 Admin입니다. 별도의 패스워드를 입력하세요</label>
-          <input type="password" id="input-admin-pwd" placeholder="어드민 비밀번호를 입력하세요" class="w-full h-11 border border-red-200 rounded-xl px-4 text-sm font-bold text-center focus:border-red-500 focus:outline-none">
+          <input type="password" id="input-admin-pwd" placeholder="어드민 비밀번호를 입력하세요"
+            class="w-full h-11 border border-red-200 rounded-xl px-4 text-sm font-bold text-center focus:border-red-500 focus:outline-none">
         </div>
 
-        <button id="modal-submit-btn" onclick="handleEntrance()" class="w-full h-11 bg-brand-500 hover:bg-brand-600 text-white text-sm font-extrabold rounded-xl transition-all shadow-sm flex items-center justify-center gap-2">
-          <svg id="btn-spinner" class="w-4 h-4 animate-spin hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+        <button id="modal-submit-btn" onclick="handleEntrance()"
+          class="w-full h-11 bg-brand-500 hover:bg-brand-600 text-white text-sm font-extrabold rounded-xl transition-all shadow-sm flex items-center justify-center gap-2">
+          <svg id="btn-spinner" class="w-4 h-4 animate-spin hidden" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="3">
             <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            <path class="opacity-75" fill="currentColor"
+              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
+            </path>
           </svg>
           <span id="btn-text">입장하기</span>
         </button>
@@ -478,16 +555,20 @@
 
       <!-- Success Screen (Hidden by default) -->
       <div id="modal-success-screen" class="flex flex-col items-center text-center gap-4 py-4 hidden">
-        <div class="w-16 h-16 rounded-full bg-brand-50 text-brand-500 text-3xl flex items-center justify-center">🎉</div>
+        <div class="w-16 h-16 rounded-full bg-brand-50 text-brand-500 text-3xl flex items-center justify-center">🎉
+        </div>
         <h4 class="text-xl font-bold text-neutral-900">개인접속코드 생성 완료!</h4>
         <p class="text-xs text-neutral-500 leading-relaxed">
           구글 시트에 등록이 완료되었습니다.<br>
           아래 코드를 복사해서 향후 클래스 ID 없이 입장하실 수 있습니다.
         </p>
-        <div class="w-full bg-neutral-50 border border-neutral-200 rounded-xl p-3.5 font-mono text-lg font-bold tracking-widest text-brand-600 select-all cursor-pointer" id="success-code-display">
+        <div
+          class="w-full bg-neutral-50 border border-neutral-200 rounded-xl p-3.5 font-mono text-lg font-bold tracking-widest text-brand-600 select-all cursor-pointer"
+          id="success-code-display">
           WA-123456
         </div>
-        <button onclick="closeEntranceModal()" class="w-full h-11 bg-brand-500 hover:bg-brand-600 text-white text-sm font-extrabold rounded-xl transition-all">
+        <button onclick="closeEntranceModal()"
+          class="w-full h-11 bg-brand-500 hover:bg-brand-600 text-white text-sm font-extrabold rounded-xl transition-all">
           실습실 입장하기
         </button>
       </div>
@@ -499,7 +580,7 @@
 
   <script>
     // Set your Deployed Google Apps Script Web App URL here
-    const GAS_API_URL = "https://script.google.com/macros/s/AKfycbztn6cdfX14ZmqAmc-RbST7L6-B6h959d4bJctqDFL_2MylpN9QvBqPytNdp9bTxHblyA/exec"; 
+    const GAS_API_URL = "https://script.google.com/macros/s/AKfycbztn6cdfX14ZmqAmc-RbST7L6-B6h959d4bJctqDFL_2MylpN9QvBqPytNdp9bTxHblyA/exec";
 
     let pendingRedirectUrl = "";
 
@@ -528,7 +609,7 @@
     }
 
     // Intercept Links pointing to workshop01/
-    document.addEventListener('click', function(e) {
+    document.addEventListener('click', function (e) {
       const anchor = e.target.closest('a');
       if (anchor) {
         const href = anchor.getAttribute('href') || '';
@@ -587,7 +668,7 @@
     async function handleEntrance() {
       const codeInput = document.getElementById('input-login-code').value.trim();
       let firstVisit = document.getElementById('checkbox-first-visit').checked;
-      
+
       const submitBtn = document.getElementById('modal-submit-btn');
       const spinner = document.getElementById('btn-spinner');
       const btnText = document.getElementById('btn-text');
@@ -619,11 +700,11 @@
 
       if (codeInput.toLowerCase() === "jhchoi") {
         const isLocalCached = (localStorage.getItem('workbook_access_code') && localStorage.getItem('workbook_access_code').toLowerCase() === "jhchoi") ||
-                              (localStorage.getItem('jhchoi_master_bypass') === "true");
+          (localStorage.getItem('jhchoi_master_bypass') === "true");
         if (!isLocalCached) {
           const adminPwdContainer = document.getElementById('admin-pwd-container');
           const adminPwdInput = document.getElementById('input-admin-pwd');
-          
+
           if (adminPwdContainer.classList.contains('hidden')) {
             // 어드민 비밀번호 입력창 노출 및 진행 차단
             adminPwdContainer.classList.remove('hidden');
@@ -659,7 +740,7 @@
         if (!GAS_API_URL || GAS_API_URL.includes("YOUR_DEPLOYED_GAS_URL")) {
           console.warn("GAS_API_URL이 설정되지 않아 로컬 테스트용 코드로 진행합니다.");
           saveLoginCode(codeInput);
-          
+
           document.getElementById('modal-login-form').classList.add('hidden');
           document.getElementById('modal-success-screen').classList.remove('hidden');
           document.getElementById('success-code-display').textContent = codeInput;
@@ -679,7 +760,7 @@
             })
           });
           const result = await response.json();
-          
+
           if (result.success) {
             saveLoginCode(codeInput);
             localStorage.setItem('workbook_course_code', result.courseCode);
@@ -698,7 +779,7 @@
         } catch (err) {
           console.warn("구글 시트 통신 실패, 로컬 캐시 모드로 강제 진입 처리합니다.", err);
           saveLoginCode(codeInput);
-          
+
           document.getElementById('modal-login-form').classList.add('hidden');
           document.getElementById('modal-success-screen').classList.remove('hidden');
           document.getElementById('success-code-display').textContent = codeInput + " (오프라인 저장됨)";
@@ -721,7 +802,7 @@
             method: "GET"
           });
           const result = await response.json();
-          
+
           if (result.success) {
             saveLoginCode(codeInput);
             localStorage.setItem('workbook_course_code', result.courseCode);
@@ -750,15 +831,17 @@
       }
     });
 
-    
+
   </script>
-<!-- KakaoTalk ?ㅽ뵂梨꾪똿 ?뚮줈??踰꾪듉 -->
-  <a href="https://open.kakao.com/me/choi_pro" target="_blank" rel="noopener noreferrer" id="kakao-float-btn" style="position:fixed;bottom:24px;right:24px;z-index:9999;width:60px;height:60px;background-color:#FEE500;border-radius:9999px;box-shadow:0 4px 16px rgba(0,0,0,0.18);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:transform 0.2s ease,box-shadow 0.2s ease;text-decoration:none;" onmouseover="this.style.transform='scale(1.1)';this.style.boxShadow='0 8px 24px rgba(0,0,0,0.25)'" onmouseout="this.style.transform='scale(1)';this.style.boxShadow='0 4px 16px rgba(0,0,0,0.18)'">
-    <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 34 34" style="pointer-events:none;">
-      <ellipse cx="17" cy="15.5" rx="14" ry="12" fill="#3A1D1D"/>
-      <polygon points="10,27 14,21 20,26" fill="#3A1D1D"/>
-      <text x="17" y="20" text-anchor="middle" font-family="Arial Black, Arial, sans-serif" font-weight="900" font-size="8.5" fill="#FEE500" letter-spacing="0.5">TALK</text>
-    </svg>
+
+  <!-- KakaoTalk 오픈채팅 플로팅 버튼 -->
+  <a href="https://open.kakao.com/me/choi_pro" target="_blank" rel="noopener noreferrer" id="kakao-float-btn"
+    style="position:fixed;bottom:24px;right:24px;z-index:9999;width:60px;height:60px;background-color:#FEE500;border-radius:9999px;box-shadow:0 4px 16px rgba(0,0,0,0.18);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:transform 0.2s ease,box-shadow 0.2s ease;"
+    onmouseover="this.style.transform='scale(1.1)';this.style.boxShadow='0 8px 24px rgba(0,0,0,0.25)'"
+    onmouseout="this.style.transform='scale(1)';this.style.boxShadow='0 4px 16px rgba(0,0,0,0.18)'">
+    <img src="images/kakaotalk_logo.png" alt="KakaoTalk 오픈채팅"
+      style="width:38px;height:38px;object-fit:contain;pointer-events:none;">
   </a>
 </body>
+
 </html>
