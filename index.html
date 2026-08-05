@@ -489,26 +489,26 @@
 
       <!-- Main Login Form (No Tabs) -->
       <div id="modal-login-form" class="flex flex-col gap-4">
-        <!-- 1. Entrance Code Input -->
-        <div>
+        <!-- 1. 클래스 ID 입력 (상단) -->
+        <div id="class-id-container">
+          <label class="text-xs font-bold text-neutral-600 mb-1.5 block">클래스 ID 입력</label>
+          <input type="password" id="input-pwd" placeholder="클래스 ID를 입력하세요"
+            class="w-full h-11 border border-neutral-200 rounded-xl px-4 text-sm font-bold text-center focus:border-brand-500 focus:outline-none">
+        </div>
+
+        <!-- 2. 개인접속코드 입력 (하단) -->
+        <div id="personal-code-container" class="transition-all duration-300">
           <label class="text-xs font-bold text-neutral-600 mb-1.5 block">개인접속코드 입력</label>
           <input type="text" id="input-login-code" placeholder="본인의 코드를 입력하세요 (영문/한글)"
             class="w-full h-11 border border-neutral-200 rounded-xl px-4 text-sm font-bold text-center focus:border-brand-500 focus:outline-none">
         </div>
 
-        <!-- 2. Checkbox: First visit -->
+        <!-- 3. 체크박스: 개인접속코드가 없습니다 -->
         <label class="flex items-center gap-2.5 cursor-pointer mt-1 select-none">
           <input type="checkbox" id="checkbox-first-visit" onchange="toggleFirstVisitInput()"
             class="w-4 h-4 rounded border-neutral-300 text-brand-500 focus:ring-brand-500">
-          <span class="text-xs font-bold text-neutral-600">최초 방문이면 체크하세요.</span>
+          <span class="text-xs font-bold text-neutral-600">개인접속코드가 없습니다.</span>
         </label>
-
-        <!-- 3. Validation ID Input (Toggled by Checkbox) -->
-        <div id="validation-id-container" class="transition-all duration-300 hidden">
-          <label class="text-xs font-bold text-neutral-600 mb-1.5 block">클래스 ID를 입력하세요</label>
-          <input type="password" id="input-pwd" placeholder="클래스 ID를 입력하세요"
-            class="w-full h-11 border border-neutral-200 rounded-xl px-4 text-sm font-bold text-center focus:border-brand-500 focus:outline-none">
-        </div>
 
         <!-- 4. Admin Password Input (Shown only for jhchoi when no local cache is found) -->
         <div id="admin-pwd-container" class="transition-all duration-300 hidden">
@@ -577,11 +577,12 @@
 
     function toggleFirstVisitInput() {
       const checkbox = document.getElementById('checkbox-first-visit');
-      const container = document.getElementById('validation-id-container');
+      const personalCodeContainer = document.getElementById('personal-code-container');
       if (checkbox.checked) {
-        container.classList.remove('hidden');
+        personalCodeContainer.classList.add('hidden');
+        document.getElementById('input-login-code').value = ""; // 입력된 개인코드 초기화
       } else {
-        container.classList.add('hidden');
+        personalCodeContainer.classList.remove('hidden');
       }
     }
 
@@ -643,8 +644,9 @@
 
     // Combined Entrance handler (Normal login or First-time registration)
     async function handleEntrance() {
+      const classIdInput = document.getElementById('input-pwd').value.trim();
       const codeInput = document.getElementById('input-login-code').value.trim();
-      let firstVisit = document.getElementById('checkbox-first-visit').checked;
+      const noCodeChecked = document.getElementById('checkbox-first-visit').checked;
 
       const submitBtn = document.getElementById('modal-submit-btn');
       const spinner = document.getElementById('btn-spinner');
@@ -665,6 +667,17 @@
         }
       }
 
+      // Case 1: 개인접속코드가 없는 경우 -> 클래스 ID가 workingai 인 경우 외부 사이트로 다이렉트
+      if (noCodeChecked) {
+        if (classIdInput.toLowerCase() !== "workingai") {
+          showModalError("클래스 ID가 올바르지 않습니다.");
+          return;
+        }
+        window.location.href = "https://prompt-makers.vercel.app/";
+        return;
+      }
+
+      // Case 2: 개인접속코드로 기존 실습실 진입
       if (!codeInput) {
         showModalError("개인접속코드를 입력해 주세요.");
         return;
@@ -689,114 +702,49 @@
             showModalError("이 ID는 Admin입니다. 별도의 패스워드를 입력하세요.");
             return;
           } else {
-            // 어드민 비밀번호 검증
+            // 어드민 비밀번호 검증 (gobd1219)
             const adminPwd = adminPwdInput.value.trim();
-            if (adminPwd !== "admin123!") {
+            if (adminPwd !== "gobd1219") {
               showModalError("어드민 비밀번호가 일치하지 않습니다.");
               adminPwdInput.focus();
               return;
             }
-            // 비밀번호 일치 시 바이패스 및 중복가입 방지를 위해 일반 로그인(GET)으로 강제 전환
+            // 비밀번호 일치 시 바이패스 설정
             localStorage.setItem('jhchoi_master_bypass', 'true');
-            document.getElementById('checkbox-first-visit').checked = false;
-            firstVisit = false;
           }
         }
       }
 
-      if (firstVisit) {
-        // [Flow 1] First visit registration: requires "ID" (workingai)
-        const pwdInput = document.getElementById('input-pwd').value.trim();
-        if (pwdInput !== "workingai") {
-          showModalError("클래스 ID가 올바르지 않습니다.");
-          return;
-        }
+      if (!GAS_API_URL || GAS_API_URL.includes("YOUR_DEPLOYED_GAS_URL")) {
+        console.warn("GAS_API_URL이 설정되지 않아 로컬 테스트용 코드로 진행합니다.");
+        saveLoginCode(codeInput);
+        closeEntranceModal();
+        return;
+      }
 
-        const todayStr = getTodayString();
+      setSubmitting(true);
+      try {
+        const response = await fetch(`${GAS_API_URL}?code=${encodeURIComponent(codeInput)}`, {
+          method: "GET"
+        });
+        const result = await response.json();
 
-        if (!GAS_API_URL || GAS_API_URL.includes("YOUR_DEPLOYED_GAS_URL")) {
-          console.warn("GAS_API_URL이 설정되지 않아 로컬 테스트용 코드로 진행합니다.");
+        if (result.success) {
           saveLoginCode(codeInput);
-
-          document.getElementById('modal-login-form').classList.add('hidden');
-          document.getElementById('modal-success-screen').classList.remove('hidden');
-          document.getElementById('success-code-display').textContent = codeInput;
-          return;
-        }
-
-        setSubmitting(true);
-        try {
-          const response = await fetch(GAS_API_URL, {
-            method: "POST",
-            headers: {
-              "Content-Type": "text/plain"
-            },
-            body: JSON.stringify({
-              code: codeInput,
-              todayStr: todayStr
-            })
-          });
-          const result = await response.json();
-
-          if (result.success) {
-            saveLoginCode(codeInput);
-            localStorage.setItem('workbook_course_code', result.courseCode);
-            localStorage.setItem('workbook_file_address', result.fileAddress || '');
-            localStorage.setItem('naver_client_id', result.naverClientId || '');
-            localStorage.setItem('naver_client_secret', result.naverClientSecret || '');
-            localStorage.setItem('gemini_api_key', result.geminiApiKey || '');
-
-            document.getElementById('modal-login-form').classList.add('hidden');
-            document.getElementById('modal-success-screen').classList.remove('hidden');
-            document.getElementById('success-code-display').textContent = codeInput;
-            document.getElementById('modal-error-msg').classList.add('hidden');
-          } else {
-            showModalError(result.message || "구글 시트 과정코드 조회 실패");
-          }
-        } catch (err) {
-          console.warn("구글 시트 통신 실패, 로컬 캐시 모드로 강제 진입 처리합니다.", err);
-          saveLoginCode(codeInput);
-
-          document.getElementById('modal-login-form').classList.add('hidden');
-          document.getElementById('modal-success-screen').classList.remove('hidden');
-          document.getElementById('success-code-display').textContent = codeInput + " (오프라인 저장됨)";
-        } finally {
-          setSubmitting(false);
-        }
-
-      } else {
-        // [Flow 2] Regular Login: verify existing code
-        if (!GAS_API_URL || GAS_API_URL.includes("YOUR_DEPLOYED_GAS_URL")) {
-          console.warn("GAS_API_URL이 설정되지 않아 로컬 테스트용 코드로 진행합니다.");
-          saveLoginCode(codeInput);
+          localStorage.setItem('workbook_course_code', result.courseCode);
+          localStorage.setItem('workbook_file_address', result.fileAddress || '');
+          localStorage.setItem('naver_client_id', result.naverClientId || '');
+          localStorage.setItem('naver_client_secret', result.naverClientSecret || '');
+          localStorage.setItem('gemini_api_key', result.geminiApiKey || '');
           closeEntranceModal();
-          return;
+        } else {
+          showModalError(result.message || "유효하지 않은 개인접속코드입니다.");
         }
-
-        setSubmitting(true);
-        try {
-          const response = await fetch(`${GAS_API_URL}?code=${encodeURIComponent(codeInput)}`, {
-            method: "GET"
-          });
-          const result = await response.json();
-
-          if (result.success) {
-            saveLoginCode(codeInput);
-            localStorage.setItem('workbook_course_code', result.courseCode);
-            localStorage.setItem('workbook_file_address', result.fileAddress || '');
-            localStorage.setItem('naver_client_id', result.naverClientId || '');
-            localStorage.setItem('naver_client_secret', result.naverClientSecret || '');
-            localStorage.setItem('gemini_api_key', result.geminiApiKey || '');
-            closeEntranceModal();
-          } else {
-            showModalError(result.message || "유효하지 않은 개인접속코드입니다.");
-          }
-        } catch (err) {
-          showModalError("네트워크 오류가 발생했습니다. 구글 앱스 스크립트 배포 상태와 CORS 구성을 확인해 주세요.");
-          console.error(err);
-        } finally {
-          setSubmitting(false);
-        }
+      } catch (err) {
+        showModalError("네트워크 오류가 발생했습니다. 구글 앱스 스크립트 배포 상태와 CORS 구성을 확인해 주세요.");
+        console.error(err);
+      } finally {
+        setSubmitting(false);
       }
     }
 
