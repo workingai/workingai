@@ -48,10 +48,26 @@ document.addEventListener('contextmenu', event => event.preventDefault());
     }
   } catch (e) {}
 
+  // URL 정규화 헬퍼 (http/https, www, 끝 슬래시 제거)
+  const normalizeUrl = (url) => {
+    if (!url) return '';
+    return url.toLowerCase()
+      .replace(/^(https?:\/\/)?(www\.)?/, '')
+      .replace(/\/+$/, '');
+  };
+
+  const checkRedirect = (rulesList) => {
+    const normalizedCurrent = normalizeUrl(window.location.href);
+    return rulesList.find(r => {
+      const normalizedBefore = normalizeUrl(r.before);
+      // 현재 주소가 before 주소를 포함하거나 완전히 일치하는지 대조
+      return normalizedBefore && (normalizedCurrent.includes(normalizedBefore) || normalizedCurrent === normalizedBefore);
+    });
+  };
+
   // 1. 캐시된 규칙이 있으면 즉시 비교 후 리다이렉트 (깜빡임 최소화)
   if (rules) {
-    const currentUrl = window.location.href;
-    const match = rules.find(r => currentUrl.includes(r.before) || currentUrl === r.before);
+    const match = checkRedirect(rules);
     if (match && match.redirect) {
       window.location.replace(match.redirect);
       return;
@@ -67,8 +83,7 @@ document.addEventListener('contextmenu', event => event.preventDefault());
     
     // 이전에 캐시가 없었을 때만 갱신된 규칙으로 한 번 더 확인
     if (!rules) {
-      const currentUrl = window.location.href;
-      const match = freshRules.find(r => currentUrl.includes(r.before) || currentUrl === r.before);
+      const match = checkRedirect(freshRules);
       if (match && match.redirect) {
         window.location.replace(match.redirect);
       }
