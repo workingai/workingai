@@ -567,7 +567,13 @@
           updateNaverPreview();
           showToast('네이버 API Key가 자동으로 입력되었습니다.');
         } else {
-          alert('스프레드시트에서 네이버 API 정보를 가져오지 못했거나 로그인 정보가 유실되었습니다. 재로그인 해주세요.');
+const accessCode = localStorage.getItem('workbook_access_code');
+          if (!accessCode || accessCode.toLowerCase() === "workingai") {
+            alert('개인접속코드가 없이 로그인하신 경우, API 키를 직접 입력해주셔야 합니다.');
+          } else {
+            alert('로그인된 접속코드에 연결된 네이버 API 키가 스프레드시트에 등록되어 있지 않습니다. 직접 키를 입력해 주세요.');
+          }
+
         }
       } else {
         alert('비밀번호가 올바르지 않습니다.');
@@ -858,7 +864,13 @@ function stripHtml(html) {
           document.getElementById('geminiApiKey').value = apiKey;
           showToast('Gemini API Key가 자동으로 입력되었습니다.');
         } else {
-          alert('스프레드시트에서 Gemini API 정보를 가져오지 못했거나 로그인 정보가 유실되었습니다. 재로그인 해주세요.');
+const accessCode = localStorage.getItem('workbook_access_code');
+          if (!accessCode || accessCode.toLowerCase() === "workingai") {
+            alert('개인접속코드가 없이 로그인하신 경우, API 키를 직접 입력해주셔야 합니다.');
+          } else {
+            alert('로그인된 접속코드에 연결된 Gemini API 키가 스프레드시트에 등록되어 있지 않습니다. 직접 키를 입력해 주세요.');
+          }
+
         }
       } else {
         alert('비밀번호가 올바르지 않습니다.');
@@ -1141,7 +1153,7 @@ function sendEmailWithReport(dateStr, reportData, imageBlob) {
     $("sortType").addEventListener("change", updateNaverPreview);
     $("searchType").addEventListener("change", updateNaverPreview);
     geminiApiKeyInput.addEventListener("input", () => updateCode());
-    
+
     // Auto-populate saved keys from localStorage and run background sync if missing
     function autoPopulateKeys() {
       const savedClientId = localStorage.getItem("naver_client_id");
