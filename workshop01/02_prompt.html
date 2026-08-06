@@ -1,19 +1,17 @@
-<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ko">
-
 <head>
+  <link rel="icon" href="../favicon.png?v=2" type="image/png">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>WORKING AI - PROMPT BUILDER</title>
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Pretendard Font -->
-  <link rel="stylesheet" as="style" crossorigin
-    href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+  <link rel="stylesheet" href="../global.css">
   <!-- IBM Plex Mono Font -->
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&display=swap"
-    rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
   <script>
     tailwind.config = {
       theme: {
@@ -44,34 +42,24 @@
       }
     }
   </script>
-
   <style>
-    body {
-      font-family: 'Pretendard', -apple-system, sans-serif;
-      background-color: #F2F1EE;
-    }
-
     /* Custom scrollbar styling */
     ::-webkit-scrollbar {
       width: 6px;
       height: 6px;
     }
-
     ::-webkit-scrollbar-track {
       background: #F2F1EE;
     }
-
     ::-webkit-scrollbar-thumb {
       background: #DDDBD5;
       border-radius: 4px;
     }
-
     ::-webkit-scrollbar-thumb:hover {
       background: #B0AEA8;
     }
   </style>
 </head>
-
 <body class="min-h-screen text-neutral-900 antialiased flex flex-col h-screen overflow-hidden pt-[5px]">
   <!-- Top brand bar -->
   <div class="fixed top-0 left-0 w-full h-[5px] bg-brand-500 z-50"></div>
