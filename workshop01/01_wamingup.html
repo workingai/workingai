@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+  <link rel="icon" href="../favicon.png?v=2" type="image/png">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>워밍업 실습 도구</title>
@@ -8,6 +9,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Pretendard Font -->
   <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+  <link rel="stylesheet" href="../global.css">
   <!-- IBM Plex Mono Font -->
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
   <script>
@@ -41,14 +43,6 @@
     }
   </script>
   <style>
-    :root{
-      --bg:#F2F1EE; --card:#FFFFFF; --line:#DDDBD5; --green:#2A6B52; --green-dark:#1D4E3A;
-      --panel:#E6F2ED; --text:#1A1A18; --muted:#77736B; --soft:#F8F7F4;
-    }
-    body {
-      font-family: 'Pretendard', -apple-system, sans-serif;
-      background-color: #F2F1EE;
-    }
     /* Custom Scrollbars */
     ::-webkit-scrollbar {
       width: 6px;
@@ -183,7 +177,7 @@
   </aside>
 
   <!-- ===== Main Content ===== -->
-  <main class="flex-1 flex flex-col overflow-hidden pt-8 lg:pt-10 pb-8 px-4 md:px-8 lg:px-10">
+  <main class="flex-1 flex flex-col overflow-y-auto pt-8 lg:pt-10 pb-8 px-4 md:px-8 lg:px-10">
     <!-- Header Area -->
     <header class="mb-4 flex-shrink-0 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
       <div>
@@ -205,7 +199,7 @@
       </div>
     </header>
  
-    <section class="border border-[#DDDBD5] rounded-2xl p-5 md:p-6 bg-white shadow-sm flex-1 flex flex-col overflow-y-auto">
+    <section class="border border-[#DDDBD5] rounded-2xl p-5 md:p-6 bg-white shadow-sm flex flex-col flex-1">
       <!-- Practice Content Container -->
       <div class="flex-1 flex flex-col gap-6">
         
