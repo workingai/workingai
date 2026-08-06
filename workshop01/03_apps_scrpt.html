@@ -567,12 +567,32 @@
           updateNaverPreview();
           showToast('네이버 API Key가 자동으로 입력되었습니다.');
         } else {
-const accessCode = localStorage.getItem('workbook_access_code');
-          if (!accessCode || accessCode.toLowerCase() === "workingai") {
-            alert('개인접속코드가 없이 로그인하신 경우, API 키를 직접 입력해주셔야 합니다.');
-          } else {
-            alert('로그인된 접속코드에 연결된 네이버 API 키가 스프레드시트에 등록되어 있지 않습니다. 직접 키를 입력해 주세요.');
-          }
+const accessCode = localStorage.getItem('workbook_access_code') || 'workingai';
+          const gasApiUrl = localStorage.getItem('gas_api_url') || "https://script.google.com/macros/s/AKfycbztn6cdfX14ZmqAmc-RbST7L6-B6h959d4bJctqDFL_2MylpN9QvBqPytNdp9bTxHblyA/exec";
+          
+          showToast('GAS에서 정보를 조회 중입니다...');
+          fetch(`${gasApiUrl}?code=${encodeURIComponent(accessCode)}`, { method: "GET" })
+            .then(res => res.json())
+            .then(result => {
+              if (result.success && result.naverClientId && result.naverClientSecret) {
+                localStorage.setItem('workbook_course_code', result.courseCode);
+                localStorage.setItem('workbook_file_address', result.fileAddress || '');
+                localStorage.setItem('naver_client_id', result.naverClientId);
+                localStorage.setItem('naver_client_secret', result.naverClientSecret);
+                if (result.geminiApiKey) { localStorage.setItem('gemini_api_key', result.geminiApiKey); }
+                
+                idField.value = result.naverClientId;
+                secretField.value = result.naverClientSecret;
+                updateNaverPreview();
+                showToast('네이버 API Key가 자동으로 입력되었습니다.');
+              } else {
+                alert('스프레드시트에 등록된 네이버 API 키 정보가 없습니다. 직접 키를 입력해 주세요.');
+              }
+            })
+            .catch(err => {
+              console.error(err);
+              alert('GAS 연동에 실패했습니다. 직접 키를 입력해 주세요.');
+            });
 
         }
       } else {
@@ -864,12 +884,31 @@ function stripHtml(html) {
           document.getElementById('geminiApiKey').value = apiKey;
           showToast('Gemini API Key가 자동으로 입력되었습니다.');
         } else {
-const accessCode = localStorage.getItem('workbook_access_code');
-          if (!accessCode || accessCode.toLowerCase() === "workingai") {
-            alert('개인접속코드가 없이 로그인하신 경우, API 키를 직접 입력해주셔야 합니다.');
-          } else {
-            alert('로그인된 접속코드에 연결된 Gemini API 키가 스프레드시트에 등록되어 있지 않습니다. 직접 키를 입력해 주세요.');
-          }
+const accessCode = localStorage.getItem('workbook_access_code') || 'workingai';
+          const gasApiUrl = localStorage.getItem('gas_api_url') || "https://script.google.com/macros/s/AKfycbztn6cdfX14ZmqAmc-RbST7L6-B6h959d4bJctqDFL_2MylpN9QvBqPytNdp9bTxHblyA/exec";
+          
+          showToast('GAS에서 정보를 조회 중입니다...');
+          fetch(`${gasApiUrl}?code=${encodeURIComponent(accessCode)}`, { method: "GET" })
+            .then(res => res.json())
+            .then(result => {
+              if (result.success && result.geminiApiKey) {
+                localStorage.setItem('workbook_course_code', result.courseCode);
+                localStorage.setItem('workbook_file_address', result.fileAddress || '');
+                localStorage.setItem('gemini_api_key', result.geminiApiKey);
+                if (result.naverClientId) { localStorage.setItem('naver_client_id', result.naverClientId); }
+                if (result.naverClientSecret) { localStorage.setItem('naver_client_secret', result.naverClientSecret); }
+                
+                document.getElementById('geminiApiKey').value = result.geminiApiKey;
+                updateCode();
+                showToast('Gemini API Key가 자동으로 입력되었습니다.');
+              } else {
+                alert('스프레드시트에 등록된 Gemini API 키 정보가 없습니다. 직접 키를 입력해 주세요.');
+              }
+            })
+            .catch(err => {
+              console.error(err);
+              alert('GAS 연동에 실패했습니다. 직접 키를 입력해 주세요.');
+            });
 
         }
       } else {
