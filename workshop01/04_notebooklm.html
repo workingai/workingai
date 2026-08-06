@@ -228,23 +228,23 @@
           </div>
           <div class="flex items-center gap-2 flex-shrink-0" id="card-links">
             <a id="link-notebook" href="https://notebooklm.google/" target="_blank" class="hidden" style="display: none !important;"></a>
-            <a id="link-template-download" href="https://prompt-makers.vercel.app/download/master_template.pdf" target="_blank" class="hidden px-4 h-9 border border-[#DDDBD5] bg-white hover:bg-neutral-50 text-neutral-900 text-xs md:text-sm font-bold rounded-lg transition-all shadow-xs flex items-center justify-center gap-1.5 focus:outline-none" style="text-decoration: none;">
-              <svg class="w-3.5 h-3.5 text-neutral-600" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"></path>
+            <a id="link-template-download" href="https://www.canva.com" target="_blank" class="hidden px-4 h-9 border border-[#DDDBD5] bg-white hover:bg-neutral-50 text-neutral-900 text-xs md:text-sm font-bold rounded-lg transition-all shadow-xs flex items-center justify-center gap-1.5 focus:outline-none" style="text-decoration: none;">
+              <svg class="w-3.5 h-3.5 text-neutral-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"></path>
               </svg>
-              템플릿 다운로드
+              Canvas.com
             </a>
             <a id="shared-notebook-link" href="https://notebooklm.google.com/notebook/853b7038-15e0-41d2-92cd-7db2b17b0622" target="_blank" class="px-4 h-9 border border-[#DDDBD5] bg-white hover:bg-neutral-50 text-neutral-900 text-xs md:text-sm font-bold rounded-lg transition-all shadow-xs flex items-center justify-center gap-1.5 focus:outline-none" style="text-decoration: none;">
               <svg class="w-3.5 h-3.5 text-neutral-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"></path>
               </svg>
-              공유 제미나이 Notebook 바로가기
+              공유 버전 보기
             </a>
             <a id="link-claude" href="https://claude.ai/" target="_blank" class="hidden px-4 h-9 border border-[#DDDBD5] hover:border-orange-500 bg-white hover:bg-orange-50 text-neutral-900 hover:text-orange-700 font-bold text-xs md:text-sm rounded-lg transition-all shadow-xs flex items-center justify-center gap-1.5 focus:outline-none" style="text-decoration: none;">
               <svg class="w-3.5 h-3.5 text-neutral-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"></path>
               </svg>
-              Claude 바로가기
+              Claude.ai
             </a>
           </div>
         </div>
@@ -710,23 +710,16 @@
   function updateStepsUI() {
     const card1 = document.getElementById('step1-card');
     const card2 = document.getElementById('step2-card');
-    const card3 = document.getElementById('step3-card');
     const body1 = document.getElementById('step1-body');
     const body2 = document.getElementById('step2-body');
-    const body3 = document.getElementById('step3-body');
     const collapsedBody1 = document.getElementById('step1-collapsed-body');
     const collapsedBody2 = document.getElementById('step2-collapsed-body');
-    const collapsedBody3 = document.getElementById('step3-collapsed-body');
     const desc1 = document.getElementById('step1-desc');
     const desc2 = document.getElementById('step2-desc');
-    const desc3 = document.getElementById('step3-desc');
     const title1 = document.getElementById('step1-title');
     const title2 = document.getElementById('step2-title');
-    const title3 = document.getElementById('step3-title');
     const head1 = card1.querySelector('.card-head');
     const head2 = card2.querySelector('.card-head');
-    const head3 = card3.querySelector('.card-head');
-
 
     if (activeStep === 1) {
       body1.classList.remove('hidden');
@@ -740,23 +733,15 @@
       title2.textContent = "🎨 Step II";
       document.getElementById('step2-download-btn').classList.add('hidden');
 
-      body3.classList.add('hidden');
-      collapsedBody3.classList.remove('hidden');
-      desc3.classList.add('hidden');
-      title3.textContent = "🚀 Step III";
-
-      // Width sizes: 4/6, 1/6, 1/6
-      card1.className = "card transition-all duration-300 lg:col-span-4";
+      // Width sizes: 5/6, 1/6
+      card1.className = "card transition-all duration-300 lg:col-span-5";
       card2.className = "card transition-all duration-300 lg:col-span-1 opacity-60";
-      card3.className = "card transition-all duration-300 lg:col-span-1 opacity-60";
 
       head1.classList.add('bg-[#EAF2EE]');
       head1.classList.remove('bg-neutral-50');
       head2.classList.remove('bg-[#EAF2EE]');
       head2.classList.add('bg-neutral-50');
-      head3.classList.remove('bg-[#EAF2EE]');
-      head3.classList.add('bg-neutral-50');
-    } else if (activeStep === 2) {
+    } else {
       body1.classList.add('hidden');
       collapsedBody1.classList.remove('hidden');
       desc1.classList.add('hidden');
@@ -768,56 +753,20 @@
       title2.textContent = "🎨 Step II. 디자인 가이드 설계";
       document.getElementById('step2-download-btn').classList.remove('hidden');
 
-      body3.classList.add('hidden');
-      collapsedBody3.classList.remove('hidden');
-      desc3.classList.add('hidden');
-      title3.textContent = "🚀 Step III";
-
-      // Width sizes: 1/6, 4/6, 1/6
+      // Width sizes: 1/6, 5/6
       card1.className = "card transition-all duration-300 lg:col-span-1 opacity-60";
-      card2.className = "card transition-all duration-300 lg:col-span-4";
-      card3.className = "card transition-all duration-300 lg:col-span-1 opacity-60";
+      card2.className = "card transition-all duration-300 lg:col-span-5";
 
       head1.classList.remove('bg-[#EAF2EE]');
       head1.classList.add('bg-neutral-50');
       head2.classList.add('bg-[#EAF2EE]');
       head2.classList.remove('bg-neutral-50');
-      head3.classList.remove('bg-[#EAF2EE]');
-      head3.classList.add('bg-neutral-50');
-    } else {
-      body1.classList.add('hidden');
-      collapsedBody1.classList.remove('hidden');
-      desc1.classList.add('hidden');
-      title1.textContent = "📝 Step I";
-
-      body2.classList.add('hidden');
-      collapsedBody2.classList.remove('hidden');
-      desc2.classList.add('hidden');
-      title2.textContent = "🎨 Step II";
-      document.getElementById('step2-download-btn').classList.add('hidden');
-
-      body3.classList.remove('hidden');
-      collapsedBody3.classList.add('hidden');
-      desc3.classList.remove('hidden');
-      title3.textContent = "🚀 Step III. 슬라이드 생성하기";
-
-      // Width sizes: 1/6, 1/6, 4/6
-      card1.className = "card transition-all duration-300 lg:col-span-1 opacity-60";
-      card2.className = "card transition-all duration-300 lg:col-span-1 opacity-60";
-      card3.className = "card transition-all duration-300 lg:col-span-4";
-
-      head1.classList.remove('bg-[#EAF2EE]');
-      head1.classList.add('bg-neutral-50');
-      head2.classList.remove('bg-[#EAF2EE]');
-      head2.classList.add('bg-neutral-50');
-      head3.classList.add('bg-[#EAF2EE]');
-      head3.classList.remove('bg-neutral-50');
     }
   }
 
   function copyActiveRequestPrompt() {
     if (activeStep === 1) {
-      copyText('contentRequest', '목차 요청문이 복사되었습니다.');
+      copyText('contentRequest', '슬라이드 구성 요청문이 복사되었습니다.');
     } else if (activeStep === 2) {
       copyText('designResult', '디자인 가이드가 복사되었습니다.');
     }
