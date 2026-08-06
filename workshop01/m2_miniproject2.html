@@ -498,54 +498,19 @@
     // Fetch dynamic webapp URL from Google Spreadsheet on page load
     async function initWebappShareLink() {
       try {
-        const spreadsheetId = '1t-iA9k7jKfRCTLHctak-JMu62WfPbSqC1PTmo99HZ_w';
-        const url = `https://docs.google.com/spreadsheets/d/${spreadsheetId}/gviz/tq?tqx=out:csv&sheet=webapp`;
-        const response = await fetch(url);
+        const gasApiUrl = localStorage.getItem('gas_api_url') || "https://script.google.com/macros/s/AKfycbztn6cdfX14ZmqAmc-RbST7L6-B6h959d4bJctqDFL_2MylpN9QvBqPytNdp9bTxHblyA/exec";
+        const response = await fetch(`${gasApiUrl}?action=getWebappUrl`);
         if (response.ok) {
-          const csvText = await response.text();
-          const lines = csvText.split(/\r?\n/);
-          if (lines.length > 0) {
-            // CSV cell parser helper
-            const parseCsvLine = (line) => {
-              const result = [];
-              let current = '';
-              let inQuotes = false;
-              for (let i = 0; i < line.length; i++) {
-                const char = line[i];
-                if (char === '"') {
-                  if (inQuotes && line[i + 1] === '"') {
-                    current += '"';
-                    i++;
-                  } else {
-                    inQuotes = !inQuotes;
-                  }
-                } else if (char === ',' && !inQuotes) {
-                  result.push(current.trim());
-                  current = '';
-                } else {
-                  current += char;
-                }
-              }
-              result.push(current.trim());
-              return result;
-            };
-
-            const headers = parseCsvLine(lines[0]);
-            const urlColIdx = headers.indexOf("URL");
-            if (urlColIdx !== -1 && lines.length > 1) {
-              const firstDataRow = parseCsvLine(lines[1]);
-              const targetUrl = firstDataRow[urlColIdx];
-              if (targetUrl && targetUrl.startsWith('http')) {
-                const btn = document.getElementById('webapp-share-btn');
-                if (btn) {
-                  btn.setAttribute('href', targetUrl);
-                }
-              }
+          const result = await response.json();
+          if (result.success && result.url && result.url.startsWith('http')) {
+            const btn = document.getElementById('webapp-share-btn');
+            if (btn) {
+              btn.setAttribute('href', result.url);
             }
           }
         }
       } catch (err) {
-        console.warn("Failed to fetch webapp share URL from spreadsheet, using fallback", err);
+        console.warn("Failed to fetch webapp share URL from GAS, using fallback", err);
       }
     }
 
