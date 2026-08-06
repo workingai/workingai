@@ -503,14 +503,44 @@
         const response = await fetch(url);
         if (response.ok) {
           const csvText = await response.text();
-          const rows = csvText.split('\n').map(row => {
-            return row.replace(/^"|"$/g, '').replace(/""/g, '"').trim();
-          });
-          
-          if (rows.length > 1 && rows[1].startsWith('http')) {
-            const btn = document.getElementById('webapp-share-btn');
-            if (btn) {
-              btn.setAttribute('href', rows[1]);
+          const lines = csvText.split(/\r?\n/);
+          if (lines.length > 0) {
+            // CSV cell parser helper
+            const parseCsvLine = (line) => {
+              const result = [];
+              let current = '';
+              let inQuotes = false;
+              for (let i = 0; i < line.length; i++) {
+                const char = line[i];
+                if (char === '"') {
+                  if (inQuotes && line[i + 1] === '"') {
+                    current += '"';
+                    i++;
+                  } else {
+                    inQuotes = !inQuotes;
+                  }
+                } else if (char === ',' && !inQuotes) {
+                  result.push(current.trim());
+                  current = '';
+                } else {
+                  current += char;
+                }
+              }
+              result.push(current.trim());
+              return result;
+            };
+
+            const headers = parseCsvLine(lines[0]);
+            const urlColIdx = headers.indexOf("URL");
+            if (urlColIdx !== -1 && lines.length > 1) {
+              const firstDataRow = parseCsvLine(lines[1]);
+              const targetUrl = firstDataRow[urlColIdx];
+              if (targetUrl && targetUrl.startsWith('http')) {
+                const btn = document.getElementById('webapp-share-btn');
+                if (btn) {
+                  btn.setAttribute('href', targetUrl);
+                }
+              }
             }
           }
         }
