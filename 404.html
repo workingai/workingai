@@ -101,7 +101,7 @@
       }
 
       // 3. 일치하는 규칙이 없는 진짜 존재하지 않는 경로인 경우 로딩 제거하고 404 콘텐츠 표시
-      document.addEventListener('DOMContentLoaded', () => {
+      const renderErrorPage = () => {
         const loadingScreen = document.getElementById('loading-screen');
         const errorContent = document.getElementById('error-content');
         
@@ -131,7 +131,13 @@
             suggestionBox.classList.remove('hidden');
           }
         }
-      });
+      };
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', renderErrorPage);
+      } else {
+        renderErrorPage();
+      }
     })();
   </script>
 </head>
