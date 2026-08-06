@@ -275,7 +275,7 @@
 
           <!-- 웹앱 공유 버튼 -->
           <div class="flex justify-end mt-2 pb-2">
-            <a href="https://docs.google.com/spreadsheets/d/1t-iA9k7jKfRCTLHctak-JMu62WfPbSqC1PTmo99HZ_w/edit?usp=sharing" 
+            <a id="webapp-share-btn" href="https://docs.google.com/spreadsheets/d/1t-iA9k7jKfRCTLHctak-JMu62WfPbSqC1PTmo99HZ_w/edit?usp=sharing" 
                target="_blank" 
                class="inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-brand-500 hover:bg-brand-600 text-white font-extrabold text-base rounded-xl transition-all shadow-md hover:shadow-lg focus:outline-none"
                style="text-decoration: none;">
@@ -495,9 +495,34 @@
       }
     }
 
+    // Fetch dynamic webapp URL from Google Spreadsheet on page load
+    async function initWebappShareLink() {
+      try {
+        const spreadsheetId = '1t-iA9k7jKfRCTLHctak-JMu62WfPbSqC1PTmo99HZ_w';
+        const url = `https://docs.google.com/spreadsheets/d/${spreadsheetId}/gviz/tq?tqx=out:csv&sheet=webapp`;
+        const response = await fetch(url);
+        if (response.ok) {
+          const csvText = await response.text();
+          const rows = csvText.split('\n').map(row => {
+            return row.replace(/^"|"$/g, '').replace(/""/g, '"').trim();
+          });
+          
+          if (rows.length > 1 && rows[1].startsWith('http')) {
+            const btn = document.getElementById('webapp-share-btn');
+            if (btn) {
+              btn.setAttribute('href', rows[1]);
+            }
+          }
+        }
+      } catch (err) {
+        console.warn("Failed to fetch webapp share URL from spreadsheet, using fallback", err);
+      }
+    }
+
     // Set tab 0 as active by default on load
     window.addEventListener('DOMContentLoaded', () => {
       showTab(0);
+      initWebappShareLink();
     });
 
     const DEFAULT_PROMPTS = {
