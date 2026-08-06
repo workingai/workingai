@@ -177,98 +177,177 @@
   <!-- ===== Main Content ===== -->
   <main class="flex-1 flex flex-col overflow-hidden pt-8 lg:pt-10 pb-8 px-4 md:px-8 lg:px-10">
     <!-- Header Area -->
-    <header class="mb-4 flex-shrink-0">
-      <div class="mb-2">
-        <span class="inline-block bg-brand-500 text-white rounded-full px-4 py-1 text-[11.5px] font-mono font-extrabold tracking-wider uppercase">PROMPT BUILDER</span>
+    <header class="mb-4 flex-shrink-0 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+      <div>
+        <div class="mb-2">
+          <span class="inline-block bg-brand-500 text-white rounded-full px-4 py-1 text-[11.5px] font-mono font-extrabold tracking-wider uppercase">PROMPT BUILDER</span>
+        </div>
+        <h1 id="header-title" class="text-2xl md:text-3xl font-extrabold tracking-tight leading-tight text-neutral-900">
+          핵심적인 프롬프트 구성 요소를 통해 목표한 결과를 얻을 수 있습니다
+        </h1>
       </div>
-      <h1 class="text-2xl md:text-3xl font-extrabold tracking-tight leading-tight text-neutral-900">
-        프롬프트 빌더
-      </h1>
+      <!-- Navigation buttons in header -->
+      <div class="flex items-center gap-2 flex-shrink-0 mb-1">
+        <button id="btn-tab-1" class="w-9 h-9 flex items-center justify-center rounded-full font-bold text-sm transition-all focus:outline-none bg-brand-500 text-white border border-brand-500" onclick="showPage1()">
+          1
+        </button>
+        <button id="btn-tab-2" class="w-9 h-9 flex items-center justify-center rounded-full font-bold text-sm transition-all focus:outline-none bg-white text-brand-500 border border-[#DDDBD5] hover:bg-neutral-50" onclick="showPage2()">
+          2
+        </button>
+      </div>
     </header>
 
     <!-- Main Builder Card -->
     <section class="border border-[#DDDBD5] rounded-2xl p-5 md:p-6 bg-white shadow-sm flex-1 flex flex-col overflow-hidden">
-      <!-- Card Head -->
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#DDDBD5] pb-4 mb-4 flex-shrink-0">
-        <div>
-          <h2 class="text-lg md:text-xl font-extrabold text-neutral-900">프롬프트 구성 요소 입력</h2>
-          <p class="text-xs md:text-sm text-[#605E59] mt-1">각 항목을 작성하면 순서대로 하나의 프롬프트로 조합됩니다.</p>
-        </div>
-        
-        <div>
-          <select id="sample-select" onchange="selectSample(this.value)" class="text-base font-bold border border-[#DDDBD5] bg-white text-neutral-700 rounded-lg px-4 py-2.5 w-64 md:w-80 focus:border-brand-500 focus:outline-none cursor-pointer">
-            <option value="ax">AX 보고서</option>
-            <option value="sales">영업 메일</option>
-            <option value="announcement">공지문 작성</option>
-            <option value="ideas">아이디어 요청</option>
-            <option value="codereview">코드 분석 및 최적화</option>
-            <option value="pr">보도자료</option>
-            <option value="">직접 입력</option>
-          </select>
+      <!-- Page 1 -->
+      <div id="page1-container" class="flex-1 flex flex-col overflow-hidden">
+        <!-- Card Head -->
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#DDDBD5] pb-4 mb-4 flex-shrink-0">
+          <div>
+            <h2 class="text-lg md:text-xl font-extrabold text-neutral-900">프롬프트 구성 요소 입력</h2>
+            <p class="text-xs md:text-sm text-[#605E59] mt-1">각 항목을 작성하면 순서대로 하나의 프롬프트로 조합됩니다.</p>
+          </div>
+          
+          <div>
+            <select id="sample-select" onchange="selectSample(this.value)" class="text-base font-bold border border-[#DDDBD5] bg-white text-neutral-700 rounded-lg px-4 py-2.5 w-64 md:w-80 focus:border-brand-500 focus:outline-none cursor-pointer">
+              <option value="ax">AX 보고서</option>
+              <option value="sales">영업 메일</option>
+              <option value="announcement">공지문 작성</option>
+              <option value="ideas">아이디어 요청</option>
+              <option value="codereview">코드 분석 및 최적화</option>
+              <option value="pr">보도자료</option>
+              <option value="">직접 입력</option>
+            </select>
+          </div>
+
         </div>
 
+        <!-- Input Fields Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 flex-1 overflow-y-auto lg:overflow-hidden mb-4">
+          <!-- Goal Input (Step 1) -->
+          <section id="step-sec-1" class="step-section flex flex-col border border-[#DDDBD5] rounded-xl bg-brand-100 overflow-hidden h-64 md:h-80 lg:h-full">
+            <div class="p-4 pb-2.5 flex-shrink-0">
+              <strong class="block text-neutral-900 text-base font-extrabold mb-1">🎯 목표</strong>
+              <span class="block text-[#605E59] text-xs leading-tight">무엇을, 왜 요청하나요?</span>
+            </div>
+            <textarea id="goal" placeholder="예: 필요한 업무와 요청 목적을 작성해 주세요."
+              class="w-full flex-1 p-4 border-t border-b-0 border-l-0 border-r-0 border-[#DDDBD5] bg-white text-neutral-900 text-base leading-relaxed placeholder-neutral-400 focus:border-brand-500 focus:ring-0 outline-none resize-none overflow-y-auto"></textarea>
+          </section>
+
+          <!-- Role Input (Step 2) -->
+          <section id="step-sec-2" class="step-section flex flex-col border border-[#DDDBD5] rounded-xl bg-brand-100 overflow-hidden h-64 md:h-80 lg:h-full">
+            <div class="p-4 pb-2.5 flex-shrink-0">
+              <strong class="block text-neutral-900 text-base font-extrabold mb-1">👤 역할</strong>
+              <span class="block text-[#605E59] text-xs leading-tight">AI에게 어떤 역할을 맡기나요?</span>
+            </div>
+            <textarea id="role" placeholder="예: 너는 10년 차 디지털 전환 전문 컨설턴트야."
+              class="w-full flex-1 p-4 border-t border-b-0 border-l-0 border-r-0 border-[#DDDBD5] bg-white text-neutral-900 text-base leading-relaxed placeholder-neutral-400 focus:border-brand-500 focus:ring-0 outline-none resize-none overflow-y-auto"></textarea>
+          </section>
+
+          <!-- Limit Input (Step 3) -->
+          <section id="step-sec-3" class="step-section flex flex-col border border-[#DDDBD5] rounded-xl bg-brand-100 overflow-hidden h-64 md:h-80 lg:h-full">
+            <div class="p-4 pb-2.5 flex-shrink-0">
+              <strong class="block text-neutral-900 text-base font-extrabold mb-1">📌 제한</strong>
+              <span class="block text-[#605E59] text-xs leading-tight">기간, 범위, 톤, 분량 등 조건</span>
+            </div>
+            <textarea id="limit" placeholder="예: 최근 6개월 이내 사례 중심으로 정리해줘."
+              class="w-full flex-1 p-4 border-t border-b-0 border-l-0 border-r-0 border-[#DDDBD5] bg-white text-neutral-900 text-base leading-relaxed placeholder-neutral-400 focus:border-brand-500 focus:ring-0 outline-none resize-none overflow-y-auto"></textarea>
+          </section>
+
+          <!-- Output Input (Step 4) -->
+          <section id="step-sec-4" class="step-section flex flex-col border border-[#DDDBD5] rounded-xl bg-brand-100 overflow-hidden h-64 md:h-80 lg:h-full">
+            <div class="p-4 pb-2.5 flex-shrink-0">
+              <strong class="block text-neutral-900 text-base font-extrabold mb-1">📄 출력</strong>
+              <span class="block text-[#605E59] text-xs leading-tight">어떤 형식으로 받고 싶나요?</span>
+            </div>
+            <textarea id="output" placeholder="예: 핵심 요약, 사례 표, 인사이트 순으로 작성해줘."
+              class="w-full flex-1 p-4 border-t border-b-0 border-l-0 border-r-0 border-[#DDDBD5] bg-white text-neutral-900 text-base leading-relaxed placeholder-neutral-400 focus:border-brand-500 focus:ring-0 outline-none resize-none overflow-y-auto"></textarea>
+          </section>
+        </div>
+
+        <!-- Actions Bottom Panel -->
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pt-4 border-t border-[#DDDBD5] flex-shrink-0">
+          <!-- Form Notice -->
+          <p class="text-[#605E59] text-xs md:text-sm leading-relaxed">
+            내용을 직접 수정 후 복사하거나 복사 후 메모장에서 수정하세요.
+          </p>
+          <!-- Action Buttons -->
+          <div class="flex justify-end gap-3">
+            <button
+              class="px-6 h-11 bg-brand-500 hover:bg-brand-600 text-white text-sm md:text-base font-extrabold rounded-lg transition-all shadow-sm flex items-center justify-center gap-1.5 focus:outline-none"
+              onclick="copyPrompt()">
+              <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <rect x="9" y="9" width="11" height="11" rx="2" ry="2" stroke-linecap="round" stroke-linejoin="round"></rect>
+                <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+              프롬프트 복사
+            </button>
+          </div>
+        </div>
       </div>
 
-      <!-- Input Fields Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 flex-1 overflow-y-auto lg:overflow-hidden mb-4">
-        <!-- Goal Input (Step 1) -->
-        <section id="step-sec-1" class="step-section flex flex-col border border-[#DDDBD5] rounded-xl bg-brand-100 overflow-hidden h-64 md:h-80 lg:h-full">
-          <div class="p-4 pb-2.5 flex-shrink-0">
-            <strong class="block text-neutral-900 text-base font-extrabold mb-1">🎯 목표</strong>
-            <span class="block text-[#605E59] text-xs leading-tight">무엇을, 왜 요청하나요?</span>
+      <!-- Page 2 -->
+      <div id="page2-container" class="hidden flex-1 flex-col overflow-y-auto px-1 py-2">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-stretch">
+          <!-- Card 1: 목표 보완 가이드 -->
+          <div class="border border-[#DDDBD5] rounded-xl bg-brand-100 flex flex-col overflow-hidden h-full shadow-xs">
+            <!-- Header (Light green) -->
+            <div class="p-4 pb-3 flex-shrink-0">
+              <strong class="block text-neutral-900 text-base font-extrabold mb-1">🎯 비즈니스 목표 구체화 (Goal)</strong>
+              <span class="block text-[#605E59] text-xs leading-tight">명확한 목표 수립을 통해 리서치의 질을 결정합니다.</span>
+            </div>
+            <!-- Body -->
+            <div class="flex-1 p-4 border-t border-[#DDDBD5] bg-white flex flex-col gap-4 overflow-y-auto">
+              <!-- Checklist Form Box -->
+              <div class="border border-[#DDDBD5] rounded-xl p-4 bg-[#F8F7F4] flex flex-col gap-3">
+                <span class="text-xs font-bold text-brand-600 uppercase tracking-wider">목표 수립 체크리스트</span>
+                <div class="flex flex-col gap-2.5">
+                  <div class="flex items-start gap-3 bg-white p-3.5 rounded-lg border border-neutral-200 shadow-3xs">
+                    <span class="text-brand-500 font-bold mt-0.5">✓</span>
+                    <span class="text-xs md:text-sm text-neutral-700 leading-relaxed font-bold">해당 기획/과제를 통해 달성하고자 하는 구체적 비즈니스 목표(매출, 전환율, 업무 효율 등)가 명확히 명시되었는가?</span>
+                  </div>
+                  <div class="flex items-start gap-3 bg-white p-3.5 rounded-lg border border-neutral-200 shadow-3xs">
+                    <span class="text-brand-500 font-bold mt-0.5">✓</span>
+                    <span class="text-xs md:text-sm text-neutral-700 leading-relaxed font-bold">리서치가 단순히 정보를 수집하는 단계에 그치지 않고, 후속 비즈니스 의사결정과 직접적으로 연결되도록 설계되었는가?</span>
+                  </div>
+                  <div class="flex items-start gap-3 bg-white p-3.5 rounded-lg border border-neutral-200 shadow-3xs">
+                    <span class="text-brand-500 font-bold mt-0.5">✓</span>
+                    <span class="text-xs md:text-sm text-neutral-700 leading-relaxed font-bold">조사 대상을 좁혀줄 시장의 한계점, 타깃 고객, 기술 범위 등 비즈니스 목표 달성에 직결되는 연구 범위가 뚜렷이 설정되었는가?</span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          <textarea id="goal" placeholder="예: 필요한 업무와 요청 목적을 작성해 주세요."
-            class="w-full flex-1 p-4 border-t border-b-0 border-l-0 border-r-0 border-[#DDDBD5] bg-white text-neutral-900 text-base leading-relaxed placeholder-neutral-400 focus:border-brand-500 focus:ring-0 outline-none resize-none overflow-y-auto"></textarea>
-        </section>
 
-        <!-- Role Input (Step 2) -->
-        <section id="step-sec-2" class="step-section flex flex-col border border-[#DDDBD5] rounded-xl bg-brand-100 overflow-hidden h-64 md:h-80 lg:h-full">
-          <div class="p-4 pb-2.5 flex-shrink-0">
-            <strong class="block text-neutral-900 text-base font-extrabold mb-1">👤 역할</strong>
-            <span class="block text-[#605E59] text-xs leading-tight">AI에게 어떤 역할을 맡기나요?</span>
+          <!-- Card 2: 아웃풋 구체화 가이드 -->
+          <div class="border border-[#DDDBD5] rounded-xl bg-brand-100 flex flex-col overflow-hidden h-full shadow-xs">
+            <!-- Header (Light green) -->
+            <div class="p-4 pb-3 flex-shrink-0">
+              <strong class="block text-neutral-900 text-base font-extrabold mb-1">📄 최종 출력 형태 구체화 (Output)</strong>
+              <span class="block text-[#605E59] text-xs leading-tight">상세한 아웃풋 설정을 통해 결과물의 실무 활용도를 높입니다.</span>
+            </div>
+            <!-- Body -->
+            <div class="flex-1 p-4 border-t border-[#DDDBD5] bg-white flex flex-col gap-4 overflow-y-auto">
+              <!-- Checklist Form Box -->
+              <div class="border border-[#DDDBD5] rounded-xl p-4 bg-[#F8F7F4] flex flex-col gap-3">
+                <span class="text-xs font-bold text-brand-600 uppercase tracking-wider">아웃풋 구성 체크리스트</span>
+                <div class="flex flex-col gap-2.5">
+                  <div class="flex items-start gap-3 bg-white p-3.5 rounded-lg border border-neutral-200 shadow-3xs">
+                    <span class="text-brand-500 font-bold mt-0.5">✓</span>
+                    <span class="text-xs md:text-sm text-neutral-700 leading-relaxed font-bold">결과물이 독자의 가독성을 돕기 위해 단계별 흐름(기획 배경 - 현상 분석 - 전략 제안 - 액션플랜)을 명확하게 정의하였는가?</span>
+                  </div>
+                  <div class="flex items-start gap-3 bg-white p-3.5 rounded-lg border border-neutral-200 shadow-3xs">
+                    <span class="text-brand-500 font-bold mt-0.5">✓</span>
+                    <span class="text-xs md:text-sm text-neutral-700 leading-relaxed font-bold">핵심성과지표(KPI) 및 정량 성과가 차트(시각화 제안) 또는 표(Table) 등의 필수 형태로 빠짐없이 담겨있도록 아웃풋 양식을 지시했는가?</span>
+                  </div>
+                  <div class="flex items-start gap-3 bg-white p-3.5 rounded-lg border border-neutral-200 shadow-3xs">
+                    <span class="text-brand-500 font-bold mt-0.5">✓</span>
+                    <span class="text-xs md:text-sm text-neutral-700 leading-relaxed font-bold">리서치 종결 후 즉각 투입 가능한 실무용 실행 계획(Action Plan)과 타임라인 항목이 아웃풋 요건에 명확히 연계되어 포함되었는가?</span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          <textarea id="role" placeholder="예: 너는 10년 차 디지털 전환 전문 컨설턴트야."
-            class="w-full flex-1 p-4 border-t border-b-0 border-l-0 border-r-0 border-[#DDDBD5] bg-white text-neutral-900 text-base leading-relaxed placeholder-neutral-400 focus:border-brand-500 focus:ring-0 outline-none resize-none overflow-y-auto"></textarea>
-        </section>
-
-        <!-- Limit Input (Step 3) -->
-        <section id="step-sec-3" class="step-section flex flex-col border border-[#DDDBD5] rounded-xl bg-brand-100 overflow-hidden h-64 md:h-80 lg:h-full">
-          <div class="p-4 pb-2.5 flex-shrink-0">
-            <strong class="block text-neutral-900 text-base font-extrabold mb-1">📌 제한</strong>
-            <span class="block text-[#605E59] text-xs leading-tight">기간, 범위, 톤, 분량 등 조건</span>
-          </div>
-          <textarea id="limit" placeholder="예: 최근 6개월 이내 사례 중심으로 정리해줘."
-            class="w-full flex-1 p-4 border-t border-b-0 border-l-0 border-r-0 border-[#DDDBD5] bg-white text-neutral-900 text-base leading-relaxed placeholder-neutral-400 focus:border-brand-500 focus:ring-0 outline-none resize-none overflow-y-auto"></textarea>
-        </section>
-
-        <!-- Output Input (Step 4) -->
-        <section id="step-sec-4" class="step-section flex flex-col border border-[#DDDBD5] rounded-xl bg-brand-100 overflow-hidden h-64 md:h-80 lg:h-full">
-          <div class="p-4 pb-2.5 flex-shrink-0">
-            <strong class="block text-neutral-900 text-base font-extrabold mb-1">📄 출력</strong>
-            <span class="block text-[#605E59] text-xs leading-tight">어떤 형식으로 받고 싶나요?</span>
-          </div>
-          <textarea id="output" placeholder="예: 핵심 요약, 사례 표, 인사이트 순으로 작성해줘."
-            class="w-full flex-1 p-4 border-t border-b-0 border-l-0 border-r-0 border-[#DDDBD5] bg-white text-neutral-900 text-base leading-relaxed placeholder-neutral-400 focus:border-brand-500 focus:ring-0 outline-none resize-none overflow-y-auto"></textarea>
-        </section>
-      </div>
-
-      <!-- Actions Bottom Panel -->
-      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pt-4 border-t border-[#DDDBD5] flex-shrink-0">
-        <!-- Form Notice -->
-        <p class="text-[#605E59] text-xs md:text-sm leading-relaxed">
-          내용을 직접 수정 후 복사하거나 복사 후 메모장에서 수정하세요.
-        </p>
-        <!-- Action Buttons -->
-        <div class="flex justify-end gap-3">
-          <button
-            class="px-6 h-11 bg-brand-500 hover:bg-brand-600 text-white text-sm md:text-base font-extrabold rounded-lg transition-all shadow-sm flex items-center justify-center gap-1.5 focus:outline-none"
-            onclick="copyPrompt()">
-            <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <rect x="9" y="9" width="11" height="11" rx="2" ry="2" stroke-linecap="round" stroke-linejoin="round"></rect>
-              <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" stroke-linecap="round" stroke-linejoin="round"></path>
-            </svg>
-            프롬프트 복사
-          </button>
         </div>
       </div>
     </section>
@@ -421,7 +500,25 @@
     window.addEventListener('DOMContentLoaded', () => {
       selectSample('ax');
     });
+
+    function showPage1() {
+      document.getElementById('page1-container').classList.remove('hidden');
+      document.getElementById('page2-container').classList.add('hidden');
+      
+      document.getElementById('btn-tab-1').className = "w-9 h-9 flex items-center justify-center rounded-full font-bold text-sm transition-all focus:outline-none bg-brand-500 text-white border border-brand-500";
+      document.getElementById('btn-tab-2').className = "w-9 h-9 flex items-center justify-center rounded-full font-bold text-sm transition-all focus:outline-none bg-white text-brand-500 border border-[#DDDBD5] hover:bg-neutral-50";
+      
+      document.getElementById('header-title').textContent = "핵심적인 프롬프트 구성 요소를 통해 목표한 결과를 얻을 수 있습니다";
+    }
+
+    function showPage2() {
+      document.getElementById('page1-container').classList.add('hidden');
+      document.getElementById('page2-container').classList.remove('hidden');
+      
+      document.getElementById('btn-tab-1').className = "w-9 h-9 flex items-center justify-center rounded-full font-bold text-sm transition-all focus:outline-none bg-white text-brand-500 border border-[#DDDBD5] hover:bg-neutral-50";
+      document.getElementById('btn-tab-2').className = "w-9 h-9 flex items-center justify-center rounded-full font-bold text-sm transition-all focus:outline-none bg-brand-500 text-white border border-brand-500";
+      
+      document.getElementById('header-title').textContent = "프롬프트를 고도화해 심층 리서치를 진행합니다";
+    }
   </script>
 </body>
-
-</html>
