@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+  <link rel="icon" href="../favicon.png?v=2" type="image/png">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>WORKING AI · 앱스스크립트 자동화</title>
@@ -8,6 +9,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Pretendard Font -->
   <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+  <link rel="stylesheet" href="../global.css">
   <!-- IBM Plex Mono Font -->
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
   <script>
@@ -48,37 +50,6 @@
       --soft:#F8F7F4; --font:"Pretendard",-apple-system,BlinkMacSystemFont,sans-serif;
       --mono:"IBM Plex Mono",monospace;
     }
-    body {
-      font-family: 'Pretendard', -apple-system, sans-serif;
-      background-color: #F2F1EE;
-    }
-    /* Custom scrollbar styling */
-    ::-webkit-scrollbar {
-      width: 6px;
-      height: 6px;
-    }
-    ::-webkit-scrollbar-track {
-      background: #F2F1EE;
-    }
-    ::-webkit-scrollbar-thumb {
-      background: #DDDBD5;
-      border-radius: 4px;
-    }
-    ::-webkit-scrollbar-thumb:hover {
-      background: #B0AEA8;
-    }
-    
-    .head{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-bottom:16px;margin-bottom:20px;border-bottom:1px solid var(--line)}
-    .head h2{font-size:18px;font-weight:750}
-    .badge{padding:7px 10px;border-radius:999px;background:var(--soft-green);color:var(--green);font:700 11px var(--mono);letter-spacing:.04em;white-space:nowrap}
-    
-    /* Grid structures */
-    .grid-3{display:grid;grid-template-columns:1fr 1.1fr 1fr;gap:16px;align-items:stretch}
-    .grid-2{display:grid;grid-template-columns:1.2fr 1.8fr;gap:16px;align-items:stretch}
-    
-    .panel{display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);border-radius:12px;padding:0;overflow:hidden}
-    .panel-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding:18px;background:var(--soft-green);margin-bottom:16px;border-bottom:1px solid rgba(42,107,82,.22)}
-    .panel-title{font-size:17px;font-weight:800;letter-spacing:-.25px}.panel-desc{font-size:12px;color:var(--sub);line-height:1.45;margin-top:4px}
     .tag{font:700 10px var(--mono);color:var(--green);white-space:nowrap}
     .group{margin:0 18px 20px}.group:last-child{margin-bottom:0}
     label{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:13px;font-weight:750;margin-bottom:7px}
@@ -953,6 +924,22 @@ function sendEmailWithReport(dateStr, reportData, imageBlob) {
     // Register event listeners
     $("keywordCount").addEventListener("change", renderKeywords);
     $("displayCount").addEventListener("blur", () => getNaverCode());
+    $("clientId").addEventListener("input", () => getNaverCode());
+    $("clientSecret").addEventListener("input", () => getNaverCode());
+    geminiApiKeyInput.addEventListener("input", () => updateCode());
+    
+    // Auto-populate saved keys from localStorage on load
+    document.addEventListener("DOMContentLoaded", () => {
+      const savedClientId = localStorage.getItem("naver_client_id");
+      const savedClientSecret = localStorage.getItem("naver_client_secret");
+      const savedGeminiApiKey = localStorage.getItem("gemini_api_key");
+      if (savedClientId) { $("clientId").value = savedClientId; }
+      if (savedClientSecret) { $("clientSecret").value = savedClientSecret; }
+      if (savedGeminiApiKey) { geminiApiKeyInput.value = savedGeminiApiKey; }
+      getNaverCode();
+      updateCode();
+    });
+
     renderKeywords();
 
     generateBtn.addEventListener('click', async () => {
