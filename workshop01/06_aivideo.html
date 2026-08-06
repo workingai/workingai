@@ -566,7 +566,7 @@
               </svg>
               프롬프트 복사
             </button>
-            <a href="https://docs.google.com/spreadsheets/d/1t-iA9k7jKfRCTLHctak-JMu62WfPbSqC1PTmo99HZ_w/edit?usp=sharing" 
+            <a id="webapp-share-btn" href="https://docs.google.com/spreadsheets/d/1t-iA9k7jKfRCTLHctak-JMu62WfPbSqC1PTmo99HZ_w/edit?usp=sharing" 
                target="_blank" 
                class="inline-flex items-center justify-center gap-2 px-6 h-11 bg-brand-500 hover:bg-brand-600 text-white font-extrabold text-sm md:text-base rounded-lg transition-all shadow-sm focus:outline-none"
                style="text-decoration: none;">
@@ -935,6 +935,35 @@
         head3.classList.remove('bg-neutral-50');
       }
     }
+
+    // Fetch dynamic webapp URL from Google Spreadsheet on page load
+    async function initWebappShareLink() {
+      try {
+        const gasApiUrl = localStorage.getItem('gas_api_url') || "https://script.google.com/macros/s/AKfycbztn6cdfX14ZmqAmc-RbST7L6-B6h959d4bJctqDFL_2MylpN9QvBqPytNdp9bTxHblyA/exec";
+        const response = await fetch(`${gasApiUrl}?action=getWebappUrl`);
+        if (response.ok) {
+          const result = await response.json();
+          if (result.success && result.url) {
+            let targetUrl = result.url.trim();
+            if (targetUrl) {
+              if (!targetUrl.startsWith('http://') && !targetUrl.startsWith('https://') && !targetUrl.startsWith('/') && !targetUrl.startsWith('.')) {
+                targetUrl = 'https://' + targetUrl;
+              }
+              const btn = document.getElementById('webapp-share-btn');
+              if (btn) {
+                btn.setAttribute('href', targetUrl);
+              }
+            }
+          }
+        }
+      } catch (err) {
+        console.warn("Failed to fetch webapp share URL from GAS, using fallback", err);
+      }
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      initWebappShareLink();
+    });
 
     let toastTimer;
     function showToast(message) {
