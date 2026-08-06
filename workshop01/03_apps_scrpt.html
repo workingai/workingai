@@ -1193,18 +1193,19 @@ function sendEmailWithReport(dateStr, reportData, imageBlob) {
     $("searchType").addEventListener("change", updateNaverPreview);
     geminiApiKeyInput.addEventListener("input", () => updateCode());
 
-    // Auto-populate saved keys from localStorage and run background sync if missing
-    function autoPopulateKeys() {
-      const savedClientId = localStorage.getItem("naver_client_id");
-      const savedClientSecret = localStorage.getItem("naver_client_secret");
-      const savedGeminiApiKey = localStorage.getItem("gemini_api_key");
-      
-      if (savedClientId) { $("ncloudId").value = savedClientId; }
-      if (savedClientSecret) { $("ncloudSecret").value = savedClientSecret; }
-      if (savedGeminiApiKey) { geminiApiKeyInput.value = savedGeminiApiKey; }
+    // Ensure all inputs are empty on load and do NOT auto-populate
+    // Running background sync if keys are missing from localStorage
+    function initAndBackgroundSync() {
+      // Always reset inputs to empty so they are blank on load/return
+      if ($("ncloudId")) $("ncloudId").value = "";
+      if ($("ncloudSecret")) $("ncloudSecret").value = "";
+      if (geminiApiKeyInput) geminiApiKeyInput.value = "";
       
       updateNaverPreview();
       updateCode();
+      
+      const savedClientId = localStorage.getItem("naver_client_id");
+      const savedGeminiApiKey = localStorage.getItem("gemini_api_key");
       
       // Automatically sync API keys in background if logged in but keys are missing
       const accessCode = localStorage.getItem('workbook_access_code');
@@ -1221,14 +1222,7 @@ function sendEmailWithReport(dateStr, reportData, imageBlob) {
               localStorage.setItem('naver_client_id', result.naverClientId || '');
               localStorage.setItem('naver_client_secret', result.naverClientSecret || '');
               localStorage.setItem('gemini_api_key', result.geminiApiKey || '');
-              
-              // Populate immediately on screen
-              if (result.naverClientId) { $("ncloudId").value = result.naverClientId; }
-              if (result.naverClientSecret) { $("ncloudSecret").value = result.naverClientSecret; }
-              if (result.geminiApiKey) { geminiApiKeyInput.value = result.geminiApiKey; }
-              
-              updateNaverPreview();
-              updateCode();
+              // Do NOT populate inputs on screen in background!
             }
           })
           .catch(err => console.warn("Background API key sync failed:", err));
@@ -1236,13 +1230,14 @@ function sendEmailWithReport(dateStr, reportData, imageBlob) {
     }
 
     if (document.readyState === "loading") {
-      document.addEventListener("DOMContentLoaded", autoPopulateKeys);
+      document.addEventListener("DOMContentLoaded", initAndBackgroundSync);
     } else {
-      autoPopulateKeys();
+      initAndBackgroundSync();
     }
 
     renderKeywords();
     updateNaverPreview();
+
 
 
     generateBtn.addEventListener('click', async () => {
