@@ -542,28 +542,36 @@
 
   const DEFAULT_DESIGN_GUIDE = `[슬라이드 디자인 가이드]
 
-메인 폰트: Pretendard 또는 Noto Sans 
+메인 폰트: Pretendard 또는 Noto Sans
 숫자·코드: IBM Plex Mono
 
-배경색: 베이지 (#F4EFE6)만 사용할 것
+배경색: 베이지 (#F4EFE6) 전 슬라이드 통일 (타 배경색 사용 금지)
 
 페이지별 구성 기준:
 
 표지 (Cover)
 - 제목: 72pt Bold
 - 부제·핵심 메시지: 18pt Medium
+- 레이아웃: 중앙 정렬, 텍스트만으로 구성하지 말고
+  핵심 수치 또는 키워드를 시각적으로 강조할 것
 
 본문 (모든 콘텐츠 슬라이드 공통)
 - 슬라이드 제목: 32pt Bold
 - 핵심 메시지(T1): 18pt Medium
 - 본문 요약(T2): 14pt Regular
 - 상세 설명(T3): 11pt Light
+- 레이아웃: 2단 또는 3단 가로 병렬 구조로 배치
+- 텍스트 단독 슬라이드 금지
+- 모든 슬라이드에 차트·카드·다이어그램 중 하나 이상 포함
 
 공통
+- 폰트 컬러: 블랙 기본
+  핵심 키워드·핵심 수치에만 레드오렌지 (#D7472A) 사용
+- 레드오렌지는 슬라이드당 1~2곳 이내, 배경·선·장식 사용 금지
+- 도넛, 막대, 범프 등 다양한 차트, 다이어그램 사용해 시각화 
+- 폰트 크기는 위 4종(표지 제목/T1/T2/T3)만 사용, 혼용 금지
 - 하단: 페이지 번호 고정 노출
-- 폰트 크기는 위 4종(표지 제목/T1/T2/T3)만 사용
-- 폰트 컬러는 블랙을 사용하되 핵심 키워드만 레드오렌지 (#D7472A) 사용
-- 레드오렌지 남용 금지`;
+- 표(table) 형식 절대 사용 금지`;
 
   document.getElementById('contentRequest').value = contentRequest;
   document.getElementById('designResult').value = DEFAULT_DESIGN_GUIDE;
