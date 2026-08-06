@@ -277,4 +277,19 @@ function initNavbar(isSubdir) {
     if (mobileLoginBtn) mobileLoginBtn.classList.remove('hidden');
     if (mobileLogoutBtn) mobileLogoutBtn.classList.add('hidden');
   }
+
+  // 비밀번호 로그인 상태에서 '직장인 AI' 혹은 실습실 링크 클릭 시 workingai_v1로 상시 강제 리다이렉트
+  document.addEventListener('click', function (e) {
+    const anchor = e.target.closest('a');
+    if (anchor) {
+      const text = anchor.textContent.trim();
+      const href = anchor.getAttribute('href') || '';
+      if (text === '직장인 AI' || href.includes('workshop01/')) {
+        if (localStorage.getItem('workbook_access_code') === 'workingai') {
+          e.preventDefault();
+          window.location.href = "/workingai_v1/index.html";
+        }
+      }
+    }
+  }, true);
 }
