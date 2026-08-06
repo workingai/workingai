@@ -163,28 +163,30 @@ document.addEventListener('DOMContentLoaded', () => {
       // 3. 네비게이션 이벤트 핸들러 및 인증 상태 연동 초기화
       initNavbar(isSubdir);
 
-      // 4. 우측 하단 카카오톡 플로팅 버튼 생성 및 추가
-      const kakaoBtn = document.createElement('a');
-      kakaoBtn.href = 'https://open.kakao.com/me/choi_pro';
-      kakaoBtn.target = '_blank';
-      kakaoBtn.rel = 'noopener noreferrer';
-      kakaoBtn.style.cssText = 'position: fixed; bottom: 24px; right: 24px; z-index: 9999; width: 60px; height: 60px; background-color: #FEE500; border-radius: 9999px; box-shadow: 0 4px 16px rgba(0,0,0,0.2); display: flex; align-items: center; justify-content: center; transition: transform 0.2s ease, hover 0.2s ease; cursor: pointer;';
-      
-      // 마우스 오버/아웃 효과
-      kakaoBtn.addEventListener('mouseenter', () => {
-        kakaoBtn.style.transform = 'scale(1.08)';
-      });
-      kakaoBtn.addEventListener('mouseleave', () => {
-        kakaoBtn.style.transform = 'scale(1)';
-      });
+      // 4. 우측 하단 카카오톡 플로팅 버튼 생성 및 추가 (서브디렉토리 제외)
+      if (!isSubdir) {
+        const kakaoBtn = document.createElement('a');
+        kakaoBtn.href = 'https://open.kakao.com/me/choi_pro';
+        kakaoBtn.target = '_blank';
+        kakaoBtn.rel = 'noopener noreferrer';
+        kakaoBtn.style.cssText = 'position: fixed; bottom: 24px; right: 24px; z-index: 9999; width: 60px; height: 60px; background-color: #FEE500; border-radius: 9999px; box-shadow: 0 4px 16px rgba(0,0,0,0.2); display: flex; align-items: center; justify-content: center; transition: transform 0.2s ease, hover 0.2s ease; cursor: pointer;';
+        
+        // 마우스 오버/아웃 효과
+        kakaoBtn.addEventListener('mouseenter', () => {
+          kakaoBtn.style.transform = 'scale(1.08)';
+        });
+        kakaoBtn.addEventListener('mouseleave', () => {
+          kakaoBtn.style.transform = 'scale(1)';
+        });
 
-      const kakaoImg = document.createElement('img');
-      kakaoImg.src = prefix + 'images/kakaotalk_logo.png';
-      kakaoImg.alt = 'KakaoTalk';
-      kakaoImg.style.cssText = 'width: 36px; height: 36px; object-fit: contain; pointer-events: none;';
+        const kakaoImg = document.createElement('img');
+        kakaoImg.src = prefix + 'images/kakaotalk_logo.png';
+        kakaoImg.alt = 'KakaoTalk';
+        kakaoImg.style.cssText = 'width: 36px; height: 36px; object-fit: contain; pointer-events: none;';
 
-      kakaoBtn.appendChild(kakaoImg);
-      document.body.appendChild(kakaoBtn);
+        kakaoBtn.appendChild(kakaoImg);
+        document.body.appendChild(kakaoBtn);
+      }
     })
     .catch(err => {
     console.error('Failed to load shared navbar:', err);
