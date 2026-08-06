@@ -335,11 +335,7 @@
             if (localStorage.getItem('workbook_logged_in') === 'true') {
                 showContent();
             } else {
-                document.getElementById('login-gate').classList.remove('hidden');
-                document.getElementById('workbook-content').classList.add('hidden');
-                document.getElementById('workbook-content').classList.remove('flex');
-                document.getElementById('logout-btn').classList.add('hidden');
-                document.getElementById('logout-btn').classList.remove('flex');
+                window.location.href = '../index.html?redirect=workingai_v1/index.html';
             }
         });
     </script>
