@@ -357,8 +357,8 @@
               <!-- Step 1 Card -->
               <article class="card transition-all duration-300 lg:col-span-4" id="step1-card">
                 <div class="card-head flex flex-col cursor-pointer select-none" style="padding: 16px 20px !important; gap: 4px !important;" onclick="setActiveStep(1)">
-                  <h2 id="step1-title" class="text-base font-extrabold text-neutral-900 flex items-center gap-2 m-0" style="margin-bottom: 0px !important;">📝 Step I. 목차 설계</h2>
-                  <p id="step1-desc" class="text-xs text-neutral-500 m-0" style="margin-top: 0px !important;">제미나이 Notebook에 현재 등록된 소스를 토대로 목차 구성을 지시합니다.</p>
+                  <h2 id="step1-title" class="text-base font-extrabold text-neutral-900 flex items-center gap-2 m-0" style="margin-bottom: 0px !important;">📝 Step I. 슬라이드 구성</h2>
+                  <p id="step1-desc" class="text-xs text-neutral-500 m-0" style="margin-top: 0px !important;">슬라이드의 구성 내용을 설계합니다.</p>
                 </div>
 
                 <div id="step1-body" class="card-body flex-grow flex flex-col gap-4">
@@ -367,7 +367,7 @@
                   </div>
                   <!-- Copy Button directly below textarea -->
                   <div class="flex justify-end mt-2 flex-shrink-0">
-                    <button onclick="copyText('contentRequest','목차 요청문이 복사되었습니다.')" class="px-6 h-11 bg-brand-500 hover:bg-brand-600 text-white text-sm md:text-base font-extrabold rounded-lg transition-all shadow-sm flex items-center justify-center gap-1.5 focus:outline-none">
+                    <button onclick="copyText('contentRequest','슬라이드 구성 요청문이 복사되었습니다.')" class="px-6 h-11 bg-brand-500 hover:bg-brand-600 text-white text-sm md:text-base font-extrabold rounded-lg transition-all shadow-sm flex items-center justify-center gap-1.5 focus:outline-none">
                       <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <rect x="9" y="9" width="11" height="11" rx="2" ry="2" stroke-linecap="round" stroke-linejoin="round"></rect>
                         <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -379,7 +379,7 @@
 
                 <!-- Collapsed Body Placeholder -->
                 <div id="step1-collapsed-body" class="p-4 bg-white flex items-center justify-center flex-grow hidden cursor-pointer select-none" onclick="setActiveStep(1)">
-                  <span class="text-sm font-bold text-neutral-500">목차 설계</span>
+                  <span class="text-sm font-bold text-neutral-500">슬라이드 구성</span>
                 </div>
               </article>
 
@@ -487,23 +487,46 @@
 
   <script>
   let activeStep = 1;
-  const contentRequest = `업로드된 소스를 바탕으로 경영진 보고용 슬라이드 구성안을 만들어줘.
+  const contentRequest = `선택한 소스를 바탕으로 [경영진 보고] 용도의
+슬라이드를 만들어줘.
 
-[전체 구성]
-- 전체 슬라이드 수:
-- 핵심 메시지 한 줄:
+[전체 구성] ← 직접 채워 보세요
+- 보고서의 목적 : 
+- 핵심 메시지 :
 
-[슬라이드별 구성]
-슬라이드 번호 — 제목
-- 핵심 메시지:
-- 핵심 내용 또는 수치:
-- 추천 시각화:
+[슬라이드 구성] ← 아래는 수정해서 사용합니다.
+1. 표지
+- 보고 제목, 작성 부서, 기준 시점 포함
+- 핵심 메시지 한 줄을 부제로 배치
 
-원칙:
-- 표지에는 주제·기준 시점·핵심 메시지만
-- 정량 성과는 차트·숫자 카드로 표현
-- 인사이트는 3개 이내 카드형 구조
-- 마지막은 실행계획 또는 핵심 메시지 재요약
+2. 현황 요약 (Executive Summary)
+- 핵심 내용을 3개 이내 카드형으로 정리
+- 수치나 키워드 중심으로 한눈에 파악 가능하게
+
+3. 배경 및 현황
+- 이슈가 발생한 맥락과 현재 상태
+- 데이터나 트렌드가 있으면 차트로 표현
+
+4. 핵심 분석
+- 원인 또는 주요 발견사항
+- 비교·대조가 있으면 표보다 그래프로 표현
+
+5. 시사점 및 제언
+- 분석에서 도출한 인사이트 3개 이내
+- 우선순위 또는 중요도 순으로 배치
+
+6. 실행 계획
+- 누가, 무엇을, 언제까지 할 것인지
+- 로드맵 또는 액션 카드 형태로 표현
+
+7. 마무리
+- 핵심 메시지 재강조
+- 다음 단계 또는 의사결정 요청 사항
+
+[원칙]
+- 각 페이지 핵심 메시지를 상단 제목으로 사용할 것. 
+- 표보다 차트·숫자 카드·다이어그램을 우선할 것
+- 한 페이지에 핵심 메시지 하나만 담을 것
 - 마크다운 사용 금지`;
 
   const designRequest = `내가 작성한 슬라이드 구성안(목차 및 내용)을 읽고, 다음 디자인 템플릿의 가이드에 맞추어 슬라이드별 최적의 '시각 구조 및 디자인 가이드'를 작성해줘.
@@ -708,7 +731,7 @@
       body1.classList.remove('hidden');
       collapsedBody1.classList.add('hidden');
       desc1.classList.remove('hidden');
-      title1.textContent = "📝 Step I. 목차 설계";
+      title1.textContent = "📝 Step I. 슬라이드 구성";
 
       body2.classList.add('hidden');
       collapsedBody2.classList.remove('hidden');
