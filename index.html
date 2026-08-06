@@ -545,32 +545,38 @@
         <span
           class="text-xs font-bold text-brand-500 uppercase tracking-widest bg-brand-50 px-3 py-1 rounded-full">Workbook
           Access</span>
-        <h3 class="text-2xl font-black text-neutral-900 mt-3">Working AI 실습 워크북</h3>
-        <p class="text-xs text-neutral-500 mt-1">실습실 입장 승인이 필요합니다.</p>
+        <h3 class="text-2xl font-black text-neutral-900 mt-3">로그인 방법을 선택하세요</h3>
+        <p class="text-xs text-neutral-500 mt-1">26년 6월 이전 수강하신 분은 <a href="/workingai_v1/index.html" class="text-brand-500 underline font-bold">url</a>로 접속하세요.</p>
       </div>
 
-      <!-- Main Login Form (No Tabs) -->
+      <!-- Login Tabs -->
+      <div class="flex border-b border-neutral-200 mb-5">
+        <button onclick="setLoginTab('code')" id="tab-btn-code" class="flex-1 pb-3 text-sm font-bold text-brand-500 border-b-2 border-brand-500 focus:outline-none transition-all">접속코드</button>
+        <button onclick="setLoginTab('password')" id="tab-btn-password" class="flex-1 pb-3 text-sm font-bold text-neutral-400 focus:outline-none transition-all">비밀번호</button>
+      </div>
+
+      <!-- Main Login Form -->
       <div id="modal-login-form" class="flex flex-col gap-4">
-        <!-- 1. 클래스 ID 입력 (상단) -->
+        <!-- 1. 클래스 ID 입력 (상단, 접속코드 탭 전용) -->
         <div id="class-id-container">
           <label class="text-xs font-bold text-neutral-600 mb-1.5 block">클래스 ID 입력</label>
           <input type="text" id="input-pwd" placeholder="클래스 ID를 입력하세요"
             class="w-full h-11 border border-neutral-200 rounded-xl px-4 text-sm font-bold text-center focus:border-brand-500 focus:outline-none">
         </div>
 
-        <!-- 2. 개인접속코드 입력 (하단) -->
+        <!-- 2. 개인접속코드 입력 (하단, 접속코드 탭 전용) -->
         <div id="personal-code-container" class="transition-all duration-300">
           <label class="text-xs font-bold text-neutral-600 mb-1.5 block">개인접속코드 입력</label>
           <input type="text" id="input-login-code" placeholder="본인의 코드를 입력하세요 (영문/한글)"
             class="w-full h-11 border border-neutral-200 rounded-xl px-4 text-sm font-bold text-center focus:border-brand-500 focus:outline-none">
         </div>
 
-        <!-- 3. 체크박스: 개인접속코드가 없습니다 -->
-        <label class="flex items-center gap-2.5 cursor-pointer mt-1 select-none">
-          <input type="checkbox" id="checkbox-first-visit" onchange="toggleFirstVisitInput()"
-            class="w-4 h-4 rounded border-neutral-300 text-brand-500 focus:ring-brand-500">
-          <span class="text-xs font-bold text-neutral-600">개인접속코드가 없습니다.</span>
-        </label>
+        <!-- 3. 비밀번호 입력 (비밀번호 탭 전용, 기본 숨김) -->
+        <div id="password-login-container" class="transition-all duration-300 hidden">
+          <label class="text-xs font-bold text-neutral-600 mb-1.5 block">비밀번호 입력</label>
+          <input type="password" id="input-only-password" placeholder="비밀번호를 입력하세요"
+            class="w-full h-11 border border-neutral-200 rounded-xl px-4 text-sm font-bold text-center focus:border-brand-500 focus:outline-none">
+        </div>
 
         <!-- 4. Admin Password Input (Shown only for jhchoi when no local cache is found) -->
         <div id="admin-pwd-container" class="transition-all duration-300 hidden">
@@ -651,14 +657,38 @@
       menu.classList.toggle('hidden');
     }
 
-    function toggleFirstVisitInput() {
-      const checkbox = document.getElementById('checkbox-first-visit');
-      const personalCodeContainer = document.getElementById('personal-code-container');
-      if (checkbox.checked) {
-        personalCodeContainer.classList.add('hidden');
-        document.getElementById('input-login-code').value = ""; // 입력된 개인코드 초기화
+    let currentLoginTab = 'code';
+
+    function setLoginTab(tab) {
+      currentLoginTab = tab;
+      const tabCode = document.getElementById('tab-btn-code');
+      const tabPassword = document.getElementById('tab-btn-password');
+      const codeContainer = document.getElementById('personal-code-container');
+      const classIdContainer = document.getElementById('class-id-container');
+      const pwdContainer = document.getElementById('password-login-container');
+      const regBtn = document.getElementById('modal-register-btn');
+      const adminContainer = document.getElementById('admin-pwd-container');
+      
+      document.getElementById('modal-error-msg').classList.add('hidden');
+      
+      if (tab === 'code') {
+        tabCode.className = "flex-1 pb-3 text-sm font-bold text-brand-500 border-b-2 border-brand-500 focus:outline-none transition-all";
+        tabPassword.className = "flex-1 pb-3 text-sm font-bold text-neutral-400 focus:outline-none transition-all";
+        
+        classIdContainer.classList.remove('hidden');
+        codeContainer.classList.remove('hidden');
+        pwdContainer.classList.add('hidden');
+        adminContainer.classList.add('hidden');
+        regBtn.classList.remove('hidden');
       } else {
-        personalCodeContainer.classList.remove('hidden');
+        tabCode.className = "flex-1 pb-3 text-sm font-bold text-neutral-400 focus:outline-none transition-all";
+        tabPassword.className = "flex-1 pb-3 text-sm font-bold text-brand-500 border-b-2 border-brand-500 focus:outline-none transition-all";
+        
+        classIdContainer.classList.add('hidden');
+        codeContainer.classList.add('hidden');
+        pwdContainer.classList.remove('hidden');
+        adminContainer.classList.add('hidden');
+        regBtn.classList.add('hidden');
       }
     }
 
@@ -682,15 +712,16 @@
       document.getElementById('modal-login-form').classList.remove('hidden');
       document.getElementById('modal-success-screen').classList.add('hidden');
       document.getElementById('modal-error-msg').classList.add('hidden');
+      
+      setLoginTab('code');
+      
       const pwdInput = document.getElementById('input-pwd');
       pwdInput.value = "";
       pwdInput.dataset.realValue = "";
       document.getElementById('input-login-code').value = "";
-      document.getElementById('checkbox-first-visit').checked = false;
+      document.getElementById('input-only-password').value = "";
       document.getElementById('admin-pwd-container').classList.add('hidden');
-      document.getElementById('class-id-container').classList.remove('hidden'); // 클래스 ID 영역 보이도록 리셋
       document.getElementById('input-admin-pwd').value = "";
-      toggleFirstVisitInput();
     }
 
     function closeEntranceModal() {
@@ -699,7 +730,6 @@
         let targetUrl = pendingRedirectUrl;
         const classIdInput = document.getElementById('input-pwd').value.trim();
         const codeInput = document.getElementById('input-login-code').value.trim();
-        // 클래스 ID와 개인접속코드를 모두 입력하고 로그인한 경우, ws01_index.html 대신 01_wamingup.html로 연결
         if (classIdInput && codeInput && targetUrl.includes('ws01_index.html')) {
           targetUrl = targetUrl.replace('ws01_index.html', '01_wamingup.html');
         }
@@ -728,13 +758,7 @@
       return `${yyyy}${mm}${dd}`;
     }
 
-    // Combined Entrance handler (Normal login or First-time registration)
     async function handleEntrance() {
-      const pwdInput = document.getElementById('input-pwd');
-      const classIdInput = (pwdInput.dataset.realValue || pwdInput.value).trim();
-      const codeInput = document.getElementById('input-login-code').value.trim();
-      const noCodeChecked = document.getElementById('checkbox-first-visit').checked;
-
       const submitBtn = document.getElementById('modal-submit-btn');
       const spinner = document.getElementById('btn-spinner');
       const btnText = document.getElementById('btn-text');
@@ -750,22 +774,28 @@
           submitBtn.disabled = false;
           submitBtn.classList.remove('opacity-75', 'cursor-not-allowed');
           spinner.classList.add('hidden');
-          btnText.textContent = "입장하기";
+          btnText.textContent = "로그인하기";
         }
       }
 
-      // Case 1: 개인접속코드가 없는 경우 -> 클래스 ID가 workingai 인 경우 외부 사이트로 다이렉트
-      if (noCodeChecked) {
-        if (classIdInput.toLowerCase() !== "workingai") {
-          showModalError("강의 중 안내드린 비밀 번호를 입력해주세요");
+      // Case 1: 비밀번호 로그인 탭인 경우
+      if (currentLoginTab === 'password') {
+        const onlyPwd = document.getElementById('input-only-password').value.trim();
+        if (onlyPwd.toLowerCase() !== "workingai") {
+          showModalError("비밀번호를 정확히 입력해 주세요.");
           return;
         }
         localStorage.setItem('workbook_logged_in', 'true');
+        localStorage.setItem('workbook_access_code', 'workingai');
         window.location.href = "/workingai_v1/index.html";
         return;
       }
 
-      // Case 2: 개인접속코드로 기존 실습실 진입
+      // Case 2: 접속코드 로그인 탭인 경우
+      const pwdInput = document.getElementById('input-pwd');
+      const classIdInput = (pwdInput.dataset.realValue || pwdInput.value).trim();
+      const codeInput = document.getElementById('input-login-code').value.trim();
+
       if (!codeInput) {
         showModalError("개인접속코드를 입력해 주세요.");
         return;
@@ -785,21 +815,18 @@
           const classIdContainer = document.getElementById('class-id-container');
 
           if (adminPwdContainer.classList.contains('hidden')) {
-            // 어드민 비밀번호 입력창 노출 및 클래스 ID 입력창 숨김 처리
             adminPwdContainer.classList.remove('hidden');
             classIdContainer.classList.add('hidden');
             adminPwdInput.focus();
             showModalError("이 ID는 Admin입니다. 클래스 ID 대신 비밀번호를 입력하세요.");
             return;
           } else {
-            // 어드민 비밀번호 검증 (gobd1219)
             const adminPwd = adminPwdInput.value.trim();
             if (adminPwd !== "gobd1219") {
               showModalError("어드민 비밀번호가 일치하지 않습니다.");
               adminPwdInput.focus();
               return;
             }
-            // 비밀번호 일치 시 바이패스 설정
             localStorage.setItem('jhchoi_master_bypass', 'true');
           }
         }
@@ -842,7 +869,6 @@
       const pwdInput = document.getElementById('input-pwd');
       const classIdInput = (pwdInput.dataset.realValue || pwdInput.value).trim();
       const codeInput = document.getElementById('input-login-code').value.trim();
-      const noCodeChecked = document.getElementById('checkbox-first-visit').checked;
 
       const regBtn = document.getElementById('modal-register-btn');
       const spinner = document.getElementById('reg-spinner');
@@ -861,11 +887,6 @@
           spinner.classList.add('hidden');
           btnText.textContent = "가입하기";
         }
-      }
-
-      if (noCodeChecked) {
-        showModalError("가입하려면 개인접속코드가 필요합니다. 체크박스를 해제해 주세요.");
-        return;
       }
 
       if (!classIdInput) {
