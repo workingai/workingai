@@ -502,10 +502,16 @@
         const response = await fetch(`${gasApiUrl}?action=getWebappUrl`);
         if (response.ok) {
           const result = await response.json();
-          if (result.success && result.url && result.url.startsWith('http')) {
-            const btn = document.getElementById('webapp-share-btn');
-            if (btn) {
-              btn.setAttribute('href', result.url);
+          if (result.success && result.url) {
+            let targetUrl = result.url.trim();
+            if (targetUrl) {
+              if (!targetUrl.startsWith('http://') && !targetUrl.startsWith('https://') && !targetUrl.startsWith('/') && !targetUrl.startsWith('.')) {
+                targetUrl = 'https://' + targetUrl;
+              }
+              const btn = document.getElementById('webapp-share-btn');
+              if (btn) {
+                btn.setAttribute('href', targetUrl);
+              }
             }
           }
         }
