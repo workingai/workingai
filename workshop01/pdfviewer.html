@@ -198,7 +198,7 @@
             <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75v4.5m0-4.5h-4.5m4.5 0L15 9m5.25 11.25v-4.5m0 4.5h-4.5m4.5 0L15 15"></path>
           </svg>
         </button>
-        <a id="download-btn" href="https://workingai-nine.vercel.app/download/multicampus_0722.pdf" download class="inline-flex items-center gap-1.5 px-3.5 h-9 bg-brand-500 hover:bg-brand-600 text-white text-xs md:text-sm font-extrabold rounded-lg transition-all shadow-xs focus:outline-none">
+        <a id="download-btn" href="/download/multicampus_0807.pdf" download class="inline-flex items-center gap-1.5 px-3.5 h-9 bg-brand-500 hover:bg-brand-600 text-white text-xs md:text-sm font-extrabold rounded-lg transition-all shadow-xs focus:outline-none">
           <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"></path>
           </svg>
@@ -321,7 +321,7 @@
     const GAS_API_URL = "https://script.google.com/macros/s/AKfycbztn6cdfX14ZmqAmc-RbST7L6-B6h959d4bJctqDFL_2MylpN9QvBqPytNdp9bTxHblyA/exec";
 
     // Load PDF Document
-    let cachedPdfUrl = localStorage.getItem('workbook_file_address') || 'https://workingai-nine.vercel.app/download/multicampus_0722.pdf';
+    let cachedPdfUrl = localStorage.getItem('workbook_file_address') || (window.location.origin + '/download/multicampus_0807.pdf');
     const accessCode = localStorage.getItem('workbook_access_code');
 
     async function loadLatestPDF() {
