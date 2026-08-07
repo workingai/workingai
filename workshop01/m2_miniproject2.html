@@ -495,8 +495,10 @@
       }
     }
 
-    // Fetch dynamic webapp URL from Google Spreadsheet on page load
-    async function initWebappShareLink() {
+    let cachedWebappUrl = null;
+
+    async function fetchWebappUrl() {
+      if (cachedWebappUrl) return cachedWebappUrl;
       try {
         const gasApiUrl = localStorage.getItem('gas_api_url') || "https://script.google.com/macros/s/AKfycbztn6cdfX14ZmqAmc-RbST7L6-B6h959d4bJctqDFL_2MylpN9QvBqPytNdp9bTxHblyA/exec";
         const response = await fetch(`${gasApiUrl}?action=getWebappUrl`);
@@ -508,22 +510,51 @@
               if (!targetUrl.startsWith('http://') && !targetUrl.startsWith('https://') && !targetUrl.startsWith('/') && !targetUrl.startsWith('.')) {
                 targetUrl = 'https://' + targetUrl;
               }
-              const btn = document.getElementById('webapp-share-btn');
-              if (btn) {
-                btn.setAttribute('href', targetUrl);
-              }
+              cachedWebappUrl = targetUrl;
+              return cachedWebappUrl;
             }
           }
         }
       } catch (err) {
-        console.warn("Failed to fetch webapp share URL from GAS, using fallback", err);
+        console.warn("Failed to fetch webapp share URL from GAS", err);
+      }
+      return null;
+    }
+
+    async function handleWebappShareClick(e) {
+      e.preventDefault();
+      const btn = document.getElementById('webapp-share-btn');
+      
+      if (cachedWebappUrl) {
+        window.open(cachedWebappUrl, '_blank');
+        return;
+      }
+      
+      if (btn) btn.style.opacity = '0.7';
+      const url = await fetchWebappUrl();
+      if (btn) btn.style.opacity = '1';
+
+      if (url) {
+        window.open(url, '_blank');
+      } else {
+        window.open('https://docs.google.com/spreadsheets/d/1t-iA9k7jKfRCTLHctak-JMu62WfPbSqC1PTmo99HZ_w/edit?usp=sharing', '_blank');
       }
     }
 
     // Set tab 0 as active by default on load
     window.addEventListener('DOMContentLoaded', () => {
       showTab(0);
-      initWebappShareLink();
+      fetchWebappUrl().then(url => {
+        if (url) {
+          const btn = document.getElementById('webapp-share-btn');
+          if (btn) btn.setAttribute('href', url);
+        }
+      });
+
+      const shareBtn = document.getElementById('webapp-share-btn');
+      if (shareBtn) {
+        shareBtn.addEventListener('click', handleWebappShareClick);
+      }
     });
 
     const DEFAULT_PROMPTS = {
