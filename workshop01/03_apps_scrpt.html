@@ -568,7 +568,7 @@
           showToast('네이버 API Key가 자동으로 입력되었습니다.');
         } else {
 const accessCode = localStorage.getItem('workbook_access_code') || 'workingai';
-          const gasApiUrl = localStorage.getItem('gas_api_url') || "https://script.google.com/macros/s/AKfycbztn6cdfX14ZmqAmc-RbST7L6-B6h959d4bJctqDFL_2MylpN9QvBqPytNdp9bTxHblyA/exec";
+          const gasApiUrl = localStorage.getItem('gas_api_url') || "https://script.google.com/macros/s/AKfycbwmedfL4Q8uUhXqKg3xa1yMEfGGUHYjRrRn1wjZN3_n_QcUMqnxmHUi1OMT3oIhZCBtKA/exec";
           
           showToast('GAS에서 정보를 조회 중입니다...');
           fetch(`${gasApiUrl}?code=${encodeURIComponent(accessCode)}`, { method: "GET" })
@@ -885,7 +885,7 @@ function stripHtml(html) {
           showToast('Gemini API Key가 자동으로 입력되었습니다.');
         } else {
 const accessCode = localStorage.getItem('workbook_access_code') || 'workingai';
-          const gasApiUrl = localStorage.getItem('gas_api_url') || "https://script.google.com/macros/s/AKfycbztn6cdfX14ZmqAmc-RbST7L6-B6h959d4bJctqDFL_2MylpN9QvBqPytNdp9bTxHblyA/exec";
+          const gasApiUrl = localStorage.getItem('gas_api_url') || "https://script.google.com/macros/s/AKfycbwmedfL4Q8uUhXqKg3xa1yMEfGGUHYjRrRn1wjZN3_n_QcUMqnxmHUi1OMT3oIhZCBtKA/exec";
           
           showToast('GAS에서 정보를 조회 중입니다...');
           fetch(`${gasApiUrl}?code=${encodeURIComponent(accessCode)}`, { method: "GET" })
@@ -1209,7 +1209,7 @@ function sendEmailWithReport(dateStr, reportData, imageBlob) {
       
       // Automatically sync API keys in background if logged in but keys are missing
       const accessCode = localStorage.getItem('workbook_access_code');
-      const gasApiUrl = localStorage.getItem('gas_api_url') || "https://script.google.com/macros/s/AKfycbztn6cdfX14ZmqAmc-RbST7L6-B6h959d4bJctqDFL_2MylpN9QvBqPytNdp9bTxHblyA/exec";
+      const gasApiUrl = localStorage.getItem('gas_api_url') || "https://script.google.com/macros/s/AKfycbwmedfL4Q8uUhXqKg3xa1yMEfGGUHYjRrRn1wjZN3_n_QcUMqnxmHUi1OMT3oIhZCBtKA/exec";
       const hasApiKeys = savedClientId && savedGeminiApiKey;
       
       if (accessCode && !hasApiKeys && gasApiUrl) {
