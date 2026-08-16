@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+  <script>
+    if (window.location.pathname === '/gem') {
+      window.location.replace(window.location.origin + '/gem/' + window.location.search + window.location.hash);
+    }
+  </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>노트북LM 슬라이드 플래너</title>
