@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <script>
+    if (window.location.pathname === '/gem') {
+      window.location.replace(window.location.origin + '/gem/' + window.location.search + window.location.hash);
+    }
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WORKING AI · 나노바나나</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Pretendard Font -->
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+  <!-- IBM Plex Mono Font -->
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#F2F8F5',
+              100: '#E6F2ED',
+              500: '#2A6B52',
+              600: '#1D4E3A',
+            },
+            neutral: {
+              50: '#F8F7F4',
+              100: '#F2F1EE',
+              200: '#E5E3DF',
+              300: '#DDDBD5',
+              400: '#B0AEA8',
+              500: '#8A8881',
+              600: '#605E59',
+              900: '#1A1A18',
+            }
+          },
+          fontFamily: {
+            sans: ['Pretendard', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+            mono: ['IBM Plex Mono', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    :root{
+      --bg:#F2F1EE; --card:#FFFFFF; --line:#DDDBD5; --green:#2A6B52; --green-dark:#1D4E3A;
+      --panel:#E6F2ED; --text:#1A1A18; --muted:#77736B; --soft:#F8F7F4;
+    }
+    body {
+      font-family: 'Pretendard', -apple-system, sans-serif;
+      background-color: #F2F1EE;
+    }
+    /* Custom Scrollbars */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #F2F1EE;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #DDDBD5;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #B0AEA8;
+    }
+    .toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%) translateY(20px);opacity:0;background:#1A1A18;color:#fff;border-radius:999px;padding:12px 18px;font-size:13px;font-weight:700;transition:.25s;z-index:20;box-shadow:0 4px 12px rgba(0,0,0,0.15)}
+    .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+  </style>
+</head>
+<body class="min-h-screen text-neutral-900 antialiased flex flex-col lg:flex-row lg:h-screen lg:overflow-hidden">
+  <!-- Top brand bar -->
+  <div class="fixed top-0 left-0 w-full h-[5px] bg-brand-500 z-50"></div>
+
+  <!-- ===== Left Sidebar Navigation ===== -->
+  <aside
+    class="flex-shrink-0 w-full lg:w-64 bg-white border-b lg:border-b-0 lg:border-r border-[#DDDBD5] flex flex-col lg:h-screen pt-[calc(5px+1.25rem)] lg:pt-[calc(5px+1.5rem)]">
+    <!-- Brand block -->
+    <div class="px-5 pb-4 mb-2 border-b border-[#DDDBD5]">
+      <a class="font-sans text-xl font-extrabold tracking-tight hover:opacity-80 transition-opacity"
+        href="index.html" style="text-decoration: none;">
+        <span class="text-neutral-900">Working AI</span> <span class="text-brand-500">Google AI</span>
+      </a>
+    </div>
+
+    <!-- Nav list -->
+    <nav class="flex-1 overflow-y-auto px-3 pb-4 space-y-3.5">
+      <!-- Part 1. Gemini -->
+      <div>
+        <p class="px-2 mb-1 text-[10px] font-extrabold uppercase tracking-wider text-neutral-400">Part 1. Gemini</p>
+        <div class="flex lg:flex-col gap-0.5 overflow-x-auto lg:overflow-visible">
+          <a href="p01_gemini2x.html"
+            class="flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg text-xs md:text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
+            <span class="text-base leading-none">🔥</span>
+            <span class="truncate">Gemini 200% 활용</span>
+          </a>
+          <a href="p01_prompt.html"
+            class="flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg text-xs md:text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
+            <span class="text-base leading-none">🧩</span>
+            <span class="truncate">프롬프트 작성법</span>
+          </a>
+          <a href="05_miniproject1.html"
+            class="flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg text-xs md:text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
+            <span class="text-base leading-none">🔍</span>
+            <span class="truncate">딥리서치 시장조사</span>
+          </a>
+          <a href="p01_notebook.html"
+            class="flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg text-xs md:text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
+            <span class="text-base leading-none">📓</span>
+            <span class="truncate">노트북LM 인사이트</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Part 2. AI Contents -->
+      <div>
+        <p class="px-2 mb-1 text-[10px] font-extrabold uppercase tracking-wider text-neutral-400">Part 2. AI Contents</p>
+        <div class="flex lg:flex-col gap-0.5 overflow-x-auto lg:overflow-visible">
+          <a href="p02_nanobanana.html"
+            class="flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg text-xs md:text-sm font-bold text-brand-600 bg-brand-100 whitespace-nowrap transition-colors">
+            <span class="text-base leading-none">🍌</span>
+            <span class="truncate">Nano Banana 디자인</span>
+          </a>
+          <a href="p02_flow.html"
+            class="flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg text-xs md:text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
+            <span class="text-base leading-none">🎬</span>
+            <span class="truncate">Google Flow 영상</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Part 3. Workspace + AI -->
+      <div>
+        <p class="px-2 mb-1 text-[10px] font-extrabold uppercase tracking-wider text-neutral-400">Part 3. Workspace + AI</p>
+        <div class="flex lg:flex-col gap-0.5 overflow-x-auto lg:overflow-visible">
+          <a href="p03_workspace.html"
+            class="flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg text-xs md:text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
+            <span class="text-base leading-none">📊</span>
+            <span class="truncate">Sheets 데이터 자동화</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Part 4. Agentic AI -->
+      <div>
+        <p class="px-2 mb-1 text-[10px] font-extrabold uppercase tracking-wider text-neutral-400">Part 4. Agentic AI</p>
+        <div class="flex lg:flex-col gap-0.5 overflow-x-auto lg:overflow-visible">
+          <a href="p04_aiagent.html"
+            class="flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg text-xs md:text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
+            <span class="text-base leading-none">🤖</span>
+            <span class="truncate">AI Agent 시작하기</span>
+          </a>
+          <a href="m2_miniproject2.html"
+            class="flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg text-xs md:text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
+            <span class="text-base leading-none">🚀</span>
+            <span class="truncate">에이전트 제작·배포</span>
+          </a>
+        </div>
+      </div>
+    </nav>
+    <!-- Sidebar Footer (Banner) -->
+    <div class="mt-auto border-t border-[#DDDBD5] p-4 bg-white flex-shrink-0">
+      <!-- Dropup Menu Container -->
+      <div class="relative">
+        <button id="quick-links-btn" onclick="toggleQuickLinks(event)" class="w-full flex items-center justify-between py-2 px-3 border border-[#DDDBD5] hover:border-brand-500 bg-white hover:bg-neutral-50 text-neutral-900 rounded-xl transition-all duration-300 shadow-xs text-sm font-extrabold focus:outline-none">
+          <span class="flex items-center gap-2 text-neutral-600 hover:text-neutral-900">
+            <span>🔗</span> 주요 서비스 바로가기
+          </span>
+          <svg id="quick-links-arrow" class="w-3.5 h-3.5 text-neutral-400 transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5"></path>
+          </svg>
+        </button>
+        <!-- Dropup menu: hidden by default, absolute positioning above the button -->
+        <div id="quick-links-menu" class="hidden absolute bottom-full left-0 w-full mb-2 bg-white border border-[#DDDBD5] rounded-xl shadow-lg z-50 overflow-hidden py-1">
+          <a href="https://gemini.google.com" target="_blank" class="block px-4 py-2.5 text-xs text-neutral-700 hover:bg-brand-50 hover:text-brand-600 transition-colors font-bold border-b border-[#F2F1EE]">제미나이</a>
+          <a href="https://sheets.google.com" target="_blank" class="block px-4 py-2.5 text-xs text-neutral-700 hover:bg-brand-50 hover:text-brand-600 transition-colors font-bold border-b border-[#F2F1EE]">구글 시트</a>
+          <a href="https://docs.google.com/videos/create?usp=vids_alc&authuser=0" target="_blank" class="block px-4 py-2.5 text-xs text-neutral-700 hover:bg-brand-50 hover:text-brand-600 transition-colors font-bold border-b border-[#F2F1EE]">구글 Vids</a>
+          <a href="https://aistudio.google.com" target="_blank" class="block px-4 py-2.5 text-xs text-neutral-700 hover:bg-brand-50 hover:text-brand-600 transition-colors font-bold border-b border-[#F2F1EE]">AI Studio</a>
+          <a href="https://workspace.google.com/experiments" target="_blank" class="block px-4 py-2.5 text-xs text-neutral-700 hover:bg-brand-50 hover:text-brand-600 transition-colors font-bold">Workspace Experiments</a>
+        </div>
+      </div>
+      <script>
+        function toggleQuickLinks(e) {
+          e.stopPropagation();
+          const menu = document.getElementById('quick-links-menu');
+          const arrow = document.getElementById('quick-links-arrow');
+          const isHidden = menu.classList.contains('hidden');
+          if (isHidden) {
+            menu.classList.remove('hidden');
+            arrow.classList.add('rotate-180');
+          } else {
+            menu.classList.add('hidden');
+            arrow.classList.remove('rotate-180');
+          }
+        }
+        document.addEventListener('click', (e) => {
+          const menu = document.getElementById('quick-links-menu');
+          const btn = document.getElementById('quick-links-btn');
+          const arrow = document.getElementById('quick-links-arrow');
+          if (menu && !menu.classList.contains('hidden') && !menu.contains(e.target) && !btn.contains(e.target)) {
+            menu.classList.add('hidden');
+            arrow.classList.remove('rotate-180');
+          }
+        });
+      </script>
+    </div>
+  </aside>
+
+  <!-- ===== Main Content ===== -->
+  <main class="flex-1 flex flex-col overflow-y-auto pt-8 lg:pt-10 pb-8 px-4 md:px-8 lg:px-10">
+    <!-- Header Area -->
+    <header class="mb-4 flex-shrink-0 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+      <div>
+        <div class="mb-2">
+          <span class="inline-block bg-brand-500 text-white rounded-full px-4 py-1 text-[11.5px] font-mono font-extrabold tracking-wider uppercase">Nano Banana</span>
+        </div>
+        <h1 id="header-title" class="text-2xl md:text-3xl font-extrabold tracking-tight leading-tight text-neutral-900">
+          AI를 활용한 우리 회사의 맞춤 모델 만들기
+        </h1>
+      </div>
+      <!-- Navigation buttons in header -->
+      <div class="flex items-center gap-2 flex-shrink-0 mb-1">
+        <button id="btn-tab-1" class="w-9 h-9 flex items-center justify-center rounded-full font-bold text-sm transition-all focus:outline-none bg-brand-500 text-white border border-brand-500" onclick="showTab(1)">
+          1
+        </button>
+        <button id="btn-tab-2" class="w-9 h-9 flex items-center justify-center rounded-full font-bold text-sm transition-all focus:outline-none bg-white text-brand-500 border border-[#DDDBD5] hover:bg-neutral-50" onclick="showTab(2)">
+          2
+        </button>
+        <button id="btn-tab-3" class="w-9 h-9 flex items-center justify-center rounded-full font-bold text-sm transition-all focus:outline-none bg-white text-brand-500 border border-[#DDDBD5] hover:bg-neutral-50" onclick="showTab(3)">
+          3
+        </button>
+      </div>
+    </header>
+
+    <section class="border border-[#DDDBD5] rounded-2xl p-5 md:p-6 bg-white shadow-sm flex flex-col">
+      <!-- Card Head -->
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#DDDBD5] pb-4 mb-4 flex-shrink-0">
+        <div>
+          <h2 id="tool-title" class="text-lg md:text-xl font-extrabold text-neutral-900">AI활용 가상모델 프롬프트</h2>
+          <p id="tool-desc" class="text-xs md:text-sm text-[#605E59] mt-1">아래 프롬프트를 사용하여 원하는 컨셉의 기업 홍보 및 채용 가상 모델 이미지를 생성합니다.</p>
+        </div>
+        <div class="flex items-center gap-2 flex-shrink-0 animate-fade-in" id="card-links">
+
+              <a id="sub-link-gemini" href="https://gemini.google.com/" target="_blank" class="flex-shrink-0 inline-flex items-center justify-center gap-2 px-4 h-9 border border-[#DDDBD5] hover:border-emerald-500 bg-white hover:bg-emerald-50 text-neutral-900 hover:text-emerald-700 font-bold text-xs md:text-sm rounded-lg transition-all shadow-xs focus:outline-none" style="text-decoration: none;">
+                <svg class="w-3.5 h-3.5 text-neutral-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"></path>
+                </svg>
+                제미나이 바로가기
+              </a>
+        </div>
+      </div>
+
+      <!-- ================= CONTAINER 1: AI활용 가상모델 만들기 (탭 1) ================= -->
+      <div id="tab-1-container" class="flex flex-col gap-6">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <section class="flex flex-col border border-[#DDDBD5] rounded-xl bg-brand-100 overflow-hidden shadow-xs">
+            <div class="p-4 pb-2.5 flex-shrink-0 bg-brand-100">
+              <strong class="block text-neutral-900 text-base font-extrabold mb-1">👩 가상모델 생성 프롬프트</strong>
+              <span class="block text-[#605E59] text-xs leading-tight">가상 인물 실사 이미지를 생성하기 위한 기본 프롬프트입니다. (수정 가능)</span>
+            </div>
+            <textarea id="prompt-model" class="w-full p-4 border-t border-b border-l-0 border-r-0 border-[#DDDBD5] bg-white text-neutral-900 text-sm md:text-base leading-relaxed placeholder-neutral-400 focus:border-brand-500 focus:ring-0 outline-none resize-none h-48 font-mono leading-relaxed" style="font-family: 'Pretendard', sans-serif;">30대 초반의 한국인 여성 가상 모델, 기업 홍보 및 채용 커뮤니케이션용 이미지.
+배경: 밝고 깔끔한 흰색 스튜디오.
+표정: 자신감 있고 신뢰감 있는 미소, 카메라를 정면으로 바라보는 시선.
+스타일: 단정한 비즈니스 캐주얼, 고화질 실사 스타일, 브랜드 웹사이트 및 채용 페이지용.
+화각 및 비율: 16:9 가로형 이미지, 가로 화면 (Landscape orientation).</textarea>
+            <div class="p-4 bg-white flex justify-end">
+              <button onclick="copyPrompt('prompt-model')" class="px-6 h-11 bg-brand-500 hover:bg-brand-600 text-white text-sm md:text-base font-extrabold rounded-lg transition-all shadow-sm flex items-center justify-center gap-1.5 focus:outline-none">
+                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="9" y="9" width="11" height="11" rx="2" ry="2" stroke-linecap="round" stroke-linejoin="round"></rect>
+                  <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+                프롬프트 복사
+              </button>
+            </div>
+          </section>
+
+          <section class="flex flex-col border border-[#DDDBD5] rounded-xl bg-brand-100 overflow-hidden shadow-xs">
+            <div class="p-4 pb-2.5 flex-shrink-0 bg-brand-100">
+              <strong class="block text-neutral-900 text-base font-extrabold mb-1">🖼️ 배경 상황 변경</strong>
+              <span class="block text-[#605E59] text-xs leading-tight">동일 모델의 다른 상황/배경을 연출하기 위한 프롬프트입니다. (수정 가능)</span>
+            </div>
+            <textarea id="prompt-bg-change" class="w-full p-4 border-t border-b border-l-0 border-r-0 border-[#DDDBD5] bg-white text-neutral-900 text-sm md:text-base leading-relaxed placeholder-neutral-400 focus:border-brand-500 focus:ring-0 outline-none resize-none h-48 font-mono leading-relaxed" style="font-family: 'Pretendard', sans-serif;">앞서 생성한 모델 이미지를 활용해서
+동일한 인물이 아래 상황에 있는 이미지를 만들어줘.
+- 밝은 카페에서 노트북 작업 중인 모습
+- 회의실에서 프레젠테이션하는 모습
+- 야외 공원에서 걷고 있는 모습</textarea>
+            <div class="p-4 bg-white flex justify-end">
+              <button onclick="copyPrompt('prompt-bg-change')" class="px-6 h-11 bg-brand-500 hover:bg-brand-600 text-white text-sm md:text-base font-extrabold rounded-lg transition-all shadow-sm flex items-center justify-center gap-1.5 focus:outline-none">
+                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="9" y="9" width="11" height="11" rx="2" ry="2" stroke-linecap="round" stroke-linejoin="round"></rect>
+                  <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+                프롬프트 복사
+              </button>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <!-- ================= CONTAINER 2: 문서 시각화 (탭 2) ================= -->
+      <div id="tab-2-container" class="hidden flex flex-col gap-6">
+
+        <!-- Sub Tab Content 1: SVG 차트 -->
+        <div id="vis-content-vis" class="flex flex-col gap-6">
+          <section class="flex flex-col border border-[#DDDBD5] rounded-xl bg-brand-100 overflow-hidden shadow-xs">
+            <div class="p-4 pb-2.5 flex-shrink-0 bg-brand-100">
+              <strong class="block text-neutral-900 text-base font-extrabold mb-1">📊 연령별 사용 시간 인포그래픽 프롬프트</strong>
+              <span class="block text-[#605E59] text-xs leading-tight">아래 지시 사항을 활용해 이미지를 만듭니다. (수정 가능)</span>
+            </div>
+            <textarea id="prompt-vis" class="w-full p-4 border-t border-b border-l-0 border-r-0 border-[#DDDBD5] bg-white text-neutral-900 text-sm md:text-base leading-relaxed placeholder-neutral-400 focus:border-brand-500 focus:ring-0 outline-none resize-none h-64 md:h-80 font-mono leading-relaxed" style="font-family: 'Pretendard', sans-serif;">국내 20대에서 40대의 연령별 스마트폰 사용 시간 통계를 조사해서 인포그래픽으로 만들어줘.
+
+스타일: 배경은 화이트 계열(#FFFFFF), 포인트 컬러는 그린(#1D9E75) 계열로 통일.
+상단에는 제목과 핵심 수치를 크게 배치하고, 하단에는 연령대별 막대그래프 또는 도넛차트로 시각화.
+전체 A4 세로 비율, 깔끔하고 미니멀한 비즈니스 보고서 스타일로.
+폰트는 산세리프 계열, 숫자와 핵심 키워드는 굵게 강조.</textarea>
+            <div class="p-4 bg-white flex justify-end gap-2 border-t border-[#DDDBD5]">
+              <button onclick="copyPrompt('prompt-vis')" class="px-6 h-11 bg-brand-500 hover:bg-brand-600 text-white text-sm md:text-base font-extrabold rounded-lg transition-all shadow-sm flex items-center justify-center gap-1.5 focus:outline-none">
+                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="9" y="9" width="11" height="11" rx="2" ry="2" stroke-linecap="round" stroke-linejoin="round"></rect>
+                  <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+                프롬프트 복사
+              </button>
+            </div>
+          </section>
+        </div>
+
+        <!-- Sub Tab Content 2: 코로플렉스 지도 -->
+        <div id="vis-content-choro" class="hidden flex flex-col gap-6">
+          <section class="flex flex-col border border-[#DDDBD5] rounded-xl bg-brand-100 overflow-hidden shadow-xs">
+            <div class="p-4 pb-2.5 flex-shrink-0 bg-brand-100">
+              <strong class="block text-neutral-900 text-base font-extrabold mb-1">✍️ 인포그래픽 생성 프롬프트</strong>
+              <span class="block text-[#605E59] text-xs leading-tight">아래 지시 사항을 활용해 이미지를 만듭니다. (수정 가능)</span>
+            </div>
+            <textarea id="prompt-choro" class="w-full p-4 border-t border-b border-l-0 border-r-0 border-[#DDDBD5] bg-white text-neutral-900 text-sm md:text-base leading-relaxed placeholder-neutral-400 focus:border-brand-500 focus:ring-0 outline-none resize-none h-64 md:h-80 font-mono leading-relaxed" style="font-family: 'Pretendard', sans-serif;">최근 1년간 [전 세계 주요국의 기업 생성형 AI 도입률]에 대해 조사한 뒤,
+그 결과를 코로플레스(choropleth) 지도 형태의 인포그래픽으로 만들어줘.
+
+조사한 데이터를 기준으로 직접 국가와 수치를 구성해줘.
+
+구성: [코로플레스 지도 + 범례 + 상/하위 국가 하이라이트 박스]
+
+디자인 조건:
+- 지도 단위: 전 세계 국가별 (G20 + 주요 IT 강국 중심)
+- 도입률이 높을수록 진한 색, 낮을수록 옅은 색으로 그라데이션 표현
+- 색상 스케일: 단일색 그라데이션 (옅은 민트 → 진한 그린)
+- 범례 구간은 5단계로 나누고 각 구간 수치 범위를 명확히 표기
+- 국경선은 얇고 깔끔하게 (옅은 회색 1px)
+- 데이터 없는 국가는 옅은 회색 + 빗금으로 구분
+- 상위 3개국, 하위 3개국은 국가명+수치 라벨로 직접 강조
+- 범례는 하단에 가로형 그라데이션 바 + 구간 수치로 표시
+- 배경: 흰색, 바다는 옅은 회색(#F8F9FA)
+- 깔끔한 모던 대시보드 스타일, 제목·부제·데이터 출처 포함
+- 16:9 비율</textarea>
+            <div class="p-4 bg-white flex justify-end gap-2 border-t border-[#DDDBD5]">
+              <button onclick="copyPrompt('prompt-choro')" class="px-6 h-11 bg-brand-500 hover:bg-brand-600 text-white text-sm md:text-base font-extrabold rounded-lg transition-all shadow-sm flex items-center justify-center gap-1.5 focus:outline-none">
+                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="9" y="9" width="11" height="11" rx="2" ry="2" stroke-linecap="round" stroke-linejoin="round"></rect>
+                  <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+                프롬프트 복사
+              </button>
+            </div>
+          </section>
+        </div>
+
+        <!-- Sub Tab Content 3: 공지 포스터 -->
+        <div id="vis-content-poster" class="hidden flex flex-col gap-6">
+          <section class="flex flex-col border border-[#DDDBD5] rounded-xl bg-brand-100 overflow-hidden shadow-xs">
+            <div class="p-4 pb-2.5 flex-shrink-0 bg-brand-100">
+              <strong class="block text-neutral-900 text-base font-extrabold mb-1">✍️ 공지 포스터 생성 프롬프트</strong>
+              <span class="block text-[#605E59] text-xs leading-tight">아래 지시 사항을 활용해 이미지를 만듭니다. (수정 가능)</span>
+            </div>
+            <textarea id="prompt-poster" class="w-full p-4 border-t border-b border-l-0 border-r-0 border-[#DDDBD5] bg-white text-neutral-900 text-sm md:text-base leading-relaxed placeholder-neutral-400 focus:border-brand-500 focus:ring-0 outline-none resize-none h-64 md:h-80 font-mono leading-relaxed" style="font-family: 'Pretendard', sans-serif;">아래 내용에 대해 조사한 뒤,
+조사한 내용을 바탕으로 사내 공유용 포스터 1장을 만들어줘.
+
+조사 내용: [예: 우리 업무에 적용할 수 있는 AI 도구 5가지]
+
+구성:
+- 제목과 핵심 메시지를 상단에 크게 배치
+- 조사한 내용을 3~5개 항목으로 정리해서 본문에 배치
+- 항목마다 도구명·핵심 기능·활용 시간 절감 효과 등 정보 포함
+
+디자인 조건:
+- 비율: 3:4 (세로형 포스터) 또는 16:9 (사내 게시판용)
+- 포인트 컬러 1~2가지로 통일
+- 항목별로 아이콘 또는 간단한 일러스트 활용
+- 가독성 높은 폰트, 핵심 키워드와 수치는 굵게 강조
+- 배경: 흰색 또는 깔끔한 단색
+- 한눈에 정보가 들어오는 인포그래픽형 포스터 스타일</textarea>
+            <div class="p-4 bg-white flex justify-end gap-2 border-t border-[#DDDBD5]">
+              <button onclick="copyPrompt('prompt-poster')" class="px-6 h-11 bg-brand-500 hover:bg-brand-600 text-white text-sm md:text-base font-extrabold rounded-lg transition-all shadow-sm flex items-center justify-center gap-1.5 focus:outline-none">
+                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="9" y="9" width="11" height="11" rx="2" ry="2" stroke-linecap="round" stroke-linejoin="round"></rect>
+                  <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+                프롬프트 복사
+              </button>
+            </div>
+          </section>
+        </div>
+
+        <!-- Sub Tab Content 4: 이메일 서명 -->
+        <div id="vis-content-signature" class="hidden flex flex-col gap-6">
+          <section class="flex flex-col border border-[#DDDBD5] rounded-xl bg-brand-100 overflow-hidden shadow-xs">
+            <div class="p-4 pb-2.5 flex-shrink-0 bg-brand-100">
+              <strong class="block text-neutral-900 text-base font-extrabold mb-1">✍️ 이메일 서명 생성 프롬프트</strong>
+              <span class="block text-[#605E59] text-xs leading-tight">아래 지시 사항을 활용해 이미지를 만듭니다. (수정 가능)</span>
+            </div>
+            <textarea id="prompt-signature" class="w-full p-4 border-t border-b border-l-0 border-r-0 border-[#DDDBD5] bg-white text-neutral-900 text-sm md:text-base leading-relaxed placeholder-neutral-400 focus:border-brand-500 focus:ring-0 outline-none resize-none h-64 md:h-80 font-mono leading-relaxed" style="font-family: 'Pretendard', sans-serif;">첨부한 로고 이미지를 분석해줘.
+로고의 주요 색상과 브랜드 스타일을 파악한 뒤
+아래 정보로 이메일 서명 이미지를 만들어줘.
+
+[서명 정보]
+이름: [          ]
+직책: [          ]
+부서: [          ]
+회사명: [          ]
+이메일: [          ]
+전화번호: [          ]
+웹사이트: [          ]
+
+[디자인 조건]
+- 비율: 4:1 (가로 600px × 세로 150px)
+- 좌측: 로고 배치
+- 로고 우측에 세로 구분선 후 인적사항 나열
+- 배경색·포인트 컬러는 로고 색상에서 추출
+- 간결하고 전문적인 비즈니스 스타일
+- 한글·영문 텍스트 모두 명확하게 표현
+- 여백을 충분히 줘서 답답하지 않게</textarea>
+            <div class="p-4 bg-white flex justify-end gap-2 border-t border-[#DDDBD5]">
+              <button onclick="copyPrompt('prompt-signature')" class="px-6 h-11 bg-brand-500 hover:bg-brand-600 text-white text-sm md:text-base font-extrabold rounded-lg transition-all shadow-sm flex items-center justify-center gap-1.5 focus:outline-none">
+                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="9" y="9" width="11" height="11" rx="2" ry="2" stroke-linecap="round" stroke-linejoin="round"></rect>
+                  <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+                프롬프트 복사
+              </button>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <!-- ================= CONTAINER 3: 카드뉴스 및 포스터 제작 (탭 3) ================= -->
+      <div id="tab-3-container" class="hidden flex flex-col gap-6">
+        <section class="flex flex-col border border-[#DDDBD5] rounded-xl bg-brand-100 overflow-hidden shadow-xs">
+          <div class="p-4 pb-2.5 flex-shrink-0 bg-brand-100">
+            <strong class="block text-neutral-900 text-base font-extrabold mb-1">📢 카드뉴스 생성 프롬프트</strong>
+            <span class="block text-[#605E59] text-xs leading-tight">강의 안내 카드뉴스 이미지를 생성하기 위한 프롬프트입니다. (수정 가능)</span>
+          </div>
+          <textarea id="prompt-news" class="w-full p-4 border-t border-b border-l-0 border-r-0 border-[#DDDBD5] bg-white text-neutral-900 text-sm md:text-base leading-relaxed placeholder-neutral-400 focus:border-brand-500 focus:ring-0 outline-none resize-none h-64 md:h-80 font-mono leading-relaxed" style="font-family: 'Pretendard', sans-serif;">구글 AI 활용법 강의 안내 카드뉴스를 만들어줘.
+
+제목은 "일잘러의 무기가 되는 Google AI 활용법"으로 크게 넣고
+핵심 정보(강의 대상, 커리큘럼, 신청 방법)는 아이콘과 함께 정리해줘.
+배경은 화이트 계열, 포인트 컬러는 그린 계열로 통일해줘.</textarea>
+          <div class="p-4 bg-white flex justify-end">
+            <button onclick="copyPrompt('prompt-news')" class="px-6 h-11 bg-brand-500 hover:bg-brand-600 text-white text-sm md:text-base font-extrabold rounded-lg transition-all shadow-sm flex items-center justify-center gap-1.5 focus:outline-none">
+              <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <rect x="9" y="9" width="11" height="11" rx="2" ry="2" stroke-linecap="round" stroke-linejoin="round"></rect>
+                <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+              프롬프트 복사
+            </button>
+          </div>
+        </section>
+      </div>
+
+    </section>
+  </main>
+
+  <div id="toast" class="toast">복사되었습니다.</div>
+
+  <script>
+    function showTab(num) {
+      const tab1Cont = document.getElementById('tab-1-container');
+      const tab2Cont = document.getElementById('tab-2-container');
+      const tab3Cont = document.getElementById('tab-3-container');
+      const tab1Btn = document.getElementById('btn-tab-1');
+      const tab2Btn = document.getElementById('btn-tab-2');
+      const tab3Btn = document.getElementById('btn-tab-3');
+      
+      const headerTitle = document.getElementById('header-title');
+      const toolTitle = document.getElementById('tool-title');
+      const toolDesc = document.getElementById('tool-desc');
+      const geminiBtn = document.getElementById('sub-link-gemini');
+
+      // Hide all containers
+      tab1Cont.classList.add('hidden');
+      tab2Cont.classList.add('hidden');
+      if (tab3Cont) tab3Cont.classList.add('hidden');
+
+      // Reset all buttons style
+      const inactive = "w-9 h-9 flex items-center justify-center rounded-full font-bold text-sm transition-all focus:outline-none bg-white text-brand-500 border border-[#DDDBD5] hover:bg-neutral-50";
+      const active = "w-9 h-9 flex items-center justify-center rounded-full font-bold text-sm transition-all focus:outline-none bg-brand-500 text-white border border-brand-500";
+      
+      tab1Btn.className = inactive;
+      tab2Btn.className = inactive;
+      if (tab3Btn) tab3Btn.className = inactive;
+
+      // Default header button layout
+      if (geminiBtn) geminiBtn.classList.remove('hidden');
+
+      if (num === 1) {
+        tab1Cont.classList.remove('hidden');
+        tab1Btn.className = active;
+        headerTitle.textContent = "AI를 활용한 우리 회사의 맞춤 모델 만들기";
+        toolTitle.textContent = "AI활용 가상모델 프롬프트";
+        toolDesc.textContent = "아래 프롬프트를 사용하여 원하는 컨셉의 기업 홍보 및 채용 가상 모델 이미지를 생성합니다.";
+      } else if (num === 2) {
+        tab2Cont.classList.remove('hidden');
+        tab2Btn.className = active;
+        headerTitle.textContent = "차트 및 인포그래픽 디자인";
+        toolTitle.textContent = "연령별 스마트폰 사용 시간 인포그래픽 프롬프트";
+        toolDesc.textContent = "20~40대 연령별 스마트폰 사용 시간 통계 인포그래픽 이미지를 생성하기 위한 프롬프트입니다.";
+      } else if (num === 3) {
+        if (tab3Cont) tab3Cont.classList.remove('hidden');
+        if (tab3Btn) tab3Btn.className = active;
+        headerTitle.textContent = "카드뉴스 및 포스터 제작";
+        toolTitle.textContent = "카드뉴스 생성 프롬프트";
+        toolDesc.textContent = "강의 안내 카드뉴스 이미지를 생성하기 위한 프롬프트입니다.";
+      }
+    }
+
+    function changeVisTool(val) {
+      const vis = document.getElementById('vis-content-vis');
+      const choro = document.getElementById('vis-content-choro');
+      const poster = document.getElementById('vis-content-poster');
+      const sig = document.getElementById('vis-content-signature');
+      const toolTitle = document.getElementById('tool-title');
+      const toolDesc = document.getElementById('tool-desc');
+      
+      vis.classList.add('hidden');
+      choro.classList.add('hidden');
+      poster.classList.add('hidden');
+      sig.classList.add('hidden');
+      
+      if (val === 'vis') {
+        vis.classList.remove('hidden');
+        toolTitle.textContent = "연령별 스마트폰 사용 시간 인포그래픽 프롬프트";
+        toolDesc.textContent = "20~40대 연령별 스마트폰 사용 시간 통계 인포그래픽 이미지를 생성하기 위한 프롬프트입니다.";
+      } else if (val === 'choro') {
+        choro.classList.remove('hidden');
+        toolTitle.textContent = "지도형 인포그래픽 프롬프트";
+        toolDesc.textContent = "챗GPT를 활용하여 전 세계 도입률 비교 등 지도 형태의 인포그래픽을 제작합니다.";
+      } else if (val === 'poster') {
+        poster.classList.remove('hidden');
+        toolTitle.textContent = "공지 포스터 생성 프롬프트";
+        toolDesc.textContent = "프롬프트를 수정하여 사내 공지용 포스터 이미지를 손쉽게 생성합니다.";
+      } else if (val === 'signature') {
+        sig.classList.remove('hidden');
+        toolTitle.textContent = "이메일 서명 생성 프롬프트";
+        toolDesc.textContent = "브랜드 스타일 로고 분석 후 비즈니스용 이메일 서명 이미지를 만듭니다.";
+      }
+    }
+
+    // copy clipboard helper
+    function copyPrompt(id) {
+      const text = document.getElementById(id).value;
+      
+      const textArea = document.createElement('textarea');
+      textArea.value = text;
+      textArea.style.position = 'fixed';
+      textArea.style.top = '0';
+      textArea.style.left = '0';
+      textArea.style.opacity = '0';
+      document.body.appendChild(textArea);
+      textArea.focus();
+      textArea.select();
+      
+      try {
+        const successful = document.execCommand('copy');
+        if (successful) {
+          showToast('프롬프트가 클립보드에 복사되었습니다.');
+        } else {
+          showToast('복사에 실패했습니다.');
+        }
+      } catch (err) {
+        showToast('복사 기능이 지원되지 않는 브라우저입니다.');
+      }
+      document.body.removeChild(textArea);
+    }
+
+    let toastTimer;
+    function showToast(message) {
+      const toast = document.getElementById("toast");
+      toast.textContent = message;
+      clearTimeout(toastTimer);
+      toast.classList.add("show");
+      toastTimer = setTimeout(() => toast.classList.remove("show"), 2200);
+    }
+  </script>
+</body>
+</html>

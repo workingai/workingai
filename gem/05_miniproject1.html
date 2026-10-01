@@ -83,64 +83,90 @@
     <!-- Brand block -->
     <div class="px-5 pb-4 mb-2 border-b border-[#DDDBD5]">
       <a class="font-sans text-xl font-extrabold tracking-tight hover:opacity-80 transition-opacity"
-        href="index1.html" style="text-decoration: none;">
+        href="index.html" style="text-decoration: none;">
         <span class="text-neutral-900">Working AI</span> <span class="text-brand-500">Google AI</span>
       </a>
     </div>
 
     <!-- Nav list -->
-    <p class="hidden lg:block px-5 mb-1.5 text-[11px] font-bold uppercase tracking-wider text-neutral-400">실습 목록</p>
-    <nav class="flex lg:flex-col gap-1 px-3 pb-4 overflow-x-auto lg:overflow-y-auto">
-      <a href="index1.html"
-        class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
-        <span class="text-lg leading-none">🏠</span>
-        <span>실습 인덱스</span>
-      </a>
-      <a href="01_wamingup.html"
-        class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
-        <span class="text-lg leading-none">🔥</span>
-        <span>워밍업 실습</span>
-      </a>
-      <a href="index.html"
-        class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
-        <span class="text-lg leading-none">🧩</span>
-        <span>프롬프트 빌더</span>
-      </a>
-      <a href="03_apps_scrpt.html"
-        class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
-        <span class="text-lg leading-none">🤖</span>
-        <span>앱스스크립트 자동화</span>
-      </a>
-      <a href="04_notebooklm.html"
-        class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
-        <span class="text-lg leading-none">🖼️</span>
-        <span>노트북LM</span>
-      </a>
-      <a href="05_miniproject1.html"
-        class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-bold text-brand-600 bg-brand-100 whitespace-nowrap transition-colors">
-        <span class="text-lg leading-none">🚀</span>
-        <span>미니프로젝트 1</span>
-      </a>
-      <a href="07_aiagent.html"
-        class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
-        <span class="text-lg leading-none">🎨</span>
-        <span>AI 에이전트</span>
-      </a>
-      <a href="06_aivideo.html"
-        class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
-        <span class="text-lg leading-none">🎬</span>
-        <span>이미지 생성 및 영상화</span>
-      </a>
-      <a href="m2_miniproject2.html"
-        class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
-        <span class="text-lg leading-none">🚀</span>
-        <span>미니프로젝트 2</span>
-      </a>
+    <nav class="flex-1 overflow-y-auto px-3 pb-4 space-y-3.5">
+      <!-- Part 1. Gemini -->
+      <div>
+        <p class="px-2 mb-1 text-[10px] font-extrabold uppercase tracking-wider text-neutral-400">Part 1. Gemini</p>
+        <div class="flex lg:flex-col gap-0.5 overflow-x-auto lg:overflow-visible">
+          <a href="p01_gemini2x.html"
+            class="flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg text-xs md:text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
+            <span class="text-base leading-none">🔥</span>
+            <span class="truncate">Gemini 200% 활용</span>
+          </a>
+          <a href="p01_prompt.html"
+            class="flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg text-xs md:text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
+            <span class="text-base leading-none">🧩</span>
+            <span class="truncate">프롬프트 작성법</span>
+          </a>
+          <a href="05_miniproject1.html"
+            class="flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg text-xs md:text-sm font-bold text-brand-600 bg-brand-100 whitespace-nowrap transition-colors">
+            <span class="text-base leading-none">🔍</span>
+            <span class="truncate">딥리서치 시장조사</span>
+          </a>
+          <a href="p01_notebook.html"
+            class="flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg text-xs md:text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
+            <span class="text-base leading-none">📓</span>
+            <span class="truncate">노트북LM 인사이트</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Part 2. AI Contents -->
+      <div>
+        <p class="px-2 mb-1 text-[10px] font-extrabold uppercase tracking-wider text-neutral-400">Part 2. AI Contents</p>
+        <div class="flex lg:flex-col gap-0.5 overflow-x-auto lg:overflow-visible">
+          <a href="p02_nanobanana.html"
+            class="flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg text-xs md:text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
+            <span class="text-base leading-none">🍌</span>
+            <span class="truncate">Nano Banana 디자인</span>
+          </a>
+          <a href="p02_flow.html"
+            class="flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg text-xs md:text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
+            <span class="text-base leading-none">🎬</span>
+            <span class="truncate">Google Flow 영상</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Part 3. Workspace + AI -->
+      <div>
+        <p class="px-2 mb-1 text-[10px] font-extrabold uppercase tracking-wider text-neutral-400">Part 3. Workspace + AI</p>
+        <div class="flex lg:flex-col gap-0.5 overflow-x-auto lg:overflow-visible">
+          <a href="p03_workspace.html"
+            class="flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg text-xs md:text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
+            <span class="text-base leading-none">📊</span>
+            <span class="truncate">Sheets 데이터 자동화</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Part 4. Agentic AI -->
+      <div>
+        <p class="px-2 mb-1 text-[10px] font-extrabold uppercase tracking-wider text-neutral-400">Part 4. Agentic AI</p>
+        <div class="flex lg:flex-col gap-0.5 overflow-x-auto lg:overflow-visible">
+          <a href="p04_aiagent.html"
+            class="flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg text-xs md:text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
+            <span class="text-base leading-none">🤖</span>
+            <span class="truncate">AI Agent 시작하기</span>
+          </a>
+          <a href="m2_miniproject2.html"
+            class="flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg text-xs md:text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
+            <span class="text-base leading-none">🚀</span>
+            <span class="truncate">에이전트 제작·배포</span>
+          </a>
+        </div>
+      </div>
     </nav>
     <!-- Sidebar Footer (Banner) -->
     <div class="mt-auto border-t border-[#DDDBD5] p-4 bg-white flex-shrink-0">
       <!-- Dropup Menu Container -->
-      <div class="relative mb-2.5">
+      <div class="relative">
         <button id="quick-links-btn" onclick="toggleQuickLinks(event)" class="w-full flex items-center justify-between py-2 px-3 border border-[#DDDBD5] hover:border-brand-500 bg-white hover:bg-neutral-50 text-neutral-900 rounded-xl transition-all duration-300 shadow-xs text-sm font-extrabold focus:outline-none">
           <span class="flex items-center gap-2 text-neutral-600 hover:text-neutral-900">
             <span>🔗</span> 주요 서비스 바로가기
@@ -151,12 +177,9 @@
         </button>
         <!-- Dropup menu: hidden by default, absolute positioning above the button -->
         <div id="quick-links-menu" class="hidden absolute bottom-full left-0 w-full mb-2 bg-white border border-[#DDDBD5] rounded-xl shadow-lg z-50 overflow-hidden py-1">
-          <a href="https://chatgpt.com" target="_blank" class="block px-4 py-2.5 text-xs text-neutral-700 hover:bg-brand-50 hover:text-brand-600 transition-colors font-bold border-b border-[#F2F1EE]">챗GPT</a>
           <a href="https://gemini.google.com" target="_blank" class="block px-4 py-2.5 text-xs text-neutral-700 hover:bg-brand-50 hover:text-brand-600 transition-colors font-bold border-b border-[#F2F1EE]">제미나이</a>
-          <a href="https://claude.ai" target="_blank" class="block px-4 py-2.5 text-xs text-neutral-700 hover:bg-brand-50 hover:text-brand-600 transition-colors font-bold border-b border-[#F2F1EE]">클로드</a>
           <a href="https://sheets.google.com" target="_blank" class="block px-4 py-2.5 text-xs text-neutral-700 hover:bg-brand-50 hover:text-brand-600 transition-colors font-bold border-b border-[#F2F1EE]">구글 시트</a>
           <a href="https://docs.google.com/videos/create?usp=vids_alc&authuser=0" target="_blank" class="block px-4 py-2.5 text-xs text-neutral-700 hover:bg-brand-50 hover:text-brand-600 transition-colors font-bold border-b border-[#F2F1EE]">구글 Vids</a>
-          <a href="https://canva.com" target="_blank" class="block px-4 py-2.5 text-xs text-neutral-700 hover:bg-brand-50 hover:text-brand-600 transition-colors font-bold border-b border-[#F2F1EE]">캔바</a>
           <a href="https://aistudio.google.com" target="_blank" class="block px-4 py-2.5 text-xs text-neutral-700 hover:bg-brand-50 hover:text-brand-600 transition-colors font-bold border-b border-[#F2F1EE]">AI Studio</a>
           <a href="https://workspace.google.com/experiments" target="_blank" class="block px-4 py-2.5 text-xs text-neutral-700 hover:bg-brand-50 hover:text-brand-600 transition-colors font-bold">Workspace Experiments</a>
         </div>
@@ -185,10 +208,6 @@
           }
         });
       </script>
-
-      <button onclick="localStorage.removeItem('workbook_logged_in'); location.href='index1.html';" class="block w-full text-center py-2 px-3 border border-[#DDDBD5] hover:border-red-500 bg-neutral-50 hover:bg-red-50 text-neutral-500 hover:text-red-600 rounded-xl transition-all duration-300 shadow-xs text-xs font-bold focus:outline-none">
-        🚪 로그아웃
-      </button>
     </div>
   </aside>
 
@@ -292,11 +311,6 @@
               <p class="text-xs md:text-sm text-[#605E59] mt-1">시장 분석 및 경쟁사 조사를 진행하기 위해 AI 모델에 입력할 리서치 프롬프트입니다.</p>
             </div>
             <div class="flex items-center gap-2 flex-shrink-0">
-              <a href="https://chatgpt.com/" target="_blank" class="flex-shrink-0 inline-flex items-center justify-center gap-2 px-4 h-9 border border-[#DDDBD5] hover:border-emerald-500 bg-white hover:bg-emerald-50 text-neutral-900 hover:text-emerald-700 font-bold text-xs md:text-sm rounded-lg transition-all shadow-xs focus:outline-none" style="text-decoration: none;">
-                <svg class="w-3.5 h-3.5 text-neutral-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"></path>
-                </svg>
-                ChatGPT 바로가기              </a>
               <a href="https://gemini.google.com/" target="_blank" class="flex-shrink-0 inline-flex items-center justify-center gap-2 px-4 h-9 border border-[#DDDBD5] hover:border-blue-500 bg-white hover:bg-blue-50 text-neutral-900 hover:text-blue-700 font-bold text-xs md:text-sm rounded-lg transition-all shadow-xs focus:outline-none" style="text-decoration: none;">
                 <svg class="w-3.5 h-3.5 text-neutral-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"></path>
