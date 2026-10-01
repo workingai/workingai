@@ -72,134 +72,196 @@
         </p>
     </header>
 
-    <!-- Main Content Layout (8 Hub Cards Grid) -->
-    <main id="workbook-content" class="w-full max-w-7xl mx-auto px-6 mb-16 flex-1 flex">
-        <div class="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+    <!-- Main Content Layout (10 Hub Cards Grid: 5 Top / 5 Bottom) -->
+    <main id="workbook-content" class="w-full max-w-[1600px] mx-auto px-4 md:px-8 mb-16 flex-1 flex">
+        <div class="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-5">
             
-            <!-- 1. 워밍업 실습 -->
-            <a href="p01_gemini2x.html"
-                class="group flex flex-col justify-between border border-[#DDDBD5] rounded-2xl p-6 bg-white hover:border-brand-500 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+            <!-- 1. Gemini 200% 활용 -->
+            <a href="p101_gemini2x.html"
+                class="group flex flex-col justify-between border border-[#DDDBD5] rounded-2xl p-5 bg-white hover:border-brand-500 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
                 <div>
-                    <div class="w-11 h-11 rounded-xl bg-orange-50 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">🔥</div>
-                    <h3 class="text-lg font-extrabold text-neutral-900 group-hover:text-brand-500 transition-colors mb-2">
-                        워밍업 실습</h3>
-                    <p class="text-xs md:text-sm text-neutral-500 leading-relaxed">
-                        AI 기본 활용 능력 배양을 위해 가장 먼저 진행하는 단계별 실무 기초 워밍업 프롬프트입니다.
+                    <div class="flex items-center justify-between mb-3">
+                        <div class="w-10 h-10 rounded-xl bg-orange-50 flex items-center justify-center text-xl group-hover:scale-110 transition-transform">🔥</div>
+                        <span class="text-[10.5px] font-extrabold px-2 py-0.5 rounded-full bg-neutral-100 text-neutral-500 uppercase tracking-wider">Part 1</span>
+                    </div>
+                    <h3 class="text-base font-extrabold text-neutral-900 group-hover:text-brand-500 transition-colors mb-2">
+                        Gemini 200% 활용</h3>
+                    <p class="text-xs text-neutral-500 leading-relaxed">
+                        간단한 한글 포함 이미지 제작부터 모델별 핵심 강점 활용까지 실무 생산성을 2배 높입니다.
                     </p>
                 </div>
-                <div class="mt-6 pt-4 flex items-center text-xs md:text-sm font-bold text-neutral-400 group-hover:text-brand-500 transition-colors gap-1">
+                <div class="mt-4 pt-3 border-t border-[#F2F1EE] flex items-center text-xs font-bold text-neutral-400 group-hover:text-brand-500 transition-colors gap-1">
                     실습 바로가기 →
                 </div>
             </a>
 
-            <!-- 2. 프롬프트 빌더 -->
-            <a href="p01_prompt.html"
-                class="group flex flex-col justify-between border border-[#DDDBD5] rounded-2xl p-6 bg-white hover:border-brand-500 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+            <!-- 2. 프롬프트 작성법 -->
+            <a href="p102_prompt.html"
+                class="group flex flex-col justify-between border border-[#DDDBD5] rounded-2xl p-5 bg-white hover:border-brand-500 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
                 <div>
-                    <div class="w-11 h-11 rounded-xl bg-emerald-50 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">🧩</div>
-                    <h3 class="text-lg font-extrabold text-neutral-900 group-hover:text-brand-500 transition-colors mb-2">
-                        프롬프트 빌더</h3>
-                    <p class="text-xs md:text-sm text-neutral-500 leading-relaxed">
+                    <div class="flex items-center justify-between mb-3">
+                        <div class="w-10 h-10 rounded-xl bg-emerald-50 flex items-center justify-center text-xl group-hover:scale-110 transition-transform">🧩</div>
+                        <span class="text-[10.5px] font-extrabold px-2 py-0.5 rounded-full bg-neutral-100 text-neutral-500 uppercase tracking-wider">Part 1</span>
+                    </div>
+                    <h3 class="text-base font-extrabold text-neutral-900 group-hover:text-brand-500 transition-colors mb-2">
+                        프롬프트 작성법</h3>
+                    <p class="text-xs text-neutral-500 leading-relaxed">
                         목표, 역할, 제한, 출력 형식 조건을 조립하여 완벽하고 구체적인 명령어를 조합해 줍니다.
                     </p>
                 </div>
-                <div class="mt-6 pt-4 flex items-center text-xs md:text-sm font-bold text-neutral-400 group-hover:text-brand-500 transition-colors gap-1">
+                <div class="mt-4 pt-3 border-t border-[#F2F1EE] flex items-center text-xs font-bold text-neutral-400 group-hover:text-brand-500 transition-colors gap-1">
                     실습 바로가기 →
                 </div>
             </a>
 
-            <!-- 3. 앱스스크립트 자동화 -->
-            <a href="p03_workspace.html"
-                class="group flex flex-col justify-between border border-[#DDDBD5] rounded-2xl p-6 bg-white hover:border-brand-500 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+            <!-- 3. 제미나이 노트북 -->
+            <a href="p103_notebook.html"
+                class="group flex flex-col justify-between border border-[#DDDBD5] rounded-2xl p-5 bg-white hover:border-brand-500 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
                 <div>
-                    <div class="w-11 h-11 rounded-xl bg-indigo-50 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">🤖</div>
-                    <h3 class="text-lg font-extrabold text-neutral-900 group-hover:text-brand-500 transition-colors mb-2">
-                        앱스스크립트 자동화</h3>
-                    <p class="text-xs md:text-sm text-neutral-500 leading-relaxed">
-                        구글 스프레드시트와 연동하여 자동으로 정보를 수집하고 배포하는 비즈니스 자동화 코드 실습입니다.
+                    <div class="flex items-center justify-between mb-3">
+                        <div class="w-10 h-10 rounded-xl bg-teal-50 flex items-center justify-center text-xl group-hover:scale-110 transition-transform">📓</div>
+                        <span class="text-[10.5px] font-extrabold px-2 py-0.5 rounded-full bg-neutral-100 text-neutral-500 uppercase tracking-wider">Part 1</span>
+                    </div>
+                    <h3 class="text-base font-extrabold text-neutral-900 group-hover:text-brand-500 transition-colors mb-2">
+                        제미나이 노트북</h3>
+                    <p class="text-xs text-neutral-500 leading-relaxed">
+                        다양한 소스 분석을 바탕으로 맞춤형 기획 요약문 및 동영상 오버뷰 대본 등을 설계합니다.
                     </p>
                 </div>
-                <div class="mt-6 pt-4 flex items-center text-xs md:text-sm font-bold text-neutral-400 group-hover:text-brand-500 transition-colors gap-1">
+                <div class="mt-4 pt-3 border-t border-[#F2F1EE] flex items-center text-xs font-bold text-neutral-400 group-hover:text-brand-500 transition-colors gap-1">
                     실습 바로가기 →
                 </div>
             </a>
 
-            <!-- 4. 노트북LM -->
-            <a href="p01_notebook.html"
-                class="group flex flex-col justify-between border border-[#DDDBD5] rounded-2xl p-6 bg-white hover:border-brand-500 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+            <!-- 4. 이미지 생성 -->
+            <a href="p201_nanobanana.html"
+                class="group flex flex-col justify-between border border-[#DDDBD5] rounded-2xl p-5 bg-white hover:border-brand-500 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
                 <div>
-                    <div class="w-11 h-11 rounded-xl bg-teal-50 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">🖼️</div>
-                    <h3 class="text-lg font-extrabold text-neutral-900 group-hover:text-brand-500 transition-colors mb-2">
-                        노트북LM</h3>
-                    <p class="text-xs md:text-sm text-neutral-500 leading-relaxed">
-                        다양한 대용량 소스 분석을 바탕으로 맞춤형 기획 요약문 및 동영상 오버뷰 대본 등을 설계합니다.
+                    <div class="flex items-center justify-between mb-3">
+                        <div class="w-10 h-10 rounded-xl bg-amber-50 flex items-center justify-center text-xl group-hover:scale-110 transition-transform">🍌</div>
+                        <span class="text-[10.5px] font-extrabold px-2 py-0.5 rounded-full bg-neutral-100 text-neutral-500 uppercase tracking-wider">Part 2</span>
+                    </div>
+                    <h3 class="text-base font-extrabold text-neutral-900 group-hover:text-brand-500 transition-colors mb-2">
+                        이미지 생성</h3>
+                    <p class="text-xs text-neutral-500 leading-relaxed">
+                        기업 홍보 및 채용 목적에 맞는 맞춤형 가상 모델 컨셉 이미지를 AI 프롬프트로 생성합니다.
                     </p>
                 </div>
-                <div class="mt-6 pt-4 flex items-center text-xs md:text-sm font-bold text-neutral-400 group-hover:text-brand-500 transition-colors gap-1">
+                <div class="mt-4 pt-3 border-t border-[#F2F1EE] flex items-center text-xs font-bold text-neutral-400 group-hover:text-brand-500 transition-colors gap-1">
                     실습 바로가기 →
                 </div>
             </a>
 
-            <!-- 5. 미니프로젝트 1 -->
-            <a href="05_miniproject1.html"
-                class="group flex flex-col justify-between border border-[#DDDBD5] rounded-2xl p-6 bg-white hover:border-brand-500 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+            <!-- 5. AI 영상 만들기 -->
+            <a href="p202_flow.html"
+                class="group flex flex-col justify-between border border-[#DDDBD5] rounded-2xl p-5 bg-white hover:border-brand-500 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
                 <div>
-                    <div class="w-11 h-11 rounded-xl bg-rose-50 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">🚀</div>
-                    <h3 class="text-lg font-extrabold text-neutral-900 group-hover:text-brand-500 transition-colors mb-2">
-                        미니프로젝트 1</h3>
-                    <p class="text-xs md:text-sm text-neutral-500 leading-relaxed">
-                        AI를 활용한 단계별 시장 리서치 진행, 보고서 세부 목차 기획 및 슬라이드 구성안 초안을 설계합니다.
+                    <div class="flex items-center justify-between mb-3">
+                        <div class="w-10 h-10 rounded-xl bg-purple-50 flex items-center justify-center text-xl group-hover:scale-110 transition-transform">🎬</div>
+                        <span class="text-[10.5px] font-extrabold px-2 py-0.5 rounded-full bg-neutral-100 text-neutral-500 uppercase tracking-wider">Part 2</span>
+                    </div>
+                    <h3 class="text-base font-extrabold text-neutral-900 group-hover:text-brand-500 transition-colors mb-2">
+                        AI 영상 만들기</h3>
+                    <p class="text-xs text-neutral-500 leading-relaxed">
+                        정지된 이미지를 생동감 넘치는 비디오로 변환하고 쇼호스트 대본을 완성합니다.
                     </p>
                 </div>
-                <div class="mt-6 pt-4 flex items-center text-xs md:text-sm font-bold text-neutral-400 group-hover:text-brand-500 transition-colors gap-1">
+                <div class="mt-4 pt-3 border-t border-[#F2F1EE] flex items-center text-xs font-bold text-neutral-400 group-hover:text-brand-500 transition-colors gap-1">
                     실습 바로가기 →
                 </div>
             </a>
 
-            <!-- 6. AI 에이전트 -->
-            <a href="p04_aiagent.html"
-                class="group flex flex-col justify-between border border-[#DDDBD5] rounded-2xl p-6 bg-white hover:border-brand-500 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+            <!-- 6. 보고서 작성 (Docs/Slide) -->
+            <a href="p301_googledocs.html"
+                class="group flex flex-col justify-between border border-[#DDDBD5] rounded-2xl p-5 bg-white hover:border-brand-500 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
                 <div>
-                    <div class="w-11 h-11 rounded-xl bg-amber-50 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">🎨</div>
-                    <h3 class="text-lg font-extrabold text-neutral-900 group-hover:text-brand-500 transition-colors mb-2">
-                        AI 에이전트</h3>
-                    <p class="text-xs md:text-sm text-neutral-500 leading-relaxed">
-                        HTML 및 JS 기능을 구현하고, QR 코드 생성이나 이미지 가공 등 실질적인 브라우저 웹앱 개발 프롬프트를 만듭니다.
+                    <div class="flex items-center justify-between mb-3">
+                        <div class="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center text-xl group-hover:scale-110 transition-transform">📄</div>
+                        <span class="text-[10.5px] font-extrabold px-2 py-0.5 rounded-full bg-neutral-100 text-neutral-500 uppercase tracking-wider">Part 3</span>
+                    </div>
+                    <h3 class="text-base font-extrabold text-neutral-900 group-hover:text-brand-500 transition-colors mb-2">
+                        보고서 작성 (Docs/Slide)</h3>
+                    <p class="text-xs text-neutral-500 leading-relaxed">
+                        신제품 출시 마케팅 계획서와 발표용 슬라이드 구성안을 빠르게 작성합니다.
                     </p>
                 </div>
-                <div class="mt-6 pt-4 flex items-center text-xs md:text-sm font-bold text-neutral-400 group-hover:text-brand-500 transition-colors gap-1">
+                <div class="mt-4 pt-3 border-t border-[#F2F1EE] flex items-center text-xs font-bold text-neutral-400 group-hover:text-brand-500 transition-colors gap-1">
                     실습 바로가기 →
                 </div>
             </a>
 
-            <!-- 7. 이미지 생성 및 영상화 -->
-            <a href="p02_nanobanana.html"
-                class="group flex flex-col justify-between border border-[#DDDBD5] rounded-2xl p-6 bg-white hover:border-brand-500 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+            <!-- 7. AI 함수 활용 (Sheets) -->
+            <a href="p302_sheets.html"
+                class="group flex flex-col justify-between border border-[#DDDBD5] rounded-2xl p-5 bg-white hover:border-brand-500 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
                 <div>
-                    <div class="w-11 h-11 rounded-xl bg-purple-50 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">🎬</div>
-                    <h3 class="text-lg font-extrabold text-neutral-900 group-hover:text-brand-500 transition-colors mb-2">
-                        이미지 생성 및 영상화</h3>
-                    <p class="text-xs md:text-sm text-neutral-500 leading-relaxed">
-                        가상 모델 생성 프롬프트 및 스케치의 실제품 비디오 변환을 위한 모핑 기획안과 쇼호스트 스크립트 도구입니다.
+                    <div class="flex items-center justify-between mb-3">
+                        <div class="w-10 h-10 rounded-xl bg-emerald-50 flex items-center justify-center text-xl group-hover:scale-110 transition-transform">📊</div>
+                        <span class="text-[10.5px] font-extrabold px-2 py-0.5 rounded-full bg-neutral-100 text-neutral-500 uppercase tracking-wider">Part 3</span>
+                    </div>
+                    <h3 class="text-base font-extrabold text-neutral-900 group-hover:text-brand-500 transition-colors mb-2">
+                        AI 함수 활용 (Sheets)</h3>
+                    <p class="text-xs text-neutral-500 leading-relaxed">
+                        구글 시트 AI 함수 프롬프트와 Apps Script를 통한 네이버 뉴스 자동 수집기를 실습합니다.
                     </p>
                 </div>
-                <div class="mt-6 pt-4 flex items-center text-xs md:text-sm font-bold text-neutral-400 group-hover:text-brand-500 transition-colors gap-1">
+                <div class="mt-4 pt-3 border-t border-[#F2F1EE] flex items-center text-xs font-bold text-neutral-400 group-hover:text-brand-500 transition-colors gap-1">
                     실습 바로가기 →
                 </div>
             </a>
 
-            <!-- 8. 미니프로젝트 2 -->
-            <a href="m2_miniproject2.html"
-                class="group flex flex-col justify-between border border-[#DDDBD5] rounded-2xl p-6 bg-white hover:border-brand-500 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+            <!-- 8. 챗봇 만들기 (Gems) -->
+            <a href="p401_gems.html"
+                class="group flex flex-col justify-between border border-[#DDDBD5] rounded-2xl p-5 bg-white hover:border-brand-500 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
                 <div>
-                    <div class="w-11 h-11 rounded-xl bg-fuchsia-50 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">🚀</div>
-                    <h3 class="text-lg font-extrabold text-neutral-900 group-hover:text-brand-500 transition-colors mb-2">
-                        미니프로젝트 2</h3>
-                    <p class="text-xs md:text-sm text-neutral-500 leading-relaxed">
-                        업무 요구사항을 바탕으로 아이디어를 도출하고, AI 작동 지침(시스템 프롬프트)을 거쳐 동작하는 단일 HTML 웹앱을 제작합니다.
+                    <div class="flex items-center justify-between mb-3">
+                        <div class="w-10 h-10 rounded-xl bg-indigo-50 flex items-center justify-center text-xl group-hover:scale-110 transition-transform">💎</div>
+                        <span class="text-[10.5px] font-extrabold px-2 py-0.5 rounded-full bg-neutral-100 text-neutral-500 uppercase tracking-wider">Part 4</span>
+                    </div>
+                    <h3 class="text-base font-extrabold text-neutral-900 group-hover:text-brand-500 transition-colors mb-2">
+                        챗봇 만들기 (Gems)</h3>
+                    <p class="text-xs text-neutral-500 leading-relaxed">
+                        운세 상담가 등 맞춤형 페르소나와 작동 지침을 설계하여 나만의 Gems 챗봇을 만듭니다.
                     </p>
                 </div>
-                <div class="mt-6 pt-4 flex items-center text-xs md:text-sm font-bold text-neutral-400 group-hover:text-brand-500 transition-colors gap-1">
+                <div class="mt-4 pt-3 border-t border-[#F2F1EE] flex items-center text-xs font-bold text-neutral-400 group-hover:text-brand-500 transition-colors gap-1">
+                    실습 바로가기 →
+                </div>
+            </a>
+
+            <!-- 9. 웹페이지 생성 (Stitch) -->
+            <a href="p402_stitch.html"
+                class="group flex flex-col justify-between border border-[#DDDBD5] rounded-2xl p-5 bg-white hover:border-brand-500 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+                <div>
+                    <div class="flex items-center justify-between mb-3">
+                        <div class="w-10 h-10 rounded-xl bg-rose-50 flex items-center justify-center text-xl group-hover:scale-110 transition-transform">🧵</div>
+                        <span class="text-[10.5px] font-extrabold px-2 py-0.5 rounded-full bg-neutral-100 text-neutral-500 uppercase tracking-wider">Part 4</span>
+                    </div>
+                    <h3 class="text-base font-extrabold text-neutral-900 group-hover:text-brand-500 transition-colors mb-2">
+                        웹페이지 생성 (Stitch)</h3>
+                    <p class="text-xs text-neutral-500 leading-relaxed">
+                        Google Stitch를 활용하여 스타트업 소개를 위한 세련된 원페이지 웹 UI를 제작합니다.
+                    </p>
+                </div>
+                <div class="mt-4 pt-3 border-t border-[#F2F1EE] flex items-center text-xs font-bold text-neutral-400 group-hover:text-brand-500 transition-colors gap-1">
+                    실습 바로가기 →
+                </div>
+            </a>
+
+            <!-- 10. AI Agent 시작하기 -->
+            <a href="p403_aiagent.html"
+                class="group flex flex-col justify-between border border-[#DDDBD5] rounded-2xl p-5 bg-white hover:border-brand-500 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+                <div>
+                    <div class="flex items-center justify-between mb-3">
+                        <div class="w-10 h-10 rounded-xl bg-violet-50 flex items-center justify-center text-xl group-hover:scale-110 transition-transform">🤖</div>
+                        <span class="text-[10.5px] font-extrabold px-2 py-0.5 rounded-full bg-neutral-100 text-neutral-500 uppercase tracking-wider">Part 4</span>
+                    </div>
+                    <h3 class="text-base font-extrabold text-neutral-900 group-hover:text-brand-500 transition-colors mb-2">
+                        AI Agent 시작하기</h3>
+                    <p class="text-xs text-neutral-500 leading-relaxed">
+                        Antigravity를 활용하여 회의록 자동화 서비스 웹앱을 개발하고 Vercel에 배포합니다.
+                    </p>
+                </div>
+                <div class="mt-4 pt-3 border-t border-[#F2F1EE] flex items-center text-xs font-bold text-neutral-400 group-hover:text-brand-500 transition-colors gap-1">
                     실습 바로가기 →
                 </div>
             </a>

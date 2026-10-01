@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <script>
+    if (window.location.pathname === '/gem') {
+      window.location.replace(window.location.origin + '/gem/' + window.location.search + window.location.hash);
+    }
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Google Sheets에서 AI 함수 사용하기</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Pretendard Font -->
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+  <!-- IBM Plex Mono Font -->
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#F2F8F5',
+              100: '#E6F2ED',
+              500: '#2A6B52',
+              600: '#1D4E3A',
+            },
+            neutral: {
+              50: '#F8F7F4',
+              100: '#F2F1EE',
+              200: '#E5E3DF',
+              300: '#DDDBD5',
+              400: '#B0AEA8',
+              500: '#8A8881',
+              600: '#605E59',
+              900: '#1A1A18',
+            }
+          },
+          fontFamily: {
+            sans: ['Pretendard', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+            mono: ['IBM Plex Mono', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    :root{
+      --green:#2A6B52; --green-hover:#1D4E3A; --bg:#F2F1EE;
+      --card:#FFFFFF; --line:#DDDBD5; --soft-green:#E6F2ED;
+      --text:#1A1A18; --sub:#605E59; --muted:#908E88;
+      --soft:#F8F7F4; --font:"Pretendard",-apple-system,BlinkMacSystemFont,sans-serif;
+      --mono:"IBM Plex Mono",monospace;
+    }
+    body {
+      font-family: 'Pretendard', -apple-system, sans-serif;
+      background-color: #F2F1EE;
+    }
+    /* Custom scrollbar styling */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #F2F1EE;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #DDDBD5;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #B0AEA8;
+    }
+    
+    .head{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-bottom:16px;margin-bottom:20px;border-bottom:1px solid var(--line)}
+    .head h2{font-size:18px;font-weight:750}
+    .badge{padding:7px 10px;border-radius:999px;background:var(--soft-green);color:var(--green);font:700 11px var(--mono);letter-spacing:.04em;white-space:nowrap}
+    
+    /* Grid structures */
+    .grid-3{display:grid;grid-template-columns:1fr 1.1fr 1fr;gap:16px;align-items:stretch}
+    
+    .panel{display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);border-radius:12px;padding:0;overflow:hidden}
+    .panel-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding:18px;background:var(--soft-green);margin-bottom:16px;border-bottom:1px solid rgba(42,107,82,.22)}
+    .panel-title{font-size:17px;font-weight:800;letter-spacing:-.25px}.panel-desc{font-size:12px;color:var(--sub);line-height:1.45;margin-top:4px}
+    .tag{font:700 10px var(--mono);color:var(--green);white-space:nowrap}
+    .group{margin:0 18px 20px}.group:last-child{margin-bottom:0}
+    label{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:13px;font-weight:750;margin-bottom:7px}
+    label small{font-size:11px;font-weight:500;color:var(--sub)}
+    .keywords{display:flex;flex-direction:column;gap:8px}
+    .tip{margin:18px;padding:12px;background:var(--soft);border:1px solid rgba(42,107,82,.18);border-radius:8px;color:var(--sub);font-size:11px;line-height:1.55;margin-top:auto}
+    .actions{display:flex;justify-content:flex-end;gap:10px;margin-top:20px;padding-top:20px;border-top:1px solid var(--line)}
+    button.btn-base{height:44px;padding:0 18px;border-radius:7px;font:700 14px var(--font);cursor:pointer;transition:.2s}
+    button.btn-primary{background:var(--green);color:#fff;border:0}
+    button.btn-primary:hover{background:var(--green-hover)}
+    button.btn-secondary{background:#fff;color:var(--text);border:1px solid var(--line)}
+    button.btn-secondary:hover{background:var(--soft)}
+    .notice{margin-top:12px;color:var(--sub);font-size:12px;line-height:1.5}
+    .toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%) translateY(100px);opacity:0;z-index:50;padding:12px 22px;border-radius:999px;background:#1A1A18;color:#fff;font-size:14px;font-weight:600;transition:.25s}
+    .toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+    
+    @media(max-width:1050px){
+      .grid-3{grid-template-columns:1fr 1fr}
+      .grid-3 .panel:last-child{grid-column:1/-1}
+    }
+    @media(max-width:680px){
+      .head{align-items:flex-start}
+      .grid-3{grid-template-columns:1fr}
+      .grid-3 .panel:last-child{grid-column:auto}
+      .actions button{flex:1}
+    }
+  </style>
+</head>
+<body class="min-h-screen text-neutral-900 antialiased flex flex-col lg:flex-row lg:h-screen lg:overflow-hidden">
+  <!-- Top brand bar -->
+  <div class="fixed top-0 left-0 w-full h-[5px] bg-brand-500 z-50"></div>
+
+  <!-- ===== Left Sidebar Navigation ===== -->
+  <aside
+    class="flex-shrink-0 w-full lg:w-64 bg-white border-b lg:border-b-0 lg:border-r border-[#DDDBD5] flex flex-col lg:h-screen pt-[calc(5px+1.25rem)] lg:pt-[calc(5px+1.5rem)]">
+            <!-- Brand block -->
+    <div class="px-5 pb-4 mb-2 border-b border-[#DDDBD5]">
+      <a class="font-sans text-xl font-extrabold tracking-tight hover:opacity-80 transition-opacity"
+        href="index.html" style="text-decoration: none;">
+        <span class="text-neutral-900">Working AI</span> <span class="text-brand-500">Google AI</span>
+      </a>
+    </div>
+
+        <!-- Nav list -->
+    <nav class="flex-1 overflow-y-auto px-3 pb-4 space-y-3.5">
+      <!-- Part 1. Gemini -->
+      <div>
+        <p class="px-2 mb-1 text-[10px] font-extrabold uppercase tracking-wider text-neutral-400">Part 1. Gemini</p>
+        <div class="flex lg:flex-col gap-0.5 overflow-x-auto lg:overflow-visible">
+          <a href="p101_gemini2x.html"
+            class="flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg text-xs md:text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
+            <span class="text-base leading-none">🔥</span>
+            <span class="truncate">Gemini 200% 활용</span>
+          </a>
+          <a href="p102_prompt.html"
+            class="flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg text-xs md:text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
+            <span class="text-base leading-none">🧩</span>
+            <span class="truncate">프롬프트 작성법</span>
+          </a>
+          <a href="p103_notebook.html"
+            class="flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg text-xs md:text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
+            <span class="text-base leading-none">📓</span>
+            <span class="truncate">제미나이 노트북</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Part 2. AI Contents -->
+      <div>
+        <p class="px-2 mb-1 text-[10px] font-extrabold uppercase tracking-wider text-neutral-400">Part 2. AI Contents</p>
+        <div class="flex lg:flex-col gap-0.5 overflow-x-auto lg:overflow-visible">
+          <a href="p201_nanobanana.html"
+            class="flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg text-xs md:text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
+            <span class="text-base leading-none">🍌</span>
+            <span class="truncate">이미지 생성</span>
+          </a>
+          <a href="p202_flow.html"
+            class="flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg text-xs md:text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
+            <span class="text-base leading-none">🎬</span>
+            <span class="truncate">AI 영상 만들기</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Part 3. Workspace + AI -->
+      <div>
+        <p class="px-2 mb-1 text-[10px] font-extrabold uppercase tracking-wider text-neutral-400">Part 3. Workspace + AI</p>
+        <div class="flex lg:flex-col gap-0.5 overflow-x-auto lg:overflow-visible">
+          <a href="p301_googledocs.html"
+            class="flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg text-xs md:text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
+            <span class="text-base leading-none">📄</span>
+            <span class="truncate">보고서 작성 (Docs/Slide)</span>
+          </a>
+          <a href="p302_sheets.html"
+            class="flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg text-xs md:text-sm font-bold text-brand-600 bg-brand-100 whitespace-nowrap transition-colors">
+            <span class="text-base leading-none">📊</span>
+            <span class="truncate">AI 함수 활용 (Sheets)</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Part 4. Agentic AI -->
+      <div>
+        <p class="px-2 mb-1 text-[10px] font-extrabold uppercase tracking-wider text-neutral-400">Part 4. Agentic AI</p>
+        <div class="flex lg:flex-col gap-0.5 overflow-x-auto lg:overflow-visible">
+          <a href="p401_gems.html"
+            class="flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg text-xs md:text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
+            <span class="text-base leading-none">💎</span>
+            <span class="truncate">챗봇 만들기 (Gems)</span>
+          </a>
+          <a href="p402_stitch.html"
+            class="flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg text-xs md:text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
+            <span class="text-base leading-none">🧵</span>
+            <span class="truncate">웹페이지 생성 (Stitch)</span>
+          </a>
+          <a href="p403_aiagent.html"
+            class="flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg text-xs md:text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
+            <span class="text-base leading-none">🤖</span>
+            <span class="truncate">AI Agent 시작하기</span>
+          </a>
+          <a href="p404_project2.html"
+            class="flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg text-xs md:text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
+            <span class="text-base leading-none">🚀</span>
+            <span class="truncate">에이전트 제작 배포</span>
+          </a>
+        </div>
+      </div>
+    </nav>
+    <!-- Sidebar Footer (Banner) -->
+    <div class="mt-auto border-t border-[#DDDBD5] p-4 bg-white flex-shrink-0">
+      <!-- Dropup Menu Container -->
+      <div class="relative">
+        <button id="quick-links-btn" onclick="toggleQuickLinks(event)" class="w-full flex items-center justify-between py-2 px-3 border border-[#DDDBD5] hover:border-brand-500 bg-white hover:bg-neutral-50 text-neutral-900 rounded-xl transition-all duration-300 shadow-xs text-sm font-extrabold focus:outline-none">
+          <span class="flex items-center gap-2 text-neutral-600 hover:text-neutral-900">
+            <span>🔗</span> 주요 서비스 바로가기
+          </span>
+          <svg id="quick-links-arrow" class="w-3.5 h-3.5 text-neutral-400 transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5"></path>
+          </svg>
+        </button>
+        <!-- Dropup menu: hidden by default, absolute positioning above the button -->
+        <div id="quick-links-menu" class="hidden absolute bottom-full left-0 w-full mb-2 bg-white border border-[#DDDBD5] rounded-xl shadow-lg z-50 overflow-hidden py-1">
+          <a href="https://gemini.google.com" target="_blank" class="block px-4 py-2.5 text-xs text-neutral-700 hover:bg-brand-50 hover:text-brand-600 transition-colors font-bold border-b border-[#F2F1EE]">제미나이</a>
+          <a href="https://sheets.google.com" target="_blank" class="block px-4 py-2.5 text-xs text-neutral-700 hover:bg-brand-50 hover:text-brand-600 transition-colors font-bold border-b border-[#F2F1EE]">구글 시트</a>
+          <a href="https://docs.google.com/videos/create?usp=vids_alc&authuser=0" target="_blank" class="block px-4 py-2.5 text-xs text-neutral-700 hover:bg-brand-50 hover:text-brand-600 transition-colors font-bold border-b border-[#F2F1EE]">구글 Vids</a>
+          <a href="https://aistudio.google.com" target="_blank" class="block px-4 py-2.5 text-xs text-neutral-700 hover:bg-brand-50 hover:text-brand-600 transition-colors font-bold border-b border-[#F2F1EE]">AI Studio</a>
+          <a href="https://workspace.google.com/experiments" target="_blank" class="block px-4 py-2.5 text-xs text-neutral-700 hover:bg-brand-50 hover:text-brand-600 transition-colors font-bold">Workspace Experiments</a>
+        </div>
+      </div>
+      <script>
+        function toggleQuickLinks(e) {
+          e.stopPropagation();
+          const menu = document.getElementById('quick-links-menu');
+          const arrow = document.getElementById('quick-links-arrow');
+          const isHidden = menu.classList.contains('hidden');
+          if (isHidden) {
+            menu.classList.remove('hidden');
+            arrow.classList.add('rotate-180');
+          } else {
+            menu.classList.add('hidden');
+            arrow.classList.remove('rotate-180');
+          }
+        }
+        document.addEventListener('click', (e) => {
+          const menu = document.getElementById('quick-links-menu');
+          const btn = document.getElementById('quick-links-btn');
+          const arrow = document.getElementById('quick-links-arrow');
+          if (menu && !menu.classList.contains('hidden') && !menu.contains(e.target) && !btn.contains(e.target)) {
+            menu.classList.add('hidden');
+            arrow.classList.remove('rotate-180');
+          }
+        });
+      </script>
+    </div>
+  </aside>
+
+  <!-- ===== Main Content ===== -->
+  <main class="flex-1 flex flex-col overflow-y-auto pt-8 lg:pt-10 pb-8 px-4 md:px-8 lg:px-10">
+    <!-- Header Area -->
+    <header class="mb-4 flex-shrink-0 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+      <div>
+        <div class="mb-2">
+          <span class="inline-block bg-brand-500 text-white rounded-full px-4 py-1 text-[11.5px] font-mono font-extrabold tracking-wider uppercase">Part 3. Workspace + AI</span>
+        </div>
+        <h1 id="header-title" class="text-2xl md:text-3xl font-extrabold tracking-tight leading-tight text-neutral-900">
+          Google Sheets에서 AI 함수 사용하기
+        </h1>
+      </div>
+      <!-- Navigation buttons in header -->
+      <div class="flex items-center gap-2 flex-shrink-0 mb-1">
+        <button id="btn-tab-1" class="w-9 h-9 flex items-center justify-center rounded-full font-bold text-sm transition-all focus:outline-none bg-brand-500 text-white border border-brand-500" onclick="showAiFunctions()">
+          1
+        </button>
+        <button id="btn-tab-2" class="w-9 h-9 flex items-center justify-center rounded-full font-bold text-sm transition-all focus:outline-none bg-white text-brand-500 border border-[#DDDBD5] hover:bg-neutral-50" onclick="showNaverNews()">
+          2
+        </button>
+      </div>
+    </header>
+
+    <section class="border border-[#DDDBD5] rounded-2xl p-5 md:p-6 bg-white shadow-sm flex flex-col">
+      <!-- Card Head -->
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#DDDBD5] pb-4 mb-4 flex-shrink-0">
+        <div>
+          <h2 id="tool-title" class="text-lg md:text-xl font-extrabold text-neutral-900">AI 함수 실습 프롬프트</h2>
+          <p id="tool-desc" class="text-xs md:text-sm text-[#605E59] mt-1">Google Sheets에서 활용할 수 있는 작업별 AI 프롬프트 예시입니다. 복사하여 스프레드시트에 적용해 보세요.</p>
+        </div>
+        
+        <!-- 우측 영역 (1페이지: 실습파일 버튼 + 프롬프트 주제 선택 드롭다운 / 2페이지: 네이버 디벨로퍼 링크) -->
+        <div class="flex items-center gap-2 flex-shrink-0" id="card-links">
+          <!-- 1페이지용 실습파일 바로가기 버튼 -->
+          <a id="link-ref" href="https://drive.google.com/drive/folders/1r3f5hgI3t6snUUKKNnXsQuX0W2-ZAC4R?usp=sharing" target="_blank" class="px-4 h-10 border border-[#DDDBD5] bg-white hover:bg-neutral-50 text-neutral-900 text-xs md:text-sm font-bold rounded-lg transition-all shadow-xs flex items-center justify-center gap-1.5 focus:outline-none" style="text-decoration: none;">
+            <svg class="w-3.5 h-3.5 text-brand-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 9.776c.112-.017.227-.026.344-.026h15.812c.117 0 .232.009.344.026m-16.5 0a2.25 2.25 0 00-1.883 2.542l.857 6a2.25 2.25 0 002.227 1.932H19.05a2.25 2.25 0 002.227-1.932l.857-6a2.25 2.25 0 00-1.883-2.542m-16.5 0V6A2.25 2.25 0 016 3.75h3.879a1.5 1.5 0 011.06.44l2.122 2.12a1.5 1.5 0 001.06.44H18A2.25 2.25 0 0120.25 9v.776"></path>
+            </svg>
+            실습파일
+          </a>
+
+          <!-- 1페이지용 프롬프트 주제 선택 드롭다운 -->
+          <div id="topic-select-wrapper" class="relative">
+            <select id="topic-dropdown" onchange="changePromptTopic(this.value)" class="h-10 text-xs md:text-sm font-bold border border-[#DDDBD5] bg-white text-neutral-800 rounded-lg px-3.5 pr-8 focus:border-brand-500 focus:outline-none cursor-pointer shadow-xs appearance-none">
+              <option value="food" selected>🍽️ 맛집 추천</option>
+              <option value="copy">✍️ 카피 작성</option>
+              <option value="translate">🌐 요약 및 번역</option>
+              <option value="quantify">📊 정량화 (2종)</option>
+              <option value="extract">🔍 데이터 추출 (2종)</option>
+              <option value="condition">🏷️ 조건 찾기</option>
+              <option value="category">📂 카테고리 분류</option>
+            </select>
+            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2.5 text-neutral-400">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"></path></svg>
+            </div>
+          </div>
+
+          <!-- 2페이지용 네이버 디벨로퍼 링크 -->
+          <a id="naver-dev-link" href="https://developers.naver.com/" target="_blank" class="hidden px-4 h-9 border border-[#DDDBD5] bg-white hover:bg-neutral-50 text-neutral-900 text-xs md:text-sm font-bold rounded-lg transition-all shadow-xs flex items-center justify-center gap-1.5 focus:outline-none" style="text-decoration: none;">
+            <svg class="w-3.5 h-3.5 text-neutral-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"></path>
+            </svg>
+            네이버 디벨로퍼
+          </a>
+        </div>
+      </div>
+
+      <!-- ================= CONTAINER 1: Google Sheets에서 AI 함수 사용하기 (탭 1) ================= -->
+      <div id="ai-functions-container" class="flex-1 flex flex-col justify-start">
+        
+        <!-- 1. 맛집 추천 -->
+        <div id="topic-food" class="topic-view">
+          <section class="flex flex-col border border-[#DDDBD5] rounded-xl bg-brand-100 overflow-hidden shadow-xs">
+            <div class="p-4 pb-2.5 flex-shrink-0 bg-brand-100">
+              <strong class="block text-neutral-900 text-base font-extrabold mb-1">🍽️ 맛집 추천</strong>
+              <span class="block text-[#605E59] text-xs leading-tight">지정된 지역의 대표 맛집 목록을 요청합니다. (수정 가능)</span>
+            </div>
+            <textarea id="prompt-func-1" class="w-full p-4 border-t border-b border-l-0 border-r-0 border-[#DDDBD5] bg-white text-neutral-900 text-sm md:text-base leading-relaxed placeholder-neutral-400 focus:border-brand-500 focus:ring-0 outline-none resize-none h-44 md:h-56 font-mono leading-relaxed" style="font-family: 'Pretendard', sans-serif;">이 지역의 대표적인 맛집 다섯 곳을 추천해 줘</textarea>
+            <div class="p-4 bg-white flex justify-end gap-2 border-t border-[#DDDBD5]">
+              <button onclick="copyPromptText('prompt-func-1')" class="px-6 h-10 bg-brand-500 hover:bg-brand-600 text-white text-sm font-extrabold rounded-lg transition-all shadow-sm flex items-center justify-center gap-1.5 focus:outline-none">
+                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="9" y="9" width="11" height="11" rx="2" ry="2" stroke-linecap="round" stroke-linejoin="round"></rect>
+                  <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+                프롬프트 복사
+              </button>
+            </div>
+          </section>
+        </div>
+
+        <!-- 2. 카피 작성 -->
+        <div id="topic-copy" class="topic-view hidden">
+          <section class="flex flex-col border border-[#DDDBD5] rounded-xl bg-brand-100 overflow-hidden shadow-xs">
+            <div class="p-4 pb-2.5 flex-shrink-0 bg-brand-100">
+              <strong class="block text-neutral-900 text-base font-extrabold mb-1">✍️ 카피 작성</strong>
+              <span class="block text-[#605E59] text-xs leading-tight">SNS 광고 집행에 알맞은 간결하고 매력적인 한글 문구를 만듭니다. (수정 가능)</span>
+            </div>
+            <textarea id="prompt-func-2" class="w-full p-4 border-t border-b border-l-0 border-r-0 border-[#DDDBD5] bg-white text-neutral-900 text-sm md:text-base leading-relaxed placeholder-neutral-400 focus:border-brand-500 focus:ring-0 outline-none resize-none h-44 md:h-56 font-mono leading-relaxed" style="font-family: 'Pretendard', sans-serif;">SNS 광고에 적합한 한글 15자 내외의 카피를 작성해 줘</textarea>
+            <div class="p-4 bg-white flex justify-end gap-2 border-t border-[#DDDBD5]">
+              <button onclick="copyPromptText('prompt-func-2')" class="px-6 h-10 bg-brand-500 hover:bg-brand-600 text-white text-sm font-extrabold rounded-lg transition-all shadow-sm flex items-center justify-center gap-1.5 focus:outline-none">
+                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="9" y="9" width="11" height="11" rx="2" ry="2" stroke-linecap="round" stroke-linejoin="round"></rect>
+                  <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+                프롬프트 복사
+              </button>
+            </div>
+          </section>
+        </div>
+
+        <!-- 3. 요약 및 번역 -->
+        <div id="topic-translate" class="topic-view hidden">
+          <section class="flex flex-col border border-[#DDDBD5] rounded-xl bg-brand-100 overflow-hidden shadow-xs">
+            <div class="p-4 pb-2.5 flex-shrink-0 bg-brand-100">
+              <strong class="block text-neutral-900 text-base font-extrabold mb-1">🌐 요약 및 번역</strong>
+              <span class="block text-[#605E59] text-xs leading-tight">외국어 또는 긴 본문 내용을 자연스러운 한국어로 변환합니다. (수정 가능)</span>
+            </div>
+            <textarea id="prompt-func-3" class="w-full p-4 border-t border-b border-l-0 border-r-0 border-[#DDDBD5] bg-white text-neutral-900 text-sm md:text-base leading-relaxed placeholder-neutral-400 focus:border-brand-500 focus:ring-0 outline-none resize-none h-44 md:h-56 font-mono leading-relaxed" style="font-family: 'Pretendard', sans-serif;">이 내용을 한국어로 번역해 줘</textarea>
+            <div class="p-4 bg-white flex justify-end gap-2 border-t border-[#DDDBD5]">
+              <button onclick="copyPromptText('prompt-func-3')" class="px-6 h-10 bg-brand-500 hover:bg-brand-600 text-white text-sm font-extrabold rounded-lg transition-all shadow-sm flex items-center justify-center gap-1.5 focus:outline-none">
+                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="9" y="9" width="11" height="11" rx="2" ry="2" stroke-linecap="round" stroke-linejoin="round"></rect>
+                  <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+                프롬프트 복사
+              </button>
+            </div>
+          </section>
+        </div>
+
+        <!-- 4. 정량화 (좌우 분할 2개 카드) -->
+        <div id="topic-quantify" class="topic-view hidden">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <!-- 4-1. 감성 분류 -->
+            <section class="flex flex-col border border-[#DDDBD5] rounded-xl bg-brand-100 overflow-hidden shadow-xs">
+              <div class="p-4 pb-2.5 flex-shrink-0 bg-brand-100">
+                <strong class="block text-neutral-900 text-base font-extrabold mb-1">📊 정량화: 감성 분류</strong>
+                <span class="block text-[#605E59] text-xs leading-tight">텍스트 피드백의 감정 톤을 긍정/부정/중립으로 분류합니다. (수정 가능)</span>
+              </div>
+              <textarea id="prompt-func-4" class="w-full p-4 border-t border-b border-l-0 border-r-0 border-[#DDDBD5] bg-white text-neutral-900 text-sm md:text-base leading-relaxed placeholder-neutral-400 focus:border-brand-500 focus:ring-0 outline-none resize-none h-44 md:h-56 font-mono leading-relaxed" style="font-family: 'Pretendard', sans-serif;">긍정/부정/중립으로 분류해줘:</textarea>
+              <div class="p-4 bg-white flex justify-end gap-2 border-t border-[#DDDBD5]">
+                <button onclick="copyPromptText('prompt-func-4')" class="px-5 h-10 bg-brand-500 hover:bg-brand-600 text-white text-sm font-extrabold rounded-lg transition-all shadow-sm flex items-center justify-center gap-1.5 focus:outline-none">
+                  <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="9" y="9" width="11" height="11" rx="2" ry="2" stroke-linecap="round" stroke-linejoin="round"></rect>
+                    <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" stroke-linecap="round" stroke-linejoin="round"></path>
+                  </svg>
+                  프롬프트 복사
+                </button>
+              </div>
+            </section>
+
+            <!-- 4-2. 척도 점수화 -->
+            <section class="flex flex-col border border-[#DDDBD5] rounded-xl bg-brand-100 overflow-hidden shadow-xs">
+              <div class="p-4 pb-2.5 flex-shrink-0 bg-brand-100">
+                <strong class="block text-neutral-900 text-base font-extrabold mb-1">⭐ 정량화: 척도 점수화</strong>
+                <span class="block text-[#605E59] text-xs leading-tight">반응이나 만족도를 1~5점 척도로 정량화합니다. (수정 가능)</span>
+              </div>
+              <textarea id="prompt-func-5" class="w-full p-4 border-t border-b border-l-0 border-r-0 border-[#DDDBD5] bg-white text-neutral-900 text-sm md:text-base leading-relaxed placeholder-neutral-400 focus:border-brand-500 focus:ring-0 outline-none resize-none h-44 md:h-56 font-mono leading-relaxed" style="font-family: 'Pretendard', sans-serif;">반응을 1~5점으로 척도로 정량화해줘, 점수가 높을 수록 만족도 역시 높아.</textarea>
+              <div class="p-4 bg-white flex justify-end gap-2 border-t border-[#DDDBD5]">
+                <button onclick="copyPromptText('prompt-func-5')" class="px-5 h-10 bg-brand-500 hover:bg-brand-600 text-white text-sm font-extrabold rounded-lg transition-all shadow-sm flex items-center justify-center gap-1.5 focus:outline-none">
+                  <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="9" y="9" width="11" height="11" rx="2" ry="2" stroke-linecap="round" stroke-linejoin="round"></rect>
+                    <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" stroke-linecap="round" stroke-linejoin="round"></path>
+                  </svg>
+                  프롬프트 복사
+                </button>
+              </div>
+            </section>
+          </div>
+        </div>
+
+        <!-- 5. 데이터 추출 (좌우 분할 2개 카드) -->
+        <div id="topic-extract" class="topic-view hidden">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <!-- 5-1. 계정 ID 추출 -->
+            <section class="flex flex-col border border-[#DDDBD5] rounded-xl bg-brand-100 overflow-hidden shadow-xs">
+              <div class="p-4 pb-2.5 flex-shrink-0 bg-brand-100">
+                <strong class="block text-neutral-900 text-base font-extrabold mb-1">🔍 데이터 추출: 계정 ID</strong>
+                <span class="block text-[#605E59] text-xs leading-tight">이메일 주소에서 @ 앞부분의 사용자 ID만 추출합니다. (수정 가능)</span>
+              </div>
+              <textarea id="prompt-func-6" class="w-full p-4 border-t border-b border-l-0 border-r-0 border-[#DDDBD5] bg-white text-neutral-900 text-sm md:text-base leading-relaxed placeholder-neutral-400 focus:border-brand-500 focus:ring-0 outline-none resize-none h-44 md:h-56 font-mono leading-relaxed" style="font-family: 'Pretendard', sans-serif;">@앞의 ID만 추출해줘</textarea>
+              <div class="p-4 bg-white flex justify-end gap-2 border-t border-[#DDDBD5]">
+                <button onclick="copyPromptText('prompt-func-6')" class="px-5 h-10 bg-brand-500 hover:bg-brand-600 text-white text-sm font-extrabold rounded-lg transition-all shadow-sm flex items-center justify-center gap-1.5 focus:outline-none">
+                  <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="9" y="9" width="11" height="11" rx="2" ry="2" stroke-linecap="round" stroke-linejoin="round"></rect>
+                    <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" stroke-linecap="round" stroke-linejoin="round"></path>
+                  </svg>
+                  프롬프트 복사
+                </button>
+              </div>
+            </section>
+
+            <!-- 5-2. 전화번호 포맷 -->
+            <section class="flex flex-col border border-[#DDDBD5] rounded-xl bg-brand-100 overflow-hidden shadow-xs">
+              <div class="p-4 pb-2.5 flex-shrink-0 bg-brand-100">
+                <strong class="block text-neutral-900 text-base font-extrabold mb-1">📞 데이터 추출: 연락처 형식 변환</strong>
+                <span class="block text-[#605E59] text-xs leading-tight">다양한 양식으로 입력된 연락처를 표준 하이픈 형식으로 정규화합니다. (수정 가능)</span>
+              </div>
+              <textarea id="prompt-func-7" class="w-full p-4 border-t border-b border-l-0 border-r-0 border-[#DDDBD5] bg-white text-neutral-900 text-sm md:text-base leading-relaxed placeholder-neutral-400 focus:border-brand-500 focus:ring-0 outline-none resize-none h-44 md:h-56 font-mono leading-relaxed" style="font-family: 'Pretendard', sans-serif;">010-XXXX-XXXX 형식으로 변경해줘</textarea>
+              <div class="p-4 bg-white flex justify-end gap-2 border-t border-[#DDDBD5]">
+                <button onclick="copyPromptText('prompt-func-7')" class="px-5 h-10 bg-brand-500 hover:bg-brand-600 text-white text-sm font-extrabold rounded-lg transition-all shadow-sm flex items-center justify-center gap-1.5 focus:outline-none">
+                  <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="9" y="9" width="11" height="11" rx="2" ry="2" stroke-linecap="round" stroke-linejoin="round"></rect>
+                    <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" stroke-linecap="round" stroke-linejoin="round"></path>
+                  </svg>
+                  프롬프트 복사
+                </button>
+              </div>
+            </section>
+          </div>
+        </div>
+
+        <!-- 6. 조건 찾기 -->
+        <div id="topic-condition" class="topic-view hidden">
+          <section class="flex flex-col border border-[#DDDBD5] rounded-xl bg-brand-100 overflow-hidden shadow-xs">
+            <div class="p-4 pb-2.5 flex-shrink-0 bg-brand-100">
+              <strong class="block text-neutral-900 text-base font-extrabold mb-1">🏷️ 조건 찾기</strong>
+              <span class="block text-[#605E59] text-xs leading-tight">수치 조건에 따라 상태 레이블(품절 위험/주문필요/안정)을 동적으로 매핑합니다. (수정 가능)</span>
+            </div>
+            <textarea id="prompt-func-8" class="w-full p-4 border-t border-b border-l-0 border-r-0 border-[#DDDBD5] bg-white text-neutral-900 text-sm md:text-base leading-relaxed placeholder-neutral-400 focus:border-brand-500 focus:ring-0 outline-none resize-none h-44 md:h-56 font-mono leading-relaxed" style="font-family: 'Pretendard', sans-serif;">?열의 재고가 5개 이하면 '품절 위험', 15개 이하면 '주문필요', 그 외에는 '안정'으로 표기해</textarea>
+            <div class="p-4 bg-white flex justify-end gap-2 border-t border-[#DDDBD5]">
+              <button onclick="copyPromptText('prompt-func-8')" class="px-6 h-10 bg-brand-500 hover:bg-brand-600 text-white text-sm font-extrabold rounded-lg transition-all shadow-sm flex items-center justify-center gap-1.5 focus:outline-none">
+                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="9" y="9" width="11" height="11" rx="2" ry="2" stroke-linecap="round" stroke-linejoin="round"></rect>
+                  <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+                프롬프트 복사
+              </button>
+            </div>
+          </section>
+        </div>
+
+        <!-- 7. 카테고리 -->
+        <div id="topic-category" class="topic-view hidden">
+          <section class="flex flex-col border border-[#DDDBD5] rounded-xl bg-brand-100 overflow-hidden shadow-xs">
+            <div class="p-4 pb-2.5 flex-shrink-0 bg-brand-100">
+              <strong class="block text-neutral-900 text-base font-extrabold mb-1">📂 카테고리 분류</strong>
+              <span class="block text-[#605E59] text-xs leading-tight">항목을 정해진 소비/업무 카테고리 규격에 맞춰 자동 분류합니다. (수정 가능)</span>
+            </div>
+            <textarea id="prompt-func-9" class="w-full p-4 border-t border-b border-l-0 border-r-0 border-[#DDDBD5] bg-white text-neutral-900 text-sm md:text-base leading-relaxed placeholder-neutral-400 focus:border-brand-500 focus:ring-0 outline-none resize-none h-44 md:h-56 font-mono leading-relaxed" style="font-family: 'Pretendard', sans-serif;">식비/교통/쇼핑/여가/생활/기타로 분류해줘</textarea>
+            <div class="p-4 bg-white flex justify-end gap-2 border-t border-[#DDDBD5]">
+              <button onclick="copyPromptText('prompt-func-9')" class="px-6 h-10 bg-brand-500 hover:bg-brand-600 text-white text-sm font-extrabold rounded-lg transition-all shadow-sm flex items-center justify-center gap-1.5 focus:outline-none">
+                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="9" y="9" width="11" height="11" rx="2" ry="2" stroke-linecap="round" stroke-linejoin="round"></rect>
+                  <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+                프롬프트 복사
+              </button>
+            </div>
+          </section>
+        </div>
+
+      </div>
+
+      <!-- ================= CONTAINER 2: Apps Script를 활용한 네이버 뉴스 수집기 제작 (탭 2) ================= -->
+      <div id="naver-news-container" class="hidden flex-1 flex flex-col justify-between">
+        <div>
+          <div class="grid-3">
+            <!-- panel 1 -->
+            <section class="panel">
+              <div class="panel-top">
+                <div>
+                  <h3 class="panel-title">🔑 네이버 API 입력</h3>
+                  <p class="panel-desc">네이버 개발자센터에서 발급한 인증 정보를 입력합니다.</p>
+                </div>
+                <span class="tag">API KEY</span>
+              </div>
+
+              <div class="group">
+                <label for="clientId">Client ID <small>필수</small></label>
+                <input id="clientId" type="text" placeholder="YOUR_CLIENT_ID" class="w-full px-4 py-2.5 border border-[#DDDBD5] bg-white text-neutral-900 text-[15px] rounded-lg focus:border-brand-500 focus:outline-none placeholder-neutral-400">
+              </div>
+              <div class="group">
+                <label for="clientSecret">Client Secret <small>필수</small></label>
+                <input id="clientSecret" type="text" placeholder="YOUR_CLIENT_SECRET" class="w-full px-4 py-2.5 border border-[#DDDBD5] bg-white text-neutral-900 text-[15px] rounded-lg focus:border-brand-500 focus:outline-none placeholder-neutral-400">
+              </div>
+
+              <p class="tip">발급받은 API 키는 코드에 포함됩니다. 공유용 코드에서는 키를 별도 관리하는 것을 권장합니다.</p>
+            </section>
+
+            <!-- panel 2 -->
+            <section class="panel">
+              <div class="panel-top">
+                <div>
+                  <h3 class="panel-title">🔎 키워드 입력</h3>
+                  <p class="panel-desc">수집할 키워드 개수를 정하고, 각 검색어를 입력합니다.</p>
+                </div>
+                <span class="tag">KEYWORDS</span>
+              </div>
+
+              <div class="group">
+                <label for="keywordCount">키워드 개수 <small>1~3개</small></label>
+                <select id="keywordCount" class="w-full px-4 py-2.5 border border-[#DDDBD5] bg-white text-neutral-900 text-[15px] rounded-lg focus:border-brand-500 focus:outline-none cursor-pointer">
+                  <option value="1">1개</option>
+                  <option value="2" selected>2개</option>
+                  <option value="3">3개</option>
+                </select>
+              </div>
+
+              <div class="group">
+                <label>검색 키워드 <small>선택 개수만큼 표시</small></label>
+                <div id="keywords" class="keywords"></div>
+              </div>
+
+              <p class="tip">각 키워드는 별도로 검색한 뒤, 결과 시트의 첫 번째 열에 어떤 키워드의 결과인지 함께 기록됩니다.</p>
+            </section>
+
+            <!-- panel 3 -->
+            <section class="panel">
+              <div class="panel-top">
+                <div>
+                  <h3 class="panel-title">⚙️ 검색 옵션</h3>
+                  <p class="panel-desc">키워드당 출력 개수, 정렬, 검색 대상을 지정합니다.</p>
+                </div>
+                <span class="tag">OPTIONS</span>
+              </div>
+
+              <div class="group">
+                <label for="displayCount">출력 개수 <small>최대 100개</small></label>
+                <input id="displayCount" type="number" min="1" max="100" value="10" class="w-full px-4 py-2.5 border border-[#DDDBD5] bg-white text-neutral-900 text-[15px] rounded-lg focus:border-brand-500 focus:outline-none">
+              </div>
+
+              <div class="group">
+                <label for="sortType">정렬 방식</label>
+                <select id="sortType" class="w-full px-4 py-2.5 border border-[#DDDBD5] bg-white text-neutral-900 text-[15px] rounded-lg focus:border-brand-500 focus:outline-none cursor-pointer">
+                  <option value="date" selected>최신순</option>
+                  <option value="sim">관련도순</option>
+                </select>
+              </div>
+
+              <div class="group">
+                <label for="searchType">검색 대상</label>
+                <select id="searchType" class="w-full px-4 py-2.5 border border-[#DDDBD5] bg-white text-neutral-900 text-[15px] rounded-lg focus:border-brand-500 focus:outline-none cursor-pointer">
+                  <option value="news" selected>뉴스</option>
+                  <option value="blog">블로그</option>
+                </select>
+              </div>
+
+              <p class="tip">뉴스와 블로그는 네이버 검색 API의 서로 다른 엔드포인트를 사용합니다. 선택한 대상에 맞춰 코드가 자동 구성됩니다.</p>
+            </section>
+          </div>
+        </div>
+
+        <div>
+          <div class="actions">
+            <button class="btn-base btn-primary flex items-center justify-center gap-1.5 focus:outline-none" onclick="copyCode()">
+              <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <rect x="9" y="9" width="11" height="11" rx="2" ry="2" stroke-linecap="round" stroke-linejoin="round"></rect>
+                <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+              코드 복사
+            </button>
+            <a href="https://sheets.google.com" target="_blank" class="btn-base btn-secondary flex items-center justify-center gap-1.5 focus:outline-none" style="text-decoration: none;">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M19 3H5C3.9 3 3 3.9 3 5V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19V5C21 3.9 20.1 3 19 3ZM9 17H7V15H9V17ZM9 13H7V11H9V13ZM9 9H7V7H9V9ZM17 17H11V15H17V17ZM17 13H11V11H17V13ZM17 9H11V7H17V9Z" fill="#0F9D58"/>
+              </svg>
+              구글 시트 이동
+            </a>
+          </div>
+          <p class="notice">복사한 코드는 Google 스프레드시트의 <strong>확장 프로그램 → Apps Script</strong>에 붙여 넣어 사용할 수 있습니다.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="toast" class="toast">복사되었습니다.</div>
+
+  <script>
+    // Prompt Topic Switcher (Tab 1)
+    function changePromptTopic(topicKey) {
+      const topicViews = document.querySelectorAll('#ai-functions-container .topic-view');
+      topicViews.forEach(view => view.classList.add('hidden'));
+
+      const target = document.getElementById('topic-' + topicKey);
+      if (target) {
+        target.classList.remove('hidden');
+      }
+    }
+
+    // Navigation / Toggle System (Tab 1 vs Tab 2)
+    function showAiFunctions() {
+      document.getElementById('ai-functions-container').classList.remove('hidden');
+      document.getElementById('naver-news-container').classList.add('hidden');
+      
+      document.getElementById('header-title').textContent = "Google Sheets에서 AI 함수 사용하기";
+      document.getElementById('tool-title').textContent = "AI 함수 실습 프롬프트";
+      document.getElementById('tool-desc').textContent = "Google Sheets에서 활용할 수 있는 작업별 AI 프롬프트 예시입니다. 복사하여 스프레드시트에 적용해 보세요.";
+      
+      const tab1 = document.getElementById('btn-tab-1');
+      const tab2 = document.getElementById('btn-tab-2');
+      tab1.className = "w-9 h-9 flex items-center justify-center rounded-full font-bold text-sm transition-all focus:outline-none bg-brand-500 text-white border border-brand-500";
+      tab2.className = "w-9 h-9 flex items-center justify-center rounded-full font-bold text-sm transition-all focus:outline-none bg-white text-brand-500 border border-[#DDDBD5] hover:bg-neutral-50";
+
+      document.getElementById('topic-select-wrapper').classList.remove('hidden');
+      document.getElementById('link-ref').classList.remove('hidden');
+      document.getElementById('naver-dev-link').classList.add('hidden');
+    }
+
+    function showNaverNews() {
+      document.getElementById('ai-functions-container').classList.add('hidden');
+      document.getElementById('naver-news-container').classList.remove('hidden');
+      
+      document.getElementById('header-title').textContent = "Apps Script를 활용한 네이버 뉴스 수집기 제작";
+      document.getElementById('tool-title').textContent = "코드 생성 조건 입력";
+      document.getElementById('tool-desc').textContent = "각 영역의 값만 입력하면 선택한 검색 조건에 맞는 Apps Script 코드가 자동으로 조합됩니다.";
+      
+      const tab1 = document.getElementById('btn-tab-1');
+      const tab2 = document.getElementById('btn-tab-2');
+      tab1.className = "w-9 h-9 flex items-center justify-center rounded-full font-bold text-sm transition-all focus:outline-none bg-white text-brand-500 border border-[#DDDBD5] hover:bg-neutral-50";
+      tab2.className = "w-9 h-9 flex items-center justify-center rounded-full font-bold text-sm transition-all focus:outline-none bg-brand-500 text-white border border-brand-500";
+
+      document.getElementById('topic-select-wrapper').classList.add('hidden');
+      document.getElementById('link-ref').classList.add('hidden');
+      document.getElementById('naver-dev-link').classList.remove('hidden');
+    }
+
+    // Common Copy Function
+    function executeCopy(text, successMessage) {
+      const textArea = document.createElement('textarea');
+      textArea.value = text;
+      textArea.style.position = 'fixed';
+      textArea.style.top = '0';
+      textArea.style.left = '0';
+      textArea.style.opacity = '0';
+      document.body.appendChild(textArea);
+      textArea.focus();
+      textArea.select();
+      
+      try {
+        const successful = document.execCommand('copy');
+        if (successful) {
+          showToast(successMessage);
+        } else {
+          showToast('복사에 실패했습니다. 직접 복사해 주세요.');
+        }
+      } catch (err) {
+        showToast('복사 기능이 지원되지 않는 브라우저입니다.');
+      }
+      document.body.removeChild(textArea);
+    }
+
+    function copyPromptText(id) {
+      const text = document.getElementById(id).value;
+      executeCopy(text, "프롬프트가 복사되었습니다.");
+    }
+
+    // ==========================================
+    // [1] 네이버 뉴스 수집기 비즈니스 로직
+    // ==========================================
+    const state = { 1: "AI 자동화", 2: "AX 전략", 3: "생성형 AI" };
+    const $ = (id) => document.getElementById(id);
+
+    function renderKeywords() {
+      const count = Number($("keywordCount").value);
+      const container = $("keywords");
+      container.innerHTML = "";
+      for (let i = 1; i <= count; i++) {
+        const input = document.createElement("input");
+        input.type = "text";
+        input.placeholder = `키워드 ${i} 입력`;
+        input.className = "w-full px-4 py-2.5 border border-[#DDDBD5] bg-white text-neutral-900 text-[15px] rounded-lg focus:border-brand-500 focus:outline-none placeholder-neutral-400";
+        input.value = state[i] || "";
+        input.addEventListener("input", (e) => state[i] = e.target.value);
+        container.appendChild(input);
+      }
+    }
+
+    function getNaverCode() {
+      let display = Number($("displayCount").value);
+      if (!display || display < 1) display = 1;
+      if (display > 100) display = 100;
+      $("displayCount").value = display;
+
+      const clientId = $("clientId").value.trim() || "YOUR_CLIENT_ID";
+      const clientSecret = $("clientSecret").value.trim() || "YOUR_CLIENT_SECRET";
+      const type = $("searchType").value;
+      const sort = $("sortType").value;
+      const typeLabel = type === "news" ? "뉴스" : "블로그";
+
+      const keywords = [...document.querySelectorAll("#keywords input")]
+        .map(i => i.value.trim())
+        .filter(Boolean)
+        .map(k => k.replace(/'/g, "\\'"));
+
+      const keywordLines = (keywords.length ? keywords : ["OOOO"])
+        .map(k => `    '${k}'`).join(",\n");
+
+      return `function searchNaver${type === "news" ? "News" : "Blog"}() {
+  const clientId = '${clientId}'; // 네이버 API Client ID
+  const clientSecret = '${clientSecret}'; // 네이버 API Client Secret
+
+  const keywords = [
+${keywordLines}
+  ];
+
+  const displayCount = ${display}; // 키워드당 출력 개수
+  const sortType = '${sort}'; // 관련도순: sim, 최신순: date
+
+  const sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  sheet.clear();
+
+  // 헤더 작성
+  sheet.getRange(1, 1, 1, 4).setValues([['키워드', '제목', '링크', '요약']]);
+
+  let row = 2;
+
+  keywords.forEach(keyword => {
+    const apiUrl = 'https://openapi.naver.com/v1/search/${type}.json?query='
+      + encodeURIComponent(keyword)
+      + '&display=' + displayCount
+      + '&sort=' + sortType;
+
+    const options = {
+      method: 'get',
+      headers: {
+        'X-Naver-Client-Id': clientId,
+        'X-Naver-Client-Secret': clientSecret
+      }
+    };
+
+    const response = UrlFetchApp.fetch(apiUrl, options);
+    const result = JSON.parse(response.getContentText());
+
+    result.items.forEach(item => {
+      sheet.getRange(row, 1).setValue(keyword);
+      sheet.getRange(row, 2).setValue(stripHtml(item.title));
+      sheet.getRange(row, 3).setValue(item.link);
+      sheet.getRange(row, 4).setValue(stripHtml(item.description));
+      row++;
+    });
+  });
+
+  SpreadsheetApp.getUi().alert('${typeLabel} 검색 결과를 가져왔습니다.');
+}
+
+function stripHtml(html) {
+  return html.replace(/<[^>]+>/g, '');
+}`;
+    }
+
+    function copyCode() {
+      const code = getNaverCode();
+      executeCopy(code, "코드가 복사되었습니다.");
+    }
+
+    let toastTimer;
+    function showToast(message) {
+      const toast = $("toast");
+      toast.textContent = message;
+      clearTimeout(toastTimer);
+      toast.classList.add("show");
+      toastTimer = setTimeout(() => toast.classList.remove("show"), 2200);
+    }
+
+    // Register event listeners
+    $("keywordCount").addEventListener("change", renderKeywords);
+    $("displayCount").addEventListener("blur", () => getNaverCode());
+    renderKeywords();
+  </script>
+</body>
+</html>

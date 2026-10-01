@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <script>
+    if (window.location.pathname === '/gem') {
+      window.location.replace(window.location.origin + '/gem/' + window.location.search + window.location.hash);
+    }
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WORKING AI · Gemini 200% 활용하기</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Pretendard Font -->
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+  <!-- IBM Plex Mono Font -->
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#F2F8F5',
+              100: '#E6F2ED',
+              500: '#2A6B52',
+              600: '#1D4E3A',
+            },
+            neutral: {
+              50: '#F8F7F4',
+              100: '#F2F1EE',
+              200: '#E5E3DF',
+              300: '#DDDBD5',
+              400: '#B0AEA8',
+              500: '#8A8881',
+              600: '#605E59',
+              900: '#1A1A18',
+            }
+          },
+          fontFamily: {
+            sans: ['Pretendard', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+            mono: ['IBM Plex Mono', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    :root{
+      --bg:#F2F1EE; --card:#FFFFFF; --line:#DDDBD5; --green:#2A6B52; --green-dark:#1D4E3A;
+      --panel:#E6F2ED; --text:#1A1A18; --muted:#77736B; --soft:#F8F7F4;
+    }
+    body {
+      font-family: 'Pretendard', -apple-system, sans-serif;
+      background-color: #F2F1EE;
+    }
+    /* Custom Scrollbars */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #F2F1EE;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #DDDBD5;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #B0AEA8;
+    }
+    .toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%) translateY(20px);opacity:0;background:#1A1A18;color:#fff;border-radius:999px;padding:12px 18px;font-size:13px;font-weight:700;transition:.25s;z-index:20;box-shadow:0 4px 12px rgba(0,0,0,0.15)}
+    .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+  </style>
+</head>
+<body class="min-h-screen text-neutral-900 antialiased flex flex-col lg:flex-row lg:h-screen lg:overflow-hidden">
+  <!-- Top brand bar -->
+  <div class="fixed top-0 left-0 w-full h-[5px] bg-brand-500 z-50"></div>
+
+  <!-- ===== Left Sidebar Navigation ===== -->
+  <aside
+    class="flex-shrink-0 w-full lg:w-64 bg-white border-b lg:border-b-0 lg:border-r border-[#DDDBD5] flex flex-col lg:h-screen pt-[calc(5px+1.25rem)] lg:pt-[calc(5px+1.5rem)]">
+            <!-- Brand block -->
+    <div class="px-5 pb-4 mb-2 border-b border-[#DDDBD5]">
+      <a class="font-sans text-xl font-extrabold tracking-tight hover:opacity-80 transition-opacity"
+        href="index.html" style="text-decoration: none;">
+        <span class="text-neutral-900">Working AI</span> <span class="text-brand-500">Google AI</span>
+      </a>
+    </div>
+
+        <!-- Nav list -->
+    <nav class="flex-1 overflow-y-auto px-3 pb-4 space-y-3.5">
+      <!-- Part 1. Gemini -->
+      <div>
+        <p class="px-2 mb-1 text-[10px] font-extrabold uppercase tracking-wider text-neutral-400">Part 1. Gemini</p>
+        <div class="flex lg:flex-col gap-0.5 overflow-x-auto lg:overflow-visible">
+          <a href="p101_gemini2x.html"
+            class="flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg text-xs md:text-sm font-bold text-brand-600 bg-brand-100 whitespace-nowrap transition-colors">
+            <span class="text-base leading-none">🔥</span>
+            <span class="truncate">Gemini 200% 활용</span>
+          </a>
+          <a href="p102_prompt.html"
+            class="flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg text-xs md:text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
+            <span class="text-base leading-none">🧩</span>
+            <span class="truncate">프롬프트 작성법</span>
+          </a>
+          <a href="p103_notebook.html"
+            class="flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg text-xs md:text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
+            <span class="text-base leading-none">📓</span>
+            <span class="truncate">제미나이 노트북</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Part 2. AI Contents -->
+      <div>
+        <p class="px-2 mb-1 text-[10px] font-extrabold uppercase tracking-wider text-neutral-400">Part 2. AI Contents</p>
+        <div class="flex lg:flex-col gap-0.5 overflow-x-auto lg:overflow-visible">
+          <a href="p201_nanobanana.html"
+            class="flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg text-xs md:text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
+            <span class="text-base leading-none">🍌</span>
+            <span class="truncate">이미지 생성</span>
+          </a>
+          <a href="p202_flow.html"
+            class="flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg text-xs md:text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
+            <span class="text-base leading-none">🎬</span>
+            <span class="truncate">AI 영상 만들기</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Part 3. Workspace + AI -->
+      <div>
+        <p class="px-2 mb-1 text-[10px] font-extrabold uppercase tracking-wider text-neutral-400">Part 3. Workspace + AI</p>
+        <div class="flex lg:flex-col gap-0.5 overflow-x-auto lg:overflow-visible">
+          <a href="p301_googledocs.html"
+            class="flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg text-xs md:text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
+            <span class="text-base leading-none">📄</span>
+            <span class="truncate">보고서 작성 (Docs/Slide)</span>
+          </a>
+          <a href="p302_sheets.html"
+            class="flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg text-xs md:text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
+            <span class="text-base leading-none">📊</span>
+            <span class="truncate">AI 함수 활용 (Sheets)</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Part 4. Agentic AI -->
+      <div>
+        <p class="px-2 mb-1 text-[10px] font-extrabold uppercase tracking-wider text-neutral-400">Part 4. Agentic AI</p>
+        <div class="flex lg:flex-col gap-0.5 overflow-x-auto lg:overflow-visible">
+          <a href="p401_gems.html"
+            class="flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg text-xs md:text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
+            <span class="text-base leading-none">💎</span>
+            <span class="truncate">챗봇 만들기 (Gems)</span>
+          </a>
+          <a href="p402_stitch.html"
+            class="flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg text-xs md:text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
+            <span class="text-base leading-none">🧵</span>
+            <span class="truncate">웹페이지 생성 (Stitch)</span>
+          </a>
+          <a href="p403_aiagent.html"
+            class="flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg text-xs md:text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
+            <span class="text-base leading-none">🤖</span>
+            <span class="truncate">AI Agent 시작하기</span>
+          </a>
+          <a href="p404_project2.html"
+            class="flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg text-xs md:text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
+            <span class="text-base leading-none">🚀</span>
+            <span class="truncate">에이전트 제작 배포</span>
+          </a>
+        </div>
+      </div>
+    </nav>
+    <!-- Sidebar Footer (Banner) -->
+    <div class="mt-auto border-t border-[#DDDBD5] p-4 bg-white flex-shrink-0">
+      <!-- Dropup Menu Container -->
+      <div class="relative">
+        <button id="quick-links-btn" onclick="toggleQuickLinks(event)" class="w-full flex items-center justify-between py-2 px-3 border border-[#DDDBD5] hover:border-brand-500 bg-white hover:bg-neutral-50 text-neutral-900 rounded-xl transition-all duration-300 shadow-xs text-sm font-extrabold focus:outline-none">
+          <span class="flex items-center gap-2 text-neutral-600 hover:text-neutral-900">
+            <span>🔗</span> 주요 서비스 바로가기
+          </span>
+          <svg id="quick-links-arrow" class="w-3.5 h-3.5 text-neutral-400 transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5"></path>
+          </svg>
+        </button>
+        <!-- Dropup menu: hidden by default, absolute positioning above the button -->
+        <div id="quick-links-menu" class="hidden absolute bottom-full left-0 w-full mb-2 bg-white border border-[#DDDBD5] rounded-xl shadow-lg z-50 overflow-hidden py-1">
+          <a href="https://gemini.google.com" target="_blank" class="block px-4 py-2.5 text-xs text-neutral-700 hover:bg-brand-50 hover:text-brand-600 transition-colors font-bold border-b border-[#F2F1EE]">제미나이</a>
+          <a href="https://sheets.google.com" target="_blank" class="block px-4 py-2.5 text-xs text-neutral-700 hover:bg-brand-50 hover:text-brand-600 transition-colors font-bold border-b border-[#F2F1EE]">구글 시트</a>
+          <a href="https://docs.google.com/videos/create?usp=vids_alc&authuser=0" target="_blank" class="block px-4 py-2.5 text-xs text-neutral-700 hover:bg-brand-50 hover:text-brand-600 transition-colors font-bold border-b border-[#F2F1EE]">구글 Vids</a>
+          <a href="https://aistudio.google.com" target="_blank" class="block px-4 py-2.5 text-xs text-neutral-700 hover:bg-brand-50 hover:text-brand-600 transition-colors font-bold border-b border-[#F2F1EE]">AI Studio</a>
+          <a href="https://workspace.google.com/experiments" target="_blank" class="block px-4 py-2.5 text-xs text-neutral-700 hover:bg-brand-50 hover:text-brand-600 transition-colors font-bold">Workspace Experiments</a>
+        </div>
+      </div>
+      <script>
+        function toggleQuickLinks(e) {
+          e.stopPropagation();
+          const menu = document.getElementById('quick-links-menu');
+          const arrow = document.getElementById('quick-links-arrow');
+          const isHidden = menu.classList.contains('hidden');
+          if (isHidden) {
+            menu.classList.remove('hidden');
+            arrow.classList.add('rotate-180');
+          } else {
+            menu.classList.add('hidden');
+            arrow.classList.remove('rotate-180');
+          }
+        }
+        document.addEventListener('click', (e) => {
+          const menu = document.getElementById('quick-links-menu');
+          const btn = document.getElementById('quick-links-btn');
+          const arrow = document.getElementById('quick-links-arrow');
+          if (menu && !menu.classList.contains('hidden') && !menu.contains(e.target) && !btn.contains(e.target)) {
+            menu.classList.add('hidden');
+            arrow.classList.remove('rotate-180');
+          }
+        });
+      </script>
+    </div>
+  </aside>
+
+  <!-- ===== Main Content ===== -->
+  <main class="flex-1 flex flex-col overflow-y-auto pt-8 lg:pt-10 pb-8 px-4 md:px-8 lg:px-10">
+    <!-- Header Area -->
+    <header class="mb-4 flex-shrink-0 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+      <div>
+        <div class="mb-2">
+          <span class="inline-block bg-brand-500 text-white rounded-full px-4 py-1 text-[11.5px] font-mono font-extrabold tracking-wider uppercase">Part 1. Gemini</span>
+        </div>
+        <h1 id="header-title" class="text-2xl md:text-3xl font-extrabold tracking-tight leading-tight text-neutral-900">
+          간단한 한글 포함 이미지를 만들어 보세요
+        </h1>
+      </div>
+      <!-- Navigation buttons in header -->
+      <div class="flex items-center gap-2 flex-shrink-0 mb-1">
+        <button onclick="showTab(1)" id="tab-btn-1" class="w-9 h-9 flex items-center justify-center rounded-full font-bold text-sm transition-all focus:outline-none bg-brand-500 text-white border border-brand-500">
+          1
+        </button>
+        <button onclick="showTab(2)" id="tab-btn-2" class="w-9 h-9 flex items-center justify-center rounded-full font-bold text-sm transition-all focus:outline-none bg-white text-brand-500 border border-[#DDDBD5] hover:bg-neutral-50">
+          2
+        </button>
+        <button onclick="showTab(3)" id="tab-btn-3" class="w-9 h-9 flex items-center justify-center rounded-full font-bold text-sm transition-all focus:outline-none bg-white text-brand-500 border border-[#DDDBD5] hover:bg-neutral-50">
+          3
+        </button>
+      </div>
+    </header>
+ 
+    <section class="border border-[#DDDBD5] rounded-2xl p-5 md:p-6 bg-white shadow-sm flex flex-col flex-1">
+      <!-- Practice Content Container -->
+      <div class="flex-1 flex flex-col gap-6">
+        
+        <!-- =================== 실습 1. Nano Banana 이미지 생성 =================== -->
+        <div id="content-chatgpt" class="flex flex-col gap-6">
+          <!-- Card Head 1 -->
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#DDDBD5] pb-4 mb-2 flex-shrink-0">
+            <div>
+              <h2 class="text-lg md:text-xl font-extrabold text-neutral-900">Nano Banana 활용</h2>
+              <p class="text-xs md:text-sm text-[#605E59] mt-1">간단한 한글 포함 이미지를 만들어 보세요</p>
+            </div>
+            
+            
+            <div class="flex-shrink-0">
+              <a href="https://gemini.google.com/" target="_blank" class="flex-shrink-0 inline-flex items-center justify-center gap-2 px-4 h-9 border border-[#DDDBD5] hover:border-emerald-500 bg-white hover:bg-emerald-50 text-neutral-900 hover:text-emerald-700 font-bold text-xs md:text-sm rounded-lg transition-all shadow-xs focus:outline-none" style="text-decoration: none;">
+                <svg class="w-3.5 h-3.5 text-neutral-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"></path>
+                </svg>
+                Gemini 바로가기              </a>
+            </div>
+
+
+          </div>
+
+          <!-- 실습 프롬프트 -->
+          <section class="flex flex-col border border-[#DDDBD5] rounded-xl bg-brand-100 overflow-hidden shadow-xs">
+            <div class="p-4 pb-2.5 flex-shrink-0 bg-brand-100">
+              <strong class="block text-neutral-900 text-base font-extrabold mb-1">✍️ 이미지 생성 프롬프트</strong>
+              <span class="block text-[#605E59] text-xs leading-tight">아래 지시 사항을 활용해 이미지를 만듭니다. (수정 가능)</span>
+            </div>
+            <textarea id="prompt-chatgpt" class="w-full p-4 border-t border-b border-l-0 border-r-0 border-[#DDDBD5] bg-white text-neutral-900 text-sm md:text-base leading-relaxed placeholder-neutral-400 focus:border-brand-500 focus:ring-0 outline-none resize-none h-56 md:h-64 font-mono leading-relaxed" style="font-family: 'Pretendard', sans-serif;">깔끔한 손그림 두들 스타일로 그려진 "Gemini 기능 허브" 인포그래픽을 그려줘.
+전체적인 스타일은 검정색 라인 드로잉에 파스텔 톤으로 채색된
+심플하고 정돈된 느낌이어야 해.
+중앙의 Gemini 캐릭터(별 또는 반짝임 아이콘)를 배치하고,
+Gemini가 실제로 제공하는 기능들을 직접 조사해서 그 중 대표적인 기능
+(예: 이미지 생성, Canvas, 앱 연동 등)을 아이콘과 말풍선 형태로
+주위에 방사형으로 배치해줘.
+이미지 비율은 16:9 비율로 제작해줘.</textarea>
+            <div class="p-4 bg-white flex justify-end gap-2 border-t border-[#DDDBD5]">
+              <button onclick="copyPrompt('prompt-chatgpt')" class="px-6 h-11 bg-brand-500 hover:bg-brand-600 text-white text-sm md:text-base font-extrabold rounded-lg transition-all shadow-sm flex items-center justify-center gap-1.5 focus:outline-none">
+                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="9" y="9" width="11" height="11" rx="2" ry="2" stroke-linecap="round" stroke-linejoin="round"></rect>
+                  <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+                프롬프트 복사
+              </button>
+            </div>
+          </section>
+        </div>
+
+        <!-- =================== 실습 2. 영상 및 음악 생성 =================== -->
+        <div id="content-media" class="hidden flex flex-col gap-6">
+          <!-- Card Head 2 -->
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#DDDBD5] pb-4 mb-2 flex-shrink-0">
+            <div>
+              <h2 class="text-lg md:text-xl font-extrabold text-neutral-900">영상 및 음악 생성</h2>
+              <p class="text-xs md:text-sm text-[#605E59] mt-1">텍스트만으로 영상이나 음악을 만들 수 있습니다</p>
+            </div>
+            
+            <div class="flex-shrink-0">
+              <a href="https://gemini.google.com/" target="_blank" class="flex-shrink-0 inline-flex items-center justify-center gap-2 px-4 h-9 border border-[#DDDBD5] hover:border-emerald-500 bg-white hover:bg-emerald-50 text-neutral-900 hover:text-emerald-700 font-bold text-xs md:text-sm rounded-lg transition-all shadow-xs focus:outline-none" style="text-decoration: none;">
+                <svg class="w-3.5 h-3.5 text-neutral-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"></path>
+                </svg>
+                Gemini 바로가기
+              </a>
+            </div>
+          </div>
+
+          <!-- 실습 프롬프트 -->
+          <section class="flex flex-col border border-[#DDDBD5] rounded-xl bg-brand-100 overflow-hidden shadow-xs">
+            <div class="p-4 pb-2.5 flex-shrink-0 bg-brand-100">
+              <strong class="block text-neutral-900 text-base font-extrabold mb-1">✍️ 영상·음악 생성 프롬프트</strong>
+              <span class="block text-[#605E59] text-xs leading-tight">아래 지시 사항을 활용해 영상 및 음악을 만듭니다. (수정 가능)</span>
+            </div>
+            <textarea id="prompt-media" class="w-full p-4 border-t border-b border-l-0 border-r-0 border-[#DDDBD5] bg-white text-neutral-900 text-sm md:text-base leading-relaxed placeholder-neutral-400 focus:border-brand-500 focus:ring-0 outline-none resize-none h-56 md:h-64 font-mono leading-relaxed" style="font-family: 'Pretendard', sans-serif;">회의실에서 노트북 화면을 보며 발표 자료를 확인하는 직장인의 모습을 만들어줘.
+차분한 사무실 조명, 자연스러운 카메라 워킹.
+인물이 짧게 대사를 말함: "아! 이 부분만 끝나면 퇴근할 수 있겠네"
+배경에는 노트북 키보드 타이핑 소리를 은은하게 넣고,
+배경음악은 잔잔한 로파이 스타일로.</textarea>
+            <div class="p-4 bg-white flex justify-end gap-2 border-t border-[#DDDBD5]">
+              <button onclick="copyPrompt('prompt-media')" class="px-6 h-11 bg-brand-500 hover:bg-brand-600 text-white text-sm md:text-base font-extrabold rounded-lg transition-all shadow-sm flex items-center justify-center gap-1.5 focus:outline-none">
+                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="9" y="9" width="11" height="11" rx="2" ry="2" stroke-linecap="round" stroke-linejoin="round"></rect>
+                  <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+                프롬프트 복사
+              </button>
+            </div>
+          </section>
+        </div>
+
+        <!-- =================== 실습 3. Gemini Canvas 웹앱 제작 =================== -->
+        <div id="content-gemini" class="hidden flex flex-col gap-6">
+          <!-- Card Head 3 -->
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#DDDBD5] pb-4 mb-2 flex-shrink-0">
+            <div>
+              <h2 class="text-lg md:text-xl font-extrabold text-neutral-900">Gemini Canvas 활용</h2>
+              <p class="text-xs md:text-sm text-[#605E59] mt-1">Gemini의 Canvas 모듈에서 간단한 html 도구를 직접 만들 수 있습니다</p>
+            </div>
+            
+            
+            <div class="flex-shrink-0">
+              <a href="https://gemini.google.com/" target="_blank" class="flex-shrink-0 inline-flex items-center justify-center gap-2 px-4 h-9 border border-[#DDDBD5] hover:border-blue-500 bg-white hover:bg-blue-50 text-neutral-900 hover:text-blue-700 font-bold text-xs md:text-sm rounded-lg transition-all shadow-xs focus:outline-none" style="text-decoration: none;">
+                <svg class="w-3.5 h-3.5 text-neutral-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"></path>
+                </svg>
+                Gemini 바로가기              </a>
+            </div>
+
+
+          </div>
+
+          <!-- 실습 프롬프트 -->
+          <section class="flex flex-col border border-[#DDDBD5] rounded-xl bg-brand-100 overflow-hidden shadow-xs">
+            <div class="p-4 pb-2.5 flex-shrink-0 bg-brand-100">
+              <strong class="block text-neutral-900 text-base font-extrabold mb-1">✍️ 도구 제작 프롬프트</strong>
+              <span class="block text-[#605E59] text-xs leading-tight">아래 지시 사항을 활용해 캔버스 코드를 생성합니다. (수정 가능)</span>
+            </div>
+            <textarea id="prompt-gemini" class="w-full p-4 border-t border-b border-l-0 border-r-0 border-[#DDDBD5] bg-white text-neutral-900 text-sm md:text-base leading-relaxed placeholder-neutral-400 focus:border-brand-500 focus:ring-0 outline-none resize-none h-64 md:h-80 font-mono leading-relaxed" style="font-family: 'Pretendard', sans-serif;">원가와 판매가를 입력하면 마진율을 계산해주는 웹앱을 만들어줘.
+
+[입력 항목]
+- 원가 (매입 가격)
+- 판매가 (소비자 판매 가격)
+
+[계산 및 표시 기능]
+- 마진 금액 = 판매가 - 원가
+- 마진율(%) = (마진 금액 ÷ 판매가) × 100
+- 금액 입력 시 천 단위 구분 쉼표(,) 자동 적용 및 '원' 단위 표시
+- 실시간 자동 계산 또는 '계산하기' 버튼 클릭 시 즉시 결과 반영
+
+[추가 편의 기능]
+- 목표 마진율(%)을 입력하면 적정 판매가를 역산해주는 기능
+- 마진율 구간별 시각적 배지 표시 (예: 20% 미만: 주의, 20~40%: 적정, 40% 이상: 우수)
+- 입력값을 한 번에 비우는 '초기화' 버튼
+
+[디자인 및 기술 조건]
+- 외부 라이브러리 설치 없이 바로 실행 가능한 단일 HTML 파일 (HTML + CSS + JavaScript)
+- 모바일과 PC 모두에서 사용하기 편리한 깔끔하고 모던한 카드형 UI</textarea>
+            <div class="p-4 bg-white flex justify-end gap-2 border-t border-[#DDDBD5]">
+              <button onclick="copyPrompt('prompt-gemini')" class="px-6 h-11 bg-brand-500 hover:bg-brand-600 text-white text-sm md:text-base font-extrabold rounded-lg transition-all shadow-sm flex items-center justify-center gap-1.5 focus:outline-none">
+                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="9" y="9" width="11" height="11" rx="2" ry="2" stroke-linecap="round" stroke-linejoin="round"></rect>
+                  <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+                프롬프트 복사
+              </button>
+            </div>
+          </section>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <div id="toast" class="toast">복사되었습니다.</div>
+
+  <script>
+    function showTab(num) {
+      const chatgptSection = document.getElementById('content-chatgpt');
+      const mediaSection = document.getElementById('content-media');
+      const geminiSection = document.getElementById('content-gemini');
+      const headerTitle = document.getElementById('header-title');
+      const btn1 = document.getElementById('tab-btn-1');
+      const btn2 = document.getElementById('tab-btn-2');
+      const btn3 = document.getElementById('tab-btn-3');
+
+      const activeClass = ['bg-brand-500', 'text-white', 'border-brand-500'];
+      const inactiveClass = ['bg-white', 'text-brand-500', 'border-[#DDDBD5]', 'hover:bg-neutral-50'];
+
+      chatgptSection.classList.add('hidden');
+      mediaSection.classList.add('hidden');
+      geminiSection.classList.add('hidden');
+
+      btn1.classList.remove(...activeClass);
+      btn1.classList.add(...inactiveClass);
+      btn2.classList.remove(...activeClass);
+      btn2.classList.add(...inactiveClass);
+      btn3.classList.remove(...activeClass);
+      btn3.classList.add(...inactiveClass);
+
+      if (num === 1) {
+        chatgptSection.classList.remove('hidden');
+        headerTitle.textContent = "간단한 한글 포함 이미지를 만들어 보세요";
+        btn1.classList.remove(...inactiveClass);
+        btn1.classList.add(...activeClass);
+      } else if (num === 2) {
+        mediaSection.classList.remove('hidden');
+        headerTitle.textContent = "텍스트만으로 영상이나 음악을 만들 수 있습니다";
+        btn2.classList.remove(...inactiveClass);
+        btn2.classList.add(...activeClass);
+      } else if (num === 3) {
+        geminiSection.classList.remove('hidden');
+        headerTitle.textContent = "업무에 필요한 도구를 직접 만들어 봅니다";
+        btn3.classList.remove(...inactiveClass);
+        btn3.classList.add(...activeClass);
+      }
+    }
+
+    function executeCopy(text, successMessage) {
+      const textArea = document.createElement('textarea');
+      textArea.value = text;
+      textArea.style.position = 'fixed';
+      textArea.style.top = '0';
+      textArea.style.left = '0';
+      textArea.style.opacity = '0';
+      document.body.appendChild(textArea);
+      textArea.focus();
+      textArea.select();
+      
+      try {
+        const successful = document.execCommand('copy');
+        if (successful) {
+          showToast(successMessage);
+        } else {
+          showToast('복사에 실패했습니다. 직접 복사해 주세요.');
+        }
+      } catch (err) {
+        showToast('복사 기능이 지원되지 않는 브라우저입니다.');
+      }
+      document.body.removeChild(textArea);
+    }
+
+    function copyPrompt(id) {
+      const text = document.getElementById(id).value;
+      executeCopy(text, '프롬프트가 복사되었습니다.');
+    }
+
+    const DEFAULT_PROMPTS = {
+      'prompt-chatgpt': `깔끔한 손그림 두들 스타일로 그려진 "Gemini 기능 허브" 인포그래픽을 그려줘.
+전체적인 스타일은 검정색 라인 드로잉에 파스텔 톤으로 채색된
+심플하고 정돈된 느낌이어야 해.
+중앙의 Gemini 캐릭터(별 또는 반짝임 아이콘)를 배치하고,
+Gemini가 실제로 제공하는 기능들을 직접 조사해서 그 중 대표적인 기능
+(예: 이미지 생성, Canvas, 앱 연동 등)을 아이콘과 말풍선 형태로
+주위에 방사형으로 배치해줘.
+이미지 비율은 16:9 비율로 제작해줘.`,
+      'prompt-media': `회의실에서 노트북 화면을 보며 발표 자료를 확인하는 직장인의 모습을 만들어줘.
+차분한 사무실 조명, 자연스러운 카메라 워킹.
+인물이 짧게 대사를 말함: "아! 이 부분만 끝나면 퇴근할 수 있겠네"
+배경에는 노트북 키보드 타이핑 소리를 은은하게 넣고,
+배경음악은 잔잔한 로파이 스타일로.`,
+      'prompt-gemini': `원가와 판매가를 입력하면 마진율을 계산해주는 웹앱을 만들어줘.
+
+[입력 항목]
+- 원가 (매입 가격)
+- 판매가 (소비자 판매 가격)
+
+[계산 및 표시 기능]
+- 마진 금액 = 판매가 - 원가
+- 마진율(%) = (마진 금액 ÷ 판매가) × 100
+- 금액 입력 시 천 단위 구분 쉼표(,) 자동 적용 및 '원' 단위 표시
+- 실시간 자동 계산 또는 '계산하기' 버튼 클릭 시 즉시 결과 반영
+
+[추가 편의 기능]
+- 목표 마진율(%)을 입력하면 적정 판매가를 역산해주는 기능
+- 마진율 구간별 시각적 배지 표시 (예: 20% 미만: 주의, 20~40%: 적정, 40% 이상: 우수)
+- 입력값을 한 번에 비우는 '초기화' 버튼
+
+[디자인 및 기술 조건]
+- 외부 라이브러리 설치 없이 바로 실행 가능한 단일 HTML 파일 (HTML + CSS + JavaScript)
+- 모바일과 PC 모두에서 사용하기 편리한 깔끔하고 모던한 카드형 UI`
+    };
+
+    function resetPrompt(id) {
+      if (DEFAULT_PROMPTS[id]) {
+        document.getElementById(id).value = DEFAULT_PROMPTS[id];
+        showToast('기본 프롬프트로 초기화되었습니다.');
+      }
+    }
+
+    let timer;
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      toast.textContent = message;
+      clearTimeout(timer);
+      toast.classList.add('show');
+      timer = setTimeout(() => toast.classList.remove('show'), 2200);
+    }
+  </script>
+</body>
+</html>
