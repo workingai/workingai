@@ -285,6 +285,23 @@ function initNavbar(isSubdir) {
     if (anchor) {
       const text = anchor.textContent.trim();
       const href = anchor.getAttribute('href') || '';
+      const destination = new URL(anchor.href, window.location.href);
+      if (destination.origin === window.location.origin && destination.pathname.includes('/workshop02/')) {
+        const hasMarketingAccess = localStorage.getItem('workbook_logged_in') === 'true' &&
+          localStorage.getItem('workbook_access_code') === 'mkt1008';
+        if (!hasMarketingAccess) {
+          e.preventDefault();
+          const relativeDestination = 'workshop02/' + destination.pathname.split('/workshop02/')[1] + destination.search + destination.hash;
+          if (typeof openEntranceModal === 'function') {
+            openEntranceModal(relativeDestination);
+          } else {
+            const mainUrl = new URL(isSubdir ? '../index.html' : 'index.html', window.location.href);
+            mainUrl.searchParams.set('redirect', relativeDestination);
+            window.location.href = mainUrl.href;
+          }
+          return;
+        }
+      }
       if (text === '직장인 AI' || href.includes('workshop01/')) {
         if (localStorage.getItem('workbook_access_code') === 'workingai') {
           e.preventDefault();
