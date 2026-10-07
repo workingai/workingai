@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <link rel="icon" href="../favicon.png?v=2" type="image/png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WORKING AI - PROMPT BUILDER</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Pretendard Font -->
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+  <link rel="stylesheet" href="../global.css">
+  <!-- IBM Plex Mono Font -->
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#F2F8F5',
+              100: '#E6F2ED',
+              500: '#2A6B52',
+              600: '#1D4E3A',
+            },
+            neutral: {
+              50: '#F8F7F4',
+              100: '#F2F1EE',
+              200: '#E5E3DF',
+              300: '#DDDBD5',
+              400: '#B0AEA8',
+              500: '#8A8881',
+              600: '#605E59',
+              900: '#1A1A18',
+            }
+          },
+          fontFamily: {
+            sans: ['Pretendard', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+            mono: ['IBM Plex Mono', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Custom scrollbar styling */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #F2F1EE;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #DDDBD5;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #B0AEA8;
+    }
+  </style>
+</head>
+<body class="min-h-screen text-neutral-900 antialiased flex flex-col h-screen overflow-hidden pt-[5px]">
+  <!-- Top brand bar -->
+  <div class="fixed top-0 left-0 w-full h-[5px] bg-brand-500 z-50"></div>
+
+  <!-- Navigation Bar (Shared) -->
+  <div id="navbar-placeholder"></div>
+  <script src="../navbar.js"></script>
+
+  <!-- Content Container -->
+  <div class="flex-1 min-h-0 flex flex-col lg:flex-row lg:overflow-hidden">
+    <!-- ===== Left Sidebar Navigation ===== -->
+    <aside
+      class="flex-shrink-0 w-full lg:w-64 bg-white border-b lg:border-b-0 lg:border-r border-[#DDDBD5] flex flex-col lg:h-full pt-4">
+    <!-- Nav list -->
+    <nav aria-label="마케터 AI 실습 메뉴" class="flex lg:flex-col gap-5 lg:gap-0 px-3 pb-4 overflow-x-auto lg:overflow-y-auto lg:flex-1 lg:min-h-0">
+<section class="flex-shrink-0 lg:flex-shrink " aria-labelledby="sidebar-part-1">
+  <h2 id="sidebar-part-1" class="px-3 mb-2 text-[11px] font-extrabold tracking-wide text-neutral-400 whitespace-nowrap">PART 1. WARMING-UP</h2>
+  <div class="flex lg:flex-col gap-1"><a href="01_wamingup.html"
+        class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
+        <span class="text-lg leading-none">🔥</span>
+        <span>워밍업 실습</span>
+      </a></div>
+ </section>
+<section class="flex-shrink-0 lg:flex-shrink lg:mt-5" aria-labelledby="sidebar-part-2">
+  <h2 id="sidebar-part-2" class="px-3 mb-2 text-[11px] font-extrabold tracking-wide text-neutral-400 whitespace-nowrap">PART 2. MARKETING INSIGHTS</h2>
+  <div class="flex lg:flex-col gap-1"><a href="02_prompt.html"
+        class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-bold text-brand-600 bg-brand-100 whitespace-nowrap transition-colors">
+        <span class="text-lg leading-none">🧩</span>
+        <span>프롬프트 빌더</span>
+      </a>
+<a href="03_apps_scrpt.html"
+        class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
+        <span class="text-lg leading-none">🤖</span>
+        <span>앱스스크립트 자동화</span>
+      </a>
+<a href="04_notebooklm.html"
+        class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
+        <span class="text-lg leading-none">🖼️</span>
+        <span>제미나이 노트북</span>
+      </a>
+<a href="08_ppt.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors"><span class="text-lg leading-none">📊</span><span>PPT 제작</span></a>
+<a href="05_miniproject1.html"
+        class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
+        <span class="text-lg leading-none">🚀</span>
+        <span>미니프로젝트 1</span>
+      </a></div>
+ </section>
+<section class="flex-shrink-0 lg:flex-shrink lg:mt-5" aria-labelledby="sidebar-part-3">
+  <h2 id="sidebar-part-3" class="px-3 mb-2 text-[11px] font-extrabold tracking-wide text-neutral-400 whitespace-nowrap">PART 3. AI CONTENTS</h2>
+  <div class="flex lg:flex-col gap-1"><a href="09_cardnews.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors"><span class="text-lg leading-none">📰</span><span>카드뉴스 제작</span></a>
+<a href="06_aivideo.html"
+        class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
+        <span class="text-lg leading-none">🎬</span>
+        <span>이미지 생성 및 영상화</span>
+      </a></div>
+ </section>
+<section class="flex-shrink-0 lg:flex-shrink lg:mt-5" aria-labelledby="sidebar-part-4">
+  <h2 id="sidebar-part-4" class="px-3 mb-2 text-[11px] font-extrabold tracking-wide text-neutral-400 whitespace-nowrap">PART 4. AGENTIC AI</h2>
+  <div class="flex lg:flex-col gap-1"><a href="07_aiagent.html"
+        class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
+        <span class="text-lg leading-none">🎨</span>
+        <span>AI 에이전트</span>
+      </a>
+
+<a href="m2_miniproject2.html"
+        class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
+        <span class="text-lg leading-none">🚀</span>
+        <span>미니프로젝트 2</span>
+      </a></div>
+ </section>
+</nav>
+    <!-- Sidebar Footer (Banner) -->
+    <div class="mt-auto border-t border-[#DDDBD5] p-4 bg-white flex-shrink-0">
+      <!-- Dropup Menu Container -->
+      <div class="relative mb-2.5">
+        <button id="quick-links-btn" onclick="toggleQuickLinks(event)" class="w-full flex items-center justify-between py-2 px-3 border border-[#DDDBD5] hover:border-brand-500 bg-white hover:bg-neutral-50 text-neutral-900 rounded-xl transition-all duration-300 shadow-xs text-sm font-extrabold focus:outline-none">
+          <span class="flex items-center gap-2 text-neutral-600 hover:text-neutral-900">
+            <span>🔗</span> 주요 서비스 바로가기
+          </span>
+          <svg id="quick-links-arrow" class="w-3.5 h-3.5 text-neutral-400 transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5"></path>
+          </svg>
+        </button>
+        <!-- Dropup menu: hidden by default, absolute positioning above the button -->
+        <div id="quick-links-menu" class="hidden absolute bottom-full left-0 w-full mb-2 bg-white border border-[#DDDBD5] rounded-xl shadow-lg z-50 overflow-hidden py-1">
+          <a href="https://chatgpt.com" target="_blank" class="block px-4 py-2.5 text-xs text-neutral-700 hover:bg-brand-50 hover:text-brand-600 transition-colors font-bold border-b border-[#F2F1EE]">챗GPT</a>
+          <a href="https://gemini.google.com" target="_blank" class="block px-4 py-2.5 text-xs text-neutral-700 hover:bg-brand-50 hover:text-brand-600 transition-colors font-bold border-b border-[#F2F1EE]">제미나이</a>
+          <a href="https://claude.ai" target="_blank" class="block px-4 py-2.5 text-xs text-neutral-700 hover:bg-brand-50 hover:text-brand-600 transition-colors font-bold border-b border-[#F2F1EE]">클로드</a>
+          <a href="https://sheets.google.com" target="_blank" class="block px-4 py-2.5 text-xs text-neutral-700 hover:bg-brand-50 hover:text-brand-600 transition-colors font-bold border-b border-[#F2F1EE]">구글 시트</a>
+          <a href="https://docs.google.com/videos/create?usp=vids_alc&authuser=0" target="_blank" class="block px-4 py-2.5 text-xs text-neutral-700 hover:bg-brand-50 hover:text-brand-600 transition-colors font-bold border-b border-[#F2F1EE]">구글 Vids</a>
+          <a href="https://canva.com" target="_blank" class="block px-4 py-2.5 text-xs text-neutral-700 hover:bg-brand-50 hover:text-brand-600 transition-colors font-bold border-b border-[#F2F1EE]">캔바</a>
+          <a href="https://aistudio.google.com" target="_blank" class="block px-4 py-2.5 text-xs text-neutral-700 hover:bg-brand-50 hover:text-brand-600 transition-colors font-bold border-b border-[#F2F1EE]">AI Studio</a>
+          <a href="https://workspace.google.com/experiments" target="_blank" class="block px-4 py-2.5 text-xs text-neutral-700 hover:bg-brand-50 hover:text-brand-600 transition-colors font-bold">Workspace Experiments</a>
+        </div>
+      </div>
+      <script>
+        function toggleQuickLinks(e) {
+          e.stopPropagation();
+          const menu = document.getElementById('quick-links-menu');
+          const arrow = document.getElementById('quick-links-arrow');
+          const isHidden = menu.classList.contains('hidden');
+          if (isHidden) {
+            menu.classList.remove('hidden');
+            arrow.classList.add('rotate-180');
+          } else {
+            menu.classList.add('hidden');
+            arrow.classList.remove('rotate-180');
+          }
+        }
+        document.addEventListener('click', (e) => {
+          const menu = document.getElementById('quick-links-menu');
+          const btn = document.getElementById('quick-links-btn');
+          const arrow = document.getElementById('quick-links-arrow');
+          if (menu && !menu.classList.contains('hidden') && !menu.contains(e.target) && !btn.contains(e.target)) {
+            menu.classList.add('hidden');
+            arrow.classList.remove('rotate-180');
+          }
+        });
+      </script>
+
+      <a href="pdfviewer.html" class="block w-full text-center py-3 px-4 border border-[#DDDBD5] hover:border-brand-500 bg-brand-50 hover:bg-brand-100 text-brand-600 rounded-xl transition-all duration-300 shadow-xs" style="text-decoration: none;">
+        <span class="block text-xs font-bold text-neutral-400 mb-0.5 tracking-wider uppercase">Slide PDF</span>
+        <span class="block text-sm font-extrabold tracking-tight">강의 교안 뷰어</span>
+      </a>
+    </div>
+  </aside>
+
+  <!-- ===== Main Content ===== -->
+  <main class="flex-1 min-h-0 flex flex-col overflow-hidden pt-8 lg:pt-10 pb-8 px-4 md:px-8 lg:px-10">
+    <!-- Header Area -->
+    <header class="mb-4 flex-shrink-0 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+      <div>
+        <div class="mb-2">
+          <span class="inline-block bg-brand-500 text-white rounded-full px-4 py-1 text-[11.5px] font-mono font-extrabold tracking-wider uppercase">PROMPT BUILDER</span>
+        </div>
+        <h1 id="header-title" class="text-2xl md:text-3xl font-extrabold tracking-tight leading-tight text-neutral-900">
+          시장 조사를 위한 심층리서치 프롬프트를 구성합니다
+        </h1>
+      </div>
+      <!-- Navigation buttons in header -->
+      <div class="flex items-center gap-2 flex-shrink-0 mb-1">
+        <button id="btn-tab-1" class="w-9 h-9 flex items-center justify-center rounded-full font-bold text-sm transition-all focus:outline-none bg-brand-500 text-white border border-brand-500" onclick="showPage1()">
+          1
+        </button>
+        <button id="btn-tab-2" class="w-9 h-9 flex items-center justify-center rounded-full font-bold text-sm transition-all focus:outline-none bg-white text-brand-500 border border-[#DDDBD5] hover:bg-neutral-50" onclick="showPage2()">
+          2
+        </button>
+      </div>
+    </header>
+
+    <!-- Lecture reference: [멀티캠퍼스] 마케터의 무기가 되는 AI 활용법_2610_Draft1.pdf, pp. 26, 29, 33-37. Source: G:/내 드라이브/! 01_콘텐츠/! 01_멀캠리뉴얼/02_마케팅/ -->
+    <!-- Main Builder Card -->
+    <section class="border border-[#DDDBD5] rounded-2xl p-5 md:p-6 bg-white shadow-sm flex-1 flex flex-col overflow-hidden">
+      <!-- Page 1 -->
+      <div id="page1-container" class="flex-1 flex flex-col overflow-hidden">
+        <!-- Card Head -->
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#DDDBD5] pb-4 mb-4 flex-shrink-0">
+          <div>
+            <h2 class="text-lg md:text-xl font-extrabold text-neutral-900">로봇청소기 시장 조사 프롬프트</h2>
+            <p class="text-xs md:text-sm text-[#605E59] mt-1">목표·역할·제한·출력을 수정한 뒤 복사하여 심층리서치를 진행하세요.</p>
+          </div>
+          
+          <div>
+            <select id="sample-select" onchange="selectSample(this.value)" class="text-base font-bold border border-[#DDDBD5] bg-white text-neutral-700 rounded-lg px-4 py-2.5 w-64 md:w-80 focus:border-brand-500 focus:outline-none cursor-pointer">
+              <option value="research">국내 로봇청소기 시장 조사</option>
+              <option value="">직접 입력</option>
+            </select>
+          </div>
+
+        </div>
+
+        <!-- Input Fields Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 flex-1 overflow-y-auto lg:overflow-hidden mb-4">
+          <!-- Goal Input (Step 1) -->
+          <section id="step-sec-1" class="step-section flex flex-col border border-[#DDDBD5] rounded-xl bg-brand-100 overflow-hidden h-64 md:h-80 lg:h-full">
+            <div class="p-4 pb-2.5 flex-shrink-0">
+              <strong class="block text-neutral-900 text-base font-extrabold mb-1">🎯 목표</strong>
+              <span class="block text-[#605E59] text-xs leading-tight">무엇을, 왜 요청하나요?</span>
+            </div>
+            <textarea id="goal" placeholder="예: 국내 로봇청소기 시장을 조사하는 목적을 작성하세요."
+              class="w-full flex-1 p-4 border-t border-b-0 border-l-0 border-r-0 border-[#DDDBD5] bg-white text-neutral-900 text-base leading-relaxed placeholder-neutral-400 focus:border-brand-500 focus:ring-0 outline-none resize-none overflow-y-auto"></textarea>
+          </section>
+
+          <!-- Role Input (Step 2) -->
+          <section id="step-sec-2" class="step-section flex flex-col border border-[#DDDBD5] rounded-xl bg-brand-100 overflow-hidden h-64 md:h-80 lg:h-full">
+            <div class="p-4 pb-2.5 flex-shrink-0">
+              <strong class="block text-neutral-900 text-base font-extrabold mb-1">👤 역할</strong>
+              <span class="block text-[#605E59] text-xs leading-tight">AI에게 어떤 역할을 맡기나요?</span>
+            </div>
+            <textarea id="role" placeholder="예: 너는 가전 시장과 소비자 행동을 분석하는 리서치 전문가야."
+              class="w-full flex-1 p-4 border-t border-b-0 border-l-0 border-r-0 border-[#DDDBD5] bg-white text-neutral-900 text-base leading-relaxed placeholder-neutral-400 focus:border-brand-500 focus:ring-0 outline-none resize-none overflow-y-auto"></textarea>
+          </section>
+
+          <!-- Limit Input (Step 3) -->
+          <section id="step-sec-3" class="step-section flex flex-col border border-[#DDDBD5] rounded-xl bg-brand-100 overflow-hidden h-64 md:h-80 lg:h-full">
+            <div class="p-4 pb-2.5 flex-shrink-0">
+              <strong class="block text-neutral-900 text-base font-extrabold mb-1">📌 제한</strong>
+              <span class="block text-[#605E59] text-xs leading-tight">기간, 범위, 톤, 분량 등 조건</span>
+            </div>
+            <textarea id="limit" placeholder="예: 최근 1년, 국내 시장, 수치별 집계 기준과 출처를 표시해줘."
+              class="w-full flex-1 p-4 border-t border-b-0 border-l-0 border-r-0 border-[#DDDBD5] bg-white text-neutral-900 text-base leading-relaxed placeholder-neutral-400 focus:border-brand-500 focus:ring-0 outline-none resize-none overflow-y-auto"></textarea>
+          </section>
+
+          <!-- Output Input (Step 4) -->
+          <section id="step-sec-4" class="step-section flex flex-col border border-[#DDDBD5] rounded-xl bg-brand-100 overflow-hidden h-64 md:h-80 lg:h-full">
+            <div class="p-4 pb-2.5 flex-shrink-0">
+              <strong class="block text-neutral-900 text-base font-extrabold mb-1">📄 출력</strong>
+              <span class="block text-[#605E59] text-xs leading-tight">어떤 형식으로 받고 싶나요?</span>
+            </div>
+            <textarea id="output" placeholder="예: 조사 계획, 시장·브랜드 비교표, 근거와 출처 목록을 작성해줘."
+              class="w-full flex-1 p-4 border-t border-b-0 border-l-0 border-r-0 border-[#DDDBD5] bg-white text-neutral-900 text-base leading-relaxed placeholder-neutral-400 focus:border-brand-500 focus:ring-0 outline-none resize-none overflow-y-auto"></textarea>
+          </section>
+        </div>
+
+        <!-- Actions Bottom Panel -->
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pt-4 border-t border-[#DDDBD5] flex-shrink-0">
+          <!-- Form Notice -->
+          <p class="text-[#605E59] text-xs md:text-sm leading-relaxed">
+            로봇청소기_마케팅 폴더를 연결하고 01_시장조사에 관련 자료를 준비하세요.
+          </p>
+          <!-- Action Buttons -->
+          <div class="flex justify-end gap-3">
+            <button
+              class="px-6 h-11 bg-brand-500 hover:bg-brand-600 text-white text-sm md:text-base font-extrabold rounded-lg transition-all shadow-sm flex items-center justify-center gap-1.5 focus:outline-none"
+              onclick="copyPrompt()">
+              <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <rect x="9" y="9" width="11" height="11" rx="2" ry="2" stroke-linecap="round" stroke-linejoin="round"></rect>
+                <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+              프롬프트 복사
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Page 2 -->
+      <div id="page2-container" class="hidden flex-1 flex-col overflow-y-auto px-1 py-2">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-stretch"><div class="border border-[#DDDBD5] rounded-xl bg-brand-100 flex flex-col overflow-hidden shadow-xs">
+ <div class="p-4"><strong class="block text-neutral-900 text-base font-extrabold mb-1">조사 계획과 범위 확인</strong><p class="text-[#605E59] text-xs">심층리서치를 실행하기 전 확인하세요.</p></div>
+ <div class="p-4 border-t border-[#DDDBD5] bg-white flex flex-col gap-3"><p class="bg-neutral-50 p-4 rounded-lg border border-neutral-200 text-sm text-neutral-700 leading-relaxed"><span class="text-brand-500 font-bold mr-2">✓</span>국산 로봇청소기의 점유율 향상이라는 조사 목적과 국내 시장 범위가 명확한가?</p>
+<p class="bg-neutral-50 p-4 rounded-lg border border-neutral-200 text-sm text-neutral-700 leading-relaxed"><span class="text-brand-500 font-bold mr-2">✓</span>시장 규모·가격대·기능·구매 기준과 국내 브랜드의 점유율·선호도 변화를 조사하는가?</p>
+<p class="bg-neutral-50 p-4 rounded-lg border border-neutral-200 text-sm text-neutral-700 leading-relaxed"><span class="text-brand-500 font-bold mr-2">✓</span>먼저 조사 계획을 제안하고 확인을 받은 뒤 진행하도록 요청했는가?</p></div></div>
+<div class="border border-[#DDDBD5] rounded-xl bg-brand-100 flex flex-col overflow-hidden shadow-xs">
+ <div class="p-4"><strong class="block text-neutral-900 text-base font-extrabold mb-1">출처 확인과 파일 저장</strong><p class="text-[#605E59] text-xs">보고서를 다음 고객 리뷰 분석의 근거로 보관하세요.</p></div>
+ <div class="p-4 border-t border-[#DDDBD5] bg-white flex flex-col gap-3"><p class="bg-neutral-50 p-4 rounded-lg border border-neutral-200 text-sm text-neutral-700 leading-relaxed"><span class="text-brand-500 font-bold mr-2">✓</span>출처 링크를 열어 핵심 주장과 게시 시점을 확인하고 사실과 해석·가설을 구분했는가?</p>
+<p class="bg-neutral-50 p-4 rounded-lg border border-neutral-200 text-sm text-neutral-700 leading-relaxed"><span class="text-brand-500 font-bold mr-2">✓</span>점유율 수치에 기간·유통채널·판매액/판매량 기준을 함께 기록하고 비교 기준을 맞췄는가?</p>
+<p class="bg-neutral-50 p-4 rounded-lg border border-neutral-200 text-sm text-neutral-700 leading-relaxed"><span class="text-brand-500 font-bold mr-2">✓</span>보고서와 출처 목록을 01_시장조사에 저장하고, 고객 리뷰로 확인할 구매 이유와 불만을 질문으로 정리했는가?</p></div></div></div>
+      </div>
+    </section>
+  </main>
+  </div>
+
+  <!-- Toast Notification -->
+  <div
+    class="toast fixed left-1/2 bottom-8 -translate-x-1/2 opacity-0 z-50 px-6 py-3 rounded-full bg-neutral-900 text-white text-sm font-bold transition-all duration-200 pointer-events-none shadow-lg"
+    id="toast">
+    프롬프트가 복사되었습니다.
+  </div>
+
+  <script>
+    
+
+    // Elements mapping
+    const el = {
+      goal: document.getElementById('goal'),
+      role: document.getElementById('role'),
+      limit: document.getElementById('limit'),
+      output: document.getElementById('output')
+    };
+
+    // Preloaded prompt template library
+    const samples = {
+  "research": {
+    "goal": "국내 로봇청소기 시장·브랜드 경쟁과 국내 브랜드의 점유율·선호도 변화를 조사해줘.\n\n국산 로봇청소기의 시장 점유율을 높이기 위한 마케팅 플랜을 수립하려고 해. 이번 단계에서는 시장·자사·경쟁사에 대한 근거를 수집하고, 고객 리뷰로 확인할 질문을 정리해줘.",
+    "role": "너는 가전 시장과 소비자 행동을 분석하는 마케팅 리서치 전문가야. 국내 로봇청소기 시장의 경쟁 구도와 소비자 구매 기준을 객관적인 자료로 분석해줘.",
+    "limit": "조사 실행일 기준 최근 1년의 국내 시장 자료를 중심으로 조사해줘. 조사 기준일과 대상 기간을 먼저 명시해줘.\n\n시장 규모, 브랜드 경쟁, 국내 브랜드의 점유율·선호도 변화, 가격대, 주요 기능, 구매 기준을 조사해줘.\n\n모든 수치에는 집계 기간, 유통채널, 판매액/판매량 기준, 출처 링크와 게시일을 표시해줘. 기준이 다른 점유율 수치를 직접 비교하지 마. 국내 브랜드와 국내 생산 여부는 구분해줘.\n\n공식 통계, 기업 공개 자료, 신뢰할 수 있는 시장조사 자료를 우선 사용해줘. 확인할 수 없는 정보는 ‘자료 없음’으로 표시하고 수치나 출처를 만들지 마. 오래된 자료는 기간과 한계를 따로 밝혀줘.\n\n먼저 조사 계획을 제안하고 내 확인을 받은 뒤 심층리서치를 진행해줘. 보고서에서는 출처로 확인된 사실과 네 해석·가설을 구분해줘. 본격적인 마케팅 실행 계획과 고객 리뷰 수집은 다음 단계에서 진행할 것이므로 이번 조사 범위를 넘기지 마.",
+    "output": "조사 계획에는 조사 질문, 대상 범위, 확인할 자료와 출처, 진행 순서를 포함해줘.\n\n계획 확인 후 보고서를 아래 순서로 작성해줘.\n1. 핵심 요약\n2. 국내 시장 규모와 최근 변화\n3. 주요 브랜드 경쟁 비교표: 브랜드 / 국내·해외 구분 / 가격대 / 주요 기능 / 점유율·선호도 / 수치 기준 / 출처\n4. 국내 브랜드의 경쟁력과 한계: 사실과 해석을 구분\n5. 소비자의 구매 기준과 추가로 검증할 가설\n6. 다음 고객 리뷰 분석에서 확인할 구매 이유와 불만 질문\n7. 출처 목록: 자료명 / 기관·작성자 / 게시일 / 링크 / 인용한 내용\n\n출처 링크를 열어 핵심 주장과 게시 시점을 확인하고, 확인하지 못한 자료는 별도 표시해줘.\n리서치 보고서와 출처 목록을 연결된 로봇청소기_마케팅 폴더의 01_시장조사에 각각 ‘로봇청소기_시장조사.md’, ‘로봇청소기_출처목록.csv’로 저장해줘. 점유율 수치는 기간·유통채널·판매액/판매량 기준과 함께 보관해줘. 저장한 실제 파일명과 위치를 알려줘. 폴더에 저장할 수 없다면 저장했다고 말하지 말고 이유와 다운로드 가능한 결과물을 알려줘."
+  }
+};
+
+    // Active sample tracking
+    let activeSampleKey = '';
+
+    function selectSample(key) {
+      activeSampleKey = key;
+      loadSample(key);
+      const selectEl = document.getElementById('sample-select');
+      if (selectEl && selectEl.value !== key) {
+        selectEl.value = key;
+      }
+    }
+
+    // Load sample directly into textarea values
+    function loadSample(key) {
+      if (!key) {
+        el.goal.value = '';
+        el.role.value = '';
+        el.limit.value = '';
+        el.output.value = '';
+      } else {
+        const d = samples[key];
+        el.goal.value = d.goal;
+        el.role.value = d.role;
+        el.limit.value = d.limit;
+        el.output.value = d.output;
+      }
+    }
+
+    // Combine active text fields into a cohesive structured prompt
+    function compiled() {
+      return [
+        ['목표', el.goal.value.trim()],
+        ['역할', el.role.value.trim()],
+        ['제한', el.limit.value.trim()],
+        ['출력', el.output.value.trim()]
+      ].filter(([, v]) => v).map(([k, v]) => '[' + k + ']\n' + v).join('\n\n');
+    }
+
+    // Handles fallback clipboard copy mechanism and UI Toast triggers
+    async function copyPrompt() {
+      const text = compiled();
+      if (!text) {
+        showToast('복사할 내용을 먼저 작성해 주세요.');
+        return;
+      }
+
+      try {
+        await navigator.clipboard.writeText(text);
+      } catch (e) {
+        const temp = document.createElement('textarea');
+        temp.value = text;
+        temp.style.position = 'fixed';
+        temp.style.opacity = '0';
+        document.body.appendChild(temp);
+        temp.select();
+        document.execCommand('copy');
+        temp.remove();
+      }
+      showToast('프롬프트가 복사되었습니다.');
+    }
+
+    // Resets all input forms back to active sample or empty state
+    function resetForm() {
+      loadSample(activeSampleKey);
+    }
+
+    // Elegant non-blocking popup notification
+    let timer;
+    function showToast(text) {
+      const t = document.getElementById('toast');
+      t.textContent = text;
+      clearTimeout(timer);
+
+      t.classList.remove('opacity-0', 'translate-y-4');
+      t.classList.add('opacity-100', 'translate-y-0');
+
+      timer = setTimeout(() => {
+        t.classList.remove('opacity-100', 'translate-y-0');
+        t.classList.add('opacity-0', 'translate-y-4');
+      }, 2200);
+    }
+
+    // Bootstraps state load sequence on initial render
+    window.addEventListener('DOMContentLoaded', () => {
+      selectSample('research');
+    });
+
+    function showPage1() {
+      document.getElementById('page1-container').classList.remove('hidden');
+      document.getElementById('page2-container').classList.add('hidden');
+      
+      document.getElementById('btn-tab-1').className = "w-9 h-9 flex items-center justify-center rounded-full font-bold text-sm transition-all focus:outline-none bg-brand-500 text-white border border-brand-500";
+      document.getElementById('btn-tab-2').className = "w-9 h-9 flex items-center justify-center rounded-full font-bold text-sm transition-all focus:outline-none bg-white text-brand-500 border border-[#DDDBD5] hover:bg-neutral-50";
+      
+      document.getElementById('header-title').textContent = "시장 조사를 위한 심층리서치 프롬프트를 구성합니다";
+    }
+
+    function showPage2() {
+      document.getElementById('page1-container').classList.add('hidden');
+      document.getElementById('page2-container').classList.remove('hidden');
+      
+      document.getElementById('btn-tab-1').className = "w-9 h-9 flex items-center justify-center rounded-full font-bold text-sm transition-all focus:outline-none bg-white text-brand-500 border border-[#DDDBD5] hover:bg-neutral-50";
+      document.getElementById('btn-tab-2').className = "w-9 h-9 flex items-center justify-center rounded-full font-bold text-sm transition-all focus:outline-none bg-brand-500 text-white border border-brand-500";
+      
+      document.getElementById('header-title').textContent = "조사 범위와 결과물의 근거를 확인합니다";
+    }
+  </script>
+</body>
