@@ -101,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // 1. 현재 폴더 위치 분석 (워크숍 하위 폴더 여부 확인)
-  const workshopMatch = window.location.pathname.match(/\/(workshop01|workshop02)\//);
+  const workshopMatch = window.location.pathname.match(/\/(workshop01|workshop02)(?:\/|$)/);
   const isSubdir = Boolean(workshopMatch);
   const prefix = isSubdir ? '../' : '';
 
