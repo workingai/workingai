@@ -100,8 +100,9 @@ document.addEventListener('DOMContentLoaded', () => {
     return;
   }
 
-  // 1. 현재 폴더 위치 분석 (workshop01 하위 폴더 여부 확인)
-  const isSubdir = window.location.pathname.includes('/workshop01/');
+  // 1. 현재 폴더 위치 분석 (워크숍 하위 폴더 여부 확인)
+  const workshopMatch = window.location.pathname.match(/\/(workshop01|workshop02)\//);
+  const isSubdir = Boolean(workshopMatch);
   const prefix = isSubdir ? '../' : '';
 
   // 2. 공통 navbar.html 로드 (캐시 방지를 위해 버전 쿼리 추가)
@@ -117,7 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
         processedHtml = processedHtml
           .replace(/href="index\.html"/g, 'href="../index.html"')
           .replace(/href="mulcam01\.html"/g, 'href="../mulcam01.html"')
-          .replace(/href="workshop01\//g, 'href="')
+          .replace(/href="(workshop01|workshop02)\//g, 'href="../$1/')
           .replace(/src="images\//g, 'src="../images/');
       }
 
@@ -131,9 +132,9 @@ document.addEventListener('DOMContentLoaded', () => {
       if (drawer) document.documentElement.appendChild(drawer);
       if (backdrop) document.documentElement.appendChild(backdrop);
 
-      // workshop01 폴더 아래의 파일이면서 ws01_index.html이 아닌 경우에만 상단 네비게이션 좌우 끝 정렬 및 메뉴 간소화 적용
+      // 워크숍 실습 화면(ws01_index.html 제외)에서만 상단 네비게이션 좌우 끝 정렬 및 메뉴 간소화 적용
       const pathname = window.location.pathname;
-      const isWorkshopSubpage = pathname.includes('/workshop01/') && !pathname.includes('ws01_index.html');
+      const isWorkshopSubpage = isSubdir && !pathname.includes('ws01_index.html');
       if (isWorkshopSubpage) {
         // 1. 네비게이션 컨테이너를 전체 너비로 변경
         const navContainer = placeholder.querySelector('nav > div');
@@ -229,7 +230,7 @@ function initNavbar(isSubdir) {
     if (isIndexPage && typeof openEntranceModal === 'function') {
       openEntranceModal();
     } else {
-      const pageName = isSubdir ? 'workshop01/' + window.location.pathname.split('/').pop() : window.location.pathname.split('/').pop();
+      const pageName = isSubdir ? window.location.pathname.replace(/^\//, '') : window.location.pathname.split('/').pop();
       const destIndex = isSubdir ? '../index.html' : 'index.html';
       window.location.href = destIndex + '?redirect=' + pageName;
     }
