@@ -286,6 +286,14 @@ function initNavbar(isSubdir) {
       const text = anchor.textContent.trim();
       const href = anchor.getAttribute('href') || '';
       const destination = new URL(anchor.href, window.location.href);
+      const isEmployeeDestination = /\/(workshop01|workingai_v1)(?:\/|$)/.test(destination.pathname);
+      if ((text === '직장인 AI' || isEmployeeDestination) &&
+          localStorage.getItem('workbook_access_code') === 'mkt1008') {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        alert('마케터 AI 계정으로는 직장인 AI에 접근할 수 없습니다.');
+        return;
+      }
       if (destination.origin === window.location.origin && destination.pathname.includes('/workshop02/')) {
         const hasMarketingAccess = localStorage.getItem('workbook_logged_in') === 'true' &&
           localStorage.getItem('workbook_access_code') === 'mkt1008';
