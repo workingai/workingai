@@ -562,7 +562,7 @@
     function fillNaverApiKey() {
       const userInput = prompt('비밀번호를 입력해 주세요.');
       if (userInput === null) return;
-      if (userInput !== 'wokingai') {
+      if (!['workingai', 'wokingai'].includes(userInput.trim().toLowerCase())) {
         alert('비밀번호가 올바르지 않습니다.');
         return;
       }
