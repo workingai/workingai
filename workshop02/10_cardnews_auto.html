@@ -213,6 +213,39 @@
  <main class="flex-1 min-h-0 flex flex-col overflow-hidden pt-8 lg:pt-10 pb-8 px-4 md:px-8 lg:px-10">
  <header class="mb-4 flex-shrink-0"><span class="inline-block mb-2 bg-brand-500 text-white rounded-full px-4 py-1 text-xs font-mono font-extrabold">CARD NEWS AUTOMATION</span><h1 class="text-2xl md:text-3xl font-extrabold">카드뉴스 제작을 자동화합니다</h1></header>
  <section class="border border-[#DDDBD5] rounded-2xl p-5 md:p-6 bg-white shadow-sm flex-1 overflow-y-auto"><div class="grid grid-cols-1 lg:grid-cols-3 gap-5 items-stretch"><article class="border border-[#DDDBD5] rounded-xl bg-white overflow-hidden"><div class="p-5 bg-brand-100 border-b border-[#DDDBD5] flex items-center gap-3"><span class="w-8 h-8 rounded-full bg-brand-500 text-white inline-flex items-center justify-center text-sm font-extrabold flex-shrink-0">1</span><h2 class="text-base md:text-lg font-extrabold text-neutral-900">Step 1. 구글 시트 입력</h2></div><div class="p-5"><p class="text-sm text-neutral-600 mb-5">구글 시트에 카드뉴스에 사용할 내용을 입력하세요.</p><a href="https://docs.google.com/spreadsheets/d/1HlirGT57pymdseapoPqW21Egcc8fCpS1h5W8YlUI3J8/edit?usp=sharing" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center h-11 px-5 bg-brand-500 hover:bg-brand-600 text-white text-sm font-extrabold rounded-lg transition-colors">구글 시트 열기 ↗</a></div></article>
-<article class="border border-[#DDDBD5] rounded-xl bg-white overflow-hidden"><div class="p-5 bg-brand-100 border-b border-[#DDDBD5] flex items-center gap-3"><span class="w-8 h-8 rounded-full bg-brand-500 text-white inline-flex items-center justify-center text-sm font-extrabold flex-shrink-0">2</span><h2 class="text-base md:text-lg font-extrabold text-neutral-900">Step 2. 이미지 업로드</h2></div><div class="p-5"><p class="text-sm text-neutral-600 mb-5">카드뉴스에 사용할 이미지를 업로드하세요.</p><a href="https://ifh.cc/ko" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center h-11 px-5 bg-brand-500 hover:bg-brand-600 text-white text-sm font-extrabold rounded-lg transition-colors">이미지 업로드하기 ↗</a></div></article>
+<article class="border border-[#DDDBD5] rounded-xl bg-white overflow-hidden"><div class="p-5 bg-brand-100 border-b border-[#DDDBD5] flex flex-wrap items-center gap-3"><span class="w-8 h-8 rounded-full bg-brand-500 text-white inline-flex items-center justify-center text-sm font-extrabold flex-shrink-0">2</span><h2 class="text-base md:text-lg font-extrabold text-neutral-900">Step 2. 이미지 업로드</h2><a href="https://ifh.cc/ko" target="_blank" rel="noopener noreferrer" class="ml-auto inline-flex items-center justify-center h-8 px-3 rounded-lg border border-brand-500 bg-white text-brand-600 hover:bg-brand-50 text-xs font-extrabold whitespace-nowrap">업로드 ↗</a></div><div class="p-5"><p class="text-sm text-neutral-600 mb-5">카드뉴스에 사용할 이미지를 업로드하고, 아래 이미지 주소를 복사해 사용하세요.</p><div class="space-y-4"><div><label for="image-url-1" class="block mb-2 text-sm font-extrabold text-neutral-900">이미지1</label><div class="flex gap-2 items-center"><input id="image-url-1" type="text" readonly value="https://i.ifh.cc/HTDoSz.jpg" class="min-w-0 flex-1 w-full px-3 py-2.5 border border-[#DDDBD5] rounded-lg bg-neutral-50 text-neutral-700 text-xs" aria-label="이미지1 주소"><button type="button" onclick="copyImageUrl(1)" class="flex-shrink-0 px-3 h-10 bg-brand-500 hover:bg-brand-600 text-white text-xs font-extrabold rounded-lg">복사</button></div></div>
+<div><label for="image-url-2" class="block mb-2 text-sm font-extrabold text-neutral-900">이미지2</label><div class="flex gap-2 items-center"><input id="image-url-2" type="text" readonly value="https://i.ifh.cc/O3ljtS.jpg" class="min-w-0 flex-1 w-full px-3 py-2.5 border border-[#DDDBD5] rounded-lg bg-neutral-50 text-neutral-700 text-xs" aria-label="이미지2 주소"><button type="button" onclick="copyImageUrl(2)" class="flex-shrink-0 px-3 h-10 bg-brand-500 hover:bg-brand-600 text-white text-xs font-extrabold rounded-lg">복사</button></div></div></div><p id="image-copy-status" role="status" aria-live="polite" class="mt-3 text-xs font-bold text-brand-600 min-h-[1rem]"></p></div></article>
 <article class="border border-[#DDDBD5] rounded-xl bg-white overflow-hidden"><div class="p-5 bg-brand-100 border-b border-[#DDDBD5] flex items-center gap-3"><span class="w-8 h-8 rounded-full bg-brand-500 text-white inline-flex items-center justify-center text-sm font-extrabold flex-shrink-0">3</span><h2 class="text-base md:text-lg font-extrabold text-neutral-900">Step 3. 피그마 디자인</h2></div><div class="p-5"><ul class="space-y-3 text-sm md:text-base text-neutral-700 leading-relaxed list-disc pl-5"><li>프레임을 만들기 (단축키: <kbd class="px-2 py-0.5 rounded bg-neutral-100 border border-neutral-200 font-mono">F</kbd>)</li><li>대표적인 단축키: 도형 (<kbd class="px-2 py-0.5 rounded bg-neutral-100 border border-neutral-200 font-mono">R</kbd>), 텍스트 (<kbd class="px-2 py-0.5 rounded bg-neutral-100 border border-neutral-200 font-mono">T</kbd>)</li><li>텍스트 레이어 각각의 이름을 지정</li><li>컴포넌트로 만들기 (<kbd class="px-2 py-0.5 rounded bg-neutral-100 border border-neutral-200 font-mono">Ctrl + Alt + K</kbd>)</li></ul></div></article></div></section>
- </main></div></body></html>
+ </main></div>
+<script>
+ async function copyImageUrl(num) {
+   const field = document.getElementById('image-url-' + num);
+   const status = document.getElementById('image-copy-status');
+   if (!field) return;
+   try {
+     try {
+       await navigator.clipboard.writeText(field.value);
+     } catch (error) {
+       const previousFocus = document.activeElement;
+       const temp = document.createElement('textarea');
+       temp.value = field.value;
+       temp.style.cssText = 'position:fixed;left:0;top:0;opacity:0;';
+       document.body.appendChild(temp);
+       let copied = false;
+       try {
+         temp.focus();
+         temp.select();
+         copied = document.execCommand('copy');
+       } finally {
+         temp.remove();
+         if (previousFocus) previousFocus.focus();
+       }
+       if (!copied) throw new Error('Copy failed');
+     }
+     status.textContent = '이미지' + num + ' 주소가 복사되었습니다.';
+   } catch (error) {
+     status.textContent = '복사하지 못했습니다. 주소를 선택해 직접 복사해 주세요.';
+   }
+ }
+</script>
+</body></html>
