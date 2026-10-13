@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+  <script>
+    // Keep relative workbook links inside this folder after clean-URL redirects.
+    if (window.location.protocol === 'http:' || window.location.protocol === 'https:') {
+      const workbookBase = document.createElement('base');
+      workbookBase.href = new URL('/shinsegae/', window.location.href).href;
+      document.head.appendChild(workbookBase);
+    }
+  </script>
   <script src="./access.js"></script>
   <link rel="icon" href="../favicon.png?v=2" type="image/png">
   <meta charset="UTF-8">
