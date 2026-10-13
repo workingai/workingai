@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <script src="./access.js"></script>
+  <link rel="icon" href="../favicon.png?v=2" type="image/png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>카드뉴스 자동화 - 구글 시트와 피그마</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Pretendard Font -->
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+  <link rel="stylesheet" href="../global.css">
+  <!-- IBM Plex Mono Font -->
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#F2F8F5',
+              100: '#E6F2ED',
+              500: '#2A6B52',
+              600: '#1D4E3A',
+            },
+            neutral: {
+              50: '#F8F7F4',
+              100: '#F2F1EE',
+              200: '#E5E3DF',
+              300: '#DDDBD5',
+              400: '#B0AEA8',
+              500: '#8A8881',
+              600: '#605E59',
+              900: '#1A1A18',
+            }
+          },
+          fontFamily: {
+            sans: ['Pretendard', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+            mono: ['IBM Plex Mono', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    :root{
+      --bg:#F2F1EE; --card:#FFFFFF; --line:#DDDBD5; --green:#2A6B52; --green-dark:#1D4E3A;
+      --panel:#E6F2ED; --text:#1A1A18; --muted:#77736B; --soft:#F8F7F4;
+    }
+    body {
+      font-family: 'Pretendard', -apple-system, sans-serif;
+      background-color: #F2F1EE;
+    }
+    /* Custom Scrollbars */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #F2F1EE;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #DDDBD5;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #B0AEA8;
+    }
+    .steps{display:grid;grid-template-columns:repeat(6, minmax(0, 1fr));gap:20px;margin-top:28px;align-items:flex-start}
+    .card{display:flex;flex-direction:column;background:var(--card);border:1px solid var(--line);border-radius:18px;min-height:auto;overflow:hidden}
+    .card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;padding:24px 24px 20px;background:#EAF2EE;border-bottom:1px solid var(--line)}
+    .card-head h2{font-size:16px;font-weight:900;color:var(--text);letter-spacing:-.35px;margin-bottom:5px}
+    .card-head p{color:var(--muted);font-size:13px;line-height:1.45}
+    .badge{background:#FFFFFF;color:var(--green);border:1px solid rgba(42,107,82,0.18);border-radius:999px;padding:6px 12px;white-space:nowrap;font:700 10px "IBM Plex Mono",monospace}
+    .card-body{display:flex;flex-direction:column;flex-grow:1;padding:24px;background:#FFFFFF}
+    .field{margin-bottom:16px}
+    label{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:8px;font-size:13px;font-weight:800}
+    label small{font-size:11px;color:var(--muted);font-weight:500}
+    textarea{display:block;width:100%;border:1px solid var(--line);border-radius:11px;padding:16px;background:#fff;color:#333330;font:16px/1.65 "Pretendard",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;outline:none;resize:none}
+    textarea:focus{border-color:var(--green);box-shadow:0 0 0 2px rgba(42,107,82,.1)}
+    .request{height:315px;background:#FCFCFA}
+    .result{height:225px;resize:vertical}
+    .copy{width:166px;height:42px;border:0;border-radius:9px;background:var(--green);color:#fff;font:800 13px "Pretendard",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;cursor:pointer;transition:.2s;display:flex;align-items:center;justify-content:center}
+    .copy:hover{background:var(--green-dark)}
+    .info{margin-top:auto;background:var(--panel);border:1px solid #CFE5DA;border-radius:12px;padding:14px;color:var(--green);font-size:12px;line-height:1.6}
+    .reset-row{display:flex;justify-content:flex-end;margin-top:14px}
+    .reset{height:40px;padding:0 14px;border:1px solid var(--line);border-radius:9px;background:var(--soft);color:var(--text);font:800 12px "Pretendard",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:6px}
+    .reset:hover{background:#EAE8E3}
+    .toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%) translateY(20px);opacity:0;background:#1A1A18;color:#fff;border-radius:999px;padding:12px 18px;font-size:13px;font-weight:700;transition:.25s;z-index:20;box-shadow:0 4px 12px rgba(0,0,0,0.15)}
+    .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+    @media(max-width:880px){.steps{grid-template-columns:1fr !important}.card{min-height:auto}.request{height:270px}.result{height:220px}}
+  </style>
+</head>
+<body class="min-h-screen text-neutral-900 antialiased flex flex-col h-screen overflow-hidden pt-[5px]">
+  <!-- Top brand bar -->
+  <div class="fixed top-0 left-0 w-full h-[5px] bg-brand-500 z-50"></div>
+
+  <!-- Navigation Bar (Shared) -->
+  <div id="navbar-placeholder"></div>
+  <script src="../navbar.js"></script>
+
+  <!-- Content Container -->
+  <div class="flex-1 min-h-0 flex flex-col lg:flex-row lg:overflow-hidden">
+    <!-- ===== Left Sidebar Navigation ===== -->
+    <aside class="flex-shrink-0 w-full lg:w-64 bg-white border-b lg:border-b-0 lg:border-r border-[#DDDBD5] flex flex-col lg:h-full pt-4">
+      <!-- Nav list -->
+      <nav aria-label="마케터 AI 실습 메뉴" class="flex lg:flex-col gap-5 lg:gap-0 px-3 pb-4 overflow-x-auto lg:overflow-y-auto lg:flex-1 lg:min-h-0">
+<section class="flex-shrink-0 lg:flex-shrink " aria-labelledby="sidebar-part-1">
+  <h2 id="sidebar-part-1" class="px-3 mb-2 text-[11px] font-extrabold tracking-wide text-neutral-400 whitespace-nowrap">Part 1. AI Shift</h2>
+  <div class="flex lg:flex-col gap-1"><a href="./p101_warmingup.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
+          <span class="text-lg leading-none">🔥</span>
+          <span>워밍업 실습</span>
+        </a></div>
+ </section>
+<section class="flex-shrink-0 lg:flex-shrink lg:mt-5" aria-labelledby="sidebar-part-2">
+  <h2 id="sidebar-part-2" class="px-3 mb-2 text-[11px] font-extrabold tracking-wide text-neutral-400 whitespace-nowrap">Part 2. Analysis</h2>
+  <div class="flex lg:flex-col gap-1"><a href="./p201_prompt.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
+          <span class="text-lg leading-none">🧩</span>
+          <span>심층리서치</span>
+        </a>
+<a href="./p202_apps_script.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
+          <span class="text-lg leading-none">🤖</span>
+          <span>쇼핑 트렌드 수집기</span>
+        </a>
+<a href="./p203_customer_response.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors"><span class="text-lg leading-none">💬</span><span>고객 반응 수집기</span></a>
+<a href="./p204_notebooklm.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
+          <span class="text-lg leading-none">🖼️</span>
+          <span>제미나이 노트북</span>
+        </a>
+<a href="./p205_ppt.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors"><span class="text-lg leading-none">📊</span><span>PPT 제작</span></a>
+<a href="./p206_miniproject1.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
+          <span class="text-lg leading-none">🚀</span>
+          <span>미니프로젝트 1</span>
+        </a></div>
+ </section>
+<section class="flex-shrink-0 lg:flex-shrink lg:mt-5" aria-labelledby="sidebar-part-3">
+  <h2 id="sidebar-part-3" class="px-3 mb-2 text-[11px] font-extrabold tracking-wide text-neutral-400 whitespace-nowrap">Part 3. STP</h2>
+  <div class="flex lg:flex-col gap-1"><a href="./p301_cardnews.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors"><span class="text-lg leading-none">📰</span><span>카드뉴스 제작</span></a>
+<a href="./p302_cardnews_auto.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-bold text-brand-600 bg-brand-100 whitespace-nowrap transition-colors"><span class="text-lg leading-none">⚙️</span><span>카드뉴스 자동화</span></a>
+<a href="./p303_aivideo.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
+          <span class="text-lg leading-none">🎬</span>
+          <span>이미지 생성 및 영상화</span>
+        </a></div>
+ </section>
+<section class="flex-shrink-0 lg:flex-shrink lg:mt-5" aria-labelledby="sidebar-part-4">
+  <h2 id="sidebar-part-4" class="px-3 mb-2 text-[11px] font-extrabold tracking-wide text-neutral-400 whitespace-nowrap">Part 4. GEO&amp;Automation</h2>
+  <div class="flex lg:flex-col gap-1"><a href="./p401_aiagent.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
+          <span class="text-lg leading-none">🎨</span>
+          <span>AI 에이전트</span>
+        </a>
+
+<a href="./p402_miniproject2.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
+          <span class="text-lg leading-none">🚀</span>
+          <span>미니프로젝트 2</span>
+        </a></div>
+ </section>
+</nav>
+      <!-- Sidebar Footer -->
+      <div class="mt-auto border-t border-[#DDDBD5] p-4 bg-white flex-shrink-0">
+        <!-- Dropup Menu Container -->
+        <div class="relative mb-2.5">
+          <button id="quick-links-btn" onclick="toggleQuickLinks(event)" class="w-full flex items-center justify-between py-2 px-3 border border-[#DDDBD5] hover:border-brand-500 bg-white hover:bg-neutral-50 text-neutral-900 rounded-xl transition-all duration-300 shadow-xs text-sm font-extrabold focus:outline-none">
+            <span class="flex items-center gap-2 text-neutral-600 hover:text-neutral-900">
+              <span>🔗</span> 주요 서비스 바로가기
+            </span>
+            <svg id="quick-links-arrow" class="w-3.5 h-3.5 text-neutral-400 transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5"></path>
+            </svg>
+          </button>
+          <!-- Dropup menu -->
+          <div id="quick-links-menu" class="hidden absolute bottom-full left-0 w-full mb-2 bg-white border border-[#DDDBD5] rounded-xl shadow-lg z-50 overflow-hidden py-1">
+            <a href="https://chatgpt.com" target="_blank" class="block px-4 py-2.5 text-xs text-neutral-700 hover:bg-brand-50 hover:text-brand-600 transition-colors font-bold border-b border-[#F2F1EE]">챗GPT</a>
+            <a href="https://gemini.google.com" target="_blank" class="block px-4 py-2.5 text-xs text-neutral-700 hover:bg-brand-50 hover:text-brand-600 transition-colors font-bold border-b border-[#F2F1EE]">제미나이</a>
+            <a href="https://sheets.google.com" target="_blank" class="block px-4 py-2.5 text-xs text-neutral-700 hover:bg-brand-50 hover:text-brand-600 transition-colors font-bold border-b border-[#F2F1EE]">구글 시트</a>
+            <a href="https://canva.com" target="_blank" class="block px-4 py-2.5 text-xs text-neutral-700 hover:bg-brand-50 hover:text-brand-600 transition-colors font-bold border-b border-[#F2F1EE]">캔바</a>
+            <a href="https://aistudio.google.com" target="_blank" class="block px-4 py-2.5 text-xs text-neutral-700 hover:bg-brand-50 hover:text-brand-600 transition-colors font-bold border-b border-[#F2F1EE]">AI Studio</a>
+            <a href="https://www.figma.com/" target="_blank" rel="noopener noreferrer" class="block px-4 py-2.5 text-xs text-neutral-700 hover:bg-brand-50 hover:text-brand-600 transition-colors font-bold border-b border-[#F2F1EE]">피그마</a>
+          <a href="https://workspace.google.com/experiments" target="_blank" class="block px-4 py-2.5 text-xs text-neutral-700 hover:bg-brand-50 hover:text-brand-600 transition-colors font-bold">Workspace Experiments</a>
+          </div>
+        </div>
+        <script>
+          function toggleQuickLinks(e) {
+            e.stopPropagation();
+            const menu = document.getElementById('quick-links-menu');
+            const arrow = document.getElementById('quick-links-arrow');
+            const isHidden = menu.classList.contains('hidden');
+            if (isHidden) {
+              menu.classList.remove('hidden');
+              arrow.classList.add('rotate-180');
+            } else {
+              menu.classList.add('hidden');
+              arrow.classList.remove('rotate-180');
+            }
+          }
+          document.addEventListener('click', (e) => {
+            const menu = document.getElementById('quick-links-menu');
+            const btn = document.getElementById('quick-links-btn');
+            const arrow = document.getElementById('quick-links-arrow');
+            if (menu && !menu.classList.contains('hidden') && !menu.contains(e.target) && !btn.contains(e.target)) {
+              menu.classList.add('hidden');
+              arrow.classList.remove('rotate-180');
+            }
+          });
+        </script>
+        <a href="./download/mkt_2610.pdf" target="_blank" rel="noopener noreferrer" class="block w-full text-center py-3 px-4 border border-[#DDDBD5] hover:border-brand-500 bg-brand-50 hover:bg-brand-100 text-brand-600 rounded-xl transition-all duration-300 shadow-xs" style="text-decoration: none;">
+          <span class="block text-xs font-bold text-neutral-400 mb-0.5 tracking-wider uppercase">Slide PDF</span>
+          <span class="block text-sm font-extrabold tracking-tight">강의 교안 뷰어</span>
+        </a>
+      </div>
+    </aside>
+
+    <!-- ===== Main Content Area ===== -->
+ <main class="flex-1 min-h-0 flex flex-col overflow-hidden pt-8 lg:pt-10 pb-8 px-4 md:px-8 lg:px-10">
+ <header class="mb-4 flex-shrink-0"><span class="inline-block mb-2 bg-brand-500 text-white rounded-full px-4 py-1 text-xs font-mono font-extrabold">CARD NEWS AUTOMATION</span><h1 class="text-2xl md:text-3xl font-extrabold">카드뉴스 제작을 자동화합니다</h1></header>
+ <section class="border border-[#DDDBD5] rounded-2xl p-5 md:p-6 bg-white shadow-sm flex-1 overflow-y-auto"><div class="grid grid-cols-1 lg:grid-cols-3 gap-5 items-stretch"><article class="border border-[#DDDBD5] rounded-xl bg-white overflow-hidden"><div class="p-5 bg-brand-100 border-b border-[#DDDBD5] flex items-center gap-3"><span class="w-8 h-8 rounded-full bg-brand-500 text-white inline-flex items-center justify-center text-sm font-extrabold flex-shrink-0">1</span><h2 class="text-base md:text-lg font-extrabold text-neutral-900">Step 1. 구글 시트 입력</h2></div><div class="p-5"><p class="text-sm text-neutral-600 mb-5">구글 시트에 카드뉴스에 사용할 내용을 입력하세요.</p><a href="https://docs.google.com/spreadsheets/d/1HlirGT57pymdseapoPqW21Egcc8fCpS1h5W8YlUI3J8/edit?usp=sharing" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center h-11 px-5 bg-brand-500 hover:bg-brand-600 text-white text-sm font-extrabold rounded-lg transition-colors">구글 시트 열기 ↗</a></div></article>
+<article class="border border-[#DDDBD5] rounded-xl bg-white overflow-hidden"><div class="p-5 bg-brand-100 border-b border-[#DDDBD5] flex flex-wrap items-center gap-3"><span class="w-8 h-8 rounded-full bg-brand-500 text-white inline-flex items-center justify-center text-sm font-extrabold flex-shrink-0">2</span><h2 class="text-base md:text-lg font-extrabold text-neutral-900">Step 2. 이미지 업로드</h2><a href="https://ifh.cc/ko" target="_blank" rel="noopener noreferrer" class="ml-auto inline-flex items-center justify-center h-8 px-3 rounded-lg border border-brand-500 bg-white text-brand-600 hover:bg-brand-50 text-xs font-extrabold whitespace-nowrap">업로드 ↗</a></div><div class="p-5"><p class="text-sm text-neutral-600 mb-5">카드뉴스에 사용할 이미지를 업로드하고, 아래 이미지 주소를 복사해 사용하세요.</p><div class="space-y-4"><div><label for="image-url-1" class="block mb-2 text-sm font-extrabold text-neutral-900">이미지1</label><div class="flex gap-2 items-center"><input id="image-url-1" type="text" readonly value="https://i.ifh.cc/HTDoSz.jpg" class="min-w-0 flex-1 w-full px-3 py-2.5 border border-[#DDDBD5] rounded-lg bg-neutral-50 text-neutral-700 text-xs" aria-label="이미지1 주소"><button type="button" onclick="copyImageUrl(1)" class="flex-shrink-0 px-3 h-10 bg-brand-500 hover:bg-brand-600 text-white text-xs font-extrabold rounded-lg">복사</button></div></div>
+<div><label for="image-url-2" class="block mb-2 text-sm font-extrabold text-neutral-900">이미지2</label><div class="flex gap-2 items-center"><input id="image-url-2" type="text" readonly value="https://i.ifh.cc/O3ljtS.jpg" class="min-w-0 flex-1 w-full px-3 py-2.5 border border-[#DDDBD5] rounded-lg bg-neutral-50 text-neutral-700 text-xs" aria-label="이미지2 주소"><button type="button" onclick="copyImageUrl(2)" class="flex-shrink-0 px-3 h-10 bg-brand-500 hover:bg-brand-600 text-white text-xs font-extrabold rounded-lg">복사</button></div></div></div><p id="image-copy-status" role="status" aria-live="polite" class="mt-3 text-xs font-bold text-brand-600 min-h-[1rem]"></p></div></article>
+<article class="border border-[#DDDBD5] rounded-xl bg-white overflow-hidden"><div class="p-5 bg-brand-100 border-b border-[#DDDBD5] flex items-center gap-3"><span class="w-8 h-8 rounded-full bg-brand-500 text-white inline-flex items-center justify-center text-sm font-extrabold flex-shrink-0">3</span><h2 class="text-base md:text-lg font-extrabold text-neutral-900">Step 3. 피그마 디자인</h2></div><div class="p-5"><ul class="space-y-3 text-sm md:text-base text-neutral-700 leading-relaxed list-disc pl-5"><li>프레임을 만들기 (단축키: <kbd class="px-2 py-0.5 rounded bg-neutral-100 border border-neutral-200 font-mono">F</kbd>)</li><li>대표적인 단축키: 도형 (<kbd class="px-2 py-0.5 rounded bg-neutral-100 border border-neutral-200 font-mono">R</kbd>), 텍스트 (<kbd class="px-2 py-0.5 rounded bg-neutral-100 border border-neutral-200 font-mono">T</kbd>)</li><li>텍스트 레이어 각각의 이름을 지정</li><li>컴포넌트로 만들기 (<kbd class="px-2 py-0.5 rounded bg-neutral-100 border border-neutral-200 font-mono">Ctrl + Alt + K</kbd>)</li></ul></div></article></div></section>
+ </main></div>
+<script>
+ async function copyImageUrl(num) {
+   const field = document.getElementById('image-url-' + num);
+   const status = document.getElementById('image-copy-status');
+   if (!field) return;
+   try {
+     try {
+       await navigator.clipboard.writeText(field.value);
+     } catch (error) {
+       const previousFocus = document.activeElement;
+       const temp = document.createElement('textarea');
+       temp.value = field.value;
+       temp.style.cssText = 'position:fixed;left:0;top:0;opacity:0;';
+       document.body.appendChild(temp);
+       let copied = false;
+       try {
+         temp.focus();
+         temp.select();
+         copied = document.execCommand('copy');
+       } finally {
+         temp.remove();
+         if (previousFocus) previousFocus.focus();
+       }
+       if (!copied) throw new Error('Copy failed');
+     }
+     status.textContent = '이미지' + num + ' 주소가 복사되었습니다.';
+   } catch (error) {
+     status.textContent = '복사하지 못했습니다. 주소를 선택해 직접 복사해 주세요.';
+   }
+ }
+</script>
+</body></html>
