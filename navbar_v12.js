@@ -191,3 +191,11 @@ function initNavbar(isSubdir) {
     if (mobileLogoutBtn) mobileLogoutBtn.classList.add('hidden');
   }
 }
+function openShinsegaeWorkbook(anchor) {
+  const password = prompt('신세계 워크북 비밀번호를 입력하세요.');
+  if (password === null) return false;
+  if (password.trim() !== 'workingai') { alert('비밀번호를 정확히 입력해 주세요.'); return false; }
+  sessionStorage.setItem('shinsegae_authenticated', 'true');
+  window.location.href = anchor.href;
+  return false;
+}
