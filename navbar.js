@@ -101,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // 1. 현재 폴더 위치 분석 (워크숍 하위 폴더 여부 확인)
-  const workshopMatch = window.location.pathname.match(/\/(workshop01|workshop02|shinsegae)(?:\/|$)/);
+  const workshopMatch = window.location.pathname.match(/\/(workshop01|workshop02|ssg)(?:\/|$)/);
   const isSubdir = Boolean(workshopMatch);
   const prefix = isSubdir ? '../' : '';
 
@@ -118,7 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
         processedHtml = processedHtml
           .replace(/href="index\.html"/g, 'href="../index.html"')
           .replace(/href="mulcam01\.html"/g, 'href="../mulcam01.html"')
-          .replace(/href="(workshop01|workshop02|shinsegae)\//g, 'href="../$1/')
+          .replace(/href="(workshop01|workshop02|ssg)\//g, 'href="../$1/')
           .replace(/src="images\//g, 'src="../images/');
       }
 
@@ -322,8 +322,8 @@ function initNavbar(isSubdir) {
 function openShinsegaeWorkbook(anchor) {
   const password = prompt('신세계 워크북 비밀번호를 입력하세요.');
   if (password === null) return false;
-  if (password.trim() !== 'workingai') { alert('비밀번호를 정확히 입력해 주세요.'); return false; }
-  sessionStorage.setItem('shinsegae_authenticated', 'true');
+  if (password.trim() !== 'ssg261015') { alert('비밀번호를 정확히 입력해 주세요.'); return false; }
+  sessionStorage.setItem('ssg_authenticated_261015', 'true');
   window.location.href = anchor.href;
   return false;
 }
