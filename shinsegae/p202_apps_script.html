@@ -236,7 +236,7 @@
           <span class="inline-block bg-brand-500 text-white rounded-full px-4 py-1 text-[11.5px] font-mono font-extrabold tracking-wider uppercase">Apps Script</span>
         </div>
         <h1 id="header-title" class="text-2xl md:text-3xl font-extrabold tracking-tight leading-tight text-neutral-900">
-          쇼핑 트렌드 수집기 제작
+          관심 트렌드를 상품 키워드로 연결하기
         </h1>
       </div>
       <!-- Navigation buttons in header -->
@@ -252,28 +252,13 @@
 
     <section class="border border-[#DDDBD5] rounded-2xl p-5 md:p-6 bg-white shadow-sm flex-1 flex flex-col overflow-y-auto relative">
       <!-- Step Progress Indicator (Naver News Search only) -->
-      <div id="naver-step-indicator" class="flex items-center justify-between mb-5 px-1 pb-4 border-b border-[#DDDBD5] flex-shrink-0">
-        <div id="step-indicator-1" class="flex items-center gap-2">
-          <span class="w-6 h-6 rounded-full bg-brand-500 text-white flex items-center justify-center text-xs font-bold">1</span>
-          <span class="text-xs font-bold text-neutral-900">API 계정</span>
-        </div>
-        <div class="flex-1 h-[1px] bg-[#DDDBD5] mx-4"></div>
-        <div id="step-indicator-2" class="flex items-center gap-2">
-          <span class="w-6 h-6 rounded-full bg-neutral-200 text-neutral-500 flex items-center justify-center text-xs font-bold">2</span>
-          <span class="text-xs font-medium text-neutral-500">키워드</span>
-        </div>
-        <div class="flex-1 h-[1px] bg-[#DDDBD5] mx-4"></div>
-        <div id="step-indicator-3" class="flex items-center gap-2">
-          <span class="w-6 h-6 rounded-full bg-neutral-200 text-neutral-500 flex items-center justify-center text-xs font-bold">3</span>
-          <span class="text-xs font-medium text-neutral-500">세부 옵션</span>
-        </div>
-      </div>
+      <div id="naver-step-indicator" class="flex items-center justify-between mb-5 px-1 pb-4 border-b border-[#DDDBD5] flex-shrink-0"><div id="step-indicator-1" class="text-sm font-bold text-brand-600">1. 관심 상품 선택</div><div class="flex-1 h-px bg-[#DDDBD5] mx-4"></div><div id="step-indicator-2" class="text-sm text-neutral-500">2. API·조회 조건</div></div>
 
       <!-- Card Sub-Head -->
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#DDDBD5] pb-4 mb-4 flex-shrink-0">
         <div>
           <h2 id="tool-title" class="text-lg md:text-xl font-extrabold text-neutral-900">코드 생성 조건 입력</h2>
-          <p id="tool-desc" class="text-xs md:text-sm text-[#605E59] mt-1">인증 정보, 상품 키워드와 카테고리, 조회 기간을 입력하면 쇼핑 클릭 추이 수집 코드가 완성됩니다.</p>
+          <p id="tool-desc" class="text-xs md:text-sm text-[#605E59] mt-1">앞의 심층리서치에서 발견한 변화를 관련 상품 카테고리와 키워드로 연결하고, 쇼핑 관심 추이를 확인합니다.</p>
         </div>
         
         <div class="flex items-center gap-2 flex-shrink-0">
@@ -290,13 +275,38 @@
 
       </div>
 
-                              <!-- ================= CONTAINER 1: 쇼핑 트렌드 수집기 ================= -->
-      <div id="naver-news-container" class="flex-1 flex flex-col justify-between">
-        <div class="flex flex-col lg:flex-row gap-6 items-stretch flex-1">
-          <!-- Left: Step Wizard (45% width on desktop) -->
-          <div class="w-full lg:w-[45%] flex flex-col justify-between">
-            <!-- Step 1 Panel: API 입력 -->
-            <section id="naver-step-1" class="panel flex-grow flex flex-col justify-between" style="min-height: 280px !important; padding: 0 !important; overflow: hidden; display: flex;">
+                              <div id="naver-news-container" class="flex-1 flex flex-col">
+<div id="naver-step-1" class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start"><div><section class="h-full p-4 border border-brand-100 bg-brand-50 rounded-xl"><h2 class="text-sm font-extrabold mb-2">심층리서치의 발견 → 관련 상품 조사</h2><p class="text-xs text-neutral-600 mb-3">백화점 가을 프로모션에 참고하고 싶은 변화 2~3개를 고른 뒤, 그 변화와 연결되는 상품을 찾아보세요. 아래는 조사 주제를 정하는 예시이며, 확인된 트렌드 결론은 아닙니다.</p><div class="overflow-x-auto"><table class="w-full text-xs text-left leading-relaxed"><thead><tr class="border-b border-brand-100"><th class="p-2">관심이 생긴 경험·변화</th><th class="p-2">선택 카테고리</th><th class="p-2">상품 키워드 예시</th></tr></thead><tbody><tr><td class="p-2">머물고 싶은 공간·집 꾸미기</td><td class="p-2">가구/인테리어</td><td class="p-2">조명, 러그, 수납장</td></tr><tr><td class="p-2">취향을 표현하는 가을 스타일</td><td class="p-2">패션의류 · 패션잡화 중 선택</td><td class="p-2">의류: 니트, 가디건 / 잡화: 가방, 스카프</td></tr><tr><td class="p-2">나를 돌보는 체험·셀프케어</td><td class="p-2">화장품/미용</td><td class="p-2">수분크림, 핸드크림</td></tr></tbody></table></div><p class="text-xs text-neutral-600 mt-3">① 관심 분야의 카테고리·상품 선택 → ② API·조회 조건 입력 후 코드 복사. 첫 화면은 인테리어 상품 예시입니다. 조사 결과는 다음 고객 반응 수집·통합 분석에서 함께 검토하세요.</p><a href="./p201_prompt.html" class="inline-block mt-2 text-xs font-bold text-brand-600">앞의 심층리서치로 돌아가기 →</a></section></div><div><section class="panel flex-grow flex flex-col justify-between">
+              <div>
+                <div class="panel-top bg-[#EAF2EE]" style="padding: 16px 20px; margin-bottom: 20px; border-bottom: 1px solid var(--line); border-radius: 12px 12px 0 0;">
+                  <div>
+                    <h3 class="panel-title">🔎 키워드 입력</h3>
+                    <p class="panel-desc">심층리서치에서 관심이 생긴 인테리어·패션·화장품 등의 카테고리를 고르고, 같은 분야의 상품 키워드 1~5개를 비교합니다.</p>
+                  </div>
+                  <span class="tag">Step 1 / 2</span>
+                </div>
+                <div style="padding: 0 20px 20px 20px;">
+                  <div class="group" style="margin-bottom: 12px;">
+                    <label for="shoppingCategoryName">쇼핑 카테고리</label>
+                    <select id="shoppingCategoryName" class="w-full px-4 py-2.5 border border-[#DDDBD5] rounded-lg"><option value="50000000">패션의류</option><option value="50000001">패션잡화</option><option value="50000002">화장품/미용</option><option value="50000003">디지털/가전</option><option value="50000004" selected>가구/인테리어</option><option value="50000005">출산/육아</option><option value="50000006">식품</option><option value="50000007">스포츠/레저</option><option value="50000008">생활/건강</option></select>
+                  </div>
+                  <div class="group" style="margin-bottom: 12px;">
+                    <label for="shoppingCategory">쇼핑 카테고리 코드 <small>이름 선택 시 자동 입력</small></label>
+                    <input id="shoppingCategory" type="text" readonly inputmode="numeric" maxlength="8" value="50000004" placeholder="네이버쇼핑 URL의 cat_id" class="w-full px-4 py-2.5 border border-[#DDDBD5] rounded-lg">
+                  </div>
+                  <p class="text-xs text-neutral-500 mb-4">가구/인테리어는 조명·러그·수납장, 패션의류는 니트·가디건, 화장품/미용은 수분크림·핸드크림처럼 상품명으로 조사하세요. 카테고리를 바꾸면 검색어도 해당 분야에 맞게 직접 바꾸세요. 모든 키워드에 동일 카테고리가 적용됩니다.</p>
+                  <div class="group" style="margin-bottom: 12px;">
+                    <label for="keywordCount">수집 키워드 개수 <small>1~5개</small></label>
+                    <select id="keywordCount" class="w-full px-4 py-2.5 border border-[#DDDBD5] bg-white text-neutral-900 text-[15px] rounded-lg focus:border-brand-500 focus:outline-none cursor-pointer"><option value="1">1개</option><option value="2">2개</option><option value="3">3개</option><option value="4">4개</option><option value="5">5개</option></select>
+                  </div>
+                  <div class="group" style="margin-bottom: 0;">
+                    <label>검색 키워드 <small>선택한 카테고리의 상품명 입력</small></label>
+                    <div id="keywords" class="keywords"></div>
+                  </div>
+                </div>
+              </div>
+            </section></div></div>
+<div id="naver-step-2" class="hidden"><div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start"><div><section class="panel flex-grow flex flex-col justify-between">
               <div>
                 <div class="panel-top bg-[#EAF2EE]" style="padding: 16px 20px; margin-bottom: 20px; border-bottom: 1px solid var(--line); border-radius: 12px 12px 0 0;">
                   <div class="w-full">
@@ -324,49 +334,14 @@
                   네이버 API 허브 연동
                 </a>
               </div>
-            </section>
-
-            <!-- Step 2 Panel: 키워드 입력 -->
-            <section id="naver-step-2" class="panel flex-grow flex flex-col justify-between" style="min-height: 280px !important; padding: 0 !important; overflow: hidden; display: none;">
-              <div>
-                <div class="panel-top bg-[#EAF2EE]" style="padding: 16px 20px; margin-bottom: 20px; border-bottom: 1px solid var(--line); border-radius: 12px 12px 0 0;">
-                  <div>
-                    <h3 class="panel-title">🔎 키워드 입력</h3>
-                    <p class="panel-desc">같은 카테고리의 상품 키워드 1~5개를 입력하면 관심추이를 함께 비교합니다.</p>
-                  </div>
-                  <span class="tag">Step 2 / 3</span>
-                </div>
-                <div style="padding: 0 20px 20px 20px;">
-                  <div class="group" style="margin-bottom: 12px;">
-                    <label for="shoppingCategoryName">쇼핑 카테고리</label>
-                    <select id="shoppingCategoryName" class="w-full px-4 py-2.5 border border-[#DDDBD5] rounded-lg"><option value="50000000">패션의류</option><option value="50000001">패션잡화</option><option value="50000002" selected>화장품/미용</option><option value="50000003">디지털/가전</option><option value="50000004">가구/인테리어</option><option value="50000005">출산/육아</option><option value="50000006">식품</option><option value="50000007">스포츠/레저</option><option value="50000008">생활/건강</option><option value="custom">직접 입력 (세부 카테고리)</option></select><input id="shoppingCustomCategoryName" type="text" placeholder="세부 카테고리 이름" class="hidden w-full mt-2 px-4 py-2.5 border border-[#DDDBD5] rounded-lg">
-                  </div>
-                  <div class="group" style="margin-bottom: 12px;">
-                    <label for="shoppingCategory">쇼핑 카테고리 코드 <small>이름 선택 시 자동 입력</small></label>
-                    <input id="shoppingCategory" type="text" readonly inputmode="numeric" maxlength="8" value="50000002" placeholder="네이버쇼핑 URL의 cat_id" class="w-full px-4 py-2.5 border border-[#DDDBD5] rounded-lg">
-                  </div>
-                  <p class="text-xs text-neutral-500 mb-4">향수·립스틱은 화장품/미용, 운동화는 패션잡화입니다. 세부 분야는 직접 입력을 선택한 후 네이버쇼핑 URL의 cat_id 코드를 넣으세요. 모든 키워드에 동일 카테고리가 적용됩니다.</p>
-                  <div class="group" style="margin-bottom: 12px;">
-                    <label for="keywordCount">수집 키워드 개수 <small>1~5개</small></label>
-                    <select id="keywordCount" class="w-full px-4 py-2.5 border border-[#DDDBD5] bg-white text-neutral-900 text-[15px] rounded-lg focus:border-brand-500 focus:outline-none cursor-pointer"><option value="1">1개</option><option value="2">2개</option><option value="3">3개</option><option value="4">4개</option><option value="5">5개</option></select>
-                  </div>
-                  <div class="group" style="margin-bottom: 0;">
-                    <label>검색 키워드 <small>선택 개수만큼 입력</small></label>
-                    <div id="keywords" class="keywords"></div>
-                  </div>
-                </div>
-              </div>
-            </section>
-
-            <!-- Step 3 Panel: 옵션 -->
-            <section id="naver-step-3" class="panel flex-grow flex flex-col justify-between" style="min-height: 280px !important; padding: 0 !important; overflow: hidden; display: none;">
+            </section></div><div><section class="panel flex-grow flex flex-col justify-between">
               <div>
                 <div class="panel-top bg-[#EAF2EE]" style="padding: 16px 20px; margin-bottom: 20px; border-bottom: 1px solid var(--line); border-radius: 12px 12px 0 0;">
                   <div>
                     <h3 class="panel-title">⚙️ 옵션</h3>
                     <p class="panel-desc">어제까지의 조회 기간과 일간·주간·월간 집계 단위를 설정합니다.</p>
                   </div>
-                  <span class="tag">Step 3 / 3</span>
+                  <span class="tag">Step 2 / 2</span>
                 </div>
                 <div style="padding: 0 20px 20px 20px;">
                   <div class="group" style="margin-bottom: 12px;">
@@ -381,46 +356,10 @@
 </div>
 <div class="group" style="margin-bottom: 0;">
 <p class="text-xs text-neutral-500 mb-3">전체 코드를 Code.gs에 붙여넣고 저장한 뒤 ▶ 실행을 누르세요. 첫 함수 main이 기본 실행 함수이며, onOpen을 수동 실행해도 수집됩니다. 최초 Google 권한 승인이 필요합니다. 이후에는 시트를 새로고침하고 “쇼핑 트렌드 → 전체 데이터 가져오기” 메뉴로 실행할 수 있습니다.</p><p class="text-sm text-neutral-600">키워드 관심추이 비교표와 각 키워드의 성별·연령별 차트를 수집하고, 쇼핑_실행결과 탭에 성공·실패를 기록합니다.</p>
-<p class="text-xs text-neutral-500 mt-3">결과는 쇼핑 클릭량의 상대 지수입니다. 검색수·매출·구매수·성별 구성비를 뜻하지 않으며, 별도 요청의 지수를 직접 비교하지 마세요.</p></div></div></div></section>
-          </div>
+<p class="text-xs text-neutral-500 mt-3">결과는 쇼핑 클릭량의 상대 지수입니다. 검색수·매출·구매수·성별 구성비를 뜻하지 않으며, 별도 요청의 지수를 직접 비교하지 마세요.</p></div></div></div></section></div></div><details class="mt-5 border border-[#DDDBD5] rounded-xl" open><summary class="p-4 bg-neutral-50 text-sm font-bold cursor-pointer">API·조회 조건 코드 미리보기</summary><pre id="naver-code-preview" class="p-4 text-xs font-mono whitespace-pre-wrap break-all"></pre><p class="px-4 pb-4 text-xs text-neutral-500">입력한 값은 빨간색으로 표시합니다. 전체 코드 복사에는 상품 설정과 수집 함수도 포함됩니다.</p></details><div class="flex flex-wrap justify-end gap-3 mt-4"><button type="button" onclick="copyCode()" class="h-10 px-5 bg-brand-500 text-white font-bold text-sm rounded-lg">전체 코드 복사</button><a href="https://sheets.google.com" target="_blank" rel="noopener noreferrer" class="h-10 px-5 border border-[#DDDBD5] rounded-lg inline-flex items-center text-sm font-bold">구글시트 열기 ↗</a></div></div>
+</div>
 
-          <!-- Right: Code Preview Browser Panel (55% width on desktop) -->
-          <div class="w-full lg:w-[55%] flex flex-col">
-            <div class="flex-grow flex flex-col border border-[#DDDBD5] rounded-2xl bg-white overflow-hidden shadow-xs" style="min-height: 280px !important;">
-              <!-- Browser Title Bar -->
-              <div class="flex items-center justify-between px-4 py-3 bg-[#F4F4F3] border-b border-[#DDDBD5] flex-shrink-0">
-                <div class="flex items-center gap-1.5 w-[70px]">
-                  <span class="w-3 h-3 rounded-full bg-[#FF5F56] inline-block"></span>
-                  <span class="w-3 h-3 rounded-full bg-[#FFBD2E] inline-block"></span>
-                  <span class="w-3 h-3 rounded-full bg-[#27C93F] inline-block"></span>
-                </div>
-                <div class="px-5 py-1 bg-[#EAEAE9] rounded-lg text-[11px] text-neutral-600 font-mono text-center max-w-[240px] truncate select-none">
-                  script.google.com/code.gs
-                </div>
-                <div class="w-[70px]"></div>
-              </div>
-              <!-- Code Preview Area -->
-              <div class="flex-grow p-5 overflow-auto relative bg-white" style="height: 220px; lg:h-[260px];">
-                <pre id="naver-code-preview" class="font-mono text-xs text-neutral-900 select-all outline-none" style="white-space: pre-wrap; word-break: break-all; margin: 0; line-height: 1.6;"></pre><p class="text-xs text-neutral-500 mt-4">현재 단계의 설정만 표시합니다. “전체 코드 복사”에는 모든 설정과 수집 함수가 포함됩니다.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 카드 아래에 '전체 코드 복사' '구글시트' 링크가 있는 형태 -->
-        <div class="mt-4 pt-4 border-t border-[#DDDBD5] flex items-center justify-end gap-3 flex-shrink-0">
-          <button onclick="copyCode()" class="px-4 h-10 border border-[#DDDBD5] bg-white hover:bg-neutral-50 text-neutral-800 text-sm font-bold rounded-lg transition-all shadow-xs focus:outline-none">전체 코드 복사</button>
-          <a href="https://sheets.google.com" target="_blank" class="px-4 h-10 border border-[#DDDBD5] bg-white hover:bg-neutral-50 text-neutral-800 text-sm font-bold rounded-lg transition-all shadow-xs flex items-center justify-center gap-1.5 focus:outline-none" style="text-decoration: none;">
-            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M19 3H5C3.9 3 3 3.9 3 5V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19V5C21 3.9 20.1 3 19 3ZM9 17H7V15H9V17ZM9 13H7V11H9V13ZM9 9H7V7H9V9ZM17 17H11V15H17V17ZM17 13H11V11H17V13ZM17 9H11V7H17V9Z" fill="#0F9D58"/>
-            </svg>
-            구글시트
-          </a>
-        </div>
-      </div>
-
-
-      <!-- ================= CONTAINER 2: AI 뉴스레터 발송 ================= -->
+<!-- ================= CONTAINER 2: AI 뉴스레터 발송 ================= -->
       <div id="ai-news-container" class="hidden flex-1 flex flex-col justify-between">
         <div>
           <div class="grid-2">
@@ -520,9 +459,9 @@
       document.getElementById('ai-news-container').classList.add('hidden');
       
       // Update header
-      document.getElementById('header-title').textContent = "쇼핑 트렌드 수집기 제작";
+      document.getElementById('header-title').textContent = "관심 트렌드를 상품 키워드로 연결하기";
       document.getElementById('tool-title').textContent = "코드 생성 조건 입력";
-      document.getElementById('tool-desc').textContent = "인증 정보, 상품 키워드와 카테고리, 조회 기간을 입력하면 쇼핑 클릭 추이 수집 코드가 완성됩니다.";
+      document.getElementById('tool-desc').textContent = "앞의 심층리서치에서 발견한 변화를 관련 상품 카테고리와 키워드로 연결하고, 쇼핑 관심 추이를 확인합니다.";
       
       // Update toggle tab button classes
       const tab1 = document.getElementById('btn-tab-1');
@@ -562,7 +501,7 @@
     }
 
                 // [1] 쇼핑 트렌드 수집기 비즈니스 로직
-    const state = { 1: "향수", 2: "립스틱", 3: "선크림", 4: "쿠션", 5: "핸드크림" };
+    const state = { 1: "조명", 2: "러그", 3: "수납장", 4: "커튼", 5: "쿠션 커버" };
     const $ = (id) => document.getElementById(id);
 
     function fillNaverApiKey() {
@@ -591,53 +530,15 @@
     }
 
     function goToNaverStep(step) {
-      if (step < 1 || step > 3) return;
-      
-      // Hide all steps using style.display
-      document.getElementById('naver-step-1').style.display = 'none';
-      document.getElementById('naver-step-2').style.display = 'none';
-      document.getElementById('naver-step-3').style.display = 'none';
-      
-      // Show requested step
-      document.getElementById('naver-step-' + step).style.display = 'flex';
-      
-      // Update indicators
-      for (let i = 1; i <= 3; i++) {
-        const ind = document.getElementById('step-indicator-' + i);
-        if (ind) {
-          const circle = ind.querySelector('span');
-          const label = ind.querySelectorAll('span')[1];
-          if (i === step) {
-            circle.className = "w-6 h-6 rounded-full bg-brand-500 text-white flex items-center justify-center text-xs font-bold";
-            if (label) label.className = "text-xs font-bold text-neutral-900";
-          } else if (i < step) {
-            circle.className = "w-6 h-6 rounded-full bg-brand-100 text-brand-600 flex items-center justify-center text-xs font-bold";
-            if (label) label.className = "text-xs font-semibold text-brand-600";
-          } else {
-            circle.className = "w-6 h-6 rounded-full bg-neutral-200 text-neutral-500 flex items-center justify-center text-xs font-bold";
-            if (label) label.className = "text-xs font-medium text-neutral-500";
-          }
-        }
+      if (step < 1 || step > 2) return;
+      for (let i = 1; i <= 2; i++) {
+        $("naver-step-" + i).classList.toggle('hidden', i !== step);
+        $("step-indicator-" + i).className = 'text-sm ' + (i === step ? 'font-bold text-brand-600' : 'text-neutral-500');
       }
-
-      // Update bottom navigation buttons
-      const prevBtn = document.getElementById('naver-prev-btn');
-      const nextBtn = document.getElementById('naver-next-btn');
-      if (step === 1) {
-        prevBtn.classList.add('hidden');
-        nextBtn.classList.remove('hidden');
-        nextBtn.textContent = '2단계 >';
-      } else if (step === 2) {
-        prevBtn.classList.remove('hidden');
-        prevBtn.textContent = '< 1단계';
-        nextBtn.classList.remove('hidden');
-        nextBtn.textContent = '3단계 >';
-      } else if (step === 3) {
-        prevBtn.classList.remove('hidden');
-        prevBtn.textContent = '< 2단계';
-        nextBtn.classList.add('hidden');
-      }
-
+      $("naver-prev-btn").classList.toggle('hidden', step === 1);
+      $("naver-next-btn").classList.toggle('hidden', step === 2);
+      $("naver-prev-btn").textContent = '< 1단계';
+      $("naver-next-btn").textContent = '2단계 >';
       currentNaverStep = step;
       updateNaverPreview();
     }
@@ -648,17 +549,13 @@
       return {
         keywords: [...new Set([...$("keywords").querySelectorAll("input")].map(input => input.value.trim()).filter(Boolean))],
         category: $("shoppingCategory").value.trim(),
-        categoryName: select.value === "custom" ? ($("shoppingCustomCategoryName").value.trim() || "직접 입력 카테고리") : select.options[select.selectedIndex].text,
+        categoryName: select.options[select.selectedIndex].text,
         days: Number.isFinite(rawDays) ? Math.max(1, Math.min(365, Math.round(rawDays))) : 90,
         timeUnit: $("shoppingTimeUnit").value
       };
     }
     function syncShoppingCategory() {
-      const select = $("shoppingCategoryName"), custom = select.value === "custom";
-      $("shoppingCategory").readOnly = !custom;
-      $("shoppingCustomCategoryName").classList.toggle("hidden", !custom);
-      if (!custom) $("shoppingCategory").value = select.value;
-      else $("shoppingCategory").value = "";
+      $("shoppingCategory").value = $("shoppingCategoryName").value;
       updateNaverPreview();
     }
     function shoppingAuth() {
@@ -671,14 +568,8 @@
       const preview = $("naver-code-preview");
       if (!preview) return;
       let code;
-      if (currentNaverStep === 1) code = '// 1. NAVER API HUB 인증 정보\nconst NAVER_AUTH = ' + JSON.stringify(shoppingAuth(), null, 2) + ';';
-      else if (currentNaverStep === 2) {
-        const {category, categoryName, keywords} = shoppingSettings();
-        code = '// 2. SHOPPING 설정 중 수집 대상\n' + JSON.stringify({category, categoryName, keywords}, null, 2);
-      } else {
-        const {days, timeUnit} = shoppingSettings();
-        code = '// 3. SHOPPING 설정 중 조회 옵션\n' + JSON.stringify({days, timeUnit}, null, 2);
-      }
+      const {days, timeUnit} = shoppingSettings();
+      code = '// NAVER API HUB 인증 정보\nconst NAVER_AUTH = ' + JSON.stringify(shoppingAuth(), null, 2) + ';\n\n// SHOPPING 설정 중 조회 옵션\n' + JSON.stringify({days, timeUnit}, null, 2);
       // Escape the whole source before inserting markup; student text stays literal.
       const lines = code.split('\n');
       preview.innerHTML = lines.map(line => {
@@ -712,9 +603,9 @@
     }
     async function copyCode() {
       const config = shoppingSettings();
-      if (!config.keywords.length) { showToast('검색 키워드를 입력하세요.'); goToNaverStep(2); return; }
-      if (!/^[0-9]{8}$/.test(config.category)) { showToast('카테고리 코드를 8자리 숫자로 입력하세요.'); goToNaverStep(2); return; }
-      if (!$("ncloudId").value.trim() || !$("ncloudSecret").value.trim()) { showToast('Client ID와 Secret을 입력하세요.'); goToNaverStep(1); return; }
+      if (!config.keywords.length) { showToast('검색 키워드를 입력하세요.'); goToNaverStep(1); return; }
+      if (!/^[0-9]{8}$/.test(config.category)) { showToast('카테고리 코드를 8자리 숫자로 입력하세요.'); goToNaverStep(1); return; }
+      if (!$("ncloudId").value.trim() || !$("ncloudSecret").value.trim()) { showToast('Client ID와 Secret을 입력하세요.'); goToNaverStep(2); return; }
       const code = getNaverCode();
       await executeCopy(code, "코드가 복사되었습니다.");
     }
@@ -1075,7 +966,7 @@ function sendEmailWithReport(dateStr, reportData, imageBlob) {
       renderKeywords(); 
       updateNaverPreview(); 
     });
-    ["shoppingCategory", "shoppingCustomCategoryName", "shoppingDays", "shoppingTimeUnit"].forEach(id => $(id).addEventListener("input", updateNaverPreview));
+    ["shoppingCategory", "shoppingDays", "shoppingTimeUnit"].forEach(id => $(id).addEventListener("input", updateNaverPreview));
     $("shoppingCategoryName").addEventListener("change", syncShoppingCategory);
     geminiApiKeyInput.addEventListener("input", () => updateCode());
 
