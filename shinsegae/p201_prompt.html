@@ -13,7 +13,7 @@
   <link rel="icon" href="../favicon.png?v=2" type="image/png">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>가을 행사 기획을 위한 심층리서치 · WORKING AI</title>
+  <title>가을 행사 아이디어를 넓히는 심층리서치 · WORKING AI</title>
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Pretendard Font -->
@@ -198,80 +198,91 @@
   </aside>
 
   <!-- ===== Main Content ===== -->
-<main class="flex-1 min-h-0 flex flex-col overflow-hidden pt-8 lg:pt-10 pb-8 px-4 md:px-8 lg:px-10">
-<header class="mb-4 flex-shrink-0"><span class="inline-block bg-brand-500 text-white rounded-full px-4 py-1 text-xs font-mono font-bold mb-2">DEEP RESEARCH</span><h1 class="text-2xl md:text-3xl font-extrabold">가을 행사 기획을 위한 심층리서치</h1><p class="text-sm text-neutral-600 mt-2">시장 동향과 고객의 구매 이유를 조사하고, 행사 기획에 활용할 근거를 확보합니다.</p></header>
-<section class="border border-[#DDDBD5] rounded-2xl p-5 md:p-6 bg-white shadow-sm flex-1 min-h-0 overflow-y-auto">
-<nav aria-label="심층리서치 실습 단계" class="flex flex-wrap gap-2 border-b border-[#DDDBD5] pb-4 mb-5"><button type="button" id="research-tab-1" onclick="showResearchStep(1)" class="px-4 py-2 rounded-lg text-sm font-bold" aria-controls="research-step-1">1. 조사 주제 설정</button><button type="button" id="research-tab-2" onclick="showResearchStep(2)" class="px-4 py-2 rounded-lg text-sm font-bold" aria-controls="research-step-2">2. 조사 프롬프트 구성</button><button type="button" id="research-tab-3" onclick="showResearchStep(3)" class="px-4 py-2 rounded-lg text-sm font-bold" aria-controls="research-step-3">3. 결과 검증·저장</button></nav>
-<div id="research-step-1"><h2 class="text-lg font-extrabold mb-2">내 업무에 맞는 조사 범위 정하기</h2><p class="text-sm text-neutral-600 mb-5">담당 상품군과 고객에 맞춰 입력하세요. 같은 주제를 쇼핑 트렌드·고객 반응 수집에서도 이어서 사용합니다.</p><div class="grid grid-cols-1 md:grid-cols-2 gap-4"><div><label for="research-product" class="block text-sm font-bold mb-2">상품군</label><input id="research-product" class="w-full px-4 py-3 border border-[#DDDBD5] rounded-lg bg-white focus:border-brand-500 focus:outline-none" value="향수" placeholder="예: 향수, 패션잡화"></div><div><label for="research-event" class="block text-sm font-bold mb-2">행사 주제</label><input id="research-event" class="w-full px-4 py-3 border border-[#DDDBD5] rounded-lg bg-white focus:border-brand-500 focus:outline-none" value="가을 향수 체험 행사" placeholder="기획할 행사를 입력하세요"></div><div><label for="research-audience" class="block text-sm font-bold mb-2">대상 고객</label><input id="research-audience" class="w-full px-4 py-3 border border-[#DDDBD5] rounded-lg bg-white focus:border-brand-500 focus:outline-none" value="20~30대 고객" placeholder="예: 20~30대 고객"></div><div><label for="research-location" class="block text-sm font-bold mb-2">지역·점포 <span class="text-xs text-neutral-500">선택</span></label><input id="research-location" class="w-full px-4 py-3 border border-[#DDDBD5] rounded-lg bg-white focus:border-brand-500 focus:outline-none" value="" placeholder="미입력 시 국내 시장 전체 기준"></div><div><label for="research-period" class="block text-sm font-bold mb-2">조사 기간</label><input id="research-period" class="w-full px-4 py-3 border border-[#DDDBD5] rounded-lg bg-white focus:border-brand-500 focus:outline-none" value="실행일 기준 최근 1년" placeholder="예: 최근 1년"></div></div><div class="mt-5 p-4 bg-brand-50 rounded-xl text-sm leading-relaxed"><strong>실습 폴더 준비</strong><p class="mt-2">PC에 ‘가을 프로모션’ 폴더를 만들고 01_시장조사 · 02_고객리뷰 · 03_분석 · 04_PPT 하위 폴더를 준비하세요. 사용할 AI 도구에서 폴더를 연결하거나 관련 자료를 첨부합니다.</p></div><p class="text-xs text-neutral-500 mt-4">입력값을 바꾼 뒤 아래 버튼을 누르면 2단계 프롬프트를 새로 구성합니다.</p><button type="button" onclick="buildResearchPrompt(true)" class="h-11 px-5 rounded-lg bg-brand-500 hover:bg-brand-600 text-white text-sm font-extrabold mt-3">입력 조건으로 프롬프트 구성 →</button></div>
-<div id="research-step-2" class="hidden"><div class="flex flex-col sm:flex-row sm:justify-between gap-3 mb-4"><div><h2 class="text-lg font-extrabold">목표·역할·제한·출력으로 조사 요청하기</h2><p class="text-sm text-neutral-600 mt-1">프롬프트를 복사해 심층리서치에 입력하고, 제안받은 조사 계획을 검토한 뒤 진행을 요청하세요.</p></div><div class="flex gap-2"><a href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer" class="text-sm text-brand-600 font-bold">ChatGPT ↗</a><a href="https://gemini.google.com/" target="_blank" rel="noopener noreferrer" class="text-sm text-brand-600 font-bold">Gemini ↗</a></div></div><div class="grid grid-cols-1 md:grid-cols-2 gap-4"><section class="border border-[#DDDBD5] rounded-xl overflow-hidden"><div class="p-4 bg-brand-100"><label for="goal" class="font-extrabold">목표</label><p class="text-xs text-neutral-600 mt-1">무엇을, 왜 조사하나요?</p></div><textarea id="goal" class="w-full p-4 text-sm leading-relaxed outline-none focus:ring-2 focus:ring-brand-500" rows="9"></textarea></section><section class="border border-[#DDDBD5] rounded-xl overflow-hidden"><div class="p-4 bg-brand-100"><label for="role" class="font-extrabold">역할</label><p class="text-xs text-neutral-600 mt-1">AI에게 어떤 역할을 맡기나요?</p></div><textarea id="role" class="w-full p-4 text-sm leading-relaxed outline-none focus:ring-2 focus:ring-brand-500" rows="9"></textarea></section><section class="border border-[#DDDBD5] rounded-xl overflow-hidden"><div class="p-4 bg-brand-100"><label for="limit" class="font-extrabold">제한</label><p class="text-xs text-neutral-600 mt-1">기간·범위·출처·검증 기준</p></div><textarea id="limit" class="w-full p-4 text-sm leading-relaxed outline-none focus:ring-2 focus:ring-brand-500" rows="9"></textarea></section><section class="border border-[#DDDBD5] rounded-xl overflow-hidden"><div class="p-4 bg-brand-100"><label for="output" class="font-extrabold">출력</label><p class="text-xs text-neutral-600 mt-1">계획과 보고서의 최종 형태</p></div><textarea id="output" class="w-full p-4 text-sm leading-relaxed outline-none focus:ring-2 focus:ring-brand-500" rows="9"></textarea></section></div><p class="mt-4 text-sm text-neutral-600">계획 확인: 조사 질문과 지역·기간·고객 범위가 맞는지, 공식 자료를 우선하는지 확인하세요. 행사 실행 전략의 완성은 자료 통합 분석 이후 진행합니다.</p><div class="flex flex-wrap gap-3 mt-4"><button type="button" onclick="copyResearch('research')" class="h-11 px-5 rounded-lg bg-brand-500 hover:bg-brand-600 text-white text-sm font-extrabold">전체 프롬프트 복사</button><button type="button" onclick="showResearchStep(1)" class="h-11 px-5 border border-[#DDDBD5] rounded-lg text-sm font-bold">조사 조건 수정</button><button type="button" onclick="showResearchStep(3)" class="h-11 px-5 border border-[#DDDBD5] rounded-lg text-sm font-bold">결과 검증·저장 →</button></div></div>
-<div id="research-step-3" class="hidden"><h2 class="text-lg font-extrabold mb-2">근거를 확인하고 다음 실습에 쓸 자료 보관하기</h2><p class="text-sm text-neutral-600 mb-4">AI의 요약을 그대로 인용하지 말고 원문과 대조하세요. 체크리스트는 직접 확인한 항목에 표시합니다.</p><div class="space-y-3"><label class="flex items-start gap-3 p-4 border border-[#DDDBD5] rounded-lg"><input type="checkbox" id="research-check-1" class="mt-1"><span class="text-sm">핵심 주장의 원문 링크와 게시일을 확인했는가?</span></label><label class="flex items-start gap-3 p-4 border border-[#DDDBD5] rounded-lg"><input type="checkbox" id="research-check-2" class="mt-1"><span class="text-sm">수치의 기간·대상·집계 기준이 명확한가?</span></label><label class="flex items-start gap-3 p-4 border border-[#DDDBD5] rounded-lg"><input type="checkbox" id="research-check-3" class="mt-1"><span class="text-sm">사실과 해석·가설이 구분되어 있는가?</span></label><label class="flex items-start gap-3 p-4 border border-[#DDDBD5] rounded-lg"><input type="checkbox" id="research-check-4" class="mt-1"><span class="text-sm">고객 반응 수집에서 추가 확인할 질문이 있는가?</span></label></div><section class="mt-5 border border-[#DDDBD5] rounded-xl overflow-hidden"><div class="p-4 bg-brand-100"><h3 class="font-extrabold">검증·후속 질문·저장 요청</h3></div><textarea id="research-save-prompt" rows="12" class="w-full p-4 text-sm leading-relaxed outline-none focus:ring-2 focus:ring-brand-500"></textarea></section><button type="button" onclick="copyResearch('save')" class="h-11 px-5 rounded-lg bg-brand-500 hover:bg-brand-600 text-white text-sm font-extrabold mt-4">검증·저장 요청 복사</button><div class="mt-5 p-4 bg-brand-50 rounded-xl"><h3 class="font-extrabold text-sm">다음 실습으로 연결</h3><p class="text-sm text-neutral-600 mt-2">같은 상품군의 쇼핑 클릭 추이와 고객 반응을 수집한 뒤, 시장 조사 자료와 함께 통합 분석합니다. 이를 바탕으로 고객별 행사 전략을 구체화합니다.</p><div class="flex flex-wrap gap-4 mt-3"><a href="./p202_apps_script.html" class="text-sm text-brand-600 font-bold">쇼핑 트렌드 수집기 →</a><a href="./p203_customer_response.html" class="text-sm text-brand-600 font-bold">고객 반응 수집기 →</a><a href="./p204_notebooklm.html" class="text-sm text-brand-600 font-bold">자료 통합 분석 →</a></div></div></div>
-<p id="research-status" role="status" aria-live="polite" class="text-sm font-bold text-brand-600 mt-4 min-h-[1.25rem]"></p>
-</section></main></div>
-<script>
-const researchField = id => document.getElementById(id);
-let researchBuiltSignature = '';
-function researchSignature() { return JSON.stringify(researchValues()); }
-function validateResearchValues() {
-  const labels = {product:'상품군',event:'행사 주제',audience:'대상 고객',period:'조사 기간'};
-  const values = researchValues();
-  const missing = Object.keys(labels).find(key => !values[key]);
-  if (!missing) return true;
-  researchField('research-status').textContent = labels[missing] + '을(를) 입력하세요.';
-  researchField('research-' + missing).focus();
-  return false;
+<main class="flex-1 min-h-0 flex flex-col overflow-hidden pt-8 lg:pt-10 pb-8 px-4 md:px-8 lg:px-10"><header class="mb-4 flex-shrink-0"><span class="inline-block bg-brand-500 text-white rounded-full px-4 py-1 text-xs font-mono font-bold mb-2">DEEP RESEARCH</span><h1 class="text-2xl md:text-3xl font-extrabold">가을 행사 아이디어를 넓히는 심층리서치</h1><p class="text-sm text-neutral-600 mt-2">백화점 가을 프로모션을 위한 탐색입니다. 왼쪽에서 탐색 조건과 결과 형식을 정하면 오른쪽 프롬프트에 반영됩니다.</p></header><section class="border border-[#DDDBD5] rounded-2xl p-5 md:p-6 bg-white shadow-sm flex-1 min-h-0 overflow-y-auto"><div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start"><div><nav aria-label="심층리서치 설정 단계" class="flex flex-wrap gap-2 pb-4 border-b border-[#DDDBD5] mb-4"><button type="button" id="explore-tab-1" onclick="showExploreStep(1)" class="px-4 py-2 rounded-lg text-sm font-bold">1. 탐색 조건 입력</button><button type="button" id="explore-tab-2" onclick="showExploreStep(2)" class="px-4 py-2 rounded-lg text-sm font-bold">2. 조사·결과 형식</button></nav><div id="explore-step-1"><h2 class="text-lg font-extrabold mb-4">무엇이 궁금한가요?</h2><label for="explore-question" class="block text-sm font-bold mb-2">궁금한 질문 <span class="text-brand-600">필수</span></label><textarea id="explore-question" rows="3" class="w-full px-4 py-3 border border-[#DDDBD5] rounded-lg bg-white focus:border-brand-500 focus:outline-none" placeholder="가을 프로모션에 참고하고 싶은 변화나 현상을 질문으로 입력하세요.">사람들이 일부러 찾아가는 공간과 경험에는 어떤 변화가 있을까?</textarea><div class="flex flex-wrap gap-2 mt-2 mb-5"><button type="button" onclick="chooseExploreQuestion(0)" class="text-left text-xs px-3 py-2 bg-brand-50 border border-brand-100 rounded-lg text-brand-600">사람들이 일부러 찾아가는 공간과 경험에는 어떤 변화가 있을까?</button><button type="button" onclick="chooseExploreQuestion(1)" class="text-left text-xs px-3 py-2 bg-brand-50 border border-brand-100 rounded-lg text-brand-600">구매 외에 백화점을 방문하게 만드는 새로운 이유는 무엇일까?</button></div><fieldset><legend class="text-sm font-bold mb-3">참고할 사례 <span class="text-brand-600">필수 · 복수 선택</span></legend><div class="grid grid-cols-1 md:grid-cols-2 gap-3"><label class="flex gap-3 items-center p-3 border border-[#DDDBD5] rounded-lg text-sm"><input type="checkbox" id="path-seongsu" checked>성수동 팝업</label><label class="flex gap-3 items-center p-3 border border-[#DDDBD5] rounded-lg text-sm"><input type="checkbox" id="path-overseas" checked>해외 리테일·문화 공간</label><label class="flex gap-3 items-center p-3 border border-[#DDDBD5] rounded-lg text-sm"><input type="checkbox" id="path-competitor" checked>경쟁 백화점</label><label class="flex gap-3 items-center p-3 border border-[#DDDBD5] rounded-lg text-sm"><input type="checkbox" id="path-industry" >다른 업종의 경험</label><label class="flex gap-3 items-center p-3 border border-[#DDDBD5] rounded-lg text-sm"><input type="checkbox" id="path-other" >기타 직접 입력</label></div><div id="other-path-area" class="hidden mt-3"><label for="explore-other-path" class="block text-sm mb-2">기타 사례 경로</label><input id="explore-other-path" class="w-full px-4 py-3 border border-[#DDDBD5] rounded-lg bg-white focus:border-brand-500 focus:outline-none" placeholder="예: 독립 서점의 커뮤니티 경험"></div></fieldset>
+<section class="mt-5 border-t border-[#DDDBD5] pt-5"><h3 class="font-extrabold mb-3">적용 맥락 <span class="text-xs font-normal text-neutral-500">선택 입력</span></h3><div class="grid grid-cols-1 md:grid-cols-2 gap-4"><div><label for="explore-location" class="block text-sm font-bold mb-2">적용할 점포·지역</label><input id="explore-location" class="w-full px-4 py-3 border border-[#DDDBD5] rounded-lg bg-white focus:border-brand-500 focus:outline-none" placeholder="예: 강남점, 부산"></div><div><label for="explore-interest" class="block text-sm font-bold mb-2">관심 고객·분야</label><input id="explore-interest" class="w-full px-4 py-3 border border-[#DDDBD5] rounded-lg bg-white focus:border-brand-500 focus:outline-none" placeholder="예: 가족 고객, 문화 체험"></div><div><label for="explore-urls" class="block text-sm font-bold mb-2">참고 URL</label><textarea id="explore-urls" rows="3" class="w-full px-4 py-3 border border-[#DDDBD5] rounded-lg bg-white focus:border-brand-500 focus:outline-none" placeholder="참고 자료 링크를 줄마다 입력하세요"></textarea></div></div><p class="text-xs text-neutral-500 mt-3">비워두면 상품·고객을 제한하지 않습니다. 적용할 점포·지역은 활용 맥락이며, 선택한 해외·타 업종 사례의 조사 지역을 제한하지 않습니다.</p></section>
+<button type="button" onclick="showExploreStep(2)" class="mt-5 h-11 px-5 bg-brand-500 text-white text-sm font-bold rounded-lg">조사·결과 형식 설정 →</button></div><div id="explore-step-2" class="hidden"><h3 class="font-extrabold mb-3">조사 범위·소스·결과 형식</h3><div class="grid grid-cols-1 md:grid-cols-2 gap-4"><div><label for="explore-months" class="block text-sm font-bold mb-2">조사 기간 <span class="text-xs font-normal">최근 개월 수</span></label><input id="explore-months" type="number" min="1" max="36" value="12" class="w-full px-4 py-3 border border-[#DDDBD5] rounded-lg bg-white focus:border-brand-500 focus:outline-none"></div><div><label for="explore-count" class="block text-sm font-bold mb-2">사례 수 <span class="text-xs font-normal">3~10개 · 선택 경로별 최소 1개</span></label><input id="explore-count" type="number" min="3" max="10" value="6" class="w-full px-4 py-3 border border-[#DDDBD5] rounded-lg bg-white focus:border-brand-500 focus:outline-none"></div><div id="overseas-area" class="md:col-span-2"><label for="explore-overseas" class="block text-sm font-bold mb-2">해외 조사 지역</label><input id="explore-overseas" value="일본·미국·유럽" class="w-full px-4 py-3 border border-[#DDDBD5] rounded-lg bg-white focus:border-brand-500 focus:outline-none"></div></div><fieldset class="mt-4"><legend class="text-sm font-bold mb-2">우선 소스</legend><div class="flex flex-wrap gap-4"><label class="flex gap-2 text-sm"><input type="checkbox" id="source-official" checked>브랜드·공간 공식 자료</label><label class="flex gap-2 text-sm"><input type="checkbox" id="source-public" checked>공공 통계·연구 보고서</label><label class="flex gap-2 text-sm"><input type="checkbox" id="source-media" checked>전문 매체</label><label class="flex gap-2 text-sm"><input type="checkbox" id="source-social" >SNS 반응 사례</label></div><p class="text-xs text-neutral-500 mt-2">공식 자료를 우선하고 보도로 보완합니다. SNS는 고객 반응 사례로 구분합니다.</p></fieldset><section class="mt-5 border-t border-[#DDDBD5] pt-5"><h3 class="font-extrabold mb-3">결과 형식</h3><label for="explore-format" class="block text-sm font-bold mb-2">어떤 형태로 받을까요?</label><select id="explore-format" class="w-full px-4 py-3 border border-[#DDDBD5] rounded-lg bg-white focus:border-brand-500 focus:outline-none"><option value="report">사례 비교표가 포함된 조사 보고서</option><option value="table">사례 비교표 중심</option><option value="brief">핵심 요약 브리프</option></select><fieldset class="mt-4"><legend class="text-sm font-bold mb-3">포함할 내용</legend><label class="flex items-center gap-2 text-sm mb-3"><input id="output-cases" type="checkbox" checked>사례 비교: 방문 동기·경험 방식·고객 반응 근거·출처</label><label class="flex flex-wrap items-center gap-2 text-sm mb-3"><input id="output-changes" type="checkbox" checked>공통 변화<input id="explore-change-count" type="number" min="1" max="5" value="3" class="w-16 px-2 py-1 border rounded-lg" aria-label="공통 변화 개수">개</label><label class="flex flex-wrap items-center gap-2 text-sm"><input id="output-opportunities" type="checkbox" checked>가을 프로모션 기회<input id="explore-opportunity-count" type="number" min="1" max="5" value="3" class="w-16 px-2 py-1 border rounded-lg" aria-label="프로모션 기회 개수">개</label></fieldset><label for="explore-format-note" class="block text-sm font-bold mt-4 mb-2">추가 형식 요청 <span class="text-xs font-normal text-neutral-500">선택</span></label><textarea id="explore-format-note" rows="3" class="w-full px-4 py-3 border border-[#DDDBD5] rounded-lg bg-white focus:border-brand-500 focus:outline-none" placeholder="예: 임원 보고용으로 핵심부터 간결하게 작성해줘."></textarea></section></div></div><aside class="min-w-0 lg:sticky lg:top-0 border border-[#DDDBD5] rounded-xl overflow-hidden"><div class="p-4 bg-brand-100"><h2 class="font-extrabold">완성 프롬프트</h2><p class="text-xs text-neutral-600 mt-2">설정 변경이 자동 반영됩니다. 직접 수정한 내용은 유지하며, 새 설정을 적용하려면 다시 만들기를 누르세요.</p></div><div id="explore-dirty" class="hidden p-4 bg-amber-50 text-sm">입력 조건이 바뀌었습니다. 직접 수정한 프롬프트는 유지됩니다. 새 조건을 적용하려면 다시 만들기를 누르세요.</div><label for="explore-prompt" class="sr-only">심층리서치 프롬프트 원문</label><textarea id="explore-prompt" rows="24" class="w-full p-4 text-sm leading-relaxed bg-white outline-none focus:ring-2 focus:ring-brand-500"></textarea><div class="flex flex-wrap gap-3 p-4 border-t border-[#DDDBD5]"><button type="button" onclick="copyExplorePrompt()" class="h-11 px-5 bg-brand-500 text-white text-sm font-bold rounded-lg">프롬프트 복사</button><button type="button" onclick="generateExplorePrompt(true)" class="h-11 px-5 border border-[#DDDBD5] text-sm font-bold rounded-lg">현재 설정으로 다시 만들기</button></div><p class="px-4 pb-4 text-xs text-neutral-500">복사한 내용을 ChatGPT 또는 Gemini의 심층리서치에서 실행하세요. 이 페이지에서는 조사 자체를 실행하지 않습니다.</p></aside></div><p id="explore-status" role="status" aria-live="polite" class="mt-4 text-sm font-bold text-brand-600 min-h-[1.25rem]"></p></section></main></div><script>
+
+const explore=id=>document.getElementById(id);
+const exploreExamples=['사람들이 일부러 찾아가는 공간과 경험에는 어떤 변화가 있을까?','구매 외에 백화점을 방문하게 만드는 새로운 이유는 무엇일까?'];
+const routeNames={seongsu:'성수동 팝업',overseas:'해외 리테일·문화 공간',competitor:'경쟁 백화점',industry:'다른 업종의 경험',other:'기타 사례'};
+let generatedExploreText='',generatedExploreSignature='';
+function getExploreOptions(){
+ const routes=Object.keys(routeNames).filter(key=>explore('path-'+key).checked);
+ return {question:explore('explore-question').value.trim(),routes,other:explore('explore-other-path').value.trim(),location:explore('explore-location').value.trim(),interest:explore('explore-interest').value.trim(),urls:explore('explore-urls').value.trim(),months:Number(explore('explore-months').value),count:Number(explore('explore-count').value),overseas:routes.includes('overseas')?explore('explore-overseas').value.trim():'',sources:['official','public','media','social'].filter(key=>explore('source-'+key).checked),format:explore('explore-format').value,cases:explore('output-cases').checked,changes:explore('output-changes').checked,opportunities:explore('output-opportunities').checked,changeCount:Number(explore('explore-change-count').value),opportunityCount:Number(explore('explore-opportunity-count').value),note:explore('explore-format-note').value.trim()};
 }
-function researchValues() {
-  return Object.fromEntries(['product','event','audience','location','period'].map(key => [key, researchField('research-' + key).value.trim()]));
+function exploreSignature(){return JSON.stringify(getExploreOptions());}
+function updateExploreConditions(){
+ const o=getExploreOptions();
+ explore('overseas-area').classList.toggle('hidden',!o.routes.includes('overseas'));
+ explore('other-path-area').classList.toggle('hidden',!o.routes.includes('other'));
+ explore('explore-count').min=String(Math.max(3,o.routes.length));
+ if(o.count<Math.max(3,o.routes.length))explore('explore-count').value=String(Math.max(3,o.routes.length));
+ explore('explore-change-count').disabled=!o.changes;
+ explore('explore-opportunity-count').disabled=!o.opportunities;
+ const edited=generatedExploreText && explore('explore-prompt').value!==generatedExploreText;
+ if(edited){explore('explore-dirty').classList.toggle('hidden',generatedExploreSignature===exploreSignature());return;}
+ generateExplorePrompt(false);
 }
-function showResearchStep(step) {
-  if (step === 2) {
-    if (!validateResearchValues()) { showResearchStep(1); return; }
-    if (researchBuiltSignature !== researchSignature()) buildResearchPrompt(false);
-  }
-  for (let i = 1; i <= 3; i++) {
-    researchField('research-step-' + i).classList.toggle('hidden', i !== step);
-    const button = researchField('research-tab-' + i);
-    button.className = 'px-4 py-2 rounded-lg text-sm font-bold ' + (i === step ? 'bg-brand-500 text-white' : 'bg-neutral-50 text-neutral-600 hover:bg-brand-50');
-    button.setAttribute('aria-current', i === step ? 'step' : 'false');
-  }
+function chooseExploreQuestion(index){explore('explore-question').value=exploreExamples[index];updateExploreConditions();}
+function showExploreStep(step){
+ if(step!==1&&step!==2)return;
+ for(let i=1;i<=2;i++){
+  explore('explore-step-'+i).classList.toggle('hidden',i!==step);
+  const b=explore('explore-tab-'+i);b.className='px-4 py-2 rounded-lg text-sm font-bold '+(i===step?'bg-brand-500 text-white':'bg-neutral-50 text-neutral-600');b.setAttribute('aria-current',i===step?'step':'false');
+ }
 }
-function buildResearchPrompt(advance) {
-  const v = researchValues();
-  if (advance && !validateResearchValues()) return;
-  const region = v.location || '국내 시장 전체';
-  researchField('goal').value = v.event + '를 기획하기 위해 ' + v.product + ' 시장과 ' + v.audience + '의 구매 기준을 조사해줘. ' + region + '에서 고객의 방문·구매 이유를 찾는 것이 목적이야. 시장 변화, 주요 브랜드와 백화점 행사 사례, 고객의 관심과 구매 장벽을 살펴봐줘.';
-  researchField('role').value = '너는 ' + v.product + ' 상품군과 ' + v.audience + '의 소비자 행동을 분석하는 백화점 마케팅 리서치 전문가야. 시장 자료와 고객 니즈를 근거로 행사 기획에 필요한 시사점을 정리해줘.';
-  researchField('limit').value = '조사 기간: ' + v.period + '. 조사 기준일과 실제 대상 기간을 먼저 명시해줘. 국내 시장을 중심으로 조사하되 지역·점포 범위는 ' + region + '에 맞춰줘. 지역 자료가 없으면 국내 자료를 참고하되 적용 한계를 표시해줘.\n\n공식 통계·기업 공개 자료·신뢰할 수 있는 시장조사 자료를 우선하고 기사로 보완해줘. 수치마다 기간·대상·유통채널·집계 기준(판매액/판매량 등)·출처 링크·게시일을 표시해줘. 기준이 다른 수치를 직접 비교하지 마.\n\n확인된 사실과 해석·가설을 구분하고, 확인되지 않는 내용은 자료 없음으로 표시해줘. 수치와 출처를 만들지 마.\n\n먼저 조사 질문·범위·출처·진행 순서를 포함한 조사 계획을 제안하고 내 확인 후 조사해줘. 이번에는 행사 전략을 완성하지 말고 조사 근거와 추가 검증 질문을 확보해줘.';
-  researchField('output').value = v.event + ' 기획을 위한 ' + v.product + ' 조사 보고서를 작성해줘. 대상 고객은 ' + v.audience + ', 지역은 ' + region + '이야.\n\n계획을 확인받은 뒤 아래 순서로 보고서를 작성해줘.\n1. 핵심 요약\n2. 시장 동향과 최근 변화\n3. 주요 브랜드·백화점 행사 사례 비교표: 사례 / 고객 / 행사 내용 / 확인된 반응·성과 / 집계 기준 / 출처\n4. 대상 고객의 구매 기준·관심·구매 장벽: 근거와 가설 구분\n5. 행사 기획에 활용할 시사점\n6. 다음 쇼핑 트렌드·고객 리뷰 조사에서 확인할 질문\n7. 출처 목록: 자료명 / 기관·작성자 / 게시일 / 링크 / 인용 내용\n\n공개 자료로 확인할 수 없는 성과나 고객 반응은 추정해서 채우지 마.';
-  const stem = v.product || '상품군';
-  researchField('research-save-prompt').value = '지금 작성한 ' + stem + ' 시장 조사 보고서를 검증하고 후속 질문을 정리해줘.\n\n1. 핵심 주장과 수치의 원문 링크·게시일·기간·대상·집계 기준을 확인해줘. 확인할 수 없는 내용과 출처 간 불일치는 따로 표시해줘.\n2. 확인된 사실과 해석·가설을 구분해줘.\n3. 고객 반응 수집에서 확인할 구매 이유·만족·불만·방문 장벽을 질문으로 정리해줘.\n4. 검증한 보고서와 출처 목록을 연결된 가을 프로모션 폴더의 01_시장조사에 저장해줘. 파일명은 ' + JSON.stringify(stem + '_시장조사.md') + ', ' + JSON.stringify(stem + '_출처목록.csv') + '로 해줘.\n5. 실제 저장한 파일명과 위치를 알려줘. 저장할 수 없다면 저장했다고 말하지 말고, 이유와 다운로드 가능한 결과물을 제공해줘.\n\n최종 행사 전략은 쇼핑 트렌드·고객 반응 자료와 통합 분석한 뒤 진행할 거야.';
-  researchBuiltSignature = researchSignature();
-  researchField('research-status').textContent = advance ? '입력한 조건을 반영했습니다. 프롬프트를 검토하고 복사하세요.' : '';
-  if (advance) showResearchStep(2);
+function exploreDateRange(months) {
+  const parts = new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Seoul',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date());
+  const part = type=>Number(parts.find(p=>p.type===type).value);
+  const end = new Date(Date.UTC(part('year'),part('month')-1,part('day')));
+  const start = new Date(Date.UTC(end.getUTCFullYear(),end.getUTCMonth()-months,1));
+  const lastDay = new Date(Date.UTC(start.getUTCFullYear(),start.getUTCMonth()+1,0)).getUTCDate();
+  start.setUTCDate(Math.min(end.getUTCDate(),lastDay));
+  return [start,end].map(d=>d.toISOString().slice(0,10));
 }
-function compiledResearch() {
-  return ['goal','role','limit','output'].map((id,i) => '[' + ['목표','역할','제한','출력'][i] + ']\n' + researchField(id).value.trim()).join('\n\n');
+function composeExplorePrompt(o) {
+  const dates = exploreDateRange(o.months);
+  const lines = ['백화점 가을 프로모션의 행사 기회를 찾기 위한 탐색이야. 아직 상품이나 타깃을 정하지 않았어.', '궁금한 질문은 '+JSON.stringify(o.question)+'이야. 조사 실행일 기준 최근 '+o.months+'개월의 사례 '+o.count+'개를 조사해줘. 프롬프트 생성일 기준 참고 기간은 '+dates[0]+' ~ '+dates[1]+'이야. 실제 실행일이 다르면 기간을 다시 계산하고 보고서에 조사 기준일과 대상 기간을 명시해줘.','\n참고할 사례와 조사 내용:'];
+  const instructions = {seongsu:'성수동 팝업의 방문 동기·참여 방식·공유되는 경험을 조사해줘.',overseas:o.overseas+'의 리테일·문화 공간에서 국내와 다른 경험을 조사해줘.',competitor:'경쟁 백화점의 행사·공간·서비스가 제안하는 방문 이유를 조사해줘.',industry:'전시·호텔·축제 등 다른 업종의 참여 경험과 백화점 적용 가능성을 조사해줘.',other:o.other+'의 경험과 백화점 적용 가능성을 조사해줘.'};
+  o.routes.forEach((key,i)=>{ const count = Math.floor(o.count/o.routes.length)+(i<o.count%o.routes.length?1:0); lines.push('- '+(key==='other'?o.other:routeNames[key])+': '+count+'개. '+instructions[key]); });
+  lines.push('선택한 경로별로 최소 1개씩 포함하고 사례를 중복 집계하지 마. 조사 지역은 각 경로에 맞춰 정해줘.');
+  if(o.location) lines.push('적용할 점포·지역: '+o.location+'. 이는 백화점 가을 프로모션의 적용 맥락이며, 조사 지역을 이곳으로 제한하지 마.');
+  if(o.interest) lines.push('관심 고객·분야: '+o.interest+'. 해당 관점을 참고해줘.');
+  if(o.urls) lines.push('참고 URL:\n'+o.urls+'\n접근할 수 없는 링크는 따로 표시해줘.');
+  const sourceNames = {official:'브랜드·공간 공식 자료',public:'공공 통계·연구 보고서',media:'전문 매체',social:'SNS 반응 사례'};
+  const selected = o.sources.length?o.sources:['official','public','media'];
+  lines.push('\n'+selected.map(key=>sourceNames[key]).join(' / ')+'를 활용해줘. 공식 자료를 우선하고 보도로 보완해줘. SNS 자료는 고객 반응 사례로 구분하며 전체 고객의 의견으로 일반화하지 마. 각 사례에 출처 링크와 발표일을 붙여줘.');
+  const formats={report:'사례 비교표가 포함된 조사 보고서',table:'사례 비교표 중심',brief:'핵심 요약 브리프'};
+  lines.push('\n결과 형식: '+formats[o.format]+'.');
+  if(o.format==='brief') lines.push('주요 발견과 근거를 핵심부터 간결하게 요약해줘.');
+  if(o.cases) lines.push('사례 비교표: 사례 / 지역 / 운영 시기 / 실제 운영·예정 구분 / 방문 동기 / 경험 방식 / 고객 반응 근거 / 출처·발표일.');
+  if(o.changes) lines.push('사례에서 발견한 공통 변화 '+o.changeCount+'개를 근거와 함께 정리해줘.');
+  if(o.opportunities) lines.push('백화점 가을 프로모션에 적용할 기회 '+o.opportunityCount+'개를 연결된 사례 근거와 적용 시 고려할 점과 함께 제안해줘.');
+  if(o.note) lines.push('추가 형식 요청: '+o.note);
+  lines.push('\n확인된 사실과 해석·가설을 구분하고, 공개되지 않은 성과나 반응은 추정하지 마. 출처 없는 주장과 조사 기간 밖의 참고 사례는 별도로 표시해줘. 자료가 부족하면 실제 확보한 사례 수와 부족한 경로를 알려줘. 이 단계는 탐색이므로 타깃·상품·최종 행사안을 확정하지 마.');
+  return lines.join('\n');
 }
-async function copyResearch(kind) {
-  const values = researchValues();
-  if (!validateResearchValues()) { showResearchStep(1); return; }
-  if (researchBuiltSignature !== researchSignature()) buildResearchPrompt(false);
-  const text = kind === 'save' ? researchField('research-save-prompt').value : compiledResearch();
-  try {
-    try { await navigator.clipboard.writeText(text); }
-    catch (error) {
-      const temp = document.createElement('textarea');
-      const previous = document.activeElement;
-      temp.value = text; temp.style.cssText = 'position:fixed;opacity:0;left:0;top:0;';
-      document.body.appendChild(temp);
-      let copied = false;
-      try { temp.focus(); temp.select(); copied = document.execCommand('copy'); }
-      finally { temp.remove(); if (previous) previous.focus(); }
-      if (!copied) throw new Error('Copy failed');
-    }
-    researchField('research-status').textContent = '요청 내용이 복사되었습니다.';
-  } catch (error) { researchField('research-status').textContent = '복사하지 못했습니다. 내용을 선택해 직접 복사하세요.'; }
+
+function validateExplore(o){
+ return !o.question?'궁금한 질문을 입력하세요.':!o.routes.length?'참고할 사례를 선택하세요.':o.routes.includes('other')&&!o.other?'기타 사례 경로를 입력하세요.':o.routes.includes('overseas')&&!o.overseas?'해외 조사 지역을 입력하세요.':!Number.isInteger(o.months)||o.months<1||o.months>36?'조사 기간은 1~36개월로 입력하세요.':!Number.isInteger(o.count)||o.count<Math.max(3,o.routes.length)||o.count>10?'사례 수는 선택 경로 수 이상이며 3~10개로 입력하세요.':!o.cases&&!o.changes&&!o.opportunities?'결과에 포함할 내용을 하나 이상 선택하세요.':o.changes&&(!Number.isInteger(o.changeCount)||o.changeCount<1||o.changeCount>5)?'공통 변화는 1~5개로 입력하세요.':o.opportunities&&(!Number.isInteger(o.opportunityCount)||o.opportunityCount<1||o.opportunityCount>5)?'프로모션 기회는 1~5개로 입력하세요.':'';
 }
-buildResearchPrompt(false);
-showResearchStep(1);
+function generateExplorePrompt(explicit){
+ const o=getExploreOptions(),invalid=validateExplore(o);
+ if(invalid){explore('explore-status').textContent=invalid;explore('explore-dirty').classList.remove('hidden');return false;}
+ if(explicit&&generatedExploreText&&explore('explore-prompt').value!==generatedExploreText&&!confirm('직접 수정한 프롬프트를 현재 설정으로 다시 만들까요?'))return false;
+ generatedExploreText=composeExplorePrompt(o);generatedExploreSignature=exploreSignature();explore('explore-prompt').value=generatedExploreText;explore('explore-dirty').classList.add('hidden');explore('explore-status').textContent=explicit?'현재 설정으로 프롬프트를 만들었습니다.':'';return true;
+}
+async function copyExplorePrompt(){
+ const text=explore('explore-prompt').value.trim();
+ if(!text){explore('explore-status').textContent='탐색 조건을 입력하세요.';return;}
+ if(!generatedExploreText||explore('explore-prompt').value===generatedExploreText){if(!generateExplorePrompt(false))return;}
+ try{
+  try{await navigator.clipboard.writeText(explore('explore-prompt').value);}
+  catch(error){const t=document.createElement('textarea'),previous=document.activeElement;t.value=explore('explore-prompt').value;t.style.cssText='position:fixed;opacity:0;left:0;top:0;';document.body.appendChild(t);let copied=false;try{t.focus();t.select();copied=document.execCommand('copy');}finally{t.remove();if(previous)previous.focus();}if(!copied)throw new Error('Copy failed');}
+  explore('explore-status').textContent='프롬프트를 복사했습니다.';
+ }catch(error){explore('explore-status').textContent='복사하지 못했습니다. 내용을 선택해 직접 복사하세요.';}
+}
+document.querySelectorAll('#explore-step-1 input, #explore-step-1 textarea, #explore-step-2 input, #explore-step-2 textarea, #explore-step-2 select').forEach(field=>{field.addEventListener('input',updateExploreConditions);field.addEventListener('change',updateExploreConditions);});
+showExploreStep(1);updateExploreConditions();
+
 </script></body></html>
