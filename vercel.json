@@ -9,13 +9,6 @@
       "status": 308
     },
     {
-      "src": "/ssg/pdfviewer(?:\\.html)?",
-      "headers": {
-        "Location": "/ssg/download/mkt_2610.pdf"
-      },
-      "status": 308
-    },
-    {
       "src": "/shinsegae/?",
       "headers": {
         "Location": "/ssg"
