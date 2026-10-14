@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // 1. 현재 폴더 위치 분석 (workshop01 하위 폴더 여부 확인)
-  const isSubdir = window.location.pathname.includes('/workshop01/');
+  const isSubdir = /\/(workshop01|ssg)(?:\/|$)/.test(window.location.pathname);
   const prefix = isSubdir ? '../' : '';
 
   // 2. 공통 navbar_v12.html 로드 (캐시 서버 회피)
@@ -59,6 +59,9 @@ document.addEventListener('DOMContentLoaded', () => {
           .replace(/src="images\//g, 'src="../images/');
       }
 
+      if (/\/ssg(?:\/|$)/.test(window.location.pathname)) {
+        processedHtml = processedHtml.replace(/(<a\b[^>]*href=")[^"]*("[^>]*>\s*<img\b[^>]*alt="Working AI")/, '$1./index.html$2');
+      }
       placeholder.innerHTML = processedHtml;
 
       // ★ 핵심: 드로어와 백드롭을 <html> 직속 자식으로 이동
@@ -160,6 +163,8 @@ function initNavbar(isSubdir) {
 
   // [로그아웃 버튼 클릭 시 처리]
   const handleLogoutClick = () => {
+    localStorage.removeItem('ssg_authenticated_261015');
+    sessionStorage.removeItem('ssg_authenticated_261015');
     localStorage.removeItem('workbook_logged_in');
     localStorage.removeItem('workbook_access_code');
     localStorage.removeItem('workbook_course_code');
@@ -192,10 +197,15 @@ function initNavbar(isSubdir) {
   }
 }
 function openShinsegaeWorkbook(anchor) {
+  if (localStorage.getItem('ssg_authenticated_261015') === 'true' || sessionStorage.getItem('ssg_authenticated_261015') === 'true') {
+    localStorage.setItem('ssg_authenticated_261015', 'true');
+    window.location.href = anchor.href;
+    return false;
+  }
   const password = prompt('신세계 워크북 비밀번호를 입력하세요.');
   if (password === null) return false;
   if (password.trim() !== 'ssg261015') { alert('비밀번호를 정확히 입력해 주세요.'); return false; }
-  sessionStorage.setItem('ssg_authenticated_261015', 'true');
+  localStorage.setItem('ssg_authenticated_261015', 'true');
   window.location.href = anchor.href;
   return false;
 }
