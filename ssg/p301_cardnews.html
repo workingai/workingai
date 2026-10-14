@@ -13,7 +13,7 @@
   <link rel="icon" href="../favicon.png?v=2" type="image/png">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>카드뉴스 제작 - 기획과 디자인</title>
+  <title>고객 전환 트리거 분석 · AI 워크숍</title>
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Pretendard Font -->
@@ -144,11 +144,11 @@
  </section>
 <section class="flex-shrink-0 lg:flex-shrink lg:mt-5" aria-labelledby="sidebar-part-3">
   <h2 id="sidebar-part-3" class="px-3 mb-2 text-[11px] font-extrabold tracking-wide text-neutral-400 whitespace-nowrap">Part 3. STP</h2>
-  <div class="flex lg:flex-col gap-1"><a href="./p301_cardnews.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-bold text-brand-600 bg-brand-100 whitespace-nowrap transition-colors"><span class="text-lg leading-none">📰</span><span>카드뉴스 제작</span></a>
-<a href="./p302_cardnews_auto.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors"><span class="text-lg leading-none">⚙️</span><span>카드뉴스 자동화</span></a>
+  <div class="flex lg:flex-col gap-1"><a href="./p301_cardnews.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-bold text-brand-600 bg-brand-100 whitespace-nowrap transition-colors"><span class="text-lg leading-none">📰</span><span>고객 전환 트리거 분석</span></a>
+<a href="./p302_cardnews_auto.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors"><span class="text-lg leading-none">⚙️</span><span>가을 행사 제안</span></a>
 <a href="./p303_aivideo.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
           <span class="text-lg leading-none">🎬</span>
-          <span>이미지 생성 및 영상화</span>
+          <span>SNS A/B안 만들기</span>
         </a></div>
  </section>
 <section class="flex-shrink-0 lg:flex-shrink lg:mt-5" aria-labelledby="sidebar-part-4">
@@ -219,118 +219,19 @@
     </aside>
 
     <!-- ===== Main Content Area ===== -->
- <main class="flex-1 min-h-0 flex flex-col overflow-hidden pt-8 lg:pt-10 pb-8 px-4 md:px-8 lg:px-10">
- <header class="mb-4 flex-shrink-0 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4"><div><span class="inline-block mb-2 bg-brand-500 text-white rounded-full px-4 py-1 text-xs font-mono font-extrabold">CARD NEWS</span><h1 class="text-2xl md:text-3xl font-extrabold">카드뉴스를 제작하고 수정합니다</h1></div><a href="https://www.canva.com/" target="_blank" rel="noopener noreferrer" class="inline-flex flex-shrink-0 items-center justify-center gap-1.5 px-4 h-10 border border-[#DDDBD5] bg-white hover:bg-neutral-50 text-neutral-900 text-sm font-bold rounded-lg transition-colors"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5M10.5 13.5L21 3m0 0h-5.25M21 3v5.25"></path></svg>Canva.com</a></header>
- <section class="border border-[#DDDBD5] rounded-2xl p-5 md:p-6 bg-white shadow-sm flex-1 overflow-y-auto"><p class="text-sm text-neutral-600 mb-5">Step 1에서 주제와 구성안을 확인한 뒤, Step 2에서 표지부터 디자인하세요.</p><div class="grid grid-cols-1 lg:grid-cols-6 gap-5 items-start"><article id="cardnews-card-1" class="border border-[#DDDBD5] rounded-xl bg-white overflow-hidden transition-all duration-300 lg:col-span-5">
- <button type="button" id="cardnews-select-1" onclick="setCardnewsStep(1)" aria-expanded="true" aria-controls="cardnews-body-1" class="w-full text-left p-4 bg-brand-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-500"><h2 id="cardnews-title-1" class="text-base font-extrabold text-neutral-900">Step 1. 카드뉴스 기획</h2><p id="cardnews-desc-1" class="text-xs text-neutral-500 mt-1 ">주제 세 가지를 비교하고, 선택한 주제로 5장 구성안을 만듭니다.</p></button>
- <div id="cardnews-body-1" class=""><label for="cardnews-1" class="sr-only">카드뉴스 기획 프롬프트</label><textarea id="cardnews-1" rows="16" class="w-full p-4 bg-white text-sm md:text-base leading-relaxed outline-none resize-y" style="border-radius:0;min-height:320px;">앞서 작성한 로봇청소기 시장 조사, 고객 리뷰 분석, 마케팅 플랜을 바탕으로 카드뉴스를 기획해줘.
+<main class="flex-1 min-h-0 flex flex-col overflow-hidden pt-8 lg:pt-10 pb-8 px-4 md:px-8 lg:px-10"><header class="mb-4 flex-shrink-0"><span class="inline-block mb-2 bg-brand-500 text-white rounded-full px-4 py-1 text-xs font-mono font-bold">STP</span><h1 class="text-2xl md:text-3xl font-extrabold">가상 데이터로 고객 전환 트리거 분석하기</h1><p class="mt-2 text-sm text-neutral-600">앞에서 관심이 생긴 상품 카테고리와 가상 지점을 선택하고, 어떤 제안에서 구매 전환이 높게 나타나는지 분석합니다.</p></header><section class="border border-[#DDDBD5] rounded-2xl p-5 md:p-6 bg-white shadow-sm flex-1 min-h-0 overflow-y-auto"><div class="mb-5 p-4 bg-brand-50 rounded-xl"><div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3"><div><h2 class="text-sm font-extrabold">실습 자료: 카테고리·지점별 프로모션 반응 데이터</h2><p class="text-xs text-neutral-600 mt-2">9개 카테고리 × A~E 지점 × 6개 트리거 × 3회차, 총 810행의 가상 데이터입니다. 실제 신세계 고객이나 성과 자료가 아닙니다.</p></div><a href="./download/conversion.csv" download="conversion.csv" class="px-4 h-10 inline-flex items-center justify-center border border-brand-500 rounded-lg text-sm font-bold text-brand-600 whitespace-nowrap">가상 데이터 다운로드 ↓</a></div><p class="text-xs text-neutral-600 mt-3">구매 전환율 = 구매 고객 수 ÷ 프로모션 노출 고객 수 × 100. 여러 회차는 고객 수를 합산해 계산합니다. 클릭률·방문율과 구분하세요.</p></div><div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start"><div><h2 class="text-lg font-bold mb-4">분석할 조건 선택</h2><label for="trigger-category" class="block text-sm font-bold mb-2">상품 카테고리</label><select id="trigger-category" class="w-full p-3 border border-[#DDDBD5] rounded-lg bg-white focus:border-brand-500 outline-none"><option value="50000000">패션의류</option><option value="50000001">패션잡화</option><option value="50000002">화장품/미용</option><option value="50000003">디지털/가전</option><option value="50000004" selected>가구/인테리어</option><option value="50000005">출산/육아</option><option value="50000006">식품</option><option value="50000007">스포츠/레저</option><option value="50000008">생활/건강</option></select><label for="trigger-branch" class="block text-sm font-bold mt-4 mb-2">가상 지점</label><select id="trigger-branch" class="w-full p-3 border border-[#DDDBD5] rounded-lg bg-white focus:border-brand-500 outline-none"><option>A 지점</option><option>B 지점</option><option>C 지점</option><option>D 지점</option><option>E 지점</option></select><p class="text-xs text-neutral-600 mt-4">CSV를 실습 폴더에 저장하거나 AI에 첨부한 뒤, 선택한 지점·카테고리의 전환 트리거를 분석하세요. 이 페이지는 프롬프트를 구성하며 데이터 분석은 AI 도구에서 실행합니다.</p></div><div class="min-w-0 border border-[#DDDBD5] rounded-xl overflow-hidden"><div class="p-4 bg-brand-100"><h2 id="trigger-title" class="font-bold"></h2><p class="text-xs text-neutral-600 mt-2">선택 조건이 프롬프트에 반영됩니다. 수정한 프롬프트가 있으면 조건 변경 시 교체 여부를 확인합니다.</p></div><label for="trigger-prompt" class="sr-only">분석 프롬프트</label><textarea id="trigger-prompt" rows="19" class="w-full p-4 bg-white text-sm leading-relaxed outline-none"></textarea><div class="p-4 flex flex-wrap gap-3 border-t border-[#DDDBD5]"><button type="button" onclick="copyTriggerPrompt()" class="h-10 px-5 bg-brand-500 text-white text-sm font-bold rounded-lg">프롬프트 복사</button><button type="button" onclick="resetTriggerPrompt()" class="h-10 px-5 border border-[#DDDBD5] text-sm font-bold rounded-lg">선택 조건으로 다시 작성</button></div></div></div><p id="trigger-status" role="status" aria-live="polite" class="mt-4 text-sm text-brand-600 font-bold min-h-[1.25rem]"></p></section></main></div><script>
+const triggerField=id=>document.getElementById(id);
+let triggerGenerated='',triggerPrevious={category:'50000004',branch:'A 지점'};
+function resetTriggerPrompt(){
+ const select=triggerField('trigger-category'),category=select.options[select.selectedIndex].text,branch=triggerField('trigger-branch').value;
+ triggerGenerated="conversion.csv에서 카테고리 \"__CATEGORY__\", \"__BRANCH__\" 지점만 골라 전환율이 높은 트리거를 분석해줘.\n\n회차별 인원을 트리거별로 합산하고 구매 전환율(구매 고객 수 ÷ 노출 고객 수 × 100) 순으로 비교표를 만들어줘.\n트리거·메시지·노출 수·구매 수·전환율을 표시하고, 상위 3개와 최하위의 차이(%p), 회차별 일관성을 설명해줘.\n\n비율을 단순 평균하지 말고 누락·중복을 확인해줘. 관찰과 원인 가설을 구분하고 가상 결과를 실제 성과로 일반화하지 마.\n자료나 조건이 없으면 먼저 질문해줘.".replaceAll('__CATEGORY__',category).replaceAll('__BRANCH__',branch);
+ triggerField('trigger-prompt').value=triggerGenerated;triggerField('trigger-title').textContent="고객 전환 트리거 분석 프롬프트";
+}
+function changeTriggerCondition(){
+ if(triggerField('trigger-prompt').value!==triggerGenerated&&!confirm('조건을 바꾸면 직접 수정한 프롬프트가 교체됩니다. 변경할까요?')){triggerField('trigger-category').value=triggerPrevious.category;triggerField('trigger-branch').value=triggerPrevious.branch;return;}
+ triggerPrevious={category:triggerField('trigger-category').value,branch:triggerField('trigger-branch').value};resetTriggerPrompt();triggerField('trigger-status').textContent='선택 조건을 반영했습니다.';
+}
+async function copyTriggerPrompt(){const text=triggerField('trigger-prompt').value;try{try{await navigator.clipboard.writeText(text);}catch(error){const t=document.createElement('textarea');t.value=text;t.style.cssText='position:fixed;opacity:0;';document.body.appendChild(t);try{t.focus();t.select();if(!document.execCommand('copy'))throw new Error('Copy failed');}finally{t.remove();}}triggerField('trigger-status').textContent='프롬프트를 복사했습니다.';}catch(error){triggerField('trigger-status').textContent='내용을 선택해 직접 복사하세요.';}}
 
-먼저 선택한 타깃 고객에게 적합한 카드뉴스 주제를 3가지 제안해줘.
-각 주제는 고객의 질문·불편, 핵심 메시지, 근거 자료를 함께 보여줘.
-제품 기능을 나열하기보다 고객이 로봇청소기를 선택할 때 궁금해하는 내용에 집중해줘.
-
-내가 주제를 선택하면 아래 순서로 5장 구성안을 작성해줘.
-
-1. 표지: 관심을 끄는 질문과 제목
-2. 공감: 고객이 겪는 문제나 고민
-3. 정보: 선택할 때 확인해야 할 기준
-4. 제안: 해당 기준에 맞는 제품 선택 방향과 근거
-5. 행동: 고객이 다음에 확인하거나 실행할 일
-
-각 장은 제목, 짧은 본문, 이미지 아이디어로 정리해줘.
-조사에서 확인된 사실과 제안을 구분하고, 수치·리뷰를 사용하면 출처를 표시해줘.
-국내 브랜드의 장점이나 비교 우위를 근거 없이 만들지 마.
-
-지금은 주제 3가지만 제안하고, 내 선택을 기다려줘.</textarea><div class="p-4 bg-white flex justify-end"><button type="button" onclick="copyText('cardnews-1','프롬프트가 복사되었습니다.')" class="px-6 h-11 bg-brand-500 hover:bg-brand-600 text-white font-extrabold rounded-lg">프롬프트 복사</button></div></div>
- <button type="button" id="cardnews-collapsed-1" onclick="setCardnewsStep(1)" class="hidden w-full p-4 text-sm font-bold text-neutral-500 bg-white text-center">카드뉴스 기획</button>
-</article>
-<article id="cardnews-card-2" class="border border-[#DDDBD5] rounded-xl bg-white overflow-hidden transition-all duration-300 lg:col-span-1 opacity-60">
- <button type="button" id="cardnews-select-2" onclick="setCardnewsStep(2)" aria-expanded="false" aria-controls="cardnews-body-2" class="w-full text-left p-4 bg-neutral-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-500"><h2 id="cardnews-title-2" class="text-base font-extrabold text-neutral-900">Step 2</h2><p id="cardnews-desc-2" class="text-xs text-neutral-500 mt-1 hidden">표지 디자인을 확인한 뒤 같은 스타일로 나머지 네 장을 만듭니다.</p></button>
- <div id="cardnews-body-2" class="hidden"><label for="cardnews-2" class="sr-only">카드뉴스 디자인 프롬프트</label><textarea id="cardnews-2" rows="16" class="w-full p-4 bg-white text-sm md:text-base leading-relaxed outline-none resize-y" style="border-radius:0;min-height:320px;">내가 확인한 카드뉴스 기획안을 바탕으로 5장의 카드뉴스를 디자인해줘.
-
-[디자인 조건]
-
-- 용도: 인스타그램 피드
-- 크기: 장당 1080×1350px, 세로형
-- 분위기: 깔끔하고 신뢰감 있는 생활가전 정보 콘텐츠
-- 색상: 흰색 배경에 짙은 회색 글자, 초록색 강조
-- 표현: 간결한 일러스트와 아이콘 중심
-- 일관성: 모든 장의 글꼴, 색상, 여백, 페이지 번호를 통일
-
-[내용 배치]
-
-- 한 장에 핵심 메시지 하나만 강조해줘.
-- 제목은 크게, 본문은 모바일에서 읽기 쉽게 짧게 배치해줘.
-- 기획안에서 확정한 메시지와 사실을 유지해줘.
-- 수치나 리뷰를 사용한 장에는 읽을 수 있는 크기로 짧은 출처를 넣어줘.
-- 실제 제품 이미지를 제공한 경우 제품의 형태와 로고를 임의로 바꾸지 마.
-- 제품 이미지가 없다면 특정 브랜드 제품으로 오인되지 않는 일반적인 일러스트를 사용해줘.
-
-먼저 표지 1장을 만들어줘.
-내가 디자인을 확인하면 같은 스타일로 나머지 4장을 만들어줘.
-완성본은 각 장을 별도 이미지로 저장해줘.</textarea><div class="p-4 bg-white flex justify-end"><button type="button" onclick="copyText('cardnews-2','프롬프트가 복사되었습니다.')" class="px-6 h-11 bg-brand-500 hover:bg-brand-600 text-white font-extrabold rounded-lg">프롬프트 복사</button></div></div>
- <button type="button" id="cardnews-collapsed-2" onclick="setCardnewsStep(2)" class=" w-full p-4 text-sm font-bold text-neutral-500 bg-white text-center">카드뉴스 디자인</button>
-</article></div></section>
- </main></div>
- <div id="toast" class="toast" role="status" aria-live="polite">복사되었습니다!</div>
- <script>  function setCardnewsStep(num) {
-    if (![1,2].includes(num)) return;
-    const titles = ["카드뉴스 기획","카드뉴스 디자인"];
-    for (let i=1;i<=2;i++) {
-      const active=i===num;
-      const card=document.getElementById('cardnews-card-'+i);
-      card.classList.remove('lg:col-span-5','lg:col-span-1','opacity-60');
-      card.classList.add(...(active?['lg:col-span-5']:['lg:col-span-1','opacity-60']));
-      document.getElementById('cardnews-body-'+i).classList.toggle('hidden',!active);
-      document.getElementById('cardnews-desc-'+i).classList.toggle('hidden',!active);
-      document.getElementById('cardnews-collapsed-'+i).classList.toggle('hidden',active);
-      document.getElementById('cardnews-title-'+i).textContent='Step '+i+(active?'. '+titles[i-1]:'');
-      const button=document.getElementById('cardnews-select-'+i);
-      button.classList.toggle('bg-brand-100',active);
-      button.classList.toggle('bg-neutral-50',!active);
-      button.setAttribute('aria-expanded',String(active));
-    }
-  }
-
-
-  function executeCopy(text, successMessage) {
-    const textArea = document.createElement('textarea');
-    textArea.value = text;
-    textArea.style.position = 'fixed';
-    textArea.style.top = '0';
-    textArea.style.left = '0';
-    textArea.style.opacity = '0';
-    document.body.appendChild(textArea);
-    textArea.focus();
-    textArea.select();
-    
-    try {
-      const successful = document.execCommand('copy');
-      if (successful) {
-        showToast(successMessage);
-      } else {
-        showToast('복사에 실패했습니다. 직접 복사해 주세요.');
-      }
-    } catch (err) {
-      showToast('복사 기능이 지원되지 않는 브라우저입니다.');
-    }
-    document.body.removeChild(textArea);
-  }
-
-  function copyText(id, successMessage) {
-    const text = document.getElementById(id).value;
-    executeCopy(text, successMessage);
-  }
-
-
-  let timer;
-  function showToast(message) {
-    const toast = document.getElementById('toast');
-    toast.textContent = message;
-    clearTimeout(timer);
-    toast.classList.add('show');
-    timer = setTimeout(() => toast.classList.remove('show'), 2200);
-  }
-
-
+triggerField('trigger-category').addEventListener('change',changeTriggerCondition);triggerField('trigger-branch').addEventListener('change',changeTriggerCondition);resetTriggerPrompt();
 </script></body></html>
