@@ -1,7 +1,26 @@
 {
   "cleanUrls": true,
   "routes": [
-    { "handle": "filesystem" },
-    { "src": "/(.*)", "dest": "/index.html" }
+    {
+      "src": "/shinsegae/?",
+      "headers": {
+        "Location": "/ssg"
+      },
+      "status": 308
+    },
+    {
+      "src": "/shinsegae/(.*)",
+      "headers": {
+        "Location": "/ssg/$1"
+      },
+      "status": 308
+    },
+    {
+      "handle": "filesystem"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
+    }
   ]
 }
