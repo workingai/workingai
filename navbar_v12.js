@@ -194,8 +194,8 @@ function initNavbar(isSubdir) {
 function openShinsegaeWorkbook(anchor) {
   const password = prompt('신세계 워크북 비밀번호를 입력하세요.');
   if (password === null) return false;
-  if (password.trim() !== 'workingai') { alert('비밀번호를 정확히 입력해 주세요.'); return false; }
-  sessionStorage.setItem('shinsegae_authenticated', 'true');
+  if (password.trim() !== 'ssg261015') { alert('비밀번호를 정확히 입력해 주세요.'); return false; }
+  sessionStorage.setItem('ssg_authenticated_261015', 'true');
   window.location.href = anchor.href;
   return false;
 }
