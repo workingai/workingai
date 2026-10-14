@@ -204,8 +204,8 @@
     <header class="mb-4 flex-shrink-0 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
       <div>
         <span class="inline-block mb-2 bg-brand-500 text-white rounded-full px-4 py-1 text-[11.5px] font-mono font-extrabold tracking-wider">AI SHIFT</span>
-        <h1 id="header-title" class="text-2xl md:text-3xl font-extrabold tracking-tight leading-tight text-neutral-900">내 출근길, 지하철은 언제 가장 붐빌까요?</h1>
-        <p id="header-description" class="text-xs md:text-sm text-neutral-600 mt-2">같은 대화에서 순서대로 요청하세요. ○○역은 회사 근처 역으로 변경합니다.</p>
+        <h1 id="header-title" class="text-2xl md:text-3xl font-extrabold tracking-tight leading-tight text-neutral-900">출근 시간, 어느 호선에 사람들이 가장 많이 내릴까요?</h1>
+        <p id="header-description" class="text-xs md:text-sm text-neutral-600 mt-2">같은 대화에서 데이터 확인 → 호선별 분석 → 차트 저장 순서로 진행합니다.</p>
       </div>
       <div class="flex items-center gap-2 flex-shrink-0 mb-1" role="group" aria-label="실습 단계">
         <a href="https://app.sli.do/event/5wsneqovArcCM7CMvYPNQk" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center h-9 px-4 rounded-lg border border-brand-500 bg-white text-brand-600 hover:bg-brand-50 text-sm font-extrabold whitespace-nowrap transition-colors">설문 참여</a>
@@ -213,14 +213,19 @@
       </div>
     </header>
     <section id="practice-content" class="border border-[#DDDBD5] rounded-2xl p-5 md:p-6 bg-white shadow-sm lg:flex-1 lg:overflow-y-auto">
-      <div class="mb-5 pb-4 border-b border-[#DDDBD5] flex flex-col md:flex-row md:items-center md:justify-between gap-4"><div class="text-xs md:text-sm text-neutral-600 leading-relaxed"><p class="font-bold text-neutral-900 mb-1">실습 자료: 지하철 시간대별 승하차 데이터</p><p>실습용 지하철 파일을 PC의 실습 폴더에 저장하고 AI에서 해당 폴더를 연결하세요.</p><p class="mt-1 text-brand-600 font-bold">같은 대화에서 1 → 2 → 3 순서로 요청하세요. 2·3단계의 ○○역을 회사 근처 역으로 바꾸세요.</p></div><a href="./download/subway_data.csv" download="subway_data.csv" class="inline-flex items-center justify-center gap-2 h-10 px-4 rounded-lg border border-brand-500 bg-white text-brand-600 hover:bg-brand-50 text-sm font-extrabold whitespace-nowrap flex-shrink-0 md:ml-auto" aria-label="지하철 데이터 CSV 다운로드">↓ 지하철 데이터 다운로드</a></div>
+      <div class="mb-5 pb-4 border-b border-[#DDDBD5] flex flex-col md:flex-row md:items-center md:justify-between gap-4"><div class="text-xs md:text-sm text-neutral-600 leading-relaxed"><p class="font-bold text-neutral-900 mb-1">실습 자료: 지하철 시간대별 승하차 데이터</p><p>실습용 지하철 파일을 PC의 실습 폴더에 저장하고 AI에서 해당 폴더를 연결하세요.</p><p class="mt-1 text-brand-600 font-bold">같은 대화에서 1 → 2 → 3 순서로 요청하세요. 앞 단계의 분석 결과를 다음 단계에서 이어서 사용합니다.</p></div><a href="./download/subway_data.csv" download="subway_data.csv" class="inline-flex items-center justify-center gap-2 h-10 px-4 rounded-lg border border-brand-500 bg-white text-brand-600 hover:bg-brand-50 text-sm font-extrabold whitespace-nowrap flex-shrink-0 md:ml-auto" aria-label="지하철 데이터 CSV 다운로드">↓ 지하철 데이터 다운로드</a></div>
       <div id="step-1" class=" flex flex-col gap-4" aria-labelledby="prompt-title-1">
         <section class="flex flex-col border border-[#DDDBD5] rounded-xl bg-brand-100 overflow-hidden shadow-xs">
           <div class="p-4 bg-brand-100">
-            <label id="prompt-title-1" for="prompt-1" class="block text-neutral-900 text-base font-extrabold mb-1">01. 파일 확인하기</label>
+            <label id="prompt-title-1" for="prompt-1" class="block text-neutral-900 text-base font-extrabold mb-1">01. 데이터 구조와 분석 가능성 확인</label>
             <span class="block text-[#605E59] text-xs">프롬프트를 수정할 수 있습니다.</span>
           </div>
-          <textarea id="prompt-1" rows="12" spellcheck="false" class="w-full p-4 border-t border-b border-l-0 border-r-0 border-[#DDDBD5] bg-white text-neutral-900 text-sm md:text-base leading-relaxed focus:border-brand-500 outline-none resize-y min-h-[280px]" style="font-family: 'Pretendard', sans-serif;">이 폴더의 지하철 파일을 읽어줘. 어떤 기간의 자료이고, 무엇을 알 수 있는지 간단히 설명해줘.</textarea>
+          <textarea id="prompt-1" rows="12" spellcheck="false" class="w-full p-4 border-t border-b border-l-0 border-r-0 border-[#DDDBD5] bg-white text-neutral-900 text-sm md:text-base leading-relaxed focus:border-brand-500 outline-none resize-y min-h-[280px]" style="font-family: 'Pretendard', sans-serif;">이 폴더의 subway_data.csv 파일을 읽고 다음 내용을 표로 정리해줘.
+1. 자료의 시작·종료 기간과 시간 단위
+2. 한 행이 무엇을 나타내는지, 주요 열과 승차·하차 인원의 의미
+3. 이 데이터로 분석할 수 있는 질문과 인사이트 예시 3가지
+
+파일의 한글이 깨지면 인코딩을 확인해서 읽어줘. 사용월과 작업일을 구분하고, 월별 집계 인원을 일별 인원으로 해석하지 마. 자료에서 확인한 내용만 설명해줘.</textarea>
           <div class="p-4 bg-white flex justify-end">
             <button type="button" onclick="copyPrompt('prompt-1')" class="px-6 h-11 bg-brand-500 hover:bg-brand-600 text-white text-sm md:text-base font-extrabold rounded-lg transition-all shadow-sm flex items-center justify-center gap-1.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-500">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"></rect><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"></path></svg>
@@ -230,15 +235,24 @@
         </section>
         <div class="rounded-xl border border-[#DDDBD5] bg-neutral-50 p-4 text-xs md:text-sm leading-relaxed">
           <strong class="block text-brand-600 mb-1">확인할 사항</strong>
-          <p class="text-neutral-600">자료 기간과 항목이 원본 파일과 일치하는지 확인하세요.</p>
+          <p class="text-neutral-600">사용월과 작업일을 구분했는지, 자료 기간·집계 단위·주요 열이 원본과 일치하는지 확인하세요.</p>
         </div>
       </div>      <div id="step-2" class="hidden flex flex-col gap-4" aria-labelledby="prompt-title-2">
         <section class="flex flex-col border border-[#DDDBD5] rounded-xl bg-brand-100 overflow-hidden shadow-xs">
           <div class="p-4 bg-brand-100">
-            <label id="prompt-title-2" for="prompt-2" class="block text-neutral-900 text-base font-extrabold mb-1">02. 출근 시간 비교</label>
+            <label id="prompt-title-2" for="prompt-2" class="block text-neutral-900 text-base font-extrabold mb-1">02. 호선별 하차 인원과 역 TOP 5 분석</label>
             <span class="block text-[#605E59] text-xs">프롬프트를 수정할 수 있습니다.</span>
           </div>
-          <textarea id="prompt-2" rows="12" spellcheck="false" class="w-full p-4 border-t border-b border-l-0 border-r-0 border-[#DDDBD5] bg-white text-neutral-900 text-sm md:text-base leading-relaxed focus:border-brand-500 outline-none resize-y min-h-[280px]" style="font-family: 'Pretendard', sans-serif;">○○역은 오전 7~10시 중 언제 내리는 사람이 가장 많아? 가장 적은 시간대와 인원 차이도 알려줘.</textarea>
+          <textarea id="prompt-2" rows="12" spellcheck="false" class="w-full p-4 border-t border-b border-l-0 border-r-0 border-[#DDDBD5] bg-white text-neutral-900 text-sm md:text-base leading-relaxed focus:border-brand-500 outline-none resize-y min-h-[280px]" style="font-family: 'Pretendard', sans-serif;">방금 읽은 지하철 데이터에서 오전 7~10시 하차 인원을 분석해줘.
+
+07~08시, 08~09시, 09~10시의 하차 인원만 합산하고, 파일에 포함된 전체 기간을 같은 기준으로 집계해줘. 실제 집계 기간을 먼저 표시해줘.
+
+1. 호선별 하차 인원을 많은 순으로 정렬한 표를 만들어줘.
+표의 열: 순위 / 호선 / 오전 7~10시 하차 인원 / 전체 호선의 오전 7~10시 하차 인원 대비 비중(%)
+2. 각 호선에서 같은 시간대의 하차 인원이 가장 많은 역 TOP 5를 알려줘. 역별 하차 인원도 함께 표시해줘.
+3. 1위 호선과 마지막 호선의 인원 차이를 수치와 함께 한 줄로 설명해줘.
+
+비중은 전체 호선의 오전 7~10시 하차 인원 합계를 분모로 계산해줘. 역 순위는 호선·역 단위로 집계하고, 환승역의 다른 호선 기록을 섞지 마. 집계 기준과 누락·중복 처리 내용을 짧게 설명해줘.</textarea>
           <div class="p-4 bg-white flex justify-end">
             <button type="button" onclick="copyPrompt('prompt-2')" class="px-6 h-11 bg-brand-500 hover:bg-brand-600 text-white text-sm md:text-base font-extrabold rounded-lg transition-all shadow-sm flex items-center justify-center gap-1.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-500">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"></rect><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"></path></svg>
@@ -248,15 +262,24 @@
         </section>
         <div class="rounded-xl border border-[#DDDBD5] bg-neutral-50 p-4 text-xs md:text-sm leading-relaxed">
           <strong class="block text-brand-600 mb-1">확인할 사항</strong>
-          <p class="text-neutral-600">선택한 역의 시간대별 하차 인원과 가장 많은·적은 시간대의 인원 차이를 확인하세요.</p>
+          <p class="text-neutral-600">07~08시·08~09시·09~10시 하차 인원만 집계했는지, 호선별 비중과 역 TOP 5의 기준이 일치하는지 확인하세요.</p>
         </div>
       </div>      <div id="step-3" class="hidden flex flex-col gap-4" aria-labelledby="prompt-title-3">
         <section class="flex flex-col border border-[#DDDBD5] rounded-xl bg-brand-100 overflow-hidden shadow-xs">
           <div class="p-4 bg-brand-100">
-            <label id="prompt-title-3" for="prompt-3" class="block text-neutral-900 text-base font-extrabold mb-1">03. 차트 만들기</label>
+            <label id="prompt-title-3" for="prompt-3" class="block text-neutral-900 text-base font-extrabold mb-1">03. 분석 결과 차트 작성·저장</label>
             <span class="block text-[#605E59] text-xs">프롬프트를 수정할 수 있습니다.</span>
           </div>
-          <textarea id="prompt-3" rows="12" spellcheck="false" class="w-full p-4 border-t border-b border-l-0 border-r-0 border-[#DDDBD5] bg-white text-neutral-900 text-sm md:text-base leading-relaxed focus:border-brand-500 outline-none resize-y min-h-[280px]" style="font-family: 'Pretendard', sans-serif;">○○역의 오전 7~10시 하차 인원을 막대그래프로 만들어줘. 핵심 설명 한 줄을 넣고, 같은 폴더에 이미지로 저장해줘.</textarea>
+          <textarea id="prompt-3" rows="12" spellcheck="false" class="w-full p-4 border-t border-b border-l-0 border-r-0 border-[#DDDBD5] bg-white text-neutral-900 text-sm md:text-base leading-relaxed focus:border-brand-500 outline-none resize-y min-h-[280px]" style="font-family: 'Pretendard', sans-serif;">앞에서 만든 호선별 오전 7~10시 하차 인원 표를 가로 막대그래프로 만들어줘.
+
+- 동일한 집계 기간과 수치를 사용하고, 하차 인원이 많은 순으로 위에서 아래로 정렬해줘.
+- 1위 호선만 다른 색으로 강조하고, 나머지는 같은 색으로 표시해줘.
+- 호선명과 축·단위를 한글로 표시하고, 막대에 인원 수를 넣어줘.
+- 제목에 분석의 핵심 메시지 한 줄을 넣고, 부제에 집계 기간과 오전 7~10시 기준을 표시해줘.
+- 한글이 깨지지 않도록 사용 가능한 한글 폰트를 적용해줘.
+- 같은 폴더에 subway_morning_alighting_by_line.png로 저장해줘.
+
+차트의 수치와 순서가 앞의 표와 일치하는지 확인하고, 실제 저장한 파일 위치를 알려줘. 파일을 저장할 수 없다면 저장했다고 말하지 말고 다운로드 가능한 이미지를 제공해줘.</textarea>
           <div class="p-4 bg-white flex justify-end">
             <button type="button" onclick="copyPrompt('prompt-3')" class="px-6 h-11 bg-brand-500 hover:bg-brand-600 text-white text-sm md:text-base font-extrabold rounded-lg transition-all shadow-sm flex items-center justify-center gap-1.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-500">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"></rect><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"></path></svg>
@@ -266,7 +289,7 @@
         </section>
         <div class="rounded-xl border border-[#DDDBD5] bg-neutral-50 p-4 text-xs md:text-sm leading-relaxed">
           <strong class="block text-brand-600 mb-1">확인할 사항</strong>
-          <p class="text-neutral-600">오전 7~10시 하차 인원을 표시했는지, 핵심 설명 한 줄과 실제 저장된 차트 이미지 파일을 확인하세요.</p>
+          <p class="text-neutral-600">막대 순서와 수치가 앞의 표와 일치하는지, 1위 강조·한글 표시·PNG 저장 결과를 확인하세요.</p>
         </div>
       </div>
     </section>
@@ -274,8 +297,8 @@
   </div>
   <div id="toast" class="toast" role="status" aria-live="polite">복사되었습니다.</div>
   <script>
-    const STEP_TITLES = ["내 출근길, 지하철은 언제 가장 붐빌까요? · 파일 확인하기","내 출근길, 지하철은 언제 가장 붐빌까요? · 출근 시간 비교","내 출근길, 지하철은 언제 가장 붐빌까요? · 차트 만들기"];
-    const STEP_DESCRIPTIONS = ["자료의 기간과 항목을 확인합니다.","시간대별 하차 인원을 비교합니다.","막대그래프를 만들고 이미지로 저장합니다."];
+    const STEP_TITLES = ["데이터 구조와 분석 가능성 확인","호선별 하차 인원과 역 TOP 5 분석","분석 결과 차트 작성·저장"];
+    const STEP_DESCRIPTIONS = ["자료 기간·항목을 표로 정리하고 분석 질문을 찾습니다.","오전 7~10시 호선별 하차 인원·비중과 역 순위를 비교합니다.","호선별 인원을 가로 막대그래프로 만들고 PNG로 저장합니다."];
     function showTab(num) {
       if (![1, 2, 3].includes(num)) return;
       document.getElementById('header-title').textContent = STEP_TITLES[num - 1];
