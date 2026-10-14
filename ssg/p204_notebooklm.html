@@ -144,11 +144,11 @@
  </section>
 <section class="flex-shrink-0 lg:flex-shrink lg:mt-5" aria-labelledby="sidebar-part-3">
   <h2 id="sidebar-part-3" class="px-3 mb-2 text-[11px] font-extrabold tracking-wide text-neutral-400 whitespace-nowrap">Part 3. STP</h2>
-  <div class="flex lg:flex-col gap-1"><a href="./p301_cardnews.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors"><span class="text-lg leading-none">📰</span><span>카드뉴스 제작</span></a>
-<a href="./p302_cardnews_auto.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors"><span class="text-lg leading-none">⚙️</span><span>카드뉴스 자동화</span></a>
+  <div class="flex lg:flex-col gap-1"><a href="./p301_cardnews.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors"><span class="text-lg leading-none">📰</span><span>고객 전환 트리거 분석</span></a>
+<a href="./p302_cardnews_auto.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors"><span class="text-lg leading-none">⚙️</span><span>가을 행사 제안</span></a>
 <a href="./p303_aivideo.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
           <span class="text-lg leading-none">🎬</span>
-          <span>이미지 생성 및 영상화</span>
+          <span>SNS A/B안 만들기</span>
         </a></div>
  </section>
 <section class="flex-shrink-0 lg:flex-shrink lg:mt-5" aria-labelledby="sidebar-part-4">
@@ -225,9 +225,7 @@
           <div class="mb-2">
             <span class="inline-block bg-brand-500 text-white rounded-full px-4 py-1 text-[11.5px] font-mono font-extrabold tracking-wider uppercase">Gemini Notebook</span>
           </div>
-          <h1 id="header-title" class="text-2xl md:text-3xl font-extrabold tracking-tight leading-tight text-neutral-900">
-            수집 자료에서 소비자 인사이트를 영상으로 확인합니다
-          </h1>
+          <h1 id="header-title" class="text-2xl md:text-3xl font-extrabold tracking-tight leading-tight text-neutral-900">수집 자료에서 트렌드와 마케팅 인사이트 찾기</h1>
         </div>
       </header>
 
@@ -235,14 +233,15 @@
         <!-- Card Head -->
         <div id="card-head-container" class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#DDDBD5] pb-4 mb-4 flex-shrink-0">
           <div>
-            <h2 id="tool-title" class="text-lg md:text-xl font-extrabold text-neutral-900">소비자 인사이트 영상 프롬프트</h2>
-            <p id="tool-desc" class="text-xs md:text-sm text-[#605E59] mt-1">시장조사 자료와 블로그 리뷰를 소스로 등록하고, 예시를 선택·수정하여 영상을 만들어 보세요.</p>
+            <h2 id="tool-title" class="text-lg md:text-xl font-extrabold text-neutral-900">마케팅 인사이트 영상 프롬프트</h2>
+            <p id="tool-desc" class="text-xs md:text-sm text-[#605E59] mt-1">앞선 심층리서치 보고서·네이버 쇼핑 추이·SNS 수집 자료를 소스로 등록하고, 분석 관점을 선택해 영상을 만들어 보세요.</p>
           </div>
           <div class="flex items-center gap-2 flex-shrink-0" id="card-links">
-            <div id="insight-example-container"><label for="insight-example" class="block text-xs font-bold text-neutral-500 mb-1">프롬프트 예시 선택</label><select id="insight-example" onchange="selectInsightExample(this.value)" class="w-full sm:w-64 px-3 py-2.5 border border-[#DDDBD5] rounded-lg bg-white text-neutral-700 text-sm font-bold focus:border-brand-500 outline-none"><option value="overview">시장과 고객 인사이트 종합</option>
-<option value="purchase">구매 이유와 선택 기준</option>
-<option value="pain">만족·불만과 미충족 니즈</option>
-<option value="brands">국내·해외 브랜드 비교</option></select></div>
+            <div id="insight-example-container"><label for="insight-example" class="block text-xs font-bold text-neutral-500 mb-1">분석 카테고리 선택</label><select id="insight-example" onchange="selectInsightExample(this.value)" class="w-full sm:w-64 px-3 py-2.5 border border-[#DDDBD5] rounded-lg bg-white text-neutral-700 text-sm font-bold focus:border-brand-500 outline-none"><option value="overview">최근 트렌드 종합</option>
+<option value="channels">채널별 관심 추이 비교</option>
+<option value="language">고객 언어와 구매·방문 동기</option>
+<option value="opportunities">새롭게 주목할 기회</option>
+<option value="promotion">가을 프로모션 시사점</option></select></div>
           </div>
         </div>
 
@@ -255,15 +254,20 @@
             <div class="flex flex-col border border-[#DDDBD5] rounded-xl bg-white overflow-hidden shadow-xs h-full">
               <div class="p-4 pb-2.5 flex-shrink-0 bg-brand-100 border-b border-[#DDDBD5]">
                 <strong class="block text-neutral-900 text-base font-extrabold mb-1">✍️ 오버뷰 생성 프롬프트</strong>
-                <span class="block text-[#605E59] text-xs leading-tight">선택한 자료를 분석하는 동영상 오버뷰를 요청합니다. (수정 가능)</span>
+                <span class="block text-[#605E59] text-xs leading-tight">선택한 관점으로 채널별 근거를 연결하고 백화점 가을 프로모션의 인사이트를 얻습니다. (수정 가능)</span>
               </div>
-              <textarea id="prompt-video-overview" class="w-full p-4 border-none bg-white text-neutral-900 text-sm md:text-base leading-relaxed placeholder-neutral-400 focus:border-brand-500 focus:ring-0 outline-none resize-none flex-grow font-mono leading-relaxed" style="font-family: 'Pretendard', sans-serif; min-height: 280px;">선택한 시장조사 자료와 블로그 리뷰를 바탕으로, 로봇청소기 소비자 인사이트를 설명하는 3~5분 한국어 영상을 만들어줘.
+              <textarea id="prompt-video-overview" class="w-full p-4 border-none bg-white text-neutral-900 text-sm md:text-base leading-relaxed placeholder-neutral-400 focus:border-brand-500 focus:ring-0 outline-none resize-none flex-grow font-mono leading-relaxed" style="font-family: 'Pretendard', sans-serif; min-height: 280px;">등록한 심층리서치 보고서, 네이버 쇼핑 추이, SNS 수집 자료를 함께 읽고 백화점 가을 프로모션을 준비하는 마케터를 위한 3~5분 한국어 인사이트 영상을 만들어줘.
 
-1. 시장의 주요 변화
-2. 고객의 구매 이유와 만족·불만
-3. 핵심 인사이트 3가지와 추가로 확인할 질문
+[분석할 내용]
+1. 각 자료의 기간과 조사 대상을 먼저 설명해줘.
+2. 여러 자료에서 반복되는 관심사·경험·상품을 찾고 주요 변화 3가지를 정리해줘.
+3. 어떤 채널에서 각각 확인되는지, 여러 채널에 공통으로 나타나는지 구분해줘.
+4. 최근의 변화인지 판단할 과거 비교 자료가 없다면 현재 관찰되는 패턴으로 설명해줘.
 
-자료에 있는 근거를 보여주고, 사실·리뷰 의견·해석을 구분해줘. 일부 후기를 전체 고객의 의견으로 단정하지 마.</textarea>
+[공통 기준]
+등록한 자료만 사용하고, 핵심 주장에는 자료명·조사 기간·근거 위치를 표시해줘. 확인된 사실, 고객의 실제 표현, 네 해석·가설을 구분해줘. 쇼핑 클릭 지수와 SNS 좋아요 수처럼 의미가 다른 수치는 직접 비교하거나 합산하지 마. 쇼핑 클릭 지수를 구매량·매출로 해석하지 마. 기간별 비교 데이터가 없으면 증가·감소 추세라고 단정하지 마. SNS 표본을 전체 고객의 의견으로 일반화하지 말고 광고·협찬 게시물과 일반 고객의 경험을 구분해줘. 자료가 없거나 채널 간 비교 기준이 다르면 그 한계를 밝혀줘.
+
+마지막에 백화점 가을 프로모션을 준비하는 마케터가 알아둘 인사이트 3가지를 근거와 함께 정리해줘.</textarea>
             </div>
           </div>
 
@@ -318,20 +322,24 @@
 
   const INSIGHT_EXAMPLES = {
   "overview": {
-    "label": "시장과 고객 인사이트 종합",
-    "prompt": "선택한 시장조사 자료와 블로그 리뷰를 바탕으로, 로봇청소기 소비자 인사이트를 설명하는 3~5분 한국어 영상을 만들어줘.\n\n1. 시장의 주요 변화\n2. 고객의 구매 이유와 만족·불만\n3. 핵심 인사이트 3가지와 추가로 확인할 질문\n\n자료에 있는 근거를 보여주고, 사실·리뷰 의견·해석을 구분해줘. 일부 후기를 전체 고객의 의견으로 단정하지 마."
+    "label": "최근 트렌드 종합",
+    "prompt": "등록한 심층리서치 보고서, 네이버 쇼핑 추이, SNS 수집 자료를 함께 읽고 백화점 가을 프로모션을 준비하는 마케터를 위한 3~5분 한국어 인사이트 영상을 만들어줘.\n\n[분석할 내용]\n1. 각 자료의 기간과 조사 대상을 먼저 설명해줘.\n2. 여러 자료에서 반복되는 관심사·경험·상품을 찾고 주요 변화 3가지를 정리해줘.\n3. 어떤 채널에서 각각 확인되는지, 여러 채널에 공통으로 나타나는지 구분해줘.\n4. 최근의 변화인지 판단할 과거 비교 자료가 없다면 현재 관찰되는 패턴으로 설명해줘.\n\n[공통 기준]\n등록한 자료만 사용하고, 핵심 주장에는 자료명·조사 기간·근거 위치를 표시해줘. 확인된 사실, 고객의 실제 표현, 네 해석·가설을 구분해줘. 쇼핑 클릭 지수와 SNS 좋아요 수처럼 의미가 다른 수치는 직접 비교하거나 합산하지 마. 쇼핑 클릭 지수를 구매량·매출로 해석하지 마. 기간별 비교 데이터가 없으면 증가·감소 추세라고 단정하지 마. SNS 표본을 전체 고객의 의견으로 일반화하지 말고 광고·협찬 게시물과 일반 고객의 경험을 구분해줘. 자료가 없거나 채널 간 비교 기준이 다르면 그 한계를 밝혀줘.\n\n마지막에 백화점 가을 프로모션을 준비하는 마케터가 알아둘 인사이트 3가지를 근거와 함께 정리해줘."
   },
-  "purchase": {
-    "label": "구매 이유와 선택 기준",
-    "prompt": "선택한 시장조사 자료와 블로그 리뷰를 바탕으로, 로봇청소기 소비자 인사이트를 설명하는 3~5분 한국어 영상을 만들어줘.\n\n1. 고객이 구매를 결심한 이유\n2. 가격·기능·편의 등 선택 기준\n3. 구매 전 기대와 사용 후 경험의 차이\n\n자료에 있는 근거를 보여주고, 사실·리뷰 의견·해석을 구분해줘. 일부 후기를 전체 고객의 의견으로 단정하지 마."
+  "channels": {
+    "label": "채널별 관심 추이 비교",
+    "prompt": "등록한 심층리서치 보고서, 네이버 쇼핑 추이, SNS 수집 자료를 함께 읽고 백화점 가을 프로모션을 준비하는 마케터를 위한 3~5분 한국어 인사이트 영상을 만들어줘.\n\n[분석할 내용]\n1. 시장 자료에서 주목한 변화, 네이버 쇼핑 클릭 추이, SNS의 실제 표현·반응을 채널별로 비교해줘.\n2. 채널별 조사 기간과 데이터의 의미를 먼저 밝히고 공통점과 차이를 설명해줘.\n3. 시장 자료에서 발견한 변화가 쇼핑 관심과 SNS 경험에서도 확인되는지, 일치하는 신호와 서로 다른 신호를 근거와 함께 보여줘.\n4. 시간에 따른 변화는 같은 채널에서 비교 가능한 기간별 데이터가 있을 때만 분석해줘.\n5. 채널 간 차이의 원인은 확인된 사실과 가능한 해석을 나눠 설명해줘.\n\n[공통 기준]\n등록한 자료만 사용하고, 핵심 주장에는 자료명·조사 기간·근거 위치를 표시해줘. 확인된 사실, 고객의 실제 표현, 네 해석·가설을 구분해줘. 쇼핑 클릭 지수와 SNS 좋아요 수처럼 의미가 다른 수치는 직접 비교하거나 합산하지 마. 쇼핑 클릭 지수를 구매량·매출로 해석하지 마. 기간별 비교 데이터가 없으면 증가·감소 추세라고 단정하지 마. SNS 표본을 전체 고객의 의견으로 일반화하지 말고 광고·협찬 게시물과 일반 고객의 경험을 구분해줘. 자료가 없거나 채널 간 비교 기준이 다르면 그 한계를 밝혀줘.\n\n마지막에 백화점 가을 프로모션을 준비하는 마케터가 알아둘 인사이트 3가지를 근거와 함께 정리해줘."
   },
-  "pain": {
-    "label": "만족·불만과 미충족 니즈",
-    "prompt": "선택한 시장조사 자료와 블로그 리뷰를 바탕으로, 로봇청소기 소비자 인사이트를 설명하는 3~5분 한국어 영상을 만들어줘.\n\n1. 고객이 만족한 점\n2. 사용 중 불편과 불만\n3. 고객이 더 원하는 점과 인사이트 3가지\n\n자료에 있는 근거를 보여주고, 사실·리뷰 의견·해석을 구분해줘. 일부 후기를 전체 고객의 의견으로 단정하지 마."
+  "language": {
+    "label": "고객 언어와 구매·방문 동기",
+    "prompt": "등록한 심층리서치 보고서, 네이버 쇼핑 추이, SNS 수집 자료를 함께 읽고 백화점 가을 프로모션을 준비하는 마케터를 위한 3~5분 한국어 인사이트 영상을 만들어줘.\n\n[분석할 내용]\n1. SNS 게시물과 수집된 댓글에서 고객이 실제로 사용하는 단어·비유·감정 표현을 찾아 짧은 원문과 출처를 보여줘.\n2. 고객이 원하는 경험과 상품의 사용 상황, 구매·방문 이유를 설명해줘.\n3. 만족·불편·망설임과 구매·방문을 막는 장벽을 구분해줘.\n4. 게시물 작성자의 표현과 댓글 반응은 구분하고, 댓글 자료가 없으면 댓글 분석을 했다고 말하지 마.\n5. 고객 표현이 심층리서치의 발견과 쇼핑 관심 추이에 어떻게 연결되는지, 근거가 없는 연결은 가설로 표시해줘.\n\n[공통 기준]\n등록한 자료만 사용하고, 핵심 주장에는 자료명·조사 기간·근거 위치를 표시해줘. 확인된 사실, 고객의 실제 표현, 네 해석·가설을 구분해줘. 쇼핑 클릭 지수와 SNS 좋아요 수처럼 의미가 다른 수치는 직접 비교하거나 합산하지 마. 쇼핑 클릭 지수를 구매량·매출로 해석하지 마. 기간별 비교 데이터가 없으면 증가·감소 추세라고 단정하지 마. SNS 표본을 전체 고객의 의견으로 일반화하지 말고 광고·협찬 게시물과 일반 고객의 경험을 구분해줘. 자료가 없거나 채널 간 비교 기준이 다르면 그 한계를 밝혀줘.\n\n마지막에 백화점 가을 프로모션을 준비하는 마케터가 알아둘 인사이트 3가지를 근거와 함께 정리해줘."
   },
-  "brands": {
-    "label": "국내·해외 브랜드 비교",
-    "prompt": "선택한 시장조사 자료와 블로그 리뷰를 바탕으로, 로봇청소기 소비자 인사이트를 설명하는 3~5분 한국어 영상을 만들어줘.\n\n1. 국내·해외 브랜드의 선택 이유\n2. 같은 항목으로 비교한 만족·불만\n3. 국내 브랜드의 강점과 보완할 점\n비교 기준이 다른 자료의 한계도 알려줘.\n\n자료에 있는 근거를 보여주고, 사실·리뷰 의견·해석을 구분해줘. 일부 후기를 전체 고객의 의견으로 단정하지 마."
+  "opportunities": {
+    "label": "새롭게 주목할 기회",
+    "prompt": "등록한 심층리서치 보고서, 네이버 쇼핑 추이, SNS 수집 자료를 함께 읽고 백화점 가을 프로모션을 준비하는 마케터를 위한 3~5분 한국어 인사이트 영상을 만들어줘.\n\n[분석할 내용]\n1. 여러 자료에 반복되는 패턴과 드물지만 더 살펴볼 만한 사례를 구분해줘.\n2. 상품·공간·활동·고객 경험이 새롭게 결합되는 아이디어를 찾아줘.\n3. 각 후보에 실제 근거와 관찰된 범위를 보여주고, 인기나 새로움이 확인되지 않았다면 단정하지 마.\n4. 백화점 가을 프로모션에 참고할 탐색 가설을 제시하되 확정된 트렌드와 구분해줘.\n5. 가설을 더 확인하려면 어떤 자료나 고객 경험을 확인해야 하는지 설명해줘.\n\n[공통 기준]\n등록한 자료만 사용하고, 핵심 주장에는 자료명·조사 기간·근거 위치를 표시해줘. 확인된 사실, 고객의 실제 표현, 네 해석·가설을 구분해줘. 쇼핑 클릭 지수와 SNS 좋아요 수처럼 의미가 다른 수치는 직접 비교하거나 합산하지 마. 쇼핑 클릭 지수를 구매량·매출로 해석하지 마. 기간별 비교 데이터가 없으면 증가·감소 추세라고 단정하지 마. SNS 표본을 전체 고객의 의견으로 일반화하지 말고 광고·협찬 게시물과 일반 고객의 경험을 구분해줘. 자료가 없거나 채널 간 비교 기준이 다르면 그 한계를 밝혀줘.\n\n마지막에 백화점 가을 프로모션을 준비하는 마케터가 알아둘 인사이트 3가지를 근거와 함께 정리해줘."
+  },
+  "promotion": {
+    "label": "가을 프로모션 시사점",
+    "prompt": "등록한 심층리서치 보고서, 네이버 쇼핑 추이, SNS 수집 자료를 함께 읽고 백화점 가을 프로모션을 준비하는 마케터를 위한 3~5분 한국어 인사이트 영상을 만들어줘.\n\n[분석할 내용]\n1. 앞선 자료에서 확인한 핵심 인사이트를 먼저 요약해줘.\n2. 백화점의 공간·체험·상품 제안으로 연결할 기회 3가지를 정리해줘.\n3. 각 기회를 고객의 실제 표현·관찰된 니즈 → 연결된 조사 근거 → 행사 또는 체험 아이디어 → 방문·참여 이유 순서로 설명해줘.\n4. 각 아이디어의 적용 조건과 추가로 확인할 점을 밝히고, 근거가 부족한 내용은 가설로 표시해줘.\n5. 예상 매출·방문 수·전환율을 임의로 만들지 말고, 최종 행사안 확정이 아닌 기획 시사점으로 제시해줘.\n\n[공통 기준]\n등록한 자료만 사용하고, 핵심 주장에는 자료명·조사 기간·근거 위치를 표시해줘. 확인된 사실, 고객의 실제 표현, 네 해석·가설을 구분해줘. 쇼핑 클릭 지수와 SNS 좋아요 수처럼 의미가 다른 수치는 직접 비교하거나 합산하지 마. 쇼핑 클릭 지수를 구매량·매출로 해석하지 마. 기간별 비교 데이터가 없으면 증가·감소 추세라고 단정하지 마. SNS 표본을 전체 고객의 의견으로 일반화하지 말고 광고·협찬 게시물과 일반 고객의 경험을 구분해줘. 자료가 없거나 채널 간 비교 기준이 다르면 그 한계를 밝혀줘.\n\n마지막에 백화점 가을 프로모션을 준비하는 마케터가 알아둘 인사이트 3가지를 근거와 함께 정리해줘."
   }
 };
   const promptDrafts = {};
