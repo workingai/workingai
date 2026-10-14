@@ -149,7 +149,8 @@
  </section>
 <section class="flex-shrink-0 lg:flex-shrink lg:mt-5" aria-labelledby="sidebar-part-4">
   <h2 id="sidebar-part-4" class="px-3 mb-2 text-[11px] font-extrabold tracking-wide text-neutral-400 whitespace-nowrap">Part 4. GEO&amp;Automation</h2>
-  <div class="flex lg:flex-col gap-1"><a href="./p401_aiagent.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-bold text-brand-600 bg-brand-100 whitespace-nowrap transition-colors">
+  <div class="flex lg:flex-col gap-1"><a href="./p400_geo_skill.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-bold text-neutral-600 hover:bg-neutral-100 whitespace-nowrap transition-colors">GEO Skill 생성</a>
+    <a href="./p401_aiagent.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-bold text-brand-600 bg-brand-100 whitespace-nowrap transition-colors">
           <span class="text-lg leading-none">🎨</span>
           <span>AI 에이전트</span>
         </a>
@@ -203,7 +204,7 @@
           });
         </script>
 
-        <a href="./download/mkt_2610.pdf" target="_blank" rel="noopener noreferrer" class="block w-full text-center py-3 px-4 border border-[#DDDBD5] hover:border-brand-500 bg-brand-50 hover:bg-brand-100 text-brand-600 rounded-xl transition-all duration-300 shadow-xs" style="text-decoration: none;">
+        <a href="./pdfviewer.html" target="_blank" rel="noopener noreferrer" class="block w-full text-center py-3 px-4 border border-[#DDDBD5] hover:border-brand-500 bg-brand-50 hover:bg-brand-100 text-brand-600 rounded-xl transition-all duration-300 shadow-xs" style="text-decoration: none;">
           <span class="block text-xs font-bold text-neutral-400 mb-0.5 tracking-wider uppercase">Slide PDF</span>
           <span class="block text-sm font-extrabold tracking-tight">강의 교안 뷰어</span>
         </a>
@@ -219,22 +220,16 @@
             <span class="inline-block bg-brand-500 text-white rounded-full px-4 py-1 text-[11.5px] font-mono font-extrabold tracking-wider uppercase">AI Agent</span>
           </div>
           <h1 id="header-title" class="text-2xl md:text-3xl font-extrabold tracking-tight leading-tight text-neutral-900">
-            챗봇을 활용한 운세 서비스 만들기
+            웹앱 프롬프트 생성기
           </h1>
         </div>
         <!-- Navigation buttons in header -->
         <div class="flex items-center gap-2 flex-shrink-0 mb-1">
-          <button onclick="showTab('i')" id="tab-btn-i" class="px-6 h-9 flex items-center justify-center rounded-full font-bold text-sm transition-all focus:outline-none bg-brand-500 text-white border border-brand-500">
-            Intro
-          </button>
           <button onclick="showTab(1)" id="tab-btn-1" class="w-9 h-9 flex items-center justify-center rounded-full font-bold text-sm transition-all focus:outline-none bg-white text-brand-500 border border-[#DDDBD5] hover:bg-neutral-50">
             1
           </button>
           <button onclick="showTab(2)" id="tab-btn-2" class="w-9 h-9 flex items-center justify-center rounded-full font-bold text-sm transition-all focus:outline-none bg-white text-brand-500 border border-[#DDDBD5] hover:bg-neutral-50">
             2
-          </button>
-          <button onclick="showTab(3)" id="tab-btn-3" class="w-9 h-9 flex items-center justify-center rounded-full font-bold text-sm transition-all focus:outline-none bg-white text-brand-500 border border-[#DDDBD5] hover:bg-neutral-50">
-            3
           </button>
         </div>
       </header>
@@ -242,136 +237,6 @@
       <section class="border border-[#DDDBD5] rounded-2xl p-5 md:p-6 bg-white shadow-sm flex-1 flex flex-col overflow-y-auto">
         <!-- Practice Content Container -->
         <div class="flex-1 flex flex-col gap-6">
-
-          <!-- =================== 인트로 페이지 =================== -->
-          <div id="content-intro" class="flex flex-col gap-6">
-            <div class="bg-brand-50 border border-brand-100 rounded-2xl p-6 md:p-8 flex flex-col gap-4">
-              <h3 class="text-lg md:text-xl font-extrabold text-neutral-900">🎨 AI 에이전트 설계 및 웹앱 제작</h3>
-              <p class="text-sm md:text-base text-neutral-700 leading-relaxed font-semibold">
-                업무에 필요한 도구를 직접 만들어서 사용할 수 있습니다. 아래 제공된 주요 서비스 링크를 통해 챗봇 설계 및 웹앱 환경을 빠르게 연동해 보세요.
-              </p>
-            </div>
-
-            <!-- 서비스 링크 목록 (3개 컬럼) -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <!-- Card 1 -->
-              <div class="bg-[#F8F7F4] border border-[#DDDBD5] rounded-xl p-6 flex flex-col gap-4 hover:shadow-md transition-all duration-300">
-                <span class="text-2xl">📱</span>
-                <h4 class="text-base font-extrabold text-neutral-900">QR 코드 생성기</h4>
-                <p class="text-xs md:text-sm text-neutral-600 leading-relaxed">
-                  원하는 웹사이트 주소를 간편하게 QR 코드 이미지로 변환하여 확인하고 다운로드할 수 있는 AI 기반 챗봇 서비스입니다.
-                </p>
-                <a href="https://gemini.google.com/share/38de5085bf8c" target="_blank" class="mt-auto inline-flex items-center justify-center gap-1.5 px-4 h-10 bg-brand-500 hover:bg-brand-600 text-white font-extrabold text-xs md:text-sm rounded-lg transition-all shadow-xs" style="text-decoration: none; width: 100%;">
-                  🚀 서비스 바로가기
-                </a>
-              </div>
-              
-              <!-- Card 2 -->
-              <div class="bg-[#F8F7F4] border border-[#DDDBD5] rounded-xl p-6 flex flex-col gap-4 hover:shadow-md transition-all duration-300">
-                <span class="text-2xl">🎨</span>
-                <h4 class="text-base font-extrabold text-neutral-900">이미지 컬러코드 추출기</h4>
-                <p class="text-xs md:text-sm text-neutral-600 leading-relaxed">
-                  웹 브라우저에 이미지를 업로드하고 실시간으로 픽셀 단위의 컬러 정보(HEX/RGB)를 추출 및 복사할 수 있는 웹앱 도구입니다.
-                </p>
-                <a href="https://color-code-app.netlify.app/" target="_blank" class="mt-auto inline-flex items-center justify-center gap-1.5 px-4 h-10 bg-brand-500 hover:bg-brand-600 text-white font-extrabold text-xs md:text-sm rounded-lg transition-all shadow-xs" style="text-decoration: none; width: 100%;">
-                  🚀 서비스 바로가기
-                </a>
-              </div>
-
-              <!-- Card 3 -->
-              <div class="bg-[#F8F7F4] border border-[#DDDBD5] rounded-xl p-6 flex flex-col gap-4 hover:shadow-md transition-all duration-300">
-                <span class="text-2xl">📝</span>
-                <h4 class="text-base font-extrabold text-neutral-900">회의록 작성기</h4>
-                <p class="text-xs md:text-sm text-neutral-600 leading-relaxed">
-                  회의 내용을 입력하면 표준 양식에 따라 요약, 결정사항, 기한별 할 일 목록을 작성해 주는 비즈니스 비서 챗봇 서비스입니다.
-                </p>
-                <a href="https://gemini.google.com/share/c093f0503c27" target="_blank" class="mt-auto inline-flex items-center justify-center gap-1.5 px-4 h-10 bg-brand-500 hover:bg-brand-600 text-white font-extrabold text-xs md:text-sm rounded-lg transition-all shadow-xs" style="text-decoration: none; width: 100%;">
-                  🚀 서비스 바로가기
-                </a>
-              </div>
-            </div>
-
-            <!-- 배포 서비스 링크 (Vercel & Netlify) -->
-            <div class="bg-white border border-[#DDDBD5] rounded-xl p-6 flex flex-col sm:flex-row items-center justify-between gap-4 mt-2">
-              <div class="flex flex-col gap-1 text-center sm:text-left">
-                <h4 class="text-sm md:text-base font-extrabold text-neutral-900">🌐 배포 및 웹앱 호스팅 플랫폼</h4>
-                <p class="text-xs text-neutral-500 font-medium">내가 기획하고 구현한 웹앱을 외부 링크로 즉시 배포할 수 있는 서비스입니다.</p>
-              </div>
-              <div class="flex items-center gap-2 flex-shrink-0">
-                <a href="https://vercel.com" target="_blank" class="inline-flex items-center justify-center gap-1.5 px-4 h-10 border border-[#DDDBD5] hover:border-black bg-white hover:bg-neutral-50 text-neutral-900 font-extrabold text-xs md:text-sm rounded-lg transition-all shadow-xs" style="text-decoration: none;">
-                  ▲ Vercel 바로가기
-                </a>
-                <a href="https://www.netlify.com" target="_blank" class="inline-flex items-center justify-center gap-1.5 px-4 h-10 border border-[#DDDBD5] hover:border-teal-500 bg-white hover:bg-teal-50 text-neutral-900 hover:text-teal-700 font-extrabold text-xs md:text-sm rounded-lg transition-all shadow-xs" style="text-decoration: none;">
-                  ◈ Netlify 바로가기
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <!-- =================== 실습 1. 챗봇을 활용한 운세 서비스 만들기 =================== -->
-          <div id="content-fortune" class="flex flex-col gap-6">
-            <!-- Card Head Fortune -->
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#DDDBD5] pb-4 mb-2 flex-shrink-0">
-              <div>
-                <h2 class="text-lg md:text-xl font-extrabold text-neutral-900">인풋과 아웃풋 만으로 챗봇 생성을 할 수 있습니다.</h2>
-              </div>
-              <div class="flex items-center gap-2 flex-shrink-0">
-                <a href="https://gemini.google.com/gems/view" target="_blank" class="flex-shrink-0 inline-flex items-center justify-center gap-2 px-4 h-9 border border-[#DDDBD5] hover:border-blue-500 bg-white hover:bg-blue-50 text-neutral-900 hover:text-blue-700 font-bold text-xs md:text-sm rounded-lg transition-all shadow-xs focus:outline-none" style="text-decoration: none;">
-                  <svg class="w-3.5 h-3.5 text-neutral-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"></path>
-                  </svg>
-                  GEM 바로 가기
-                </a>
-              </div>
-            </div>
-
-            <!-- Accordion cards wrapper -->
-            <div class="steps-wrapper">
-              <section class="steps" style="margin-top: 10px;">
-                <!-- Fortune Card 1 -->
-                <article class="card transition-all duration-300 flex-1" id="fortune-step1-card">
-                  <div class="card-head flex items-center justify-between cursor-pointer select-none" style="padding: 16px 20px !important; gap: 4px !important;" onclick="setFortuneStep(1)">
-                    <div class="flex flex-col flex-1">
-                      <h2 id="fortune-step1-title" class="text-base font-extrabold text-neutral-900 flex items-center gap-2 m-0" style="margin-bottom: 0px !important;">📥 Input. 사용자가 입력할 사항은 무엇인가요?</h2>
-                    </div>
-                  </div>
-                  <div id="fortune-step1-body" class="card-body flex-grow flex flex-col gap-4">
-                    <textarea id="prompt-fortune-step1" placeholder="사용자가 입력할 사항을 적어보세요." class="w-full p-4 border border-[#DDDBD5] bg-white text-neutral-900 text-sm md:text-base leading-relaxed placeholder-neutral-400 focus:border-brand-500 focus:ring-0 outline-none resize-none flex-grow font-mono leading-relaxed" style="font-family: 'Pretendard', sans-serif; min-height: 180px; height: 200px;"></textarea>
-                    </div>
-                  <!-- Collapsed body -->
-                  <div id="fortune-step1-collapsed-body" class="p-4 bg-white flex items-center justify-center flex-grow hidden cursor-pointer select-none" onclick="setFortuneStep(1)">
-                    <span class="text-sm font-bold text-neutral-500">Input 입력 사항</span>
-                  </div>
-                </article>
-
-                <!-- Fortune Card 2 -->
-                <article class="card transition-all duration-300 opacity-60 flex-1" id="fortune-step2-card">
-                  <div class="card-head flex items-center justify-between cursor-pointer select-none bg-neutral-50" style="padding: 16px 20px !important; gap: 4px !important;" onclick="setFortuneStep(2)">
-                    <div class="flex flex-col flex-1">
-                      <h2 id="fortune-step2-title" class="text-base font-extrabold text-neutral-900 flex items-center gap-2 m-0" style="margin-bottom: 0px !important;">📤 Output</h2>
-                    </div>
-                  </div>
-                  <div id="fortune-step2-body" class="card-body flex-grow flex flex-col gap-4 hidden">
-                    <textarea id="prompt-fortune-step2" placeholder="Output으로 나올 결과를 적어보세요." class="w-full p-4 border border-[#DDDBD5] bg-white text-neutral-900 text-sm md:text-base leading-relaxed placeholder-neutral-400 focus:border-brand-500 focus:ring-0 outline-none resize-none flex-grow font-mono leading-relaxed" style="font-family: 'Pretendard', sans-serif; min-height: 180px; height: 200px;"></textarea>
-                  </div>
-                  <!-- Collapsed body -->
-                  <div id="fortune-step2-collapsed-body" class="p-4 bg-white flex items-center justify-center flex-grow cursor-pointer select-none" onclick="setFortuneStep(2)">
-                    <span class="text-sm font-bold text-neutral-500">Output 결과</span>
-                  </div>
-                </article>
-              </section>
-              <!-- 전체 복사 버튼 - 카드 하단 -->
-              <div class="flex justify-end mt-4">
-                <button onclick="copyAllFortunePrompts()" class="px-6 h-11 bg-brand-500 hover:bg-brand-600 text-white text-sm md:text-base font-extrabold rounded-lg transition-all shadow-sm flex items-center justify-center gap-2 focus:outline-none">
-                  <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <rect x="9" y="9" width="11" height="11" rx="2" ry="2" stroke-linecap="round" stroke-linejoin="round"></rect>
-                    <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" stroke-linecap="round" stroke-linejoin="round"></path>
-                  </svg>
-                  프롬프트 복사
-                </button>
-              </div>
-            </div>
-          </div>
 
           <!-- =================== 실습 2. 블로그 포스팅 웹앱 만들기 =================== -->
           <div id="content-meta" class="hidden flex flex-col gap-6">
@@ -439,7 +304,7 @@ API 설정:
             </section>
           </div>
 
-          <!-- =================== 실습 3. 웹앱 프롬프트 생성기 =================== -->
+          <!-- =================== 실습 1. 웹앱 프롬프트 생성기 =================== -->
           <div id="content-webapp" class="hidden flex flex-col gap-6">
             <!-- Card Head -->
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#DDDBD5] pb-4 mb-2 flex-shrink-0">
@@ -517,72 +382,6 @@ API 설정:
   <script>
     
 
-    let activeFortuneStep = 1;
-
-    function setFortuneStep(stepNum) {
-      activeFortuneStep = stepNum;
-      updateFortuneStepsUI();
-    }
-
-    function updateFortuneStepsUI() {
-      const card1 = document.getElementById('fortune-step1-card');
-      const card2 = document.getElementById('fortune-step2-card');
-      const body1 = document.getElementById('fortune-step1-body');
-      const body2 = document.getElementById('fortune-step2-body');
-      const collapsedBody1 = document.getElementById('fortune-step1-collapsed-body');
-      const collapsedBody2 = document.getElementById('fortune-step2-collapsed-body');
-      const title1 = document.getElementById('fortune-step1-title');
-      const title2 = document.getElementById('fortune-step2-title');
-      const head1 = card1.querySelector('.card-head');
-      const head2 = card2.querySelector('.card-head');
-
-      if (activeFortuneStep === 1) {
-        body1.classList.remove('hidden');
-        collapsedBody1.classList.add('hidden');
-        title1.textContent = "📥 Input. 사용자가 입력할 사항은 무엇인가요?";
-
-        body2.classList.add('hidden');
-        collapsedBody2.classList.remove('hidden');
-        title2.textContent = "📤 Output";
-
-        card1.classList.remove('opacity-60');
-        card2.classList.add('opacity-60');
-
-        // Make active card wider
-        card1.classList.remove('flex-1');
-        card1.classList.add('flex-[2]');
-        card2.classList.remove('flex-[2]');
-        card2.classList.add('flex-1');
-
-        head1.classList.add('bg-[#EAF2EE]');
-        head1.classList.remove('bg-neutral-50');
-        head2.classList.remove('bg-[#EAF2EE]');
-        head2.classList.add('bg-neutral-50');
-      } else {
-        body1.classList.add('hidden');
-        collapsedBody1.classList.remove('hidden');
-        title1.textContent = "📥 Input";
-
-        body2.classList.remove('hidden');
-        collapsedBody2.classList.add('hidden');
-        title2.textContent = "📤 Output으로 나올 결과는 무엇인가요?";
-
-        card1.classList.add('opacity-60');
-        card2.classList.remove('opacity-60');
-
-        // Make active card wider
-        card1.classList.remove('flex-[2]');
-        card1.classList.add('flex-1');
-        card2.classList.remove('flex-1');
-        card2.classList.add('flex-[2]');
-
-        head1.classList.remove('bg-[#EAF2EE]');
-        head1.classList.add('bg-neutral-50');
-        head2.classList.add('bg-[#EAF2EE]');
-        head2.classList.remove('bg-neutral-50');
-      }
-    }
-
     let activeWebappStep = 1;
 
     function setWebappStep(stepNum) {
@@ -648,84 +447,18 @@ API 설정:
     }
 
     function showTab(num) {
-      const introSection = document.getElementById('content-intro');
-      const fortuneSection = document.getElementById('content-fortune');
-      const metaSection = document.getElementById('content-meta');
-      const webappSection = document.getElementById('content-webapp');
-      const headerTitle = document.getElementById('header-title');
-      const btni = document.getElementById('tab-btn-i');
-      const btn1 = document.getElementById('tab-btn-1');
-      const btn2 = document.getElementById('tab-btn-2');
-      const btn3 = document.getElementById('tab-btn-3');
-
+      const isWebapp = num === 1;
+      document.getElementById('content-webapp').classList.toggle('hidden', !isWebapp);
+      document.getElementById('content-meta').classList.toggle('hidden', isWebapp);
+      document.getElementById('header-title').textContent = isWebapp ? '웹앱 프롬프트 생성기' : '블로그 포스팅 웹앱 만들기';
       const activeClass = ['bg-brand-500', 'text-white', 'border-brand-500'];
       const inactiveClass = ['bg-white', 'text-brand-500', 'border-[#DDDBD5]', 'hover:bg-neutral-50'];
-
-      if (num === 'i') {
-        introSection.classList.remove('hidden');
-        fortuneSection.classList.add('hidden');
-        metaSection.classList.add('hidden');
-        webappSection.classList.add('hidden');
-        headerTitle.textContent = "AI 에이전트 설계 및 웹앱 제작";
-
-        btni.classList.remove(...inactiveClass);
-        btni.classList.add(...activeClass);
-        btn1.classList.remove(...activeClass);
-        btn1.classList.add(...inactiveClass);
-        btn2.classList.remove(...activeClass);
-        btn2.classList.add(...inactiveClass);
-        btn3.classList.remove(...activeClass);
-        btn3.classList.add(...inactiveClass);
-      } else if (num === 1) {
-        introSection.classList.add('hidden');
-        fortuneSection.classList.remove('hidden');
-        metaSection.classList.add('hidden');
-        webappSection.classList.add('hidden');
-        headerTitle.textContent = "챗봇을 활용한 운세 서비스 만들기";
-        
-        btni.classList.remove(...activeClass);
-        btni.classList.add(...inactiveClass);
-        btn1.classList.remove(...inactiveClass);
-        btn1.classList.add(...activeClass);
-        btn2.classList.remove(...activeClass);
-        btn2.classList.add(...inactiveClass);
-        btn3.classList.remove(...activeClass);
-        btn3.classList.add(...inactiveClass);
-
-        updateFortuneStepsUI();
-      } else if (num === 2) {
-        introSection.classList.add('hidden');
-        fortuneSection.classList.add('hidden');
-        metaSection.classList.remove('hidden');
-        webappSection.classList.add('hidden');
-        headerTitle.textContent = "블로그 포스팅 웹앱 만들기";
-        
-        btni.classList.remove(...activeClass);
-        btni.classList.add(...inactiveClass);
-        btn1.classList.remove(...activeClass);
-        btn1.classList.add(...inactiveClass);
-        btn2.classList.remove(...inactiveClass);
-        btn2.classList.add(...activeClass);
-        btn3.classList.remove(...activeClass);
-        btn3.classList.add(...inactiveClass);
-      } else {
-        introSection.classList.add('hidden');
-        fortuneSection.classList.add('hidden');
-        metaSection.classList.add('hidden');
-        webappSection.classList.remove('hidden');
-        headerTitle.textContent = "웹앱 프롬프트 생성기";
-
-        btni.classList.remove(...activeClass);
-        btni.classList.add(...inactiveClass);
-        btn1.classList.remove(...activeClass);
-        btn1.classList.add(...inactiveClass);
-        btn2.classList.remove(...activeClass);
-        btn2.classList.add(...inactiveClass);
-        btn3.classList.remove(...inactiveClass);
-        btn3.classList.add(...activeClass);
-
-        updateWebappStepsUI();
+      for (let page = 1; page <= 2; page++) {
+        const button = document.getElementById('tab-btn-' + page);
+        button.classList.remove(...activeClass, ...inactiveClass);
+        button.classList.add(...(page === num ? activeClass : inactiveClass));
       }
+      if (isWebapp) updateWebappStepsUI();
     }
 
     const DEFAULT_META_PROMPT = "왼쪽에서 주제를 입력하면 오른쪽에 해당 주제의 블로그 포스팅이 작성되는 한 페이지 웹앱을 만들어줘.\n\n제작 방식:\n- Sites 스킬을 사용하지 말고, 배포나 호스팅 없이 로컬 파일로만 만들어줘.\n- index.html, style.css, app.js 파일로 구성해줘.\n- index.html을 브라우저에서 열어 사용할 수 있도록 해줘.\n\nAPI 설정:\n- Google Gemini API를 사용해줘.\n- 기본 모델 이름은 gemini-3.8-flash로 설정해줘.\n- 사용자가 자신의 API 키를 직접 입력할 수 있는 설정 영역을 만들어줘.\n- API 키는 파일이나 브라우저 저장소에 저장하지 말고, 현재 탭의 메모리에만 보관해줘.\n- API 요청이 실패하면 HTTP 상태 코드와 Google이 반환한 오류 내용을 표시하되, API 키는 노출하지 마.\n\n화면과 기능:\n- 왼쪽: 주제, 글의 분위기, 길이, 키워드, 대상 독자, API 키와 모델 이름 입력.\n- 오른쪽: 생성된 블로그 글 표시.\n- 글은 제목, 서론, 소제목이 있는 본문, 마무리를 포함해 한국어로 작성해줘.\n- 작성 중 상태를 표시하고 중복 요청을 방지해줘.\n- 생성된 글을 복사하거나 Markdown 파일로 저장할 수 있게 해줘.\n- API 키 없이 확인할 수 있는 예시 글 미리보기를 제공해줘.\n- 차분하고 깔끔한 디자인과 모바일 대응 레이아웃을 적용해줘.\n\n완료 후 파일 위치와 실행 방법을 알려줘. 실제 API 호출을 검증하지 못했다면 그 점도 명확히 알려줘.";
@@ -745,33 +478,6 @@ API 설정:
         document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove();
       }
       showToast('프롬프트가 복사되었습니다.');
-    }
-
-    async function copyFortunePrompt(id) {
-      const text = document.getElementById(id).value;
-      try {
-        await navigator.clipboard.writeText(text);
-      } catch {
-        const ta = document.createElement('textarea');
-        ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
-        document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove();
-      }
-      showToast('프롬프트가 클립보드에 복사되었습니다.');
-    }
-
-    // Copy both input and output prompts together
-    async function copyAllFortunePrompts() {
-      const inputText = document.getElementById('prompt-fortune-step1').value;
-      const outputText = document.getElementById('prompt-fortune-step2').value;
-      const combined = `${inputText}\n\n${outputText}`;
-      try {
-        await navigator.clipboard.writeText(combined);
-      } catch {
-        const ta = document.createElement('textarea');
-        ta.value = combined; ta.style.position = 'fixed'; ta.style.opacity = '0';
-        document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove();
-      }
-      showToast('전체 프롬프트가 복사되었습니다.');
     }
 
     const samples = {
@@ -877,10 +583,10 @@ ${$('outputText').value}
     $('copyBtn').addEventListener('click', copyPrompt);
     if ($('resetBtn')) $('resetBtn').addEventListener('click', resetCurrent);
 
-    // Default load Tab Intro
+    // Default load first page
     window.addEventListener('DOMContentLoaded', () => {
       loadSample('qr');
-      showTab('i');
+      showTab(1);
     });
   </script>
 </body>
