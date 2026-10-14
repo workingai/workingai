@@ -783,7 +783,7 @@
         const onlyPwd = document.getElementById('input-only-password').value.trim().toLowerCase();
         if (pendingRedirectUrl.includes('ssg/')) {
           if (onlyPwd !== 'ssg261015') { showModalError('비밀번호를 정확히 입력해 주세요.'); return; }
-          sessionStorage.setItem('ssg_authenticated_261015', 'true');
+          localStorage.setItem('ssg_authenticated_261015', 'true');
           window.location.href = pendingRedirectUrl;
           return;
         }
