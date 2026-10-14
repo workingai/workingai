@@ -144,11 +144,11 @@
  </section>
 <section class="flex-shrink-0 lg:flex-shrink lg:mt-5" aria-labelledby="sidebar-part-3">
   <h2 id="sidebar-part-3" class="px-3 mb-2 text-[11px] font-extrabold tracking-wide text-neutral-400 whitespace-nowrap">Part 3. STP</h2>
-  <div class="flex lg:flex-col gap-1"><a href="./p301_cardnews.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors"><span class="text-lg leading-none">📰</span><span>카드뉴스 제작</span></a>
-<a href="./p302_cardnews_auto.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors"><span class="text-lg leading-none">⚙️</span><span>카드뉴스 자동화</span></a>
+  <div class="flex lg:flex-col gap-1"><a href="./p301_cardnews.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors"><span class="text-lg leading-none">📰</span><span>고객 전환 트리거 분석</span></a>
+<a href="./p302_cardnews_auto.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors"><span class="text-lg leading-none">⚙️</span><span>가을 행사 제안</span></a>
 <a href="./p303_aivideo.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
           <span class="text-lg leading-none">🎬</span>
-          <span>이미지 생성 및 영상화</span>
+          <span>SNS A/B안 만들기</span>
         </a></div>
  </section>
 <section class="flex-shrink-0 lg:flex-shrink lg:mt-5" aria-labelledby="sidebar-part-4">
@@ -221,130 +221,93 @@
     <!-- ===== Main Content Area ===== -->
     <main class="flex-1 min-h-0 flex flex-col overflow-hidden pt-8 lg:pt-10 pb-8 px-4 md:px-8 lg:px-10">
       <header class="mb-4 flex-shrink-0 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
-        <div><span class="inline-block mb-2 bg-brand-500 text-white rounded-full px-4 py-1 text-xs font-mono font-extrabold">PPT MAKER</span><h1 id="header-title" class="text-2xl md:text-3xl font-extrabold">마케팅 기획 방향을 선택하고 초안을 만듭니다</h1></div>
-        <div class="flex gap-2" role="group" aria-label="PPT 제작 페이지"><button id="ppt-tab-1" type="button" onclick="showPptPage(1)" aria-pressed="true" class="w-9 h-9 rounded-full border font-bold bg-brand-500 text-white border-brand-500">1</button><button id="ppt-tab-2" type="button" onclick="showPptPage(2)" aria-pressed="false" class="w-9 h-9 rounded-full border font-bold bg-white text-brand-500 border-[#DDDBD5]">2</button></div>
+        <div><span class="inline-block mb-2 bg-brand-500 text-white rounded-full px-4 py-1 text-xs font-mono font-extrabold">PPT MAKER</span><h1 id="header-title" class="text-2xl md:text-3xl font-extrabold">내 양식으로 핵심 트렌드 PPT 만들기</h1></div>
+        
       </header>
       <section class="border border-[#DDDBD5] rounded-2xl p-5 md:p-6 bg-white shadow-sm flex-1 overflow-y-auto">
-        <div id="ppt-page-1" class="flex flex-col gap-5"><p class="text-sm text-neutral-600">같은 대화에서 Step 1을 진행하고, 선택한 방향을 Step 2에 입력하세요.</p><div class="grid grid-cols-1 lg:grid-cols-6 gap-5 items-start"><article id="planning-card-1" class="border border-[#DDDBD5] rounded-xl bg-white overflow-hidden transition-all duration-300 lg:col-span-5">
- <button type="button" id="planning-select-1" onclick="setPlanningStep(1)" aria-expanded="true" aria-controls="planning-body-1" class="w-full text-left p-4 bg-brand-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-500">
-  <h2 id="planning-title-1" class="text-base font-extrabold text-neutral-900">Step 1. 마케팅 방향 비교</h2>
-  <p id="planning-desc-1" class="text-xs text-neutral-500 mt-1 ">조사 근거를 바탕으로 세 가지 방향을 비교합니다.</p>
- </button>
- <div id="planning-body-1" class="">
-  <label for="planning-1" class="sr-only">Step 1. 마케팅 방향 비교 프롬프트</label>
-  <textarea id="planning-1" rows="16" class="w-full p-4 bg-white text-sm md:text-base leading-relaxed outline-none resize-y" style="border-radius:0;min-height:320px;">프로젝트에 있는 로봇청소기 시장 조사 자료와 고객 리뷰를 함께 분석해줘.
-
-국내 브랜드 로봇청소기의 시장 점유율을 높이기 위한 마케팅 방향 3가지를 제안해줘.
-각 방향은 우선 타깃과 공략할 고객 니즈가 서로 다르게 구성해줘.
-
-아래 항목으로 간단한 비교표를 만들어줘.
-
-- 우선 타깃과 핵심 니즈
-- 고객에게 전달할 핵심 메시지
-- 이를 뒷받침하는 조사 근거와 출처
-- 콘텐츠·채널 아이디어
-- 약점과 추가 확인 사항
-
-자료에서 확인된 사실과 네가 제안한 내용을 구분해줘.
-자료에 없는 제품 성능이나 혜택은 만들지 마.
-아직 기획안을 작성하지 말고, 내가 방향을 선택할 수 있도록 대안을 보여줘.</textarea>
-  <div class="p-4 bg-white flex justify-end"><button type="button" onclick="copyText('planning-1','프롬프트가 복사되었습니다.')" class="px-6 h-11 bg-brand-500 hover:bg-brand-600 text-white font-extrabold rounded-lg">프롬프트 복사</button></div>
- </div>
- <button type="button" id="planning-collapsed-1" onclick="setPlanningStep(1)" class="hidden w-full p-4 text-sm font-bold text-neutral-500 bg-white text-center">마케팅 방향 비교</button>
-</article>
-<article id="planning-card-2" class="border border-[#DDDBD5] rounded-xl bg-white overflow-hidden transition-all duration-300 lg:col-span-1 opacity-60">
- <button type="button" id="planning-select-2" onclick="setPlanningStep(2)" aria-expanded="false" aria-controls="planning-body-2" class="w-full text-left p-4 bg-neutral-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-500">
-  <h2 id="planning-title-2" class="text-base font-extrabold text-neutral-900">Step 2</h2>
-  <p id="planning-desc-2" class="text-xs text-neutral-500 mt-1 hidden">선택한 방향을 검토하고 기획안 초안을 작성합니다.</p>
- </button>
- <div id="planning-body-2" class="hidden">
-  <label for="planning-2" class="sr-only">Step 2. 선택한 방향으로 기획안 작성 프롬프트</label>
-  <textarea id="planning-2" rows="16" class="w-full p-4 bg-white text-sm md:text-base leading-relaxed outline-none resize-y" style="border-radius:0;min-height:320px;">앞서 제안한 방향 중 아래와 같이 결정했어.
-
-[내가 선택한 방향]
-
-- 선택한 안: [안 번호 또는 조합할 내용]
-- 선택 이유: [이 방향이 적합하다고 판단한 이유]
-- 우선 타깃: [집중할 고객]
-- 강조할 메시지: [고객에게 전달할 핵심 내용]
-- 수정하거나 제외할 내용: [없으면 ‘없음’]
-
-이 결정이 조사 근거와 맞는지 먼저 검토해줘.
-근거가 부족하거나 서로 충돌하는 부분이 있다면 짚어주고, 확인이 필요한 사항으로 남겨줘.
-
-이를 바탕으로 아래 구성의 마케팅 기획안 초안을 작성해줘.
-
-1. 목표와 핵심 전략
-2. 우선 타깃과 고객 인사이트
-3. 핵심 메시지와 설득 근거
-4. 콘텐츠·채널별 실행 아이디어
-5. 실행 우선순위와 성과 확인 지표
-
-시장 조사와 고객 리뷰의 근거를 연결하고, 사실과 제안을 구분해줘.
-예산·일정·성과 목표가 정해지지 않았다면 임의로 확정하지 마.
-결과는 검토하기 쉬운 문서 형태로 정리하고, PPT는 아직 만들지 마.</textarea>
-  <div class="p-4 bg-white flex justify-end"><button type="button" onclick="copyText('planning-2','프롬프트가 복사되었습니다.')" class="px-6 h-11 bg-brand-500 hover:bg-brand-600 text-white font-extrabold rounded-lg">프롬프트 복사</button></div>
- </div>
- <button type="button" id="planning-collapsed-2" onclick="setPlanningStep(2)" class=" w-full p-4 text-sm font-bold text-neutral-500 bg-white text-center">선택한 방향으로 기획안 작성</button>
-</article></div></div>
-        <div id="ppt-page-2" class="hidden"><p class="text-sm text-neutral-600 mb-5">Step 1에서 템플릿으로 Skill을 만들고, Step 2에서 필요한 페이지를 지정하세요.</p><div class="grid grid-cols-1 lg:grid-cols-6 gap-5 items-start"><article id="production-card-1" class="border border-[#DDDBD5] rounded-xl bg-white overflow-hidden transition-all duration-300 lg:col-span-5">
+        <div id="ppt-production" class="flex flex-col gap-5"><p class="text-sm text-neutral-600 mb-5">Step 1에서 양식을 Skill로 저장하고, Step 2에서 구성안·Mermaid를 검토한 뒤 Step 3에서 확정한 내용으로 PPT를 만듭니다.</p><div class="grid grid-cols-1 lg:grid-cols-8 gap-5 items-start"><article id="production-card-1" class="border border-[#DDDBD5] rounded-xl bg-white overflow-hidden transition-all duration-300 lg:col-span-6">
  <button type="button" id="production-select-1" onclick="setProductionStep(1)" aria-expanded="true" aria-controls="production-body-1" class="w-full text-left p-4 bg-brand-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-500">
-  <h2 id="production-title-1" class="text-base font-extrabold text-neutral-900">Step 1. 디자인 Skill 만들기</h2>
-  <p id="production-desc-1" class="text-xs text-neutral-500 mt-1 ">템플릿에서 반복 사용할 디자인 규칙을 저장합니다.</p>
+  <h2 id="production-title-1" class="text-base font-extrabold text-neutral-900">Step 1. 내 PPT 양식을 Skill로 저장하기</h2>
+  <p id="production-desc-1" class="text-xs text-neutral-500 mt-1 ">템플릿의 공통 디자인과 유형별 레이아웃을 Skill로 저장하고 선택용 카탈로그를 만듭니다.</p>
  </button>
  <div id="production-body-1" class="">
-  <label for="production-1" class="sr-only">디자인 Skill 만들기 프롬프트</label>
-  <textarea id="production-1" rows="16" class="w-full p-4 bg-white text-sm md:text-base leading-relaxed outline-none resize-y" style="border-radius:0;min-height:320px;">프로젝트 폴더의 [템플릿 파일명.pptx]를 분석해, 앞으로 PPT를 만들 때 반복해서 사용할 디자인 Skill을 만들어줘.
-Skill 이름은 [marketing-ppt-design]으로 지정해.
+  <label for="production-1" class="sr-only">내 PPT 양식을 Skill로 저장하기 프롬프트</label>
+  <textarea id="production-1" rows="16" class="w-full p-4 bg-white text-sm md:text-base leading-relaxed outline-none resize-y" style="border-radius:0;min-height:320px;">프로젝트에 추가한 [템플릿 파일명.pptx]를 분석해,
+앞으로 백화점 보고서를 작성할 때 반복해서 사용할 Skill로 저장해줘.
+Skill 이름은 marketing-ppt-design으로 해줘.
 
-[내가 유지하고 싶은 부분]
-- 우선 참고할 페이지: [페이지 번호]
-- 유지할 특징: [예: 제목 위치, 색상, 간결한 본문, 큰 이미지]
-- 제외할 요소: [없으면 ‘없음’]
+글꼴&#183;색상&#183;여백&#183;정렬 등 공통 디자인 규칙을 정리하고,
+페이지를 표지&#183;요약&#183;비교&#183;데이터&#183;프로세스&#183;제안 등 유형별로 분류해줘.
+각 유형은 원본과 동일한 형태로 재사용할 수 있는 레이아웃으로 구성해 Skill에 포함해줘.
 
-다음 항목을 실제 슬라이드에서 확인해줘.
-- 슬라이드 크기와 배경
-- 제목·부제·본문의 위치, 글꼴, 크기와 색상
-- 여백·정렬·도형·이미지 배치
-- 반복되는 본문 레이아웃과 각각에 적합한 내용
+향후 페이지 작업에서 레이아웃 유형을 지정할 수 있도록
+유형별 코드&#183;이름&#183;사용 목적&#183;입력 항목과 미리보기 이미지를 담은 카탈로그도 만들어줘.
+원본 템플릿과 카탈로그를 Skill에 연결하고, 텍스트&#183;표&#183;도형은 편집 가능하게 유지해줘.
 
-이 규칙을 적용해 PPT를 제작할 수 있도록 Skill로 저장해줘.
-템플릿 파일과 필요한 참고 자료도 다시 사용할 수 있게 연결해줘.
-
-템플릿의 기존 주제·회사명·수치 등은 새 기획안의 내용으로 사용하지 마.
-텍스트와 도형은 편집 가능하게 유지하고, 글자가 넘치면 임의로 작게 줄이기보다 내용을 정리하거나 페이지를 나누도록 해줘.
-완성 후 모든 페이지를 렌더링해 넘침·겹침을 확인하는 절차도 포함해줘.
-
-마지막으로 저장한 Skill의 이름과 위치, 주요 디자인 규칙을 간단히 알려줘.
-아직 전체 PPT는 만들지 마.</textarea>
+마지막으로 Skill과 카탈로그의 저장 위치,
+‘[유형 코드]로 가을 행사 개요 1장을 만들어줘’처럼 요청하는 예시를 알려줘.
+지금은 Skill과 카탈로그까지만 만들고, 실제 보고서 제작은 다음 단계에서 진행할게.</textarea>
   <div class="p-4 bg-white flex justify-end"><button type="button" onclick="copyText('production-1','프롬프트가 복사되었습니다.')" class="px-6 h-11 bg-brand-500 hover:bg-brand-600 text-white font-extrabold rounded-lg">프롬프트 복사</button></div>
  </div>
- <button type="button" id="production-collapsed-1" onclick="setProductionStep(1)" class="hidden w-full p-4 text-sm font-bold text-neutral-500 bg-white text-center">디자인 Skill 만들기</button>
+ <button type="button" id="production-collapsed-1" onclick="setProductionStep(1)" class="hidden w-full p-4 text-sm font-bold text-neutral-500 bg-white text-center">내 PPT 양식을 Skill로 저장하기</button>
 </article>
 <article id="production-card-2" class="border border-[#DDDBD5] rounded-xl bg-white overflow-hidden transition-all duration-300 lg:col-span-1 opacity-60">
  <button type="button" id="production-select-2" onclick="setProductionStep(2)" aria-expanded="false" aria-controls="production-body-2" class="w-full text-left p-4 bg-neutral-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-500">
   <h2 id="production-title-2" class="text-base font-extrabold text-neutral-900">Step 2</h2>
-  <p id="production-desc-2" class="text-xs text-neutral-500 mt-1 hidden">확정한 기획안과 Skill을 적용해 필요한 페이지를 제작합니다.</p>
+  <p id="production-desc-2" class="text-xs text-neutral-500 mt-1 hidden">핵심 트렌드·근거·사례를 구성안으로 정리하고 Mermaid로 흐름을 검토합니다.</p>
  </button>
  <div id="production-body-2" class="hidden">
-  <label for="production-2" class="sr-only">필요한 PPT 페이지 만들기 프롬프트</label>
-  <textarea id="production-2" rows="16" class="w-full p-4 bg-white text-sm md:text-base leading-relaxed outline-none resize-y" style="border-radius:0;min-height:320px;">앞서 만든 marketing-ppt-design Skill을 사용해, 확정한 마케팅 기획안에서 필요한 PPT 페이지를 만들어줘.
+  <label for="production-2" class="sr-only">핵심 트렌드 구성안과 Mermaid 만들기 프롬프트</label>
+  <textarea id="production-2" rows="16" class="w-full p-4 bg-white text-sm md:text-base leading-relaxed outline-none resize-y" style="border-radius:0;min-height:320px;">프로젝트 폴더의 심층리서치 보고서, 쇼핑 트렌드 데이터,
+SNS 고객 반응 자료를 함께 분석해
+백화점 가을 프로모션에 활용할 핵심 트렌드 PPT 구성안을 만들어줘.
 
-[이번에 만들 페이지]
-- 기획안 파일 또는 내용: [파일명 또는 확정한 내용]
-- 필요한 페이지: [예: 목표와 전략, 타깃과 고객 인사이트, 콘텐츠·채널 실행 아이디어]
-- 페이지 수: [원하는 페이지 수]
-- 저장할 파일명: [파일명.pptx]
+먼저 핵심 트렌드 3~5개를 한 문장씩 제시하고,
+각 트렌드에 대한 근거 내용과 사례를 연결해줘.
 
-선택한 내용에 맞는 템플릿 레이아웃을 적용하고, 각 페이지에 핵심 메시지 하나를 담아줘.
-시장 조사와 고객 리뷰의 근거를 연결하고, 사실과 제안을 구분해줘. 자료에 없는 성능·혜택·수치나 미정인 예산·일정·성과 목표를 만들지 마.
+슬라이드별로 아래 항목을 정리해줘.
+- 제목과 핵심 메시지
+- 뒷받침하는 자료·수치·고객의 실제 표현
+- 관련 상품·공간·브랜드·고객 경험 사례
+- 마케팅에 적용할 시사점
+- 앞서 만든 marketing-ppt-design 카탈로그의 추천 레이아웃 유형
 
-텍스트와 도형은 편집 가능하게 유지하고, 글자가 넘치면 내용을 정리하거나 페이지를 나눠줘.
-요청한 페이지만 제작하고 모든 페이지를 렌더링해 넘침·겹침을 확인한 뒤 수정해줘.
-완성한 PPT를 프로젝트 폴더에 저장하고 실제 파일명과 위치, 확인이 필요한 사항을 알려줘.</textarea>
+근거에는 파일명과 확인 가능한 페이지·행·게시물 URL을 표시해줘.
+사실과 해석·가설을 구분하고, 자료에 없는 수치나 사례는 만들지 마.
+
+구성의 흐름을 한눈에 검토할 수 있도록
+‘핵심 트렌드 → 근거·사례 → 고객 니즈 → 마케팅 적용 기회’를
+Mermaid 다이어그램으로 정리해줘.
+슬라이드 번호를 함께 표시하고,
+Mermaid 원문과 확인 가능한 미리보기를 제공해줘.
+
+지금은 구성안과 다이어그램까지만 만들고 내 확인을 기다려줘.
+PPT 제작은 내용을 확정한 뒤 다음 단계에서 진행할게.</textarea>
   <div class="p-4 bg-white flex justify-end"><button type="button" onclick="copyText('production-2','프롬프트가 복사되었습니다.')" class="px-6 h-11 bg-brand-500 hover:bg-brand-600 text-white font-extrabold rounded-lg">프롬프트 복사</button></div>
  </div>
- <button type="button" id="production-collapsed-2" onclick="setProductionStep(2)" class=" w-full p-4 text-sm font-bold text-neutral-500 bg-white text-center">필요한 PPT 페이지 만들기</button>
+ <button type="button" id="production-collapsed-2" onclick="setProductionStep(2)" class=" w-full p-4 text-sm font-bold text-neutral-500 bg-white text-center">핵심 트렌드 구성안과 Mermaid 만들기</button>
+</article>
+<article id="production-card-3" class="border border-[#DDDBD5] rounded-xl bg-white overflow-hidden transition-all duration-300 lg:col-span-1 opacity-60">
+ <button type="button" id="production-select-3" onclick="setProductionStep(3)" aria-expanded="false" aria-controls="production-body-3" class="w-full text-left p-4 bg-neutral-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-500">
+  <h2 id="production-title-3" class="text-base font-extrabold text-neutral-900">Step 3</h2>
+  <p id="production-desc-3" class="text-xs text-neutral-500 mt-1 hidden">확정한 구성안에 Skill과 레이아웃 카탈로그를 적용해 PPT를 제작합니다.</p>
+ </button>
+ <div id="production-body-3" class="hidden">
+  <label for="production-3" class="sr-only">확정한 구성안으로 PPT 만들기 프롬프트</label>
+  <textarea id="production-3" rows="16" class="w-full p-4 bg-white text-sm md:text-base leading-relaxed outline-none resize-y" style="border-radius:0;min-height:320px;">앞서 만든 marketing-ppt-design Skill과 레이아웃 카탈로그를 사용해,
+내가 확정한 핵심 트렌드 구성안과 Mermaid 흐름을 PPT로 만들어줘.
+
+[저장 위치]
+- 저장할 폴더: [원하는 폴더명 또는 경로 / 미지정 가능]
+- 파일명: [원하는 파일명.pptx / 미지정 가능]
+
+저장 폴더를 지정하지 않으면 현재 프로젝트의 메인 폴더에 저장해줘.
+파일명을 지정하지 않으면 내용을 알 수 있는 적절한 이름을 만들어 .pptx로 저장해줘.
+같은 이름의 파일이 있으면 덮어쓰지 말고 번호를 붙여 새 파일로 저장해줘.
+완료 후 실제 저장한 폴더와 파일명을 알려줘.</textarea>
+  <div class="p-4 bg-white flex justify-end"><button type="button" onclick="copyText('production-3','프롬프트가 복사되었습니다.')" class="px-6 h-11 bg-brand-500 hover:bg-brand-600 text-white font-extrabold rounded-lg">프롬프트 복사</button></div>
+ </div>
+ <button type="button" id="production-collapsed-3" onclick="setProductionStep(3)" class=" w-full p-4 text-sm font-bold text-neutral-500 bg-white text-center">확정한 구성안으로 PPT 만들기</button>
 </article></div></div>
       </section>
     </main>
@@ -353,55 +316,24 @@ Skill 이름은 [marketing-ppt-design]으로 지정해.
   <script>
 
 
-  function setPlanningStep(num) {
-    if (![1,2].includes(num)) return;
-    const titles = ['마케팅 방향 비교','선택한 방향으로 기획안 작성'];
-    for (let i=1;i<=2;i++) {
-      const active=i===num;
-      const card=document.getElementById('planning-card-'+i);
-      card.classList.remove('lg:col-span-5','lg:col-span-1','opacity-60');
-      card.classList.add(...(active?['lg:col-span-5']:['lg:col-span-1','opacity-60']));
-      document.getElementById('planning-body-'+i).classList.toggle('hidden',!active);
-      document.getElementById('planning-desc-'+i).classList.toggle('hidden',!active);
-      document.getElementById('planning-collapsed-'+i).classList.toggle('hidden',active);
-      document.getElementById('planning-title-'+i).textContent='Step '+i+(active?'. '+titles[i-1]:'');
-      const button=document.getElementById('planning-select-'+i);
-      button.classList.toggle('bg-brand-100',active);
-      button.classList.toggle('bg-neutral-50',!active);
-      button.setAttribute('aria-expanded',String(active));
-    }
-  }
-
-  function setProductionStep(num) {
-    if (![1,2].includes(num)) return;
-    const titles = ["디자인 Skill 만들기","필요한 PPT 페이지 만들기"];
-    for (let i=1;i<=2;i++) {
-      const active=i===num;
-      const card=document.getElementById('production-card-'+i);
-      card.classList.remove('lg:col-span-5','lg:col-span-1','opacity-60');
-      card.classList.add(...(active?['lg:col-span-5']:['lg:col-span-1','opacity-60']));
+    function setProductionStep(num) {
+    if (![1,2,3].includes(num)) return;
+    const titles=["내 PPT 양식을 Skill로 저장하기","핵심 트렌드 구성안과 Mermaid 만들기","확정한 구성안으로 PPT 만들기"];
+    for(let i=1;i<=3;i++) {
+      const active=i===num,card=document.getElementById('production-card-'+i);
+      card.classList.remove('lg:col-span-5','lg:col-span-6','lg:col-span-1','opacity-60');
+      card.classList.add(...(active?['lg:col-span-6']:['lg:col-span-1','opacity-60']));
       document.getElementById('production-body-'+i).classList.toggle('hidden',!active);
       document.getElementById('production-desc-'+i).classList.toggle('hidden',!active);
       document.getElementById('production-collapsed-'+i).classList.toggle('hidden',active);
       document.getElementById('production-title-'+i).textContent='Step '+i+(active?'. '+titles[i-1]:'');
       const button=document.getElementById('production-select-'+i);
-      button.classList.toggle('bg-brand-100',active);
-      button.classList.toggle('bg-neutral-50',!active);
+      button.classList.toggle('bg-brand-100',active);button.classList.toggle('bg-neutral-50',!active);
       button.setAttribute('aria-expanded',String(active));
     }
   }
 
-  function showPptPage(num) {
-    if (![1,2].includes(num)) return;
-    for (let i=1;i<=2;i++) {
-      document.getElementById('ppt-page-'+i).classList.toggle('hidden',i!==num);
-      const button=document.getElementById('ppt-tab-'+i);
-      button.className='w-9 h-9 rounded-full border font-bold '+(i===num?'bg-brand-500 text-white border-brand-500':'bg-white text-brand-500 border-[#DDDBD5]');
-      button.setAttribute('aria-pressed',String(i===num));
-    }
-    document.getElementById('header-title').textContent=num===1?'마케팅 기획 방향을 선택하고 초안을 만듭니다':'디자인 Skill을 만들고 필요한 PPT 페이지를 제작합니다';
-  }
-  function executeCopy(text, successMessage) {
+    function executeCopy(text, successMessage) {
     const textArea = document.createElement('textarea');
     textArea.value = text;
     textArea.style.position = 'fixed';
