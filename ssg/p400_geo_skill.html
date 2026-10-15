@@ -13,7 +13,7 @@
   <link rel="icon" href="../favicon.png?v=2" type="image/png">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>WORKING AI · GEO Skill 생성</title>
+  <title>WORKING AI · GEO 가이드 만들기</title>
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Pretendard Font -->
@@ -149,7 +149,10 @@
  </section>
 <section class="flex-shrink-0 lg:flex-shrink lg:mt-5" aria-labelledby="sidebar-part-4">
   <h2 id="sidebar-part-4" class="px-3 mb-2 text-[11px] font-extrabold tracking-wide text-neutral-400 whitespace-nowrap">Part 4. GEO&amp;Automation</h2>
-  <div class="flex lg:flex-col gap-1"><a href="./p400_geo_skill.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-bold text-brand-600 bg-brand-100 whitespace-nowrap transition-colors">GEO Skill 생성</a>
+  <div class="flex lg:flex-col gap-1"><a href="./p400_geo_skill.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-bold text-brand-600 bg-brand-100 whitespace-nowrap transition-colors">
+          <span class="text-lg leading-none">🔎</span>
+          <span>GEO 가이드 만들기</span>
+        </a>
     <a href="./p401_aiagent.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-bold text-neutral-600 hover:bg-neutral-100 whitespace-nowrap transition-colors">
           <span class="text-lg leading-none">🎨</span>
           <span>AI 에이전트</span>
@@ -215,33 +218,64 @@
     <main class="flex-1 flex flex-col overflow-y-auto pt-8 lg:pt-10 pb-8 px-4 md:px-8 lg:px-10">
       <header class="mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div><span class="inline-block bg-brand-500 text-white rounded-full px-4 py-1 text-xs font-bold mb-2">GEO Skill</span>
-          <h1 class="text-2xl md:text-3xl font-extrabold text-neutral-900">GEO Skill 생성</h1>
-          <p class="mt-2 text-sm text-neutral-600">자료를 바탕으로 AI 검색에 대응하는 마케팅 콘텐츠 개선 Skill을 만듭니다.</p>
+          <h1 class="text-2xl md:text-3xl font-extrabold text-neutral-900">GEO 가이드 만들기</h1>
+          <p class="mt-2 text-sm text-neutral-600">GEO 자료를 분석하고, 마케팅 콘텐츠에 반복 적용할 가이드 Skill을 만듭니다.</p>
         </div>
+        <div class="flex items-center gap-3 flex-wrap sm:justify-end">
         <a href="./download/Generative%20Engine%20Optimization.pdf" download="Generative Engine Optimization.pdf" class="inline-flex items-center justify-center px-5 py-3 bg-brand-500 hover:bg-brand-600 text-white rounded-xl text-sm font-bold whitespace-nowrap">GEO 자료 다운로드</a>
+          <nav aria-label="실습 페이지" class="flex items-center gap-2"><button type="button" onclick="showGeoPage(1)" id="geo-tab-1" aria-controls="geo-page-1" aria-pressed="true" class="w-9 h-9 flex items-center justify-center rounded-full font-bold text-sm transition-all focus:outline-none border bg-brand-500 text-white border-brand-500">1</button><button type="button" onclick="showGeoPage(2)" id="geo-tab-2" aria-controls="geo-page-2" aria-pressed="false" class="w-9 h-9 flex items-center justify-center rounded-full font-bold text-sm transition-all focus:outline-none border bg-white text-brand-500 border-[#DDDBD5] hover:bg-neutral-50">2</button></nav>
+        </div>
       </header>
-      <section class="bg-white border border-[#DDDBD5] rounded-2xl p-5 md:p-6 flex flex-col gap-5">
-        <div class="bg-brand-50 rounded-xl p-4 text-sm text-neutral-700 leading-relaxed"><strong>실습 방법</strong><br>① 자료를 다운로드합니다. ② 작업할 프로젝트에 PDF를 추가합니다. ③ 아래 프롬프트를 복사해 Skill을 만들고, 마케팅 콘텐츠에 적용해 봅니다.</div>
-        <label for="geo-prompt" class="text-lg font-extrabold text-neutral-900">Skill 생성 프롬프트</label>
-        <textarea id="geo-prompt" class="w-full border border-[#DDDBD5] rounded-xl p-4 text-sm md:text-base leading-relaxed focus:outline-none focus:border-brand-500" rows="17">프로젝트에 추가한 [Generative Engine Optimization.pdf]를 분석해, 백화점 마케팅 콘텐츠를 AI 검색·답변에서 잘 발견되고 인용되도록 개선하는 Skill을 만들어줘.
+      <div class="bg-brand-50 rounded-xl p-4 mb-5 text-sm text-neutral-700 leading-relaxed">자료 다운로드 → 프로젝트에 PDF 추가 → Step 1 분석 결과 확인 → Step 2 Skill 생성 순서로 진행합니다.</div>
+      <section id="geo-page-1" class="bg-white border border-[#DDDBD5] rounded-2xl p-5 md:p-6 mb-5 flex flex-col gap-4">
+        <h2 class="text-lg font-extrabold text-neutral-900">자료 분석하기</h2>
+        <p class="text-sm text-neutral-600">PDF를 다운로드해 작업할 프로젝트에 추가한 뒤 실행합니다.</p>
+        <label for="geo-prompt-1" class="font-bold text-sm">실습 프롬프트</label>
+        <textarea id="geo-prompt-1" class="w-full border border-[#DDDBD5] rounded-xl p-4 text-sm md:text-base leading-relaxed focus:outline-none focus:border-brand-500" rows="13">프로젝트에 추가한 [Generative Engine Optimization.pdf]를 읽고, 백화점 마케터가 활용할 GEO 가이드를 만들 수 있도록 분석해줘.
+
+GEO의 개념, 핵심 원칙, 효과가 확인된 방법과 적용 조건을 정리해줘. 각 항목에는 근거가 있는 PDF 페이지를 표시하고, 자료의 주장과 실무적 해석을 구분해줘.
+
+이를 백화점의 행사 소개·상품 소개·매장 안내 콘텐츠에 어떻게 적용할지 예시와 점검 체크리스트를 제안해줘. 자료에 없는 사실이나 수치는 만들지 말고, 한계와 추가 확인이 필요한 점도 알려줘.
+
+마지막에 Skill에 포함할 작업 순서와 결과물 형식을 제안해줘. 아직 Skill은 만들지 말고, 내가 분석 결과를 확인할 때까지 기다려줘.</textarea>
+        <div class="flex items-center justify-end gap-3"><span id="copy-status-1" role="status" class="text-sm text-brand-600"></span><button data-copy-step="1" class="px-5 py-3 rounded-xl bg-brand-500 hover:bg-brand-600 text-white font-bold text-sm">프롬프트 복사</button></div>
+      </section>
+      <section id="geo-page-2" class="hidden bg-white border border-[#DDDBD5] rounded-2xl p-5 md:p-6 mb-5 flex flex-col gap-4">
+        <h2 class="text-lg font-extrabold text-neutral-900">GEO 가이드 Skill 만들기</h2>
+        <p class="text-sm text-neutral-600">Step 1의 분석 결과를 확인하고 필요한 내용을 보완한 뒤 실행합니다.</p>
+        <label for="geo-prompt-2" class="font-bold text-sm">실습 프롬프트</label>
+        <textarea id="geo-prompt-2" class="w-full border border-[#DDDBD5] rounded-xl p-4 text-sm md:text-base leading-relaxed focus:outline-none focus:border-brand-500" rows="13">앞서 확인한 [Generative Engine Optimization.pdf] 분석 결과와 GEO 체크리스트를 바탕으로, 백화점 마케팅 콘텐츠를 점검하고 개선하는 Skill을 만들어줘.
 Skill 이름은 geo-content-optimizer로 해줘.
 
-자료의 핵심 원칙과 근거를 정리하고, 실제 콘텐츠 점검·수정에 적용할 절차와 체크리스트를 구성해줘. 근거가 확인되는 출처·인용, 명확한 답변 구조, 구체적인 정보와 데이터 등을 자료에서 확인한 범위 안에서 반영해줘.
+사용자가 콘텐츠를 입력하면 필요한 경우 목적·대상 고객·게시 채널을 먼저 질문하고, 콘텐츠 진단 → 개선 가이드 → 수정 콘텐츠 순서로 결과를 제공하도록 구성해줘. 각 개선안에는 적용한 GEO 원칙과 PDF 근거 페이지를 표시해줘.
 
-사용자가 콘텐츠를 제공하면 먼저 목적·대상 고객·게시 채널 등 필요한 사항만 질문하고, 현재 콘텐츠 진단 → 개선안 → 수정 콘텐츠 순서로 결과를 제시하도록 해줘. 사실이나 수치를 임의로 만들지 말고, 추가 확인이 필요한 부분은 표시해줘.
+자료의 근거와 실무 제안을 구분하고, 사실·수치·출처를 임의로 만들지 마. AI 검색·답변 노출을 보장하지 말고 확인이 필요한 부분은 표시해줘.
 
-SKILL.md와 필요한 참고 자료를 저장하고, 저장 위치와 사용 예시를 알려줘. 자료의 주장과 실무 제안을 구분하고 AI 답변 노출을 보장하지는 마.</textarea>
-        <div class="flex items-center justify-end gap-3"><span id="copy-status" role="status" class="text-sm text-brand-600"></span><button id="copy-geo" class="px-5 py-3 rounded-xl bg-brand-500 hover:bg-brand-600 text-white font-bold text-sm">프롬프트 복사</button></div>
+반복 사용할 수 있도록 SKILL.md와 참고 자료·체크리스트를 저장하고, 저장 위치와 실제 사용 예시를 알려줘.</textarea>
+        <div class="flex items-center justify-end gap-3"><span id="copy-status-2" role="status" class="text-sm text-brand-600"></span><button data-copy-step="2" class="px-5 py-3 rounded-xl bg-brand-500 hover:bg-brand-600 text-white font-bold text-sm">프롬프트 복사</button></div>
       </section>
     </main>
   </div>
   <script>
-    document.getElementById('copy-geo').addEventListener('click', async () => {
-      const input = document.getElementById('geo-prompt');
-      let copied = false;
-      try { await navigator.clipboard.writeText(input.value); copied = true; }
-      catch { input.focus(); input.select(); copied = document.execCommand('copy'); }
-      document.getElementById('copy-status').textContent = copied ? '복사되었습니다.' : '프롬프트를 선택해 직접 복사해 주세요.';
+    function showGeoPage(page) {
+      for (let i = 1; i <= 2; i++) {
+        const selected = i === page;
+        document.getElementById('geo-page-' + i).classList.toggle('hidden', !selected);
+        const button = document.getElementById('geo-tab-' + i);
+        button.setAttribute('aria-pressed', String(selected));
+        button.classList.remove('bg-brand-500', 'text-white', 'border-brand-500', 'bg-white', 'text-brand-500', 'border-[#DDDBD5]', 'hover:bg-neutral-50');
+        button.classList.add(...(selected ? ['bg-brand-500', 'text-white', 'border-brand-500'] : ['bg-white', 'text-brand-500', 'border-[#DDDBD5]', 'hover:bg-neutral-50']));
+      }
+    }
+    document.querySelectorAll('[data-copy-step]').forEach(button => {
+      button.addEventListener('click', async () => {
+        const step = button.dataset.copyStep;
+        const input = document.getElementById('geo-prompt-' + step);
+        let copied = false;
+        try { await navigator.clipboard.writeText(input.value); copied = true; }
+        catch { input.focus(); input.select(); copied = document.execCommand('copy'); }
+        document.getElementById('copy-status-' + step).textContent = copied ? '복사되었습니다.' : '프롬프트를 선택해 직접 복사해 주세요.';
+      });
     });
   </script>
 </body>
