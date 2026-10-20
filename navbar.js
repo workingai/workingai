@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // 1. 현재 폴더 위치 분석 (워크숍 하위 폴더 여부 확인)
   const workshopMatch = window.location.pathname.match(/\/(workshop01|workshop02|ssg)(?:\/|$)/);
   const isSubdir = Boolean(workshopMatch);
-  const prefix = isSubdir ? '../' : '';
+  const prefix = /\/ssg\/day2(?:\/|$)/.test(window.location.pathname) ? '../../' : (isSubdir ? '../' : '');
 
   // 2. 공통 navbar.html 로드 (캐시 방지를 위해 버전 쿼리 추가)
   fetch(prefix + 'navbar.html?v=13')
@@ -116,14 +116,14 @@ document.addEventListener('DOMContentLoaded', () => {
       let processedHtml = html;
       if (isSubdir) {
         processedHtml = processedHtml
-          .replace(/href="index\.html"/g, 'href="../index.html"')
-          .replace(/href="mulcam01\.html"/g, 'href="../mulcam01.html"')
-          .replace(/href="(workshop01|workshop02|ssg)\//g, 'href="../$1/')
-          .replace(/src="images\//g, 'src="../images/');
+          .replace(/href="index\.html"/g, 'href="' + prefix + 'index.html"')
+          .replace(/href="mulcam01\.html"/g, 'href="' + prefix + 'mulcam01.html"')
+          .replace(/href="(workshop01|workshop02|ssg)\//g, 'href="' + prefix + '$1/')
+          .replace(/src="images\//g, 'src="' + prefix + 'images/');
       }
 
       if (/\/ssg(?:\/|$)/.test(window.location.pathname)) {
-        processedHtml = processedHtml.replace(/(<a\b[^>]*href=")[^"]*("[^>]*>\s*<img\b[^>]*alt="Working AI")/, '$1./index.html$2');
+        processedHtml = processedHtml.replace(/(<a\b[^>]*href=")[^"]*("[^>]*>\s*<img\b[^>]*alt="Working AI")/, '$1' + (/\/ssg\/day2(?:\/|$)/.test(window.location.pathname) ? '../index.html' : './index.html') + '$2');
       }
       placeholder.innerHTML = processedHtml;
 
@@ -165,7 +165,7 @@ document.addEventListener('DOMContentLoaded', () => {
       });
 
       // 3. 네비게이션 이벤트 핸들러 및 인증 상태 연동 초기화
-      initNavbar(isSubdir);
+      initNavbar(isSubdir, prefix);
 
       // 4. 우측 하단 카카오톡 플로팅 버튼 생성 및 추가 (서브디렉토리 제외)
       if (!isSubdir) {
@@ -221,7 +221,7 @@ window.toggleMobileMenu = () => {
   }
 };
 
-function initNavbar(isSubdir) {
+function initNavbar(isSubdir, rootPrefix = isSubdir ? '../' : '') {
   const loginBtn = document.getElementById('nav-login-btn');
   const logoutBtn = document.getElementById('nav-logout-btn');
   const mobileLoginBtn = document.getElementById('mobile-login-btn');
@@ -234,7 +234,7 @@ function initNavbar(isSubdir) {
       openEntranceModal();
     } else {
       const pageName = isSubdir ? window.location.pathname.replace(/^\//, '') : window.location.pathname.split('/').pop();
-      const destIndex = isSubdir ? '../index.html' : 'index.html';
+      const destIndex = rootPrefix + 'index.html';
       window.location.href = destIndex + '?redirect=' + pageName;
     }
   };
@@ -260,7 +260,7 @@ function initNavbar(isSubdir) {
     localStorage.removeItem('naver_client_id');
     localStorage.removeItem('naver_client_secret');
     localStorage.removeItem('gemini_api_key');
-    window.location.href = isSubdir ? '../index.html' : 'index.html';
+    window.location.href = rootPrefix + 'index.html';
   };
 
   if (logoutBtn) {
@@ -308,7 +308,7 @@ function initNavbar(isSubdir) {
           if (typeof openEntranceModal === 'function') {
             openEntranceModal(relativeDestination);
           } else {
-            const mainUrl = new URL(isSubdir ? '../index.html' : 'index.html', window.location.href);
+            const mainUrl = new URL(rootPrefix + 'index.html', window.location.href);
             mainUrl.searchParams.set('redirect', relativeDestination);
             window.location.href = mainUrl.href;
           }
@@ -325,15 +325,6 @@ function initNavbar(isSubdir) {
   }, true);
 }
 function openShinsegaeWorkbook(anchor) {
-  if (localStorage.getItem('ssg_authenticated_261015') === 'true' || sessionStorage.getItem('ssg_authenticated_261015') === 'true') {
-    localStorage.setItem('ssg_authenticated_261015', 'true');
-    window.location.href = anchor.href;
-    return false;
-  }
-  const password = prompt('신세계 워크북 비밀번호를 입력하세요.');
-  if (password === null) return false;
-  if (password.trim() !== 'ssg261015') { alert('비밀번호를 정확히 입력해 주세요.'); return false; }
-  localStorage.setItem('ssg_authenticated_261015', 'true');
-  window.location.href = anchor.href;
+  window.location.href = new URL('/workshop.html', window.location.href).href;
   return false;
 }
