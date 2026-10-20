@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <script>
+    // Keep relative workbook links inside this folder after clean-URL redirects.
+    if (window.location.protocol === 'http:' || window.location.protocol === 'https:') {
+      const workbookBase = document.createElement('base');
+      workbookBase.href = new URL('/ssg/day2/', window.location.href).href;
+      document.head.appendChild(workbookBase);
+    }
+  </script>
+  <script src="./access.js"></script>
+  <link rel="icon" href="../../favicon.png?v=2" type="image/png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WORKING AI · Day 2 · 콘텐츠 가이드 만들기</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Pretendard Font -->
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+  <link rel="stylesheet" href="../../global.css">
+  <!-- IBM Plex Mono Font -->
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#F2F8F5',
+              100: '#E6F2ED',
+              500: '#2A6B52',
+              600: '#1D4E3A',
+            },
+            neutral: {
+              50: '#F8F7F4',
+              100: '#F2F1EE',
+              200: '#E5E3DF',
+              300: '#DDDBD5',
+              400: '#B0AEA8',
+              500: '#8A8881',
+              600: '#605E59',
+              900: '#1A1A18',
+            }
+          },
+          fontFamily: {
+            sans: ['Pretendard', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+            mono: ['IBM Plex Mono', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="./style.css">
+<script defer src="./app.js"></script>
+</head>
+<body class="min-h-screen text-neutral-900 antialiased flex flex-col h-screen overflow-hidden pt-[5px]">
+  <!-- Top brand bar -->
+  <div class="fixed top-0 left-0 w-full h-[5px] bg-brand-500 z-50"></div>
+
+  <!-- Navigation Bar (Shared) -->
+  <div id="navbar-placeholder"></div>
+  <script src="../../navbar.js"></script>
+
+  <!-- Content Container -->
+  <div class="workbook-layout flex-1 flex flex-col lg:flex-row lg:overflow-hidden">
+    <!-- ===== Left Sidebar Navigation ===== -->
+    <aside class="flex-shrink-0 w-full lg:w-64 bg-white border-b lg:border-b-0 lg:border-r border-[#DDDBD5] flex flex-col lg:h-full pt-4 day2-sidebar">
+<nav aria-label="Day 2 실습 메뉴" class="flex lg:flex-col gap-5 lg:gap-0 px-3 pb-4 overflow-x-auto lg:overflow-y-auto lg:flex-1 lg:min-h-0"><section class="flex-shrink-0 lg:flex-shrink "><h2 class="px-3 mb-2 text-[11px] font-extrabold tracking-wide text-neutral-400 whitespace-nowrap">Part 1. 정보 수집과 아이디어</h2><div class="flex lg:flex-col gap-1"><a href="./p101_warmingup.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors"><span class="text-lg leading-none" aria-hidden="true">🔥</span><span>워밍업 실습</span></a><a href="./p102_persona_journey.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors"><span class="text-lg leading-none" aria-hidden="true">👤</span><span>페르소나·고객여정</span></a><a href="./p103_ksf.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors"><span class="text-lg leading-none" aria-hidden="true">🔎</span><span>KSF 찾기</span></a><a href="./p104_mindmap.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors"><span class="text-lg leading-none" aria-hidden="true">🌿</span><span>마인드맵 · 방향 선택</span></a></div></section><section class="flex-shrink-0 lg:flex-shrink lg:mt-5"><h2 class="px-3 mb-2 text-[11px] font-extrabold tracking-wide text-neutral-400 whitespace-nowrap">Part 2. 콘텐츠 기획</h2><div class="flex lg:flex-col gap-1"><a href="./p200_chatbot.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors"><span class="text-lg leading-none" aria-hidden="true">🤖</span><span>자동화 챗봇 만들기</span></a><a href="./p201_plan.html" aria-current="page" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-bold text-brand-600 bg-brand-100 whitespace-nowrap transition-colors"><span class="text-lg leading-none" aria-hidden="true">📝</span><span>가이드·스킬 만들기</span></a><a href="./p204_content.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors"><span class="text-lg leading-none" aria-hidden="true">✍️</span><span>추가 프로젝트</span></a></div></section><section class="flex-shrink-0 lg:flex-shrink lg:mt-5"><h2 class="px-3 mb-2 text-[11px] font-extrabold tracking-wide text-neutral-400 whitespace-nowrap">Part 3. 이미지와 영상 제작</h2><div class="flex lg:flex-col gap-1"><a href="./p301_person.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors"><span class="text-lg leading-none" aria-hidden="true">👤</span><span>가상 인물 이미지</span></a><a href="./p302_product.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors"><span class="text-lg leading-none" aria-hidden="true">🛍️</span><span>상품 스튜디오 연출</span></a><a href="./p303_information.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors"><span class="text-lg leading-none" aria-hidden="true">🪧</span><span>정보 안내 이미지</span></a><a href="./p304_cardnews.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors"><span class="text-lg leading-none" aria-hidden="true">🎨</span><span>카드뉴스 · Canva 편집</span></a><a href="./p305_video.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors"><span class="text-lg leading-none" aria-hidden="true">🎬</span><span>Flow · 장면 영상화</span></a></div></section><section class="flex-shrink-0 lg:flex-shrink lg:mt-5"><h2 class="px-3 mb-2 text-[11px] font-extrabold tracking-wide text-neutral-400 whitespace-nowrap">Part 4. 내 콘텐츠 완성</h2><div class="flex lg:flex-col gap-1"><a href="./p401_finish.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors"><span class="text-lg leading-none" aria-hidden="true">✨</span><span>내 콘텐츠 완성</span></a></div></section><section class="flex-shrink-0 lg:flex-shrink lg:mt-5"><h2 class="px-3 mb-2 text-[11px] font-extrabold tracking-wide text-neutral-400 whitespace-nowrap">Part 5. 검수와 공유</h2><div class="flex lg:flex-col gap-1"><a href="./p501_review.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors"><span class="text-lg leading-none" aria-hidden="true">✅</span><span>게시 전 검수</span></a><a href="./p502_share.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors"><span class="text-lg leading-none" aria-hidden="true">🚀</span><span>1분 공유 · 자료 정리</span></a></div></section><section class="flex-shrink-0 lg:flex-shrink lg:mt-5"><h2 class="px-3 mb-2 text-[11px] font-extrabold tracking-wide text-neutral-400 whitespace-nowrap">Bonus · 추가 실습</h2><div class="flex lg:flex-col gap-1"><a href="./bonus_flow.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors"><span class="text-lg leading-none" aria-hidden="true">🎬</span><span>Flow 추가 실습</span></a></div></section></nav>      <!-- Sidebar Footer (Banner) -->
+      <div class="mt-auto border-t border-[#DDDBD5] p-4 bg-white flex-shrink-0">
+        <!-- Dropup Menu Container -->
+        <div class="relative mb-2.5">
+          <button id="quick-links-btn" onclick="toggleQuickLinks(event)" class="w-full flex items-center justify-between py-2 px-3 border border-[#DDDBD5] hover:border-brand-500 bg-white hover:bg-neutral-50 text-neutral-900 rounded-xl transition-all duration-300 shadow-xs text-sm font-extrabold focus:outline-none">
+            <span class="flex items-center gap-2 text-neutral-600 hover:text-neutral-900">
+              <span>🔗</span> 주요 서비스 바로가기
+            </span>
+            <svg id="quick-links-arrow" class="w-3.5 h-3.5 text-neutral-400 transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5"></path>
+            </svg>
+          </button>
+          <!-- Dropup menu -->
+          <div id="quick-links-menu" class="hidden absolute bottom-full left-0 w-full mb-2 bg-white border border-[#DDDBD5] rounded-xl shadow-lg z-50 overflow-hidden py-1">
+<a href="https://gemini.google.com/" target="_blank" rel="noopener noreferrer" class="block px-4 py-2.5 text-xs text-neutral-700 hover:bg-brand-50 hover:text-brand-600 transition-colors font-bold">제미나이</a>
+<a href="https://sheets.google.com/" target="_blank" rel="noopener noreferrer" class="block px-4 py-2.5 text-xs text-neutral-700 hover:bg-brand-50 hover:text-brand-600 transition-colors font-bold">구글 시트</a>
+<a href="https://aistudio.google.com/" target="_blank" rel="noopener noreferrer" class="block px-4 py-2.5 text-xs text-neutral-700 hover:bg-brand-50 hover:text-brand-600 transition-colors font-bold">AI Studio</a></div>
+        </div>
+        <script>
+          function toggleQuickLinks(e) {
+            e.stopPropagation();
+            const menu = document.getElementById('quick-links-menu');
+            const arrow = document.getElementById('quick-links-arrow');
+            const isHidden = menu.classList.contains('hidden');
+            if (isHidden) {
+              menu.classList.remove('hidden');
+              arrow.classList.add('rotate-180');
+            } else {
+              menu.classList.add('hidden');
+              arrow.classList.remove('rotate-180');
+            }
+          }
+          document.addEventListener('click', (e) => {
+            const menu = document.getElementById('quick-links-menu');
+            const btn = document.getElementById('quick-links-btn');
+            const arrow = document.getElementById('quick-links-arrow');
+            if (menu && !menu.classList.contains('hidden') && !menu.contains(e.target) && !btn.contains(e.target)) {
+              menu.classList.add('hidden');
+              arrow.classList.remove('rotate-180');
+            }
+          });
+        </script>
+
+        <a href="../pdfviewer.html" class="block w-full text-center py-3 px-4 border border-[#DDDBD5] hover:border-brand-500 bg-brand-50 hover:bg-brand-100 text-brand-600 rounded-xl transition-all duration-300 shadow-xs" style="text-decoration: none;">
+          <span class="block text-xs font-bold text-neutral-400 mb-0.5 tracking-wider uppercase">Slide PDF</span>
+          <span class="block text-sm font-extrabold tracking-tight">강의 교안 뷰어</span>
+        </a>
+      </div>
+    </aside>
+
+<main class="workbook-main day2-main flex-1 flex flex-col overflow-hidden pt-8 lg:pt-10 pb-8 px-4 md:px-8 lg:px-10" data-page="plan"><header class="lesson-header"><div><span class="part-badge">DAY 2 · Part 2. 콘텐츠 기획</span><h1>1. 콘텐츠 가이드 만들기</h1></div><div class="header-actions"><nav class="page-tabs" aria-label="가이드와 스킬 실습"><button type="button" class="page-tab selected" data-page-tab="1" aria-controls="lesson-1" aria-pressed="true">1</button><button type="button" class="page-tab" data-page-tab="2" aria-controls="lesson-2" aria-pressed="false">2</button></nav></div></header><div class="lesson-content"><section data-page-title="1. 콘텐츠 가이드 만들기" id="lesson-1" data-lesson="plan" data-prompt-key="plan" class="lesson-panel "><div class="lesson-instruction"><p>앞선 분석을 바탕으로 콘텐츠 제작 가이드를 문서로 저장하세요.</p></div><article class="prompt-card"><div class="prompt-head"><label for="prompt-plan">실습 프롬프트</label><p>내용을 수정한 뒤 같은 채팅에서 이어서 실행하세요.</p></div><textarea id="prompt-plan" data-prompt="plan" spellcheck="false">앞서 정리한 고객 페르소나, 고객 여정, 채널의 KSF와 선택한 아이디어를 바탕으로 콘텐츠 제작 가이드를 만들어줘.
+
+소개 대상, 핵심 고객, 전달할 메시지, 말투와 구성, 작성 시 주의사항을 정리해줘.
+말투와 구성은 짧은 예시도 넣어줘.
+
+앞으로 카피·블로그·콘텐츠 캘린더를 만들 때 참고할 수 있도록 문서로 저장해줘.
+확인되지 않은 내용은 임의로 채우지 말고 ‘확인 필요’로 표시해줘.</textarea><div class="copy-actions"><button type="button" class="secondary" data-sample="plan">샘플</button><button type="button" class="primary" data-copy="plan">프롬프트 복사</button></div></article></section><section id="lesson-2" data-page-title="2. 콘텐츠 작성 스킬 만들기" data-lesson="style" data-prompt-key="style" class="lesson-panel hidden"><div class="lesson-instruction"><p>앞서 만든 가이드를 재사용할 콘텐츠 작성 스킬로 만드세요.</p></div><article class="prompt-card"><div class="prompt-head"><label for="prompt-style">실습 프롬프트</label><p>내용을 수정한 뒤 같은 채팅에서 이어서 실행하세요.</p></div><textarea id="prompt-style" data-prompt="style" spellcheck="false">앞서 만든 콘텐츠 가이드를 활용하는 ‘우리 콘텐츠 작성’ 스킬을 만들어줘.
+
+새로운 소재와 원하는 형식(SNS 카피 또는 블로그)을 입력하면,
+가이드 확인 → 콘텐츠 작성 → 사실·말투 점검 순서로 진행하도록 해줘.
+
+SNS 카피는 3가지 안으로, 블로그는 제목·도입·본문·마무리로 작성해줘.
+고객과 톤앤매너는 가이드를 따르고, 없는 정보는 만들어내지 마.
+
+이 작성 절차를 재사용할 수 있는 스킬로 저장하고, 실행하는 방법도 간단히 알려줘.</textarea><div class="copy-actions"><button type="button" class="secondary" data-sample="style">샘플</button><button type="button" class="primary" data-copy="style">프롬프트 복사</button></div></article></section><div class="lesson-footer"><a href="./p204_content.html" class="practice-next">다음 · 추가 프로젝트 →</a><button type="button" id="export-notes">프롬프트 기록 다운로드</button></div></div></main></div><div id="toast" role="status" aria-live="polite"></div></body></html>
