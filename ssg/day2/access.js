@@ -1,0 +1,1 @@
+(()=>{if(location.protocol==='file:')return;let ok=false;try{ok=localStorage.getItem('ssg_authenticated_261021')==='true'}catch{}if(ok)return;document.documentElement.style.visibility='hidden';const u=new URL('/index.html',location.href);u.searchParams.set('redirect',location.pathname.replace(/^\//,'')+location.search+location.hash);location.replace(u.href)})();
