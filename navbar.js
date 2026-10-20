@@ -252,6 +252,8 @@ function initNavbar(isSubdir, rootPrefix = isSubdir ? '../' : '') {
   // [로그아웃 버튼 클릭 시 처리]
   const handleLogoutClick = () => {
     localStorage.removeItem('ssg_authenticated_261015');
+    localStorage.removeItem('ssg_authenticated_261021');
+    sessionStorage.removeItem('ssg_authenticated_261021');
     sessionStorage.removeItem('ssg_authenticated_261015');
     localStorage.removeItem('workbook_logged_in');
     localStorage.removeItem('workbook_access_code');
