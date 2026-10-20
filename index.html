@@ -782,8 +782,11 @@
       if (currentLoginTab === 'password') {
         const onlyPwd = document.getElementById('input-only-password').value.trim().toLowerCase();
         if (pendingRedirectUrl.includes('ssg/')) {
-          if (onlyPwd !== 'ssg261015') { showModalError('비밀번호를 정확히 입력해 주세요.'); return; }
-          localStorage.setItem('ssg_authenticated_261015', 'true');
+          const isDay2 = pendingRedirectUrl.includes('ssg/day2/');
+          const expectedPassword = isDay2 ? 'ssg261021' : 'ssg261015';
+          const accessKey = isDay2 ? 'ssg_authenticated_261021' : 'ssg_authenticated_261015';
+          if (onlyPwd !== expectedPassword) { showModalError('비밀번호를 정확히 입력해 주세요.'); return; }
+          localStorage.setItem(accessKey, 'true');
           window.location.href = pendingRedirectUrl;
           return;
         }
