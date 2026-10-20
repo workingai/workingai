@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <script>
+    // Keep relative workbook links inside this folder after clean-URL redirects.
+    if (window.location.protocol === 'http:' || window.location.protocol === 'https:') {
+      const workbookBase = document.createElement('base');
+      workbookBase.href = new URL('/ssg/day2/', window.location.href).href;
+      document.head.appendChild(workbookBase);
+    }
+  </script>
+  <script src="./access.js"></script>
+  <link rel="icon" href="../../favicon.png?v=2" type="image/png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WORKING AI · Day 2 · 정보 안내 이미지</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Pretendard Font -->
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+  <link rel="stylesheet" href="../../global.css">
+  <!-- IBM Plex Mono Font -->
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#F2F8F5',
+              100: '#E6F2ED',
+              500: '#2A6B52',
+              600: '#1D4E3A',
+            },
+            neutral: {
+              50: '#F8F7F4',
+              100: '#F2F1EE',
+              200: '#E5E3DF',
+              300: '#DDDBD5',
+              400: '#B0AEA8',
+              500: '#8A8881',
+              600: '#605E59',
+              900: '#1A1A18',
+            }
+          },
+          fontFamily: {
+            sans: ['Pretendard', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+            mono: ['IBM Plex Mono', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="./style.css">
+<script defer src="./app.js"></script>
+</head>
+<body class="min-h-screen text-neutral-900 antialiased flex flex-col h-screen overflow-hidden pt-[5px]">
+  <!-- Top brand bar -->
+  <div class="fixed top-0 left-0 w-full h-[5px] bg-brand-500 z-50"></div>
+
+  <!-- Navigation Bar (Shared) -->
+  <div id="navbar-placeholder"></div>
+  <script src="../../navbar.js"></script>
+
+  <!-- Content Container -->
+  <div class="workbook-layout flex-1 flex flex-col lg:flex-row lg:overflow-hidden">
+    <!-- ===== Left Sidebar Navigation ===== -->
+    <aside class="flex-shrink-0 w-full lg:w-64 bg-white border-b lg:border-b-0 lg:border-r border-[#DDDBD5] flex flex-col lg:h-full pt-4 day2-sidebar">
+<nav aria-label="Day 2 실습 메뉴" class="flex lg:flex-col gap-5 lg:gap-0 px-3 pb-4 overflow-x-auto lg:overflow-y-auto lg:flex-1 lg:min-h-0"><section class="flex-shrink-0 lg:flex-shrink "><h2 class="px-3 mb-2 text-[11px] font-extrabold tracking-wide text-neutral-400 whitespace-nowrap">Part 1. 정보 수집과 아이디어</h2><div class="flex lg:flex-col gap-1"><a href="./p101_warmingup.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors"><span class="text-lg leading-none" aria-hidden="true">🔥</span><span>워밍업 실습</span></a><a href="./p102_persona_journey.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors"><span class="text-lg leading-none" aria-hidden="true">👤</span><span>페르소나·고객여정</span></a><a href="./p103_ksf.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors"><span class="text-lg leading-none" aria-hidden="true">🔎</span><span>KSF 찾기</span></a><a href="./p104_mindmap.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors"><span class="text-lg leading-none" aria-hidden="true">🌿</span><span>마인드맵 · 방향 선택</span></a></div></section><section class="flex-shrink-0 lg:flex-shrink lg:mt-5"><h2 class="px-3 mb-2 text-[11px] font-extrabold tracking-wide text-neutral-400 whitespace-nowrap">Part 2. 콘텐츠 기획</h2><div class="flex lg:flex-col gap-1"><a href="./p200_chatbot.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors"><span class="text-lg leading-none" aria-hidden="true">🤖</span><span>자동화 챗봇 만들기</span></a><a href="./p201_plan.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors"><span class="text-lg leading-none" aria-hidden="true">📝</span><span>가이드·스킬 만들기</span></a><a href="./p204_content.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors"><span class="text-lg leading-none" aria-hidden="true">✍️</span><span>추가 프로젝트</span></a></div></section><section class="flex-shrink-0 lg:flex-shrink lg:mt-5"><h2 class="px-3 mb-2 text-[11px] font-extrabold tracking-wide text-neutral-400 whitespace-nowrap">Part 3. 이미지와 영상 제작</h2><div class="flex lg:flex-col gap-1"><a href="./p301_person.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors"><span class="text-lg leading-none" aria-hidden="true">👤</span><span>가상 인물 이미지</span></a><a href="./p302_product.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors"><span class="text-lg leading-none" aria-hidden="true">🛍️</span><span>상품 스튜디오 연출</span></a><a href="./p303_information.html" aria-current="page" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-bold text-brand-600 bg-brand-100 whitespace-nowrap transition-colors"><span class="text-lg leading-none" aria-hidden="true">🪧</span><span>정보 안내 이미지</span></a><a href="./p304_cardnews.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors"><span class="text-lg leading-none" aria-hidden="true">🎨</span><span>카드뉴스 · Canva 편집</span></a><a href="./p305_video.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors"><span class="text-lg leading-none" aria-hidden="true">🎬</span><span>Flow · 장면 영상화</span></a></div></section><section class="flex-shrink-0 lg:flex-shrink lg:mt-5"><h2 class="px-3 mb-2 text-[11px] font-extrabold tracking-wide text-neutral-400 whitespace-nowrap">Part 4. 내 콘텐츠 완성</h2><div class="flex lg:flex-col gap-1"><a href="./p401_finish.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors"><span class="text-lg leading-none" aria-hidden="true">✨</span><span>내 콘텐츠 완성</span></a></div></section><section class="flex-shrink-0 lg:flex-shrink lg:mt-5"><h2 class="px-3 mb-2 text-[11px] font-extrabold tracking-wide text-neutral-400 whitespace-nowrap">Part 5. 검수와 공유</h2><div class="flex lg:flex-col gap-1"><a href="./p501_review.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors"><span class="text-lg leading-none" aria-hidden="true">✅</span><span>게시 전 검수</span></a><a href="./p502_share.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors"><span class="text-lg leading-none" aria-hidden="true">🚀</span><span>1분 공유 · 자료 정리</span></a></div></section><section class="flex-shrink-0 lg:flex-shrink lg:mt-5"><h2 class="px-3 mb-2 text-[11px] font-extrabold tracking-wide text-neutral-400 whitespace-nowrap">Bonus · 추가 실습</h2><div class="flex lg:flex-col gap-1"><a href="./bonus_flow.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors"><span class="text-lg leading-none" aria-hidden="true">🎬</span><span>Flow 추가 실습</span></a></div></section></nav>      <!-- Sidebar Footer (Banner) -->
+      <div class="mt-auto border-t border-[#DDDBD5] p-4 bg-white flex-shrink-0">
+        <!-- Dropup Menu Container -->
+        <div class="relative mb-2.5">
+          <button id="quick-links-btn" onclick="toggleQuickLinks(event)" class="w-full flex items-center justify-between py-2 px-3 border border-[#DDDBD5] hover:border-brand-500 bg-white hover:bg-neutral-50 text-neutral-900 rounded-xl transition-all duration-300 shadow-xs text-sm font-extrabold focus:outline-none">
+            <span class="flex items-center gap-2 text-neutral-600 hover:text-neutral-900">
+              <span>🔗</span> 주요 서비스 바로가기
+            </span>
+            <svg id="quick-links-arrow" class="w-3.5 h-3.5 text-neutral-400 transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5"></path>
+            </svg>
+          </button>
+          <!-- Dropup menu -->
+          <div id="quick-links-menu" class="hidden absolute bottom-full left-0 w-full mb-2 bg-white border border-[#DDDBD5] rounded-xl shadow-lg z-50 overflow-hidden py-1">
+<a href="https://gemini.google.com/" target="_blank" rel="noopener noreferrer" class="block px-4 py-2.5 text-xs text-neutral-700 hover:bg-brand-50 hover:text-brand-600 transition-colors font-bold">제미나이</a>
+<a href="https://sheets.google.com/" target="_blank" rel="noopener noreferrer" class="block px-4 py-2.5 text-xs text-neutral-700 hover:bg-brand-50 hover:text-brand-600 transition-colors font-bold">구글 시트</a>
+<a href="https://aistudio.google.com/" target="_blank" rel="noopener noreferrer" class="block px-4 py-2.5 text-xs text-neutral-700 hover:bg-brand-50 hover:text-brand-600 transition-colors font-bold">AI Studio</a></div>
+        </div>
+        <script>
+          function toggleQuickLinks(e) {
+            e.stopPropagation();
+            const menu = document.getElementById('quick-links-menu');
+            const arrow = document.getElementById('quick-links-arrow');
+            const isHidden = menu.classList.contains('hidden');
+            if (isHidden) {
+              menu.classList.remove('hidden');
+              arrow.classList.add('rotate-180');
+            } else {
+              menu.classList.add('hidden');
+              arrow.classList.remove('rotate-180');
+            }
+          }
+          document.addEventListener('click', (e) => {
+            const menu = document.getElementById('quick-links-menu');
+            const btn = document.getElementById('quick-links-btn');
+            const arrow = document.getElementById('quick-links-arrow');
+            if (menu && !menu.classList.contains('hidden') && !menu.contains(e.target) && !btn.contains(e.target)) {
+              menu.classList.add('hidden');
+              arrow.classList.remove('rotate-180');
+            }
+          });
+        </script>
+
+        <a href="../pdfviewer.html" class="block w-full text-center py-3 px-4 border border-[#DDDBD5] hover:border-brand-500 bg-brand-50 hover:bg-brand-100 text-brand-600 rounded-xl transition-all duration-300 shadow-xs" style="text-decoration: none;">
+          <span class="block text-xs font-bold text-neutral-400 mb-0.5 tracking-wider uppercase">Slide PDF</span>
+          <span class="block text-sm font-extrabold tracking-tight">강의 교안 뷰어</span>
+        </a>
+      </div>
+    </aside>
+
+<main class="workbook-main day2-main flex-1 flex flex-col overflow-hidden pt-8 lg:pt-10 pb-8 px-4 md:px-8 lg:px-10" data-page="information"><header class="lesson-header"><div><span class="part-badge">DAY 2 · Part 3. 이미지와 영상 제작</span><h1>정보 안내 이미지</h1></div><div class="header-actions"><a class="tool-button" href="https://gemini.google.com/" target="_blank" rel="noopener noreferrer">Gemini ↗</a></div></header><div class="lesson-content"><div class="practice-toolbar"><div class="lesson-instruction"><p>이미지 유형을 고르고 앞서 사용한 자료와 가이드를 첨부하세요.</p></div><div class="practice-fields"><label for="image-format">이미지 유형<select id="image-format"><option value="1">SVG 차트</option><option value="2">지도형 인포그래픽</option><option value="3">안내 포스터</option><option value="4">브랜드 이메일 서명</option><option value="5">순서도</option><option value="6">비교도</option><option value="7">관계도</option></select></label></div></div><section id="lesson-1" class="lesson-panel "><article class="prompt-card"><div class="prompt-head"><label for="prompt-information">SVG 차트</label><p>앞서 선택한 대상과 콘텐츠 가이드를 이어서 사용하세요.</p></div><textarea id="prompt-information" data-prompt="information" spellcheck="false">앞서 선택한 소개 대상과 고객에게 필요한 정보 중, 제공한 자료에서 비교할 수 있는 수치를 골라 16:9 SVG 인포그래픽을 만들어줘.
+
+먼저 사용할 항목·수치·단위·기간·출처를 확인하고 막대·선·도넛 중 적합한 차트로 표현해줘. 데이터가 부족하면 필요한 자료를 질문하고 수치는 만들지 마.
+
+항목별 색상을 구분하고 가장 중요한 내용을 강조해줘. 제목·축·데이터 라벨·출처를 읽기 쉽게 배치하고, 콘텐츠 가이드의 색상과 분위기를 적용해줘. 편집 가능한 SVG 파일로 저장해줘.</textarea><div class="copy-actions"><button type="button" class="secondary" data-sample="information">샘플</button><button type="button" class="primary" data-copy="information">프롬프트 복사</button></div></article></section><section id="lesson-2" class="lesson-panel hidden"><article class="prompt-card"><div class="prompt-head"><label for="prompt-information-2">지도형 인포그래픽</label><p>앞서 선택한 대상과 콘텐츠 가이드를 이어서 사용하세요.</p></div><textarea id="prompt-information-2" data-prompt="information-2" spellcheck="false">앞서 선택한 소개 대상과 관련해 제공한 지역별 데이터를 지도형 인포그래픽으로 만들어줘.
+
+지역별 수치·단위·기간·출처를 확인하고, 비교 기준이 같은 데이터만 사용해줘. 값에 따라 색의 농도를 달리하고 범례와 핵심 지역 라벨을 표시해줘. 데이터가 없는 지역은 따로 구분하고 수치를 추정하지 마.
+
+16:9 비율로 제목·핵심 메시지·출처를 넣고 콘텐츠 가이드의 분위기에 맞춰줘. 지역별 자료가 없다면 필요한 데이터를 먼저 요청해줘.</textarea><div class="copy-actions"><button type="button" class="secondary" data-sample="information-2">샘플</button><button type="button" class="primary" data-copy="information-2">프롬프트 복사</button></div></article></section><section id="lesson-3" class="lesson-panel hidden"><article class="prompt-card"><div class="prompt-head"><label for="prompt-information-3">안내 포스터</label><p>앞서 선택한 대상과 콘텐츠 가이드를 이어서 사용하세요.</p></div><textarea id="prompt-information-3" data-prompt="information-3" spellcheck="false">앞서 선택한 소개 대상과 고객, 콘텐츠 가이드에 맞춰 안내 포스터 1장을 만들어줘.
+
+제공한 자료에서 고객이 궁금해할 핵심 정보를 3~5개로 정리하고, 제목과 핵심 메시지는 상단에 크게 배치해줘. 항목마다 간단한 아이콘과 짧은 문구를 넣어줘.
+
+세로형 3:4 비율, 콘텐츠 가이드의 포인트 컬러 1~2가지, 충분한 여백과 읽기 쉬운 한글로 구성해줘. 확인되지 않은 가격·기간·혜택·위치는 넣지 말고 필요한 정보를 먼저 질문해줘.</textarea><div class="copy-actions"><button type="button" class="secondary" data-sample="information-3">샘플</button><button type="button" class="primary" data-copy="information-3">프롬프트 복사</button></div></article></section><section id="lesson-4" class="lesson-panel hidden"><article class="prompt-card"><div class="prompt-head"><label for="prompt-information-4">브랜드 이메일 서명</label><p>앞서 선택한 대상과 콘텐츠 가이드를 이어서 사용하세요.</p></div><textarea id="prompt-information-4" data-prompt="information-4" spellcheck="false">첨부한 우리 브랜드 로고에서 색상과 스타일을 파악해 이메일 서명 이미지를 만들어줘.
+
+이름·직책·부서·연락처·웹사이트는 내가 제공한 정보만 사용하고, 빠진 항목은 먼저 질문해줘.
+
+가로 600px × 세로 150px의 4:1 비율로, 왼쪽에는 로고를, 오른쪽에는 구분선과 정보를 배치해줘. 브랜드 색상과 충분한 여백을 적용하고 한글·영문이 명확하게 읽히도록 해줘.</textarea><div class="copy-actions"><button type="button" class="secondary" data-sample="information-4">샘플</button><button type="button" class="primary" data-copy="information-4">프롬프트 복사</button></div></article></section><section id="lesson-5" class="lesson-panel hidden"><div class="lesson-instruction"><p>내 설명문·업무 안내·표 중 하나를 첨부하세요. 원문과 결과의 수치·단위·순서를 비교해 저장하세요.</p></div><article class="prompt-card"><div class="prompt-head"><label for="prompt-information-5">순서도</label><p>내용을 수정한 뒤 복사하세요.</p></div><textarea id="prompt-information-5" data-prompt="information-5" spellcheck="false">첨부한 설명문에서 진행 절차를 뽑아 한 장의 순서도 이미지로 만들어줘.
+
+핵심 메시지 1개와 주요 단계 3~5개를 짧게 정리하고, 화살표로 순서를 보여줘. 원문에 있는 분기와 조건만 표시하고 없는 단계는 추가하지 마.
+
+가이드의 색상과 말투를 적용하고, 글자가 잘 읽히는 16:9 이미지로 만들어줘.</textarea><div class="copy-actions"><button type="button" class="secondary" data-sample="information-5">샘플</button><button type="button" class="primary" data-copy="information-5">프롬프트 복사</button></div></article></section><section id="lesson-6" class="lesson-panel hidden"><div class="lesson-instruction"><p>내 설명문·업무 안내·표 중 하나를 첨부하세요. 원문과 결과의 수치·단위·순서를 비교해 저장하세요.</p></div><article class="prompt-card"><div class="prompt-head"><label for="prompt-information-6">비교도</label><p>내용을 수정한 뒤 복사하세요.</p></div><textarea id="prompt-information-6" data-prompt="information-6" spellcheck="false">첨부한 자료에서 비교 대상 2~3개와 공통 비교 기준 3개를 찾아 한 장의 비교 인포그래픽으로 만들어줘.
+
+같은 기준끼리 나란히 배치하고 핵심 차이 한 가지를 강조해줘. 수치·단위·기간·출처는 원문대로 쓰고, 없는 정보는 자료 없음으로 표시해줘.
+
+가이드의 분위기를 유지하고 읽기 쉬운 16:9 이미지로 만들어줘.</textarea><div class="copy-actions"><button type="button" class="secondary" data-sample="information-6">샘플</button><button type="button" class="primary" data-copy="information-6">프롬프트 복사</button></div></article></section><section id="lesson-7" class="lesson-panel hidden"><div class="lesson-instruction"><p>내 설명문·업무 안내·표 중 하나를 첨부하세요. 원문과 결과의 수치·단위·순서를 비교해 저장하세요.</p></div><article class="prompt-card"><div class="prompt-head"><label for="prompt-information-7">관계도</label><p>내용을 수정한 뒤 복사하세요.</p></div><textarea id="prompt-information-7" data-prompt="information-7" spellcheck="false">첨부한 설명문에서 주요 요소와 연결 관계를 뽑아 한 장의 관계도 이미지로 만들어줘.
+
+핵심 메시지 하나를 중심에 놓고 관련 요소 3~5개를 연결해줘. 연결선에는 역할이나 관계를 짧게 표시하고, 원문에 없는 인과관계는 만들지 마.
+
+가이드의 색상을 적용하고 읽기 쉬운 16:9 이미지로 만들어줘.</textarea><div class="copy-actions"><button type="button" class="secondary" data-sample="information-7">샘플</button><button type="button" class="primary" data-copy="information-7">프롬프트 복사</button></div></article></section><div class="lesson-footer"><button type="button" id="export-notes">프롬프트 기록 다운로드</button></div></div></main></div><div id="toast" role="status" aria-live="polite"></div></body></html>
