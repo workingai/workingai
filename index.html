@@ -707,6 +707,16 @@
 
     function openEntranceModal(redirectUrl = "") {
       pendingRedirectUrl = redirectUrl || "workshop01/ws01_index.html";
+      const destination = new URL(pendingRedirectUrl, location.href);
+      if (destination.origin === location.origin) {
+        const route = destination.pathname;
+        const key = route.startsWith('/ssg/day2/') ? 'ssg_authenticated_261021' : route.startsWith('/ssg/') ? 'ssg_authenticated_261015' : null;
+        if (key && localStorage.getItem(key) === 'true') { location.href = destination.href; return; }
+        const code = localStorage.getItem('workbook_access_code');
+        if (route.startsWith('/workshop02/') && code === 'mkt1008') { location.href = destination.href; return; }
+        if (route.startsWith('/workshop01/') && code === 'workingai') { location.href = '/workingai_v1/index.html'; return; }
+      }
+
       document.getElementById('entrance-modal').classList.remove('hidden');
       document.getElementById('modal-login-form').classList.remove('hidden');
       document.getElementById('modal-success-screen').classList.add('hidden');
