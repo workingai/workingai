@@ -1,0 +1,20 @@
+{
+  "warmup": "p101_warmingup.html",
+  "persona": "p102_persona_journey.html",
+  "journey": "p102_persona_journey.html",
+  "ksf": "p103_ksf.html",
+  "idea": "p104_mindmap.html",
+  "plan": "p201_plan.html",
+  "style": "p201_plan.html?page=2",
+  "person": "p301_person.html",
+  "product": "p302_product.html",
+  "information": "p303_information.html",
+  "cardnews": "p304_cardnews.html",
+  "video": "p305_video.html",
+  "finish": "p401_finish.html",
+  "review": "p501_review.html",
+  "share": "p502_share.html",
+  "chatbot": "p200_chatbot.html",
+  "content": "p204_content.html",
+  "calendar": "p204_content.html?page=2"
+}
