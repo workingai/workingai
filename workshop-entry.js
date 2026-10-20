@@ -10,6 +10,10 @@
   document.querySelectorAll('[data-day]').forEach(card => card.addEventListener('click', event => {
     event.preventDefault();
     selected = courses[card.dataset.day];
+    if (localStorage.getItem(selected.key) === 'true') {
+      location.href = selected.path;
+      return;
+    }
     document.getElementById('dialog-title').textContent = `Day ${card.dataset.day} 입장`;
     input.value = ''; error.textContent = '';
     dialog.showModal(); input.focus();
