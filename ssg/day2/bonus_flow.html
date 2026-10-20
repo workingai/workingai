@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <script>
+    // Keep relative workbook links inside this folder after clean-URL redirects.
+    if (window.location.protocol === 'http:' || window.location.protocol === 'https:') {
+      const workbookBase = document.createElement('base');
+      workbookBase.href = new URL('/ssg/day2/', window.location.href).href;
+      document.head.appendChild(workbookBase);
+    }
+  </script>
+  <script src="./access.js"></script>
+  <link rel="icon" href="../../favicon.png?v=2" type="image/png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WORKING AI · Day 2 · Bonus Flow 추가 실습</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Pretendard Font -->
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+  <link rel="stylesheet" href="../../global.css">
+  <!-- IBM Plex Mono Font -->
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#F2F8F5',
+              100: '#E6F2ED',
+              500: '#2A6B52',
+              600: '#1D4E3A',
+            },
+            neutral: {
+              50: '#F8F7F4',
+              100: '#F2F1EE',
+              200: '#E5E3DF',
+              300: '#DDDBD5',
+              400: '#B0AEA8',
+              500: '#8A8881',
+              600: '#605E59',
+              900: '#1A1A18',
+            }
+          },
+          fontFamily: {
+            sans: ['Pretendard', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+            mono: ['IBM Plex Mono', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="./style.css">
+<script defer src="./app.js"></script>
+</head>
+<body class="min-h-screen text-neutral-900 antialiased flex flex-col h-screen overflow-hidden pt-[5px]">
+  <!-- Top brand bar -->
+  <div class="fixed top-0 left-0 w-full h-[5px] bg-brand-500 z-50"></div>
+
+  <!-- Navigation Bar (Shared) -->
+  <div id="navbar-placeholder"></div>
+  <script src="../../navbar.js"></script>
+
+  <!-- Content Container -->
+  <div class="workbook-layout flex-1 flex flex-col lg:flex-row lg:overflow-hidden">
+    <!-- ===== Left Sidebar Navigation ===== -->
+    <aside class="flex-shrink-0 w-full lg:w-64 bg-white border-b lg:border-b-0 lg:border-r border-[#DDDBD5] flex flex-col lg:h-full pt-4 day2-sidebar">
+<nav aria-label="Day 2 실습 메뉴" class="flex lg:flex-col gap-5 lg:gap-0 px-3 pb-4 overflow-x-auto lg:overflow-y-auto lg:flex-1 lg:min-h-0"><section class="flex-shrink-0 lg:flex-shrink "><h2 class="px-3 mb-2 text-[11px] font-extrabold tracking-wide text-neutral-400 whitespace-nowrap">Part 1. 정보 수집과 아이디어</h2><div class="flex lg:flex-col gap-1"><a href="./p101_warmingup.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors"><span class="text-lg leading-none" aria-hidden="true">🔥</span><span>워밍업 실습</span></a><a href="./p102_persona_journey.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors"><span class="text-lg leading-none" aria-hidden="true">👤</span><span>페르소나·고객여정</span></a><a href="./p103_ksf.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors"><span class="text-lg leading-none" aria-hidden="true">🔎</span><span>KSF 찾기</span></a><a href="./p104_mindmap.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors"><span class="text-lg leading-none" aria-hidden="true">🌿</span><span>마인드맵 · 방향 선택</span></a></div></section><section class="flex-shrink-0 lg:flex-shrink lg:mt-5"><h2 class="px-3 mb-2 text-[11px] font-extrabold tracking-wide text-neutral-400 whitespace-nowrap">Part 2. 콘텐츠 기획</h2><div class="flex lg:flex-col gap-1"><a href="./p200_chatbot.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors"><span class="text-lg leading-none" aria-hidden="true">🤖</span><span>자동화 챗봇 만들기</span></a><a href="./p201_plan.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors"><span class="text-lg leading-none" aria-hidden="true">📝</span><span>가이드·스킬 만들기</span></a><a href="./p204_content.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors"><span class="text-lg leading-none" aria-hidden="true">✍️</span><span>추가 프로젝트</span></a></div></section><section class="flex-shrink-0 lg:flex-shrink lg:mt-5"><h2 class="px-3 mb-2 text-[11px] font-extrabold tracking-wide text-neutral-400 whitespace-nowrap">Part 3. 이미지와 영상 제작</h2><div class="flex lg:flex-col gap-1"><a href="./p301_person.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors"><span class="text-lg leading-none" aria-hidden="true">👤</span><span>가상 인물 이미지</span></a><a href="./p302_product.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors"><span class="text-lg leading-none" aria-hidden="true">🛍️</span><span>상품 스튜디오 연출</span></a><a href="./p303_information.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors"><span class="text-lg leading-none" aria-hidden="true">🪧</span><span>정보 안내 이미지</span></a><a href="./p304_cardnews.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors"><span class="text-lg leading-none" aria-hidden="true">🎨</span><span>카드뉴스 · Canva 편집</span></a><a href="./p305_video.html"  class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors"><span class="text-lg leading-none" aria-hidden="true">🎬</span><span>Flow · 장면 영상화</span></a></div></section><section class="flex-shrink-0 lg:flex-shrink lg:mt-5"><h2 class="px-3 mb-2 text-[11px] font-extrabold tracking-wide text-neutral-400 whitespace-nowrap">Part 4. 내 콘텐츠 완성</h2><div class="flex lg:flex-col gap-1"><a href="./p401_finish.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors"><span class="text-lg leading-none" aria-hidden="true">✨</span><span>내 콘텐츠 완성</span></a></div></section><section class="flex-shrink-0 lg:flex-shrink lg:mt-5"><h2 class="px-3 mb-2 text-[11px] font-extrabold tracking-wide text-neutral-400 whitespace-nowrap">Part 5. 검수와 공유</h2><div class="flex lg:flex-col gap-1"><a href="./p501_review.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors"><span class="text-lg leading-none" aria-hidden="true">✅</span><span>게시 전 검수</span></a><a href="./p502_share.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors"><span class="text-lg leading-none" aria-hidden="true">🚀</span><span>1분 공유 · 자료 정리</span></a></div></section><section class="flex-shrink-0 lg:flex-shrink lg:mt-5"><h2 class="px-3 mb-2 text-[11px] font-extrabold tracking-wide text-neutral-400 whitespace-nowrap">Bonus · 추가 실습</h2><div class="flex lg:flex-col gap-1"><a href="./bonus_flow.html" aria-current="page" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors"><span class="text-lg leading-none" aria-hidden="true">🎬</span><span>Flow 추가 실습</span></a></div></section></nav>      <!-- Sidebar Footer (Banner) -->
+      <div class="mt-auto border-t border-[#DDDBD5] p-4 bg-white flex-shrink-0">
+        <!-- Dropup Menu Container -->
+        <div class="relative mb-2.5">
+          <button id="quick-links-btn" onclick="toggleQuickLinks(event)" class="w-full flex items-center justify-between py-2 px-3 border border-[#DDDBD5] hover:border-brand-500 bg-white hover:bg-neutral-50 text-neutral-900 rounded-xl transition-all duration-300 shadow-xs text-sm font-extrabold focus:outline-none">
+            <span class="flex items-center gap-2 text-neutral-600 hover:text-neutral-900">
+              <span>🔗</span> 주요 서비스 바로가기
+            </span>
+            <svg id="quick-links-arrow" class="w-3.5 h-3.5 text-neutral-400 transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5"></path>
+            </svg>
+          </button>
+          <!-- Dropup menu -->
+          <div id="quick-links-menu" class="hidden absolute bottom-full left-0 w-full mb-2 bg-white border border-[#DDDBD5] rounded-xl shadow-lg z-50 overflow-hidden py-1">
+<a href="https://gemini.google.com/" target="_blank" rel="noopener noreferrer" class="block px-4 py-2.5 text-xs text-neutral-700 hover:bg-brand-50 hover:text-brand-600 transition-colors font-bold">제미나이</a>
+<a href="https://sheets.google.com/" target="_blank" rel="noopener noreferrer" class="block px-4 py-2.5 text-xs text-neutral-700 hover:bg-brand-50 hover:text-brand-600 transition-colors font-bold">구글 시트</a>
+<a href="https://aistudio.google.com/" target="_blank" rel="noopener noreferrer" class="block px-4 py-2.5 text-xs text-neutral-700 hover:bg-brand-50 hover:text-brand-600 transition-colors font-bold">AI Studio</a></div>
+        </div>
+        <script>
+          function toggleQuickLinks(e) {
+            e.stopPropagation();
+            const menu = document.getElementById('quick-links-menu');
+            const arrow = document.getElementById('quick-links-arrow');
+            const isHidden = menu.classList.contains('hidden');
+            if (isHidden) {
+              menu.classList.remove('hidden');
+              arrow.classList.add('rotate-180');
+            } else {
+              menu.classList.add('hidden');
+              arrow.classList.remove('rotate-180');
+            }
+          }
+          document.addEventListener('click', (e) => {
+            const menu = document.getElementById('quick-links-menu');
+            const btn = document.getElementById('quick-links-btn');
+            const arrow = document.getElementById('quick-links-arrow');
+            if (menu && !menu.classList.contains('hidden') && !menu.contains(e.target) && !btn.contains(e.target)) {
+              menu.classList.add('hidden');
+              arrow.classList.remove('rotate-180');
+            }
+          });
+        </script>
+
+        <a href="../pdfviewer.html" class="block w-full text-center py-3 px-4 border border-[#DDDBD5] hover:border-brand-500 bg-brand-50 hover:bg-brand-100 text-brand-600 rounded-xl transition-all duration-300 shadow-xs" style="text-decoration: none;">
+          <span class="block text-xs font-bold text-neutral-400 mb-0.5 tracking-wider uppercase">Slide PDF</span>
+          <span class="block text-sm font-extrabold tracking-tight">강의 교안 뷰어</span>
+        </a>
+      </div>
+    </aside>
+
+<main class="workbook-main day2-main flex-1 flex flex-col overflow-hidden pt-8 lg:pt-10 pb-8 px-4 md:px-8 lg:px-10" data-page="bonus-flow"><header class="lesson-header"><div><span class="part-badge">DAY 2 · BONUS</span><h1>Flow 추가 실습</h1></div><div class="header-actions"><a class="tool-button" href="https://labs.google/flow/" target="_blank" rel="noopener noreferrer">Flow ↗</a><nav class="page-tabs" aria-label="실습 페이지"><button type="button" data-page-tab="1" class="page-tab" aria-controls="lesson-1">1</button><button type="button" data-page-tab="2" class="page-tab" aria-controls="lesson-2">2</button><button type="button" data-page-tab="3" class="page-tab" aria-controls="lesson-3">3</button><button type="button" data-page-tab="4" class="page-tab" aria-controls="lesson-4">4</button><button type="button" data-page-tab="5" class="page-tab" aria-controls="lesson-5">5</button></nav></div></header><div class="lesson-content"><section id="lesson-1" class="lesson-panel " data-page-title="1. 시작 이미지 만들기"><div class="lesson-instruction"><p>ChatGPT 또는 Gemini에서 스케치 이미지를 만든 뒤 저장하세요.</p><p>Marketing 워크시트의 로봇청소기 예시 · 1~3은 제품 전환 영상, 4~5는 인물 소개 영상</p></div><article class="prompt-card"><div class="prompt-head"><label for="prompt-bonus-start-img">1. 시작 이미지 만들기</label><p>그대로 복사하거나 내 상품에 맞게 수정하세요.</p></div><textarea id="prompt-bonus-start-img" data-prompt="bonus-start-img" spellcheck="false">나무 재질의 작업 책상을 위에서 비스듬히 내려다본 구도.
+책상 정중앙의 종이 위에 연필로 그린 &#x27;미래형 로봇청소기&#x27;의 제품 디자인 스케치가 있다.
+낮고 둥근 본체, 상단 센서와 전면 범퍼가 보이는 디자인이며, 종이 옆에는 연필과 지우개가 놓여 있다.
+부드러운 아침 햇살, 16:9 고해상도 실사 사진 스타일. 특정 브랜드 로고나 성능 문구는 넣지 마.</textarea><div class="copy-actions"><button type="button" class="primary" data-copy="bonus-start-img">프롬프트 복사</button></div></article></section><section id="lesson-2" class="lesson-panel hidden" data-page-title="2. 종료 이미지 만들기"><div class="lesson-instruction"><p>시작 이미지를 첨부하고 같은 구도의 완성 제품 이미지를 만드세요.</p><p>Marketing 워크시트의 로봇청소기 예시 · 1~3은 제품 전환 영상, 4~5는 인물 소개 영상</p></div><article class="prompt-card"><div class="prompt-head"><label for="prompt-bonus-end-img">2. 종료 이미지 만들기</label><p>그대로 복사하거나 내 상품에 맞게 수정하세요.</p></div><textarea id="prompt-bonus-end-img" data-prompt="bonus-end-img" spellcheck="false">시작 이미지와 동일한 구도와 조명의 나무 재질 작업 책상.
+종이와 연필이 있던 자리에 스케치와 같은 형태의 &#x27;미래형 로봇청소기&#x27;가 실물로 놓여 있다.
+낮고 둥근 본체, 상단 센서와 전면 범퍼의 위치를 유지하고, 짙은 회색 무광 소재로 표현해줘.
+고해상도 제품 광고 사진 스타일, 16:9. 특정 브랜드 로고나 확인되지 않은 성능 문구는 넣지 마.</textarea><div class="copy-actions"><button type="button" class="primary" data-copy="bonus-end-img">프롬프트 복사</button></div></article></section><section id="lesson-3" class="lesson-panel hidden" data-page-title="3. Flow에서 두 이미지 연결하기"><div class="lesson-instruction"><p>Flow에 시작·종료 이미지를 넣고 아래 프롬프트로 전환 영상을 만드세요.</p><p>Marketing 워크시트의 로봇청소기 예시 · 1~3은 제품 전환 영상, 4~5는 인물 소개 영상</p></div><article class="prompt-card"><div class="prompt-head"><label for="prompt-bonus-flow">3. Flow에서 두 이미지 연결하기</label><p>그대로 복사하거나 내 상품에 맞게 수정하세요.</p></div><textarea id="prompt-bonus-flow" data-prompt="bonus-flow" spellcheck="false">시작 이미지의 연필 스케치 선들이 미세하게 떨리며 황금빛 입자로 변하고, 이 입자들이 모여 실물 제품의 정교한 부품으로 조립되는 모핑 효과를 구현해줘.
+종이의 질감은 서서히 사라지고 실제 나무 책상의 결이 선명해지며 제품이 완성돼.
+카메라 앵글은 고정된 상태에서 아주 천천히 중앙으로 줌인하며 제품의 금속 광택을 강조해줘.
+
+배경음 및 사운드: 영감을 주는 미니멀한 테크 스타일의 앰비언트 배경음악을 깔아줘.</textarea><div class="copy-actions"><button type="button" class="primary" data-copy="bonus-flow">프롬프트 복사</button></div></article></section><section id="lesson-4" class="lesson-panel hidden" data-page-title="4. 제품을 소개할 가상 모델 만들기"><div class="lesson-instruction"><p>ChatGPT 또는 Gemini에서 제품 소개 장면에 사용할 모델 이미지를 만드세요.</p><p>Marketing 워크시트의 로봇청소기 예시 · 1~3은 제품 전환 영상, 4~5는 인물 소개 영상</p></div><article class="prompt-card"><div class="prompt-head"><label for="prompt-bonus-model">4. 제품을 소개할 가상 모델 만들기</label><p>그대로 복사하거나 내 상품에 맞게 수정하세요.</p></div><textarea id="prompt-bonus-model" data-prompt="bonus-model" spellcheck="false">[목적]
+로봇청소기 소개 콘텐츠에 사용할 친근하고 신뢰감 있는 가상 모델 이미지를 만들어줘.
+
+[누가]
+30대 한국인 여성 생활가전 콘텐츠 진행자, 자연스러운 미소.
+아이보리 니트와 베이지 팬츠를 입은 편안하고 단정한 모습.
+
+[연출]
+배경: 자연광이 들어오는 밝고 정돈된 거실.
+동작: 소파 옆에 앉아 바닥의 로봇청소기를 손바닥으로 소개하는 자세.
+스타일: 모델과 제품이 함께 보이는 고화질 실사, 자연스러운 피부 표현.
+
+[결과]
+제품 소개 영상의 시작 장면으로 활용할 16:9 고화질 이미지.
+인물은 왼쪽, 제품은 오른쪽 아래에 배치하고, 화면 내 문자와 로고는 제외해줘.</textarea><div class="copy-actions"><button type="button" class="primary" data-copy="bonus-model">프롬프트 복사</button></div></article></section><section id="lesson-5" class="lesson-panel hidden" data-page-title="5. 가상 모델의 제품 소개 영상"><div class="lesson-instruction"><p>만든 모델과 제품 이미지를 Flow에 추가하고, 대사의 길이를 영상 길이에 맞춰 조정하세요.</p><p>Marketing 워크시트의 로봇청소기 예시 · 1~3은 제품 전환 영상, 4~5는 인물 소개 영상</p></div><article class="prompt-card"><div class="prompt-head"><label for="prompt-bonus-pitch">5. 가상 모델의 제품 소개 영상</label><p>그대로 복사하거나 내 상품에 맞게 수정하세요.</p></div><textarea id="prompt-bonus-pitch" data-prompt="bonus-pitch" spellcheck="false">[@캐릭터]가 쇼호스트 스타일로 [@제품] 로봇청소기를 소개한다.
+&quot;안녕하세요. 오늘은 우리 집에 맞는 로봇청소기를 소개해 드릴게요.
+로봇청소기를 고를 때는 집의 구조와 바닥 환경, 사용 후 관리 방법을 함께 살펴보는 게 중요하죠.
+이 제품이 우리 집 생활에 잘 맞는지, 주요 기능과 사용 방법을 함께 확인해 보세요.&quot;</textarea><div class="copy-actions"><button type="button" class="primary" data-copy="bonus-pitch">프롬프트 복사</button></div></article></section><div class="lesson-footer"><button type="button" id="export-notes">프롬프트 기록 다운로드</button></div></div></main></div><div id="toast" role="status" aria-live="polite"></div></body></html>
