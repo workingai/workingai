@@ -133,3 +133,15 @@ if(canvaExample){
   state.practice.canvaExample=canvaExample.value;state.prompts['canva-example']=text;save();
  });
 }
+
+const finishProjects={"cardnews": ["카드뉴스 만들기", "주제: [내가 정한 주제]\n적용할 스킬: [내가 만든 스킬 이름 또는 스킬 내용 첨부]\n\n위 주제와 스킬, 이 대화에서 만든 자료를 활용해 아래 결과물을 완성해줘. 스킬의 타깃·말투·디자인 기준을 우선 적용해줘.\n역질문하거나 확인을 기다리지 말고 바로 제작해줘. 구성·색상·장면 등 제작에 필요한 선택은 주제에 맞게 정해줘. 확인되지 않은 가격·성능·혜택·주소·운영정보는 지어내지 말고 생략해줘.\n\n인스타그램용 카드뉴스 5장을 만들어줘.\n\n1장: 관심을 끄는 표지\n2장: 고객이 공감할 상황이나 고민\n3장: 주제의 핵심 정보·매력\n4장: 활용 방법이나 구체적인 장면\n5장: 핵심 요약과 저장·방문·문의 중 적절한 행동 제안\n\n각 장에 짧은 제목, 본문 2~3문장, 이미지 구도와 배치안을 작성해줘. 세로형 4:5 비율로 색감과 스타일을 통일해줘. 사용할 이미지를 장별로 생성하고, 이미지 안에는 글자를 넣지 마. 제목과 본문은 Canva에서 편집할 수 있도록 별도로 정리해줘.\n\n이미지 생성 도구를 사용할 수 없다면 바로 복사할 수 있는 장별 이미지 프롬프트를 제공해줘. 마지막에 Canva 편집 순서와 최종 점검 항목 3개를 정리해줘."], "video": ["영상 만들기", "주제: [내가 정한 주제]\n적용할 스킬: [내가 만든 스킬 이름 또는 스킬 내용 첨부]\n\n위 주제와 스킬, 이 대화에서 만든 자료를 활용해 아래 결과물을 완성해줘. 스킬의 타깃·말투·디자인 기준을 우선 적용해줘.\n역질문하거나 확인을 기다리지 말고 바로 제작해줘. 구성·색상·장면 등 제작에 필요한 선택은 주제에 맞게 정해줘. 확인되지 않은 가격·성능·혜택·주소·운영정보는 지어내지 말고 생략해줘.\n\n주제를 소개하는 20~30초 세로형 영상 1편을 제작할 수 있도록 만들어줘.\n\n관심을 끄는 첫 장면 → 핵심 매력 → 사용·경험 장면 → 마무리 순서로 4개 장면을 구성해줘. 장면별 길이, 화면, 자막, 내레이션을 표로 정리하고 전체 길이를 맞춰줘.\n\n각 장면의 시작 이미지를 생성해줘. 인물·제품·색감은 일관되게 유지하고 글자는 이미지에 넣지 마. 이어서 Flow에 넣을 영상 프롬프트를 장면별로 작성해줘. 피사체의 동작, 카메라 움직임, 배경, 장면 길이를 구체적으로 포함해줘.\n\n이미지 생성 도구를 사용할 수 없다면 장면별 이미지 프롬프트를 제공해줘. 마지막에 영상들을 연결하는 순서, 자막·음성 삽입 위치와 최종 점검 항목 3개를 정리해줘."], "product": ["상품 상세페이지 만들기", "주제: [내가 정한 주제]\n적용할 스킬: [내가 만든 스킬 이름 또는 스킬 내용 첨부]\n\n위 주제와 스킬, 이 대화에서 만든 자료를 활용해 아래 결과물을 완성해줘. 스킬의 타깃·말투·디자인 기준을 우선 적용해줘.\n역질문하거나 확인을 기다리지 말고 바로 제작해줘. 구성·색상·장면 등 제작에 필요한 선택은 주제에 맞게 정해줘. 확인되지 않은 가격·성능·혜택·주소·운영정보는 지어내지 말고 생략해줘.\n\n선택한 상품을 소개하는 모바일용 세로 상세페이지 1개를 만들어줘.\n\n대표 이미지와 한 줄 소개 → 핵심 특징 3가지 → 사용 장면 → 제공된 상품 정보 → 구매·문의 안내 순서로 5개 구역을 구성해줘. 구역별 제목, 짧은 설명, 이미지와 배치안을 작성해줘.\n\n첨부한 상품 사진이 있으면 모양·색상·로고를 유지하면서 대표 이미지와 사용 장면을 생성해줘. 사진이 없으면 실제 상품처럼 꾸며내지 말고 이미지를 넣을 자리와 촬영·이미지 제작 방향을 제시해줘. 확인되지 않은 효능·인증·고객 후기·할인율은 추가하지 마.\n\n폭 1080px의 모바일 세로 화면을 기준으로 색감과 스타일을 통일해줘. 문구는 이미지와 분리해 Canva에서 편집하기 쉽게 정리해줘. 마지막에 Canva 조립 순서와 최종 점검 항목 3개를 정리해줘."]};
+const finishProject=document.getElementById('finish-project');
+if(finishProject){
+ const input=document.getElementById('prompt-finish-project');
+ finishProject.value=finishProjects[state.practice.finishProject]?state.practice.finishProject:'cardnews';
+ const drafts=state.practice.finishProjectDrafts||{};
+ function loadFinishProject(){const value=finishProject.value;defaults.set('finish-project',finishProjects[value][1]);input.value=drafts[value]??finishProjects[value][1];state.prompts['finish-project']=input.value;state.practice.finishProject=value;save();}
+ loadFinishProject();
+ input.addEventListener('input',()=>{drafts[finishProject.value]=input.value;state.practice.finishProjectDrafts=drafts;save();});
+ finishProject.addEventListener('change',loadFinishProject);
+}
