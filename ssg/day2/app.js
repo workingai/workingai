@@ -30,6 +30,11 @@ localStorage.setItem('day2_cardnews_previous',JSON.stringify({cardnews:state.pro
 delete state.prompts.cardnews;delete state.prompts['canva-example'];
 localStorage.setItem(KEY,JSON.stringify(state));localStorage.setItem('day2_cardnews_revision','20261021-standalone');
 }}catch{}
+// Update standalone information exercises; preserve saved drafts separately.
+try{if(localStorage.getItem('day2_information_revision')!=='20261021-standalone'){
+const previous={};for(let n=2;n<=7;n++){const k='information-'+n;if(state.prompts[k]!==undefined)previous[k]=state.prompts[k];delete state.prompts[k];}
+localStorage.setItem('day2_information_previous',JSON.stringify(previous));localStorage.setItem(KEY,JSON.stringify(state));localStorage.setItem('day2_information_revision','20261021-standalone');
+}}catch{}
 const defaults=new Map();let toastTimer;
 function toast(message){const box=document.getElementById('toast');box.textContent=message;box.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>box.classList.remove('show'),2400)}
 function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch{toast('브라우저 저장이 제한됩니다. 기록을 다운로드하세요.')}}
@@ -53,6 +58,15 @@ function samplePrompt(key){
  'information-6':'비교 자료: 텀블러는 음료를 담고 그립감 체험, 조명은 책상에 놓고 빛의 분위기 체험, 가방은 소지품을 담고 착용감 체험. 용도·사용 장소·체험 방법을 비교해줘.',
  'information-7':'관계 자료: 방문객은 상품을 체험하고 직원에게 문의, 직원은 상품 안내와 문의 응대, 운영 담당자는 상품과 안내 자료 관리. 이 역할 관계만 표현해줘.'
  };
+ const informationSamples={
+ 'information-2':['지역별 관심 응답자 수'],
+ 'information-3':['체험 공간 이용 안내'],
+ 'information-4':['김민지','콘텐츠 매니저 / 마케팅팀','hello@example.com','https://example.com'],
+ 'information-5':['입구에서 품목 확인 → 상품 선택 → 체험 → 직원에게 문의'],
+ 'information-6':['텀블러 / 조명 / 가방','생활 소품별 용도와 체험 방법 비교'],
+ 'information-7':['체험 공간의 방문객·직원·운영 담당자 역할과 관계']
+ };
+ if(informationSamples[key]){let i=0;return base.replace(/\[[^\]]+\]/g,()=>informationSamples[key][i++]||'')+'\n\n'+inputs[key];}
  if(key==='chatbot')return base+'\n\n테스트 입력: 1994년 5월 15일.';
  return inputs[key]?base+'\n\n'+inputs[key]:base;
 }
