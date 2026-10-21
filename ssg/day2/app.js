@@ -15,6 +15,15 @@ for(const key of Object.keys(state.prompts)){
  }
 }
 if(migratedPrompts){try{localStorage.setItem(KEY,JSON.stringify(state))}catch{}}
+// Refresh the SVG exercise once, retaining a backup of any saved draft.
+try {
+ if(localStorage.getItem('day2_svg_prompt_revision')!=='20261021-research'){
+  if(typeof state.prompts.information==='string')localStorage.setItem('day2_svg_prompt_previous',state.prompts.information);
+  delete state.prompts.information;
+  localStorage.setItem(KEY,JSON.stringify(state));
+  localStorage.setItem('day2_svg_prompt_revision','20261021-research');
+ }
+}catch{}
 const defaults=new Map();let toastTimer;
 function toast(message){const box=document.getElementById('toast');box.textContent=message;box.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>box.classList.remove('show'),2400)}
 function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch{toast('브라우저 저장이 제한됩니다. 기록을 다운로드하세요.')}}
@@ -26,6 +35,7 @@ document.querySelectorAll('[data-copy]').forEach(button=>button.addEventListener
 function samplePrompt(key){
  const date=new Date();const today=date.getFullYear()+'-'+String(date.getMonth()+1).padStart(2,'0')+'-'+String(date.getDate()).padStart(2,'0');
  const base=(defaults.get(key)||'').replaceAll('[장소/브랜드/상품]','앞서 선택한 장소·브랜드·상품').replaceAll('[소개할 대상]','앞서 선택한 대상').replaceAll('[시작일]',today).replaceAll('[채널]','인스타그램');
+ if(key==='information')return base.replace('[관심 있는 주제 (예: 최근 5년간 국내 OTT 서비스 점유율 변화)]','최근 5년간 국내 OTT 서비스 점유율 변화').replace('[원하는 차트 형태 — 예: 범프 차트(순위 변동), 막대 차트, 도넛 차트 등]','범프 차트(순위 변동)');
  if(key==='warmup-step-1')return '옥상 정원을 소개하는 짧은 영상을 만들려고 해.\n\n핵심 타깃과 전달할 매력을 정할 수 있도록 질문을 하나씩 해줘.\n1. 어떤 사람이 어떤 상황에서 찾는 공간인지\n2. 그 고객이 원하는 것과 이 공간의 매력은 무엇인지\n3. 영상을 본 뒤 어떤 행동을 하길 바라는지\n\n내 답변을 기다리고, 답하기 어려우면 예시를 제안해줘. 마지막에 타깃·매력·원하는 행동을 짧게 정리해줘. 확인되지 않은 특징은 지어내지 마.';
  const inputs={
  'ksf':'비교 자료: A는 첫 장면에 상품 사용 모습을 보여주고 특징 3개를 설명하는 콘텐츠, B는 공간 전경으로 시작해 이동 동선과 체험 장면을 보여주는 콘텐츠야. 성과 수치가 없으므로 성공 요인은 가설로 구분해줘.',
