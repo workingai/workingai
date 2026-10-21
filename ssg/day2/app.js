@@ -24,6 +24,12 @@ try {
   localStorage.setItem('day2_svg_prompt_revision','20261021-research');
  }
 }catch{}
+// Refresh card-news defaults once; keep previous drafts as a backup.
+try{if(localStorage.getItem('day2_cardnews_revision')!=='20261021-standalone'){
+localStorage.setItem('day2_cardnews_previous',JSON.stringify({cardnews:state.prompts.cardnews,canva:state.prompts['canva-example']}));
+delete state.prompts.cardnews;delete state.prompts['canva-example'];
+localStorage.setItem(KEY,JSON.stringify(state));localStorage.setItem('day2_cardnews_revision','20261021-standalone');
+}}catch{}
 const defaults=new Map();let toastTimer;
 function toast(message){const box=document.getElementById('toast');box.textContent=message;box.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>box.classList.remove('show'),2400)}
 function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch{toast('브라우저 저장이 제한됩니다. 기록을 다운로드하세요.')}}
@@ -100,7 +106,7 @@ if(personScene){
  personScene.addEventListener('change',updateScene);
 }
 
-const canvaExamples={"carousel": ["카드뉴스 만들기", "앞서 정리한 내용과 콘텐츠 가이드를 바탕으로 Canva에서 인스타그램 카드뉴스 5장을 만들어줘.\n\n표지 → 핵심 내용 3장 → 마무리 순서로, 한 장에 메시지 하나씩 넣어줘. 사진은 이미지로, 제목과 본문은 편집 가능한 텍스트로 배치해줘.\n\n가이드의 색상과 말투를 유지하고 확인되지 않은 정보는 넣지 마. Canva에서 이어서 편집할 수 있는 디자인 링크도 알려줘."], "poster": ["포스터 만들기", "첨부한 공간 사진과 앞서 정리한 소개 문구로 Canva에서 방문 안내 포스터를 만들어줘.\n\n공간의 매력을 보여주는 사진을 크게 넣고 제목과 이용 안내가 잘 보이게 배치해줘. 제목과 안내 문구는 편집 가능한 텍스트로 만들어줘. 제공하지 않은 위치·운영시간·가격은 추가하지 마."], "product": ["상품 소개 페이지 만들기", "첨부한 상품 사진과 확인된 특징으로 Canva에서 상품 소개 페이지를 만들어줘.\n\n대표 이미지 → 핵심 특징 → 사용 장면 순서로 구성해줘. 상품의 모양·색·로고를 유지하고 제목과 본문은 편집 가능한 텍스트로 넣어줘. 제공하지 않은 성능이나 효능은 추가하지 마."], "presentation": ["발표자료 만들기", "앞서 정리한 조사 결과를 Canva 발표자료 5장으로 만들어줘.\n\n핵심 결론 → 근거 → 주요 발견 → 적용 아이디어 → 다음 행동 순서로 구성해줘. 한 장에 메시지 하나씩 넣고 수치와 출처는 제공한 자료만 사용해줘. Canva에서 수정할 수 있는 디자인 링크를 알려줘."], "edit": ["기존 디자인 수정하기", "내가 선택한 Canva 디자인의 제목을 더 짧고 명확하게 바꾸고 본문 글자를 읽기 쉽게 키워줘.\n\n기존 색상과 분위기는 유지하고, 문장이 길면 핵심만 남겨줘. 수정 대상 디자인이 지정되지 않았다면 먼저 링크를 요청해줘. 원본은 남기고 사본으로 수정해줘."], "reuse": ["기존 자료 찾아 활용하기", "내 Canva에서 상품 소개 디자인을 찾아 후보를 보여줘. 내가 하나를 선택하면 그 디자인의 색상·글꼴·구성을 참고해 새 상품 소개안을 만들어줘.\n\n새 상품의 사진과 설명이 없으면 먼저 요청해줘. 기존 디자인은 그대로 두고 새로운 디자인으로 만들어줘."]};
+const canvaExamples={"carousel": ["카드뉴스 만들기", "Canva에서 [소개할 장소/브랜드/상품 또는 관심 주제]를 소개하는 인스타그램 카드뉴스 3장을 만들어줘.\n\n앞서 정리한 문구가 있으면 활용해줘. 없다면 타깃 고객·핵심 내용·원하는 행동을 먼저 물어보고, 내 답변을 받은 뒤 만들어줘.\n\n관심을 끄는 표지 → 핵심 정보 → 행동 제안 순서로, 한 장에 메시지 하나씩 넣어줘. 1080×1350px 세로형으로 3장의 색상과 글꼴을 통일하고, 제목과 본문은 편집 가능한 텍스트로 배치해줘.\n\n확인되지 않은 정보는 추가하지 마. Canva에서 이어서 편집할 수 있는 디자인 링크를 알려줘."], "poster": ["포스터 만들기", "첨부한 공간 사진과 앞서 정리한 소개 문구로 Canva에서 방문 안내 포스터를 만들어줘.\n\n공간의 매력을 보여주는 사진을 크게 넣고 제목과 이용 안내가 잘 보이게 배치해줘. 제목과 안내 문구는 편집 가능한 텍스트로 만들어줘. 제공하지 않은 위치·운영시간·가격은 추가하지 마."], "product": ["상품 소개 페이지 만들기", "첨부한 상품 사진과 확인된 특징으로 Canva에서 상품 소개 페이지를 만들어줘.\n\n대표 이미지 → 핵심 특징 → 사용 장면 순서로 구성해줘. 상품의 모양·색·로고를 유지하고 제목과 본문은 편집 가능한 텍스트로 넣어줘. 제공하지 않은 성능이나 효능은 추가하지 마."], "presentation": ["발표자료 만들기", "앞서 정리한 조사 결과를 Canva 발표자료 5장으로 만들어줘.\n\n핵심 결론 → 근거 → 주요 발견 → 적용 아이디어 → 다음 행동 순서로 구성해줘. 한 장에 메시지 하나씩 넣고 수치와 출처는 제공한 자료만 사용해줘. Canva에서 수정할 수 있는 디자인 링크를 알려줘."], "edit": ["기존 디자인 수정하기", "내가 선택한 Canva 디자인의 제목을 더 짧고 명확하게 바꾸고 본문 글자를 읽기 쉽게 키워줘.\n\n기존 색상과 분위기는 유지하고, 문장이 길면 핵심만 남겨줘. 수정 대상 디자인이 지정되지 않았다면 먼저 링크를 요청해줘. 원본은 남기고 사본으로 수정해줘."], "reuse": ["기존 자료 찾아 활용하기", "내 Canva에서 상품 소개 디자인을 찾아 후보를 보여줘. 내가 하나를 선택하면 그 디자인의 색상·글꼴·구성을 참고해 새 상품 소개안을 만들어줘.\n\n새 상품의 사진과 설명이 없으면 먼저 요청해줘. 기존 디자인은 그대로 두고 새로운 디자인으로 만들어줘."]};
 const canvaExample=document.getElementById('canva-example');
 if(canvaExample){
  const input=document.getElementById('prompt-canva-example');
