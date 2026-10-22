@@ -1,0 +1,186 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <script src="/employee-access.js"></script>
+  <link rel="icon" href="../favicon.png?v=2" type="image/png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WORKING AI - PROMPT BUILDER</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Pretendard Font -->
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+  <link rel="stylesheet" href="../global.css">
+  <!-- IBM Plex Mono Font -->
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#F2F8F5',
+              100: '#E6F2ED',
+              500: '#2A6B52',
+              600: '#1D4E3A',
+            },
+            neutral: {
+              50: '#F8F7F4',
+              100: '#F2F1EE',
+              200: '#E5E3DF',
+              300: '#DDDBD5',
+              400: '#B0AEA8',
+              500: '#8A8881',
+              600: '#605E59',
+              900: '#1A1A18',
+            }
+          },
+          fontFamily: {
+            sans: ['Pretendard', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+            mono: ['IBM Plex Mono', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Custom scrollbar styling */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #F2F1EE;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #DDDBD5;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #B0AEA8;
+    }
+  </style>
+<style id="course-sidebar-style">
+.course-nav{display:flex;flex-direction:column;gap:18px;padding:4px 12px 20px;overflow-y:auto;min-height:0}.course-nav h2{font-size:12px;line-height:1.5;font-weight:800;color:#989994;margin:0 0 8px;padding:0 10px}.course-nav a{display:flex;align-items:center;gap:12px;padding:11px 12px;border-radius:9px;font-size:14px;font-weight:500;color:#605E59;text-decoration:none;white-space:nowrap}.course-nav a:hover{background:#F8F7F4}.course-nav a[aria-current=page]{background:#E6F2ED;color:#1D4E3A;font-weight:800}.course-nav .nav-icon{font-size:19px;line-height:1}.course-nav a:focus-visible{outline:2px solid #2A6B52;outline-offset:-2px}@media(min-width:1024px){aside:has(.course-nav){min-height:0;overflow:hidden}.course-nav{flex:1}}@media(max-width:1023px){.course-nav{flex-direction:row;overflow-x:auto;gap:20px;padding:10px 12px;flex-shrink:0}.course-group{flex-shrink:0}.course-group-links{display:flex}.course-nav h2{margin-bottom:3px}}
+</style><style>.builder-heading{display:flex;justify-content:space-between;align-items:center;gap:20px;border-bottom:1px solid #DDDBD5;padding-bottom:16px;margin-bottom:20px}.builder-heading h2{font-size:18px;font-weight:800;line-height:1.5}.builder-heading p{margin-top:4px}.builder-heading .step-nav{border:0;padding:0;margin:0;flex-shrink:0;gap:8px}.builder-heading .step-nav button{flex:none;min-width:72px;padding:10px 16px;font:700 14px/1.5 Pretendard,sans-serif;border:1px solid #DDDBD5}.research-main .actions .action{min-width:44px}@media(max-width:640px){.builder-heading{flex-wrap:wrap;gap:12px}.builder-heading .step-nav{margin-left:auto}}</style><link rel="stylesheet" href="workbook-ui.css"></head>
+<body class="min-h-screen text-neutral-900 antialiased flex flex-col h-screen overflow-hidden pt-[5px]">
+  <!-- Top brand bar -->
+  <div class="fixed top-0 left-0 w-full h-[5px] bg-brand-500 z-50"></div>
+
+  <!-- Navigation Bar (Shared) -->
+  <div id="navbar-placeholder"></div>
+  <script src="../navbar.js"></script>
+
+  <!-- Content Container -->
+  <div class="flex-1 flex flex-col lg:flex-row lg:overflow-hidden">
+    <!-- ===== Left Sidebar Navigation ===== -->
+    <aside
+      class="flex-shrink-0 w-full lg:w-64 bg-white border-b lg:border-b-0 lg:border-r border-[#DDDBD5] flex flex-col lg:h-full pt-4">
+    <!-- Nav list -->
+    
+    <nav class="course-nav" aria-label="파트별 실습 목록"><section class="course-group"><h2>Part 1. AI Next Level</h2><div class="course-group-links"><a href="01_wamingup.html"><span class="nav-icon" aria-hidden="true">🔥</span><span>워밍업 실습</span></a></div></section><section class="course-group"><h2>Part 2. AI 리서치</h2><div class="course-group-links"><a href="02_prompt.html" aria-current="page"><span class="nav-icon" aria-hidden="true">🧩</span><span>심층리서치</span></a><a href="03_apps_scrpt.html"><span class="nav-icon" aria-hidden="true">🤖</span><span>네이버 뉴스 수집기</span></a></div></section><section class="course-group"><h2>Part 3. 문서 작성</h2><div class="course-group-links"><a href="04_notebooklm.html"><span class="nav-icon" aria-hidden="true">🖼️</span><span>제미나이 Notebook</span></a><a href="04_mermaid.html"><span class="nav-icon" aria-hidden="true">🔀</span><span>문서구조 시각화</span></a><a href="04_ppt_guide.html"><span class="nav-icon" aria-hidden="true">📐</span><span>PPT 가이드 만들기</span></a><a href="04_skills.html"><span class="nav-icon" aria-hidden="true">🧰</span><span>스킬 만들기</span></a></div></section><section class="course-group" aria-label="미니 프로젝트"><h2>Mini Project</h2><div class="course-group-links"><a href="05_miniproject1.html"><span class="nav-icon" aria-hidden="true">📊</span><span>리서치·보고서 작성</span></a></div></section><section class="course-group"><h2>Part 5. AI 에이전트</h2><div class="course-group-links"><a href="07_aiagent.html"><span class="nav-icon" aria-hidden="true">⚙️</span><span>AI 에이전트</span></a></div></section><section class="course-group"><h2>Mini Project</h2><div class="course-group-links"><a href="m2_miniproject2.html"><span class="nav-icon" aria-hidden="true">🛠️</span><span>웹앱·대시보드 제작</span></a></div></section><section class="course-group"><h2>Part 6. 이미지·영상 제작</h2><div class="course-group-links"><a href="06_aivideo.html"><span class="nav-icon" aria-hidden="true">🎬</span><span>이미지 생성 및 영상화</span></a></div></section></nav>
+    <!-- Sidebar Footer (Banner) -->
+    <div class="mt-auto border-t border-[#DDDBD5] p-4 bg-white flex-shrink-0">
+      <!-- Dropup Menu Container -->
+      <div class="relative mb-2.5">
+        <button id="quick-links-btn" onclick="toggleQuickLinks(event)" class="w-full flex items-center justify-between py-2 px-3 border border-[#DDDBD5] hover:border-brand-500 bg-white hover:bg-neutral-50 text-neutral-900 rounded-xl transition-all duration-300 shadow-xs text-sm font-extrabold focus:outline-none">
+          <span class="flex items-center gap-2 text-neutral-600 hover:text-neutral-900">
+            <span>🔗</span> 주요 서비스 바로가기
+          </span>
+          <svg id="quick-links-arrow" class="w-3.5 h-3.5 text-neutral-400 transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5"></path>
+          </svg>
+        </button>
+        <!-- Dropup menu: hidden by default, absolute positioning above the button -->
+        <div id="quick-links-menu" class="hidden absolute bottom-full left-0 w-full mb-2 bg-white border border-[#DDDBD5] rounded-xl shadow-lg z-50 overflow-hidden py-1">
+          <a href="https://chatgpt.com" target="_blank" class="block px-4 py-2.5 text-xs text-neutral-700 hover:bg-brand-50 hover:text-brand-600 transition-colors font-bold border-b border-[#F2F1EE]">챗GPT</a>
+          <a href="https://gemini.google.com" target="_blank" class="block px-4 py-2.5 text-xs text-neutral-700 hover:bg-brand-50 hover:text-brand-600 transition-colors font-bold border-b border-[#F2F1EE]">제미나이</a>
+          <a href="https://claude.ai" target="_blank" class="block px-4 py-2.5 text-xs text-neutral-700 hover:bg-brand-50 hover:text-brand-600 transition-colors font-bold border-b border-[#F2F1EE]">클로드</a>
+          <a href="https://sheets.google.com" target="_blank" class="block px-4 py-2.5 text-xs text-neutral-700 hover:bg-brand-50 hover:text-brand-600 transition-colors font-bold border-b border-[#F2F1EE]">구글 시트</a>
+          <a href="https://docs.google.com/videos/create?usp=vids_alc&authuser=0" target="_blank" class="block px-4 py-2.5 text-xs text-neutral-700 hover:bg-brand-50 hover:text-brand-600 transition-colors font-bold border-b border-[#F2F1EE]">구글 Vids</a>
+          <a href="https://canva.com" target="_blank" class="block px-4 py-2.5 text-xs text-neutral-700 hover:bg-brand-50 hover:text-brand-600 transition-colors font-bold border-b border-[#F2F1EE]">캔바</a>
+          <a href="https://aistudio.google.com" target="_blank" class="block px-4 py-2.5 text-xs text-neutral-700 hover:bg-brand-50 hover:text-brand-600 transition-colors font-bold border-b border-[#F2F1EE]">AI Studio</a>
+          <a href="https://workspace.google.com/experiments" target="_blank" class="block px-4 py-2.5 text-xs text-neutral-700 hover:bg-brand-50 hover:text-brand-600 transition-colors font-bold">Workspace Experiments</a>
+        </div>
+      </div>
+      <script>
+        function toggleQuickLinks(e) {
+          e.stopPropagation();
+          const menu = document.getElementById('quick-links-menu');
+          const arrow = document.getElementById('quick-links-arrow');
+          const isHidden = menu.classList.contains('hidden');
+          if (isHidden) {
+            menu.classList.remove('hidden');
+            arrow.classList.add('rotate-180');
+          } else {
+            menu.classList.add('hidden');
+            arrow.classList.remove('rotate-180');
+          }
+        }
+        document.addEventListener('click', (e) => {
+          const menu = document.getElementById('quick-links-menu');
+          const btn = document.getElementById('quick-links-btn');
+          const arrow = document.getElementById('quick-links-arrow');
+          if (menu && !menu.classList.contains('hidden') && !menu.contains(e.target) && !btn.contains(e.target)) {
+            menu.classList.add('hidden');
+            arrow.classList.remove('rotate-180');
+          }
+        });
+      </script>
+
+      <a href="pdfviewer.html" class="block w-full text-center py-3 px-4 border border-[#DDDBD5] hover:border-brand-500 bg-brand-50 hover:bg-brand-100 text-brand-600 rounded-xl transition-all duration-300 shadow-xs" style="text-decoration: none;">
+        <span class="block text-xs font-bold text-neutral-400 mb-0.5 tracking-wider uppercase">Slide PDF</span>
+        <span class="block text-sm font-extrabold tracking-tight">강의 교안 뷰어</span>
+      </a>
+    </div>
+  </aside>
+
+<style>
+.research-main{flex:1;min-width:0;overflow:auto;padding:28px 32px}.research-main h1{font-size:28px;font-weight:800;margin:8px 0}.research-main p{color:#605E59}.builder{background:white;border:1px solid #DDDBD5;border-radius:16px;padding:24px;margin-top:20px}.step-nav{display:flex;gap:12px;border-bottom:1px solid #DDDBD5;padding-bottom:18px;margin-bottom:20px}.step-nav button{flex:1;padding:12px;border-radius:8px;background:#F2F1EE;font-weight:700}.step-nav button[aria-current=step]{background:#2A6B52;color:white}.builder-grid{display:grid;grid-template-columns:minmax(0,45fr) minmax(0,55fr);gap:24px}.input-panel,.preview-panel{border:1px solid #DDDBD5;border-radius:12px;overflow:hidden;min-width:0}.panel-head{background:#E6F2ED;padding:18px 20px}.panel-head h2{font-size:20px;font-weight:800}.fields{padding:20px}.fields label{display:block;font-weight:700;margin:0 0 8px}.fields textarea{width:100%;border:1px solid #DDDBD5;border-radius:8px;padding:12px;min-height:115px;resize:vertical;font:15px/1.7 Pretendard,sans-serif;margin-bottom:18px}.fields textarea:focus{outline:2px solid #2A6B52;outline-offset:1px}.actions{display:flex;gap:10px;justify-content:space-between;margin-top:18px;flex-wrap:wrap}.research-main button.action{padding:10px 18px;border:1px solid #DDDBD5;border-radius:8px;font-weight:700;background:white}.research-main button.primary{background:#2A6B52;color:white;border-color:#2A6B52}.research-main button:disabled{opacity:.4;cursor:default}#prompt-preview{display:block;white-space:pre-wrap;overflow-wrap:anywhere;padding:20px;font:15px/1.8 Pretendard,sans-serif;max-height:520px;overflow:auto;min-height:300px}.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0}.small{font-size:13px}#copy-status{min-height:24px;color:#2A6B52}.research-main [hidden]{display:none!important}@media(max-width:1023px){body{height:auto!important;overflow:auto!important}.research-main{overflow:visible;padding:20px 16px}.builder-grid{grid-template-columns:1fr}.builder{padding:16px}.step-nav{gap:5px}.step-nav button{padding:10px 4px;font-size:13px}}
+</style>
+<main class="research-main"><header class="workbook-page-header"><span class="workbook-part-badge">Part 2. AI 리서치</span><h1 class="workbook-practice-title">WHY · HOW · WHAT으로 조사 요청 만들기</h1></header>
+
+
+<p>3단계를 작성하면 오른쪽에 프롬프트가 완성됩니다. 예시를 내 업무에 맞게 바꿔 보세요.</p>
+<div class="builder">
+<div class="builder-heading"><div><h2>조사의 목적부터 결과물까지 정리해 보세요.</h2><p class="small">Why → How → What 순서로 작성합니다.</p></div><nav class="step-nav" aria-label="프롬프트 작성 단계">
+<button type="button" data-step="1" aria-controls="panel-1">Why</button><button type="button" data-step="2" aria-controls="panel-2">How</button><button type="button" data-step="3" aria-controls="panel-3">What</button>
+</nav></div>
+
+<div class="builder-grid"><div>
+<section id="panel-1" class="input-panel"><div class="panel-head"><h2>WHY · 왜 조사하나요?</h2><p class="small">배경과 문제, 조사 후 판단할 일과 목표</p></div><div class="fields">
+<label for="why-background">조사 배경과 이유</label><textarea id="why-background" placeholder="왜 지금 이 조사가 필요한가요?"></textarea>
+<label for="why-goal">판단할 일과 조사 목표</label><textarea id="why-goal" placeholder="조사 결과로 무엇을 결정하고 싶나요?"></textarea></div></section>
+<section id="panel-2" class="input-panel" hidden=""><div class="panel-head"><h2>HOW · 어떻게 수집하나요?</h2><p class="small">기존 자료·수집 채널·조사 범위·제한 조건</p></div><div class="fields">
+<label for="how-sources">기존 자료와 수집 채널</label><textarea id="how-sources" placeholder="참고할 파일과 우선 조사할 사이트·매체를 적어 주세요."></textarea>
+<label for="how-limits">조사 범위와 제한 조건</label><textarea id="how-limits" placeholder="기간·지역·업종·사례 수, 제외할 자료와 출처 표기 기준"></textarea><p class="small">여기에는 파일명과 활용 방법을 작성합니다. 실제 자료는 ChatGPT에 첨부하거나 프로젝트 폴더에 연결해 주세요.</p></div></section>
+<section id="panel-3" class="input-panel" hidden=""><div class="panel-head"><h2>WHAT · 무엇으로 완성하나요?</h2><p class="small">결과물의 형식·분량·필수 내용·완료 기준</p></div><div class="fields">
+<label for="what-format">결과물 형식과 분량</label><textarea id="what-format" placeholder="누가 볼 자료인가요? 문서·표·PPT 등 형식과 분량을 정해 주세요."></textarea>
+<label for="what-content">필수 내용과 완료 기준</label><textarea id="what-content" placeholder="꼭 포함할 항목, 적용할 양식, 검토 기준"></textarea></div></section>
+<div class="actions"><button type="button" class="action" id="prev-step" aria-label="이전 단계" title="이전 단계">&lt;&lt;</button><button type="button" class="action primary" id="next-step" aria-label="다음 단계" title="다음 단계">&gt;&gt;</button></div>
+</div><section class="preview-panel"><div class="panel-head"><h2>완성 프롬프트</h2><p class="small" id="progress">입력한 내용이 실시간으로 반영됩니다.</p></div><div id="prompt-preview" role="region" aria-label="완성 프롬프트" tabindex="0"></div><div class="fields"><div class="workbook-copy-actions"><button type="button" class="action primary workbook-copy-button" id="copy-prompt">프롬프트 복사</button></div><p id="copy-status" role="status"></p><p class="small">복사한 내용을 ChatGPT에 붙여 넣고 심층리서치를 진행하세요.</p></div></section></div>
+</div></main></div>
+<script>
+const ids=['why-background','why-goal','how-sources','how-limits','what-format','what-content'];
+const labels=['조사 배경과 이유','판단할 일과 목표','기존 자료와 수집 채널','조사 범위와 제한 조건','결과물 형식과 분량','필수 내용과 완료 기준'];
+const example=[
+'멀캠컴퍼니는 반복적인 보고서 작성과 자료 정리에 많은 시간이 들고 있어. AX를 적용해 개선할 수 있는 업무를 찾으려고 해.',
+'우리 회사가 먼저 도입할 AX 업무 3개를 선정할 수 있도록 유사 기업의 사례와 선정 근거를 조사해줘.',
+'제공한 회사 소개와 업무 현황 자료가 있다면 먼저 확인해줘. 기업·기관의 공식 자료를 우선 조사하고 전문 매체와 네이버 뉴스로 최근 동향을 보완해줘. 자료가 없다면 필요한 정보를 먼저 질문해줘.',
+'최근 1년간 국내 유사 업종의 AX 사례 5개를 조사해줘. 중복·홍보성 자료는 제외하고 출처 링크와 발표일을 붙여줘. 사실과 해석을 구분하고, 근거 없는 성과는 확인 필요로 표시해줘.',
+'최종 목표는 임원 보고용 PPT 약 10페이지야. 이번 심층리서치에서는 PPT 제작에 사용할 조사 보고서와 페이지별 구성안을 작성해줘.',
+'사례 비교표, 핵심 인사이트, 우선 도입할 업무 3개와 선정 근거를 포함해줘. 출처와 미확인 사항을 별도로 정리하고, 제공한 회사 양식이 있다면 목차와 구성에 반영해줘.'
+];
+let step=1;
+function setStep(n){step=n;document.querySelectorAll('[data-step]').forEach(b=>{if(+b.dataset.step===n)b.setAttribute('aria-current','step');else b.removeAttribute('aria-current');});for(let i=1;i<=3;i++)document.getElementById('panel-'+i).hidden=i!==n;document.getElementById('prev-step').disabled=n===1;document.getElementById('next-step').disabled=n===3;}
+function compiled(){return ['WHY · 조사 목적','HOW · 수집 방법','WHAT · 결과물'].map((heading,k)=>{const items=ids.slice(k*2,k*2+2).map((id,j)=>{const value=document.getElementById(id).value.trim();return value?labels[k*2+j]+':\n'+value:'';}).filter(Boolean);return items.length?'['+heading+']\n'+items.join('\n\n'):'';}).filter(Boolean).join('\n\n');}
+function update(){const text=compiled();document.getElementById('prompt-preview').textContent=text||'왼쪽에서 조사 목적부터 입력해 주세요.';document.getElementById('copy-prompt').disabled=!text;document.getElementById('progress').textContent=ids.filter(id=>document.getElementById(id).value.trim()).length+' / 6개 항목 작성 · 실시간 반영';document.getElementById('copy-status').textContent='';}
+function fill(values){ids.forEach((id,i)=>document.getElementById(id).value=values[i]||'');setStep(1);update();}
+ids.forEach(id=>document.getElementById(id).addEventListener('input',update));
+document.querySelectorAll('[data-step]').forEach(b=>b.addEventListener('click',()=>setStep(+b.dataset.step)));
+document.getElementById('prev-step').onclick=()=>setStep(Math.max(1,step-1));
+document.getElementById('next-step').onclick=()=>{if(step<3)setStep(step+1);else document.getElementById('prompt-preview').focus();};
+document.getElementById('copy-prompt').onclick=async()=>{const text=compiled();if(!text)return;let ok=false;try{await navigator.clipboard.writeText(text);ok=true;}catch(e){const t=document.createElement('textarea');t.value=text;document.body.appendChild(t);t.select();ok=document.execCommand('copy');t.remove();}document.getElementById('copy-status').textContent=ok?'복사되었습니다. ChatGPT에 붙여 넣어 주세요.':'복사하지 못했습니다. 위 프롬프트를 직접 선택해 복사해 주세요.';};
+fill(example);
+</script></body></html>
