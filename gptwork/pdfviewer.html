@@ -70,7 +70,9 @@
       100% { transform: rotate(360deg); }
     }
   </style>
-</head>
+<style id="course-sidebar-style">
+.course-nav{display:flex;flex-direction:column;gap:18px;padding:4px 12px 20px;overflow-y:auto;min-height:0}.course-nav h2{font-size:12px;line-height:1.5;font-weight:800;color:#989994;margin:0 0 8px;padding:0 10px}.course-nav a{display:flex;align-items:center;gap:12px;padding:11px 12px;border-radius:9px;font-size:14px;font-weight:500;color:#605E59;text-decoration:none;white-space:nowrap}.course-nav a:hover{background:#F8F7F4}.course-nav a[aria-current=page]{background:#E6F2ED;color:#1D4E3A;font-weight:800}.course-nav .nav-icon{font-size:19px;line-height:1}.course-nav a:focus-visible{outline:2px solid #2A6B52;outline-offset:-2px}@media(min-width:1024px){aside:has(.course-nav){min-height:0;overflow:hidden}.course-nav{flex:1}}@media(max-width:1023px){.course-nav{flex-direction:row;overflow-x:auto;gap:20px;padding:10px 12px;flex-shrink:0}.course-group{flex-shrink:0}.course-group-links{display:flex}.course-nav h2{margin-bottom:3px}}
+</style></head>
 <body class="min-h-screen text-neutral-900 antialiased flex flex-col h-screen overflow-hidden pt-[5px] bg-[#F2F1EE]">
   <!-- Top brand bar -->
   <div class="fixed top-0 left-0 w-full h-[5px] bg-brand-500 z-50"></div>
@@ -85,49 +87,8 @@
     <aside
       class="flex-shrink-0 w-full lg:w-64 bg-white border-b lg:border-b-0 lg:border-r border-[#DDDBD5] flex flex-col lg:h-full pt-4">
       <!-- Nav list -->
-      <p class="hidden lg:block px-5 mb-1.5 text-[11px] font-bold uppercase tracking-wider text-neutral-400">실습 목록</p>
-      <nav class="flex lg:flex-col gap-1 px-3 pb-4 overflow-x-auto lg:overflow-y-auto">
-        <a href="01_wamingup.html"
-          class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
-          <span class="text-lg leading-none">🔥</span>
-          <span>워밍업 실습</span>
-        </a>
-        <a href="02_prompt.html"
-          class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
-          <span class="text-lg leading-none">🧩</span>
-          <span>프롬프트 빌더</span>
-        </a>
-        <a href="03_apps_scrpt.html"
-          class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
-          <span class="text-lg leading-none">🤖</span>
-          <span>앱스스크립트 자동화</span>
-        </a>
-        <a href="04_notebooklm.html"
-          class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
-          <span class="text-lg leading-none">🖼️</span>
-          <span>노트북LM</span>
-        </a>
-        <a href="05_miniproject1.html"
-          class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
-          <span class="text-lg leading-none">🚀</span>
-          <span>미니프로젝트 1</span>
-        </a>
-        <a href="07_aiagent.html"
-          class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
-          <span class="text-lg leading-none">🎨</span>
-          <span>AI 에이전트</span>
-        </a>
-        <a href="06_aivideo.html"
-          class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
-          <span class="text-lg leading-none">🎬</span>
-          <span>이미지 생성 및 영상화</span>
-        </a>
-        <a href="m2_miniproject2.html"
-          class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
-          <span class="text-lg leading-none">🚀</span>
-          <span>미니프로젝트 2</span>
-        </a>
-      </nav>
+      
+      <nav class="course-nav" aria-label="파트별 실습 목록"><section class="course-group"><h2>Part 1. AI Next Level</h2><div class="course-group-links"><a href="01_wamingup.html"><span class="nav-icon" aria-hidden="true">🔥</span><span>워밍업 실습</span></a></div></section><section class="course-group"><h2>Part 2. AI 리서치</h2><div class="course-group-links"><a href="02_prompt.html"><span class="nav-icon" aria-hidden="true">🧩</span><span>심층리서치</span></a><a href="03_apps_scrpt.html"><span class="nav-icon" aria-hidden="true">🤖</span><span>네이버 뉴스 수집기</span></a></div></section><section class="course-group"><h2>Part 3. 문서 작성</h2><div class="course-group-links"><a href="04_notebooklm.html"><span class="nav-icon" aria-hidden="true">🖼️</span><span>제미나이 Notebook</span></a><a href="04_mermaid.html"><span class="nav-icon" aria-hidden="true">🔀</span><span>문서구조 시각화</span></a><a href="04_ppt_guide.html"><span class="nav-icon" aria-hidden="true">📐</span><span>PPT 가이드 만들기</span></a><a href="04_skills.html"><span class="nav-icon" aria-hidden="true">🧰</span><span>스킬 만들기</span></a></div></section><section class="course-group" aria-label="미니 프로젝트"><h2>Mini Project</h2><div class="course-group-links"><a href="05_miniproject1.html"><span class="nav-icon" aria-hidden="true">📊</span><span>리서치·보고서 작성</span></a></div></section><section class="course-group"><h2>Part 5. AI 에이전트</h2><div class="course-group-links"><a href="07_aiagent.html"><span class="nav-icon" aria-hidden="true">⚙️</span><span>AI 에이전트</span></a></div></section><section class="course-group"><h2>Mini Project</h2><div class="course-group-links"><a href="m2_miniproject2.html"><span class="nav-icon" aria-hidden="true">🛠️</span><span>웹앱·대시보드 제작</span></a></div></section><section class="course-group"><h2>Part 6. 이미지·영상 제작</h2><div class="course-group-links"><a href="06_aivideo.html"><span class="nav-icon" aria-hidden="true">🎬</span><span>이미지 생성 및 영상화</span></a></div></section></nav>
       <!-- Sidebar Footer (Banner) -->
       <div class="mt-auto border-t border-[#DDDBD5] p-4 bg-white flex-shrink-0">
         <!-- Dropup Menu Container -->

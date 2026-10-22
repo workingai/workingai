@@ -70,7 +70,9 @@
     .toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%) translateY(20px);opacity:0;background:#1A1A18;color:#fff;border-radius:999px;padding:12px 18px;font-size:13px;font-weight:700;transition:.25s;z-index:20;box-shadow:0 4px 12px rgba(0,0,0,0.15)}
     .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
   </style>
-</head>
+<style id="course-sidebar-style">
+.course-nav{display:flex;flex-direction:column;gap:18px;padding:4px 12px 20px;overflow-y:auto;min-height:0}.course-nav h2{font-size:12px;line-height:1.5;font-weight:800;color:#989994;margin:0 0 8px;padding:0 10px}.course-nav a{display:flex;align-items:center;gap:12px;padding:11px 12px;border-radius:9px;font-size:14px;font-weight:500;color:#605E59;text-decoration:none;white-space:nowrap}.course-nav a:hover{background:#F8F7F4}.course-nav a[aria-current=page]{background:#E6F2ED;color:#1D4E3A;font-weight:800}.course-nav .nav-icon{font-size:19px;line-height:1}.course-nav a:focus-visible{outline:2px solid #2A6B52;outline-offset:-2px}@media(min-width:1024px){aside:has(.course-nav){min-height:0;overflow:hidden}.course-nav{flex:1}}@media(max-width:1023px){.course-nav{flex-direction:row;overflow-x:auto;gap:20px;padding:10px 12px;flex-shrink:0}.course-group{flex-shrink:0}.course-group-links{display:flex}.course-nav h2{margin-bottom:3px}}
+</style><style id="workbook-resource-layout">.workbook-resource-box{box-sizing:border-box}.workbook-resource-actions{display:flex;justify-content:flex-end;align-items:center;flex-wrap:wrap;gap:10px;width:100%;margin:0 0 20px;flex-shrink:0}.workbook-resource-actions:has(+*){padding-bottom:12px;border-bottom:1px solid #E5E3DF}.workbook-resource-actions .workbook-resource-button{width:auto!important;max-width:100%;min-height:40px;height:auto!important;margin:0!important;padding:10px 16px!important;border:1px solid #DDDBD5!important;border-radius:8px!important;background:#fff!important;color:#1D4E3A!important;font:700 14px/1.5 Pretendard,-apple-system,sans-serif!important;text-decoration:none!important;align-items:center;justify-content:center;gap:6px;box-sizing:border-box}.workbook-resource-button:hover{background:#E6F2ED!important}.workbook-resource-button:focus-visible{outline:2px solid #2A6B52;outline-offset:2px}.workbook-resource-actions .workbook-resource-button:not(.hidden){display:inline-flex}.workbook-resource-actions .workbook-resource-button svg{width:16px;height:16px;flex-shrink:0}@media(max-width:640px){.workbook-resource-actions{gap:8px}.workbook-resource-actions .workbook-resource-button{font-size:13px!important}}</style><style>.workbook-resource-heading{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-shrink:0;margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid #DDDBD5}.resource-heading-text{flex:1;min-width:0;margin:0!important;padding-bottom:0!important;border-bottom:0!important}.resource-caption{font:800 18px/1.5 Pretendard,sans-serif;color:#1A1A18}.workbook-resource-heading>.workbook-resource-actions{flex:0 1 auto;width:auto;margin:0;padding:0;border:0;align-self:center}.workbook-resource-heading .workbook-resource-button{white-space:nowrap}@media(max-width:640px){.workbook-resource-heading{flex-wrap:wrap;gap:12px}.workbook-resource-heading>.workbook-resource-actions{margin-left:auto}}</style><link rel="stylesheet" href="workbook-ui.css"></head>
 <body class="min-h-screen text-neutral-900 antialiased flex flex-col h-screen overflow-hidden pt-[5px]">
   <!-- Top brand bar -->
   <div class="fixed top-0 left-0 w-full h-[5px] bg-brand-500 z-50"></div>
@@ -84,50 +86,7 @@
     <!-- ===== Left Sidebar Navigation ===== -->
     <aside
       class="flex-shrink-0 w-full lg:w-64 bg-white border-b lg:border-b-0 lg:border-r border-[#DDDBD5] flex flex-col lg:h-full pt-4">
-    <nav class="flex-1 overflow-y-auto p-4 flex flex-col gap-1 bg-white">
-      <span class="text-[10px] font-extrabold text-neutral-400 px-3 mb-2 tracking-widest uppercase">실습 목록</span>
-
-      <a href="01_wamingup.html"
-        class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
-        <span class="text-lg leading-none">🔥</span>
-        <span>워밍업 실습</span>
-      </a>
-      <a href="02_prompt.html"
-        class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
-        <span class="text-lg leading-none">🧩</span>
-        <span>프롬프트 빌더</span>
-      </a>
-      <a href="03_apps_scrpt.html"
-        class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
-        <span class="text-lg leading-none">🤖</span>
-        <span>앱스스크립트 자동화</span>
-      </a>
-      <a href="04_notebooklm.html"
-        class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
-        <span class="text-lg leading-none">🖼️</span>
-        <span>노트북LM</span>
-      </a>
-      <a href="05_miniproject1.html"
-        class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
-        <span class="text-lg leading-none">🚀</span>
-        <span>미니프로젝트 1</span>
-      </a>
-      <a href="07_aiagent.html"
-        class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
-        <span class="text-lg leading-none">🎨</span>
-        <span>AI 에이전트</span>
-      </a>
-      <a href="06_aivideo.html"
-        class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
-        <span class="text-lg leading-none">🎬</span>
-        <span>이미지 생성 및 영상화</span>
-      </a>
-      <a href="m2_miniproject2.html"
-        class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-bold text-brand-600 bg-brand-100 whitespace-nowrap transition-colors">
-        <span class="text-lg leading-none">🚀</span>
-        <span>미니프로젝트 2</span>
-      </a>
-    </nav>
+    <nav class="course-nav" aria-label="파트별 실습 목록"><section class="course-group"><h2>Part 1. AI Next Level</h2><div class="course-group-links"><a href="01_wamingup.html"><span class="nav-icon" aria-hidden="true">🔥</span><span>워밍업 실습</span></a></div></section><section class="course-group"><h2>Part 2. AI 리서치</h2><div class="course-group-links"><a href="02_prompt.html"><span class="nav-icon" aria-hidden="true">🧩</span><span>심층리서치</span></a><a href="03_apps_scrpt.html"><span class="nav-icon" aria-hidden="true">🤖</span><span>네이버 뉴스 수집기</span></a></div></section><section class="course-group"><h2>Part 3. 문서 작성</h2><div class="course-group-links"><a href="04_notebooklm.html"><span class="nav-icon" aria-hidden="true">🖼️</span><span>제미나이 Notebook</span></a><a href="04_mermaid.html"><span class="nav-icon" aria-hidden="true">🔀</span><span>문서구조 시각화</span></a><a href="04_ppt_guide.html"><span class="nav-icon" aria-hidden="true">📐</span><span>PPT 가이드 만들기</span></a><a href="04_skills.html"><span class="nav-icon" aria-hidden="true">🧰</span><span>스킬 만들기</span></a></div></section><section class="course-group" aria-label="미니 프로젝트"><h2>Mini Project</h2><div class="course-group-links"><a href="05_miniproject1.html"><span class="nav-icon" aria-hidden="true">📊</span><span>리서치·보고서 작성</span></a></div></section><section class="course-group"><h2>Part 5. AI 에이전트</h2><div class="course-group-links"><a href="07_aiagent.html"><span class="nav-icon" aria-hidden="true">⚙️</span><span>AI 에이전트</span></a></div></section><section class="course-group"><h2>Mini Project</h2><div class="course-group-links"><a href="m2_miniproject2.html" aria-current="page"><span class="nav-icon" aria-hidden="true">🛠️</span><span>웹앱·대시보드 제작</span></a></div></section><section class="course-group"><h2>Part 6. 이미지·영상 제작</h2><div class="course-group-links"><a href="06_aivideo.html"><span class="nav-icon" aria-hidden="true">🎬</span><span>이미지 생성 및 영상화</span></a></div></section></nav>
     <!-- Sidebar Footer (Banner) -->
     <div class="mt-auto border-t border-[#DDDBD5] p-4 bg-white flex-shrink-0">
       <!-- Dropup Menu Container -->
@@ -187,12 +146,12 @@
   <!-- ===== Main Content ===== -->
   <main class="flex-1 flex flex-col overflow-hidden pt-8 lg:pt-10 pb-8 px-4 md:px-8 lg:px-10">
     <!-- Header Area -->
-    <header class="mb-4 flex-shrink-0 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+    <header class="mb-4 flex-shrink-0 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 workbook-page-header">
       <div>
         <div class="mb-2">
-          <span class="inline-block bg-brand-500 text-white rounded-full px-4 py-1 text-[11.5px] font-mono font-extrabold tracking-wider uppercase">Mini Project 2</span>
+          
         </div>
-        <h1 id="header-title" class="text-2xl md:text-3xl font-extrabold tracking-tight leading-tight text-neutral-900">
+        <span class="workbook-part-badge">Mini Project</span><h1 id="header-title" class="text-2xl md:text-3xl font-extrabold tracking-tight leading-tight text-neutral-900 workbook-practice-title">
           AI 활용 나만의 웹앱 제작
         </h1>
       </div>
@@ -213,21 +172,43 @@
       </div>
     </header>
 
-    <section class="border border-[#DDDBD5] rounded-2xl p-5 md:p-6 bg-white shadow-sm flex-1 flex flex-col overflow-y-auto">
+    <section class="border border-[#DDDBD5] rounded-2xl p-5 md:p-6 bg-white shadow-sm flex-1 flex flex-col overflow-y-auto workbook-resource-box"><div class="workbook-resource-heading"><div class="resource-caption resource-heading-text">AI 활용 나만의 웹앱 제작</div><div class="workbook-resource-actions" aria-label="실습 자료 및 서비스 링크"><a href="https://claude.ai/" target="_blank" class="flex-shrink-0 inline-flex items-center justify-center gap-2 px-4 h-9 border border-[#DDDBD5] hover:border-orange-500 bg-white hover:bg-orange-50 text-neutral-900 hover:text-orange-700 font-bold text-xs md:text-sm rounded-lg transition-all shadow-xs focus:outline-none workbook-resource-button" style="text-decoration: none;">
+                <svg class="w-3.5 h-3.5 text-neutral-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"></path>
+                </svg>
+                Claude 바로가기              </a><a href="https://gemini.google.com/" target="_blank" class="flex-shrink-0 inline-flex items-center justify-center gap-2 px-4 h-9 border border-[#DDDBD5] hover:border-blue-500 bg-white hover:bg-blue-50 text-neutral-900 hover:text-blue-700 font-bold text-xs md:text-sm rounded-lg transition-all shadow-xs focus:outline-none workbook-resource-button" style="text-decoration: none;">
+                <svg class="w-3.5 h-3.5 text-neutral-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"></path>
+                </svg>
+                Gemini 바로가기              </a><a href="https://claude.ai/" target="_blank" class="flex-shrink-0 inline-flex items-center justify-center gap-2 px-4 h-9 border border-[#DDDBD5] hover:border-orange-500 bg-white hover:bg-orange-50 text-neutral-900 hover:text-orange-700 font-bold text-xs md:text-sm rounded-lg transition-all shadow-xs focus:outline-none workbook-resource-button" style="text-decoration: none;">
+                <svg class="w-3.5 h-3.5 text-neutral-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"></path>
+                </svg>
+                Claude 바로가기              </a><a href="https://gemini.google.com/" target="_blank" class="flex-shrink-0 inline-flex items-center justify-center gap-2 px-4 h-9 border border-[#DDDBD5] hover:border-blue-500 bg-white hover:bg-blue-50 text-neutral-900 hover:text-blue-700 font-bold text-xs md:text-sm rounded-lg transition-all shadow-xs focus:outline-none workbook-resource-button" style="text-decoration: none;">
+                <svg class="w-3.5 h-3.5 text-neutral-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"></path>
+                </svg>
+                Gemini 바로가기              </a><a href="https://gemini.google.com/" target="_blank" class="flex-shrink-0 inline-flex items-center justify-center gap-2 px-4 h-9 border border-[#DDDBD5] hover:border-blue-500 bg-white hover:bg-blue-50 text-neutral-900 hover:text-blue-700 font-bold text-xs md:text-sm rounded-lg transition-all shadow-xs focus:outline-none workbook-resource-button" style="text-decoration: none;">
+                <svg class="w-3.5 h-3.5 text-neutral-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"></path>
+                </svg>
+                Gemini 바로가기              </a></div></div>
       <!-- Practice Content Container -->
       <div class="flex-1 flex flex-col gap-6">
 
         <!-- =================== 실습 인트로 (Tab 0) =================== -->
-        <div id="content-intro" class="flex flex-col gap-6">
-          <!-- Mission Card -->
-          <div class="bg-brand-600 rounded-2xl p-6 text-white shadow-xs">
+        <div id="content-intro" class="flex flex-col gap-6 workbook-resource-box"><div class="workbook-resource-heading"><div class="bg-brand-600 rounded-2xl p-6 text-white shadow-xs resource-heading-text">
             <div class="flex items-center gap-2 text-brand-100 mb-3 text-xs md:text-sm font-extrabold uppercase tracking-wider">
               <span>✦</span> MISSION
             </div>
             <h3 class="text-xl md:text-2xl font-extrabold leading-snug">
               간단한 업무용 웹앱을 직접 만들어 보세요.
             </h3>
-          </div>
+          </div><div class="workbook-resource-actions" aria-label="실습 자료 및 서비스 링크"><a id="webapp-share-btn" href="https://docs.google.com/spreadsheets/d/1t-iA9k7jKfRCTLHctak-JMu62WfPbSqC1PTmo99HZ_w/edit?usp=sharing" target="_blank" class="inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-brand-500 hover:bg-brand-600 text-white font-extrabold text-base rounded-xl transition-all shadow-md hover:shadow-lg focus:outline-none workbook-resource-button" style="text-decoration: none;">
+              <span>🌐</span> 웹앱 공유
+            </a></div></div>
+          <!-- Mission Card -->
+          
 
           <!-- Steps Flowcard -->
           <div class="border border-[#DDDBD5] rounded-2xl p-6 bg-[#F8F7F4] flex flex-col justify-center">
@@ -276,12 +257,7 @@
 
           <!-- 웹앱 공유 버튼 -->
           <div class="flex justify-end mt-2 pb-2">
-            <a id="webapp-share-btn" href="https://docs.google.com/spreadsheets/d/1t-iA9k7jKfRCTLHctak-JMu62WfPbSqC1PTmo99HZ_w/edit?usp=sharing" 
-               target="_blank" 
-               class="inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-brand-500 hover:bg-brand-600 text-white font-extrabold text-base rounded-xl transition-all shadow-md hover:shadow-lg focus:outline-none"
-               style="text-decoration: none;">
-              <span>🌐</span> 웹앱 공유
-            </a>
+            
           </div>
         </div>
         
@@ -294,16 +270,8 @@
               <p class="text-xs md:text-sm text-[#605E59] mt-1">내 업무를 설명하고 아이디어를 구하는 프롬프트입니다.</p>
             </div>
             <div class="flex items-center gap-2 flex-shrink-0">
-              <a href="https://claude.ai/" target="_blank" class="flex-shrink-0 inline-flex items-center justify-center gap-2 px-4 h-9 border border-[#DDDBD5] hover:border-orange-500 bg-white hover:bg-orange-50 text-neutral-900 hover:text-orange-700 font-bold text-xs md:text-sm rounded-lg transition-all shadow-xs focus:outline-none" style="text-decoration: none;">
-                <svg class="w-3.5 h-3.5 text-neutral-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"></path>
-                </svg>
-                Claude 바로가기              </a>
-              <a href="https://gemini.google.com/" target="_blank" class="flex-shrink-0 inline-flex items-center justify-center gap-2 px-4 h-9 border border-[#DDDBD5] hover:border-blue-500 bg-white hover:bg-blue-50 text-neutral-900 hover:text-blue-700 font-bold text-xs md:text-sm rounded-lg transition-all shadow-xs focus:outline-none" style="text-decoration: none;">
-                <svg class="w-3.5 h-3.5 text-neutral-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"></path>
-                </svg>
-                Gemini 바로가기              </a>
+              
+              
             </div>
           </div>
 
@@ -325,13 +293,13 @@
 2. 사용자 입력 항목 (Input)
 3. 결과물 화면 구성 및 출력 내용 (Output)</textarea>
             <div class="p-4 bg-white flex justify-end gap-2 border-t border-[#DDDBD5]">
-              <button onclick="copyPrompt('prompt-step1')" class="px-6 h-11 bg-brand-500 hover:bg-brand-600 text-white text-sm md:text-base font-extrabold rounded-lg transition-all shadow-sm flex items-center justify-center gap-1.5 focus:outline-none">
+              <div class="workbook-copy-actions"><button onclick="copyPrompt('prompt-step1')" class="px-6 h-11 bg-brand-500 hover:bg-brand-600 text-white text-sm md:text-base font-extrabold rounded-lg transition-all shadow-sm flex items-center justify-center gap-1.5 focus:outline-none workbook-copy-button">
                 <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                   <rect x="9" y="9" width="11" height="11" rx="2" ry="2" stroke-linecap="round" stroke-linejoin="round"></rect>
                   <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" stroke-linecap="round" stroke-linejoin="round"></path>
                 </svg>
                 프롬프트 복사
-              </button>
+              </button></div>
             </div>
           </section>
         </div>
@@ -345,16 +313,8 @@
               <p class="text-xs md:text-sm text-[#605E59] mt-1">웹앱에 대한 지침을 설계하기 위한 프롬프트입니다.</p>
             </div>
             <div class="flex items-center gap-2 flex-shrink-0">
-              <a href="https://claude.ai/" target="_blank" class="flex-shrink-0 inline-flex items-center justify-center gap-2 px-4 h-9 border border-[#DDDBD5] hover:border-orange-500 bg-white hover:bg-orange-50 text-neutral-900 hover:text-orange-700 font-bold text-xs md:text-sm rounded-lg transition-all shadow-xs focus:outline-none" style="text-decoration: none;">
-                <svg class="w-3.5 h-3.5 text-neutral-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"></path>
-                </svg>
-                Claude 바로가기              </a>
-              <a href="https://gemini.google.com/" target="_blank" class="flex-shrink-0 inline-flex items-center justify-center gap-2 px-4 h-9 border border-[#DDDBD5] hover:border-blue-500 bg-white hover:bg-blue-50 text-neutral-900 hover:text-blue-700 font-bold text-xs md:text-sm rounded-lg transition-all shadow-xs focus:outline-none" style="text-decoration: none;">
-                <svg class="w-3.5 h-3.5 text-neutral-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"></path>
-                </svg>
-                Gemini 바로가기              </a>
+              
+              
             </div>
           </div>
 
@@ -372,13 +332,13 @@
 이 웹앱을 구현하기 위해 AI 모델(예: LLM)에게 입력할 구체적인 '시스템 지침(System Prompt)'을 설계해줘.
 이 지침은 AI가 입력을 받아 원하는 출력을 정확히 생산해낼 수 있도록 역할 정의, 규칙, 예외 처리 등을 구체적으로 명시해야 해.</textarea>
             <div class="p-4 bg-white flex justify-end gap-2 border-t border-[#DDDBD5]">
-              <button onclick="copyPrompt('prompt-step2')" class="px-6 h-11 bg-brand-500 hover:bg-brand-600 text-white text-sm md:text-base font-extrabold rounded-lg transition-all shadow-sm flex items-center justify-center gap-1.5 focus:outline-none">
+              <div class="workbook-copy-actions"><button onclick="copyPrompt('prompt-step2')" class="px-6 h-11 bg-brand-500 hover:bg-brand-600 text-white text-sm md:text-base font-extrabold rounded-lg transition-all shadow-sm flex items-center justify-center gap-1.5 focus:outline-none workbook-copy-button">
                 <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                   <rect x="9" y="9" width="11" height="11" rx="2" ry="2" stroke-linecap="round" stroke-linejoin="round"></rect>
                   <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" stroke-linecap="round" stroke-linejoin="round"></path>
                 </svg>
                 프롬프트 복사
-              </button>
+              </button></div>
             </div>
           </section>
         </div>
@@ -392,11 +352,7 @@
               <p class="text-xs md:text-sm text-[#605E59] mt-1">구상한 지침을 활용하여 Gemini 등에서 동작하는 단일 파일 웹앱 코드를 요청하고 완성합니다.</p>
             </div>
             <div class="flex items-center gap-2 flex-shrink-0">
-              <a href="https://gemini.google.com/" target="_blank" class="flex-shrink-0 inline-flex items-center justify-center gap-2 px-4 h-9 border border-[#DDDBD5] hover:border-blue-500 bg-white hover:bg-blue-50 text-neutral-900 hover:text-blue-700 font-bold text-xs md:text-sm rounded-lg transition-all shadow-xs focus:outline-none" style="text-decoration: none;">
-                <svg class="w-3.5 h-3.5 text-neutral-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"></path>
-                </svg>
-                Gemini 바로가기              </a>
+              
             </div>
           </div>
 
@@ -408,7 +364,7 @@
                 <strong class="block text-neutral-900 text-base font-extrabold mb-1">📋 웹앱 제작 공통 가이드라인</strong>
                 <span class="block text-[#605E59] text-xs leading-tight">Gemini에게 웹앱 제작을 요청할 때 함께 전달할 디자인 및 기능 조건 가이드라인입니다.</span>
               </div>
-              <textarea id="prompt-step3" readonly class="w-full p-4 border-t border-b border-l-0 border-r-0 border-[#DDDBD5] bg-white text-neutral-600 text-xs md:text-sm leading-relaxed outline-none resize-none h-48 md:h-64 font-mono leading-relaxed" style="font-family: 'Pretendard', sans-serif;">[웹앱 제작 공통 가이드라인]
+              <textarea id="prompt-step3" readonly="" class="w-full p-4 border-t border-b border-l-0 border-r-0 border-[#DDDBD5] bg-white text-neutral-600 text-xs md:text-sm leading-relaxed outline-none resize-none h-48 md:h-64 font-mono leading-relaxed" style="font-family: 'Pretendard', sans-serif;">[웹앱 제작 공통 가이드라인]
 
 1. 제작 조건:
 - 단일 파일 HTML (HTML, CSS, JavaScript 통합)로 완성해줘.
@@ -425,13 +381,13 @@
 - 사용자가 입력값을 손쉽게 수정하고 테스트할 수 있도록 디자인해줘.
 - 모든 동작은 JavaScript를 기반으로 프론트엔드 단에서 즉각 실행되도록 해줘.</textarea>
               <div class="p-4 bg-white flex justify-end gap-2 border-t border-[#DDDBD5]">
-                <button onclick="copyPrompt('prompt-step3')" class="px-6 h-11 bg-brand-500 hover:bg-brand-600 text-white text-sm md:text-base font-extrabold rounded-lg transition-all shadow-sm flex items-center justify-center gap-1.5 focus:outline-none">
+                <div class="workbook-copy-actions"><button onclick="copyPrompt('prompt-step3')" class="px-6 h-11 bg-brand-500 hover:bg-brand-600 text-white text-sm md:text-base font-extrabold rounded-lg transition-all shadow-sm flex items-center justify-center gap-1.5 focus:outline-none workbook-copy-button">
                   <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <rect x="9" y="9" width="11" height="11" rx="2" ry="2" stroke-linecap="round" stroke-linejoin="round"></rect>
                     <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" stroke-linecap="round" stroke-linejoin="round"></path>
                   </svg>
                   가이드라인 복사
-                </button>
+                </button></div>
               </div>
             </section>
           </div>

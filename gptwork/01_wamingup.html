@@ -70,7 +70,9 @@
 .warmup-card [hidden]{display:none!important}.warmup-head:focus-visible,.step-collapsed:focus-visible{outline:2px solid #2A6B52;outline-offset:-3px}
 @media(max-width:1023px){.warmup-steps,.warmup-steps.step-two{grid-template-columns:minmax(0,1fr)}.warmup-body{padding:18px}}
 </style>
-</head>
+<style id="course-sidebar-style">
+.course-nav{display:flex;flex-direction:column;gap:18px;padding:4px 12px 20px;overflow-y:auto;min-height:0}.course-nav h2{font-size:12px;line-height:1.5;font-weight:800;color:#989994;margin:0 0 8px;padding:0 10px}.course-nav a{display:flex;align-items:center;gap:12px;padding:11px 12px;border-radius:9px;font-size:14px;font-weight:500;color:#605E59;text-decoration:none;white-space:nowrap}.course-nav a:hover{background:#F8F7F4}.course-nav a[aria-current=page]{background:#E6F2ED;color:#1D4E3A;font-weight:800}.course-nav .nav-icon{font-size:19px;line-height:1}.course-nav a:focus-visible{outline:2px solid #2A6B52;outline-offset:-2px}@media(min-width:1024px){aside:has(.course-nav){min-height:0;overflow:hidden}.course-nav{flex:1}}@media(max-width:1023px){.course-nav{flex-direction:row;overflow-x:auto;gap:20px;padding:10px 12px;flex-shrink:0}.course-group{flex-shrink:0}.course-group-links{display:flex}.course-nav h2{margin-bottom:3px}}
+</style><style id="workbook-resource-layout">.workbook-resource-box{box-sizing:border-box}.workbook-resource-actions{display:flex;justify-content:flex-end;align-items:center;flex-wrap:wrap;gap:10px;width:100%;margin:0 0 20px;flex-shrink:0}.workbook-resource-actions:has(+*){padding-bottom:12px;border-bottom:1px solid #E5E3DF}.workbook-resource-actions .workbook-resource-button{width:auto!important;max-width:100%;min-height:40px;height:auto!important;margin:0!important;padding:10px 16px!important;border:1px solid #DDDBD5!important;border-radius:8px!important;background:#fff!important;color:#1D4E3A!important;font:700 14px/1.5 Pretendard,-apple-system,sans-serif!important;text-decoration:none!important;align-items:center;justify-content:center;gap:6px;box-sizing:border-box}.workbook-resource-button:hover{background:#E6F2ED!important}.workbook-resource-button:focus-visible{outline:2px solid #2A6B52;outline-offset:2px}.workbook-resource-actions .workbook-resource-button:not(.hidden){display:inline-flex}.workbook-resource-actions .workbook-resource-button svg{width:16px;height:16px;flex-shrink:0}@media(max-width:640px){.workbook-resource-actions{gap:8px}.workbook-resource-actions .workbook-resource-button{font-size:13px!important}}</style><style>.workbook-resource-heading{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-shrink:0;margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid #DDDBD5}.resource-heading-text{flex:1;min-width:0;margin:0!important;padding-bottom:0!important;border-bottom:0!important}.resource-caption{font:800 18px/1.5 Pretendard,sans-serif;color:#1A1A18}.workbook-resource-heading>.workbook-resource-actions{flex:0 1 auto;width:auto;margin:0;padding:0;border:0;align-self:center}.workbook-resource-heading .workbook-resource-button{white-space:nowrap}@media(max-width:640px){.workbook-resource-heading{flex-wrap:wrap;gap:12px}.workbook-resource-heading>.workbook-resource-actions{margin-left:auto}}</style><link rel="stylesheet" href="workbook-ui.css"></head>
 <body class="min-h-screen text-neutral-900 antialiased flex flex-col h-screen overflow-hidden pt-[5px]">
   <!-- Top brand bar -->
   <div class="fixed top-0 left-0 w-full h-[5px] bg-brand-500 z-50"></div>
@@ -85,50 +87,8 @@
     <aside
       class="flex-shrink-0 w-full lg:w-64 bg-white border-b lg:border-b-0 lg:border-r border-[#DDDBD5] flex flex-col lg:h-full pt-4">
     <!-- Nav list -->
-    <p class="hidden lg:block px-5 mb-1.5 text-[11px] font-bold uppercase tracking-wider text-neutral-400">실습 목록</p>
-    <nav class="flex lg:flex-col gap-1 px-3 pb-4 overflow-x-auto lg:overflow-y-auto">
-
-      <a href="01_wamingup.html"
-        class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-bold text-brand-600 bg-brand-100 whitespace-nowrap transition-colors">
-        <span class="text-lg leading-none">🔥</span>
-        <span>워밍업 실습</span>
-      </a>
-      <a href="02_prompt.html"
-        class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
-        <span class="text-lg leading-none">🧩</span>
-        <span>프롬프트 빌더</span>
-      </a>
-      <a href="03_apps_scrpt.html"
-        class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
-        <span class="text-lg leading-none">🤖</span>
-        <span>앱스스크립트 자동화</span>
-      </a>
-      <a href="04_notebooklm.html"
-        class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
-        <span class="text-lg leading-none">🖼️</span>
-        <span>노트북LM</span>
-      </a>
-      <a href="05_miniproject1.html"
-        class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
-        <span class="text-lg leading-none">🚀</span>
-        <span>미니프로젝트 1</span>
-      </a>
-      <a href="07_aiagent.html"
-        class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
-        <span class="text-lg leading-none">🎨</span>
-        <span>AI 에이전트</span>
-      </a>
-      <a href="06_aivideo.html"
-        class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
-        <span class="text-lg leading-none">🎬</span>
-        <span>이미지 생성 및 영상화</span>
-      </a>
-      <a href="m2_miniproject2.html"
-        class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900 whitespace-nowrap transition-colors">
-        <span class="text-lg leading-none">🚀</span>
-        <span>미니프로젝트 2</span>
-      </a>
-    </nav>
+    
+    <nav class="course-nav" aria-label="파트별 실습 목록"><section class="course-group"><h2>Part 1. AI Next Level</h2><div class="course-group-links"><a href="01_wamingup.html" aria-current="page"><span class="nav-icon" aria-hidden="true">🔥</span><span>워밍업 실습</span></a></div></section><section class="course-group"><h2>Part 2. AI 리서치</h2><div class="course-group-links"><a href="02_prompt.html"><span class="nav-icon" aria-hidden="true">🧩</span><span>심층리서치</span></a><a href="03_apps_scrpt.html"><span class="nav-icon" aria-hidden="true">🤖</span><span>네이버 뉴스 수집기</span></a></div></section><section class="course-group"><h2>Part 3. 문서 작성</h2><div class="course-group-links"><a href="04_notebooklm.html"><span class="nav-icon" aria-hidden="true">🖼️</span><span>제미나이 Notebook</span></a><a href="04_mermaid.html"><span class="nav-icon" aria-hidden="true">🔀</span><span>문서구조 시각화</span></a><a href="04_ppt_guide.html"><span class="nav-icon" aria-hidden="true">📐</span><span>PPT 가이드 만들기</span></a><a href="04_skills.html"><span class="nav-icon" aria-hidden="true">🧰</span><span>스킬 만들기</span></a></div></section><section class="course-group" aria-label="미니 프로젝트"><h2>Mini Project</h2><div class="course-group-links"><a href="05_miniproject1.html"><span class="nav-icon" aria-hidden="true">📊</span><span>리서치·보고서 작성</span></a></div></section><section class="course-group"><h2>Part 5. AI 에이전트</h2><div class="course-group-links"><a href="07_aiagent.html"><span class="nav-icon" aria-hidden="true">⚙️</span><span>AI 에이전트</span></a></div></section><section class="course-group"><h2>Mini Project</h2><div class="course-group-links"><a href="m2_miniproject2.html"><span class="nav-icon" aria-hidden="true">🛠️</span><span>웹앱·대시보드 제작</span></a></div></section><section class="course-group"><h2>Part 6. 이미지·영상 제작</h2><div class="course-group-links"><a href="06_aivideo.html"><span class="nav-icon" aria-hidden="true">🎬</span><span>이미지 생성 및 영상화</span></a></div></section></nav>
     <!-- Sidebar Footer (Banner) -->
     <div class="mt-auto border-t border-[#DDDBD5] p-4 bg-white flex-shrink-0">
       <!-- Dropup Menu Container -->
@@ -187,15 +147,15 @@
 
   <!-- ===== Main Content ===== -->
   <main class="flex-1 flex flex-col overflow-hidden pt-8 lg:pt-10 pb-8 px-4 md:px-8 lg:px-10">
-<header class="mb-4 flex-shrink-0"><div class="mb-2"><span class="inline-block bg-brand-500 text-white rounded-full px-4 py-1 text-[11.5px] font-mono font-extrabold tracking-wider uppercase">Warming-Up</span></div><h1 class="text-2xl md:text-3xl font-extrabold tracking-tight leading-tight text-neutral-900" style="word-break:keep-all">동료가 남긴 파일, 미팅 자료로 정리하기</h1></header>
-<section class="border border-[#DDDBD5] rounded-2xl p-5 md:p-6 bg-white shadow-sm flex-1 flex flex-col overflow-y-auto">
-<div class="border-b border-[#DDDBD5] pb-4 mb-4 flex-shrink-0"><h2 class="text-lg md:text-xl font-extrabold">휴가 간 동료 대신 고객사 미팅을 준비해 보세요.</h2><p class="text-sm text-neutral-600 mt-1">인수인계 자료 5개를 읽고 Word 한 페이지로 정리합니다.</p></div>
-<div class="warmup-steps"><article id="step1-card" class="warmup-card active"><button id="step1-toggle" type="button" class="warmup-head" aria-expanded="true" aria-controls="step1-body" onclick="setActiveStep(1)"><span><strong>Step 1</strong><span class="step-label">프로젝트 만들고 ZIP 다운로드</span></span><span class="step-arrow" aria-hidden="true">−</span></button><div id="step1-body" class="warmup-body" ><ol class="list-decimal pl-5 space-y-3 text-sm text-neutral-600 leading-relaxed"><li>새 프로젝트 이름을 정하세요 (예. GPT 실습 등).</li><li>바탕화면에 프로젝트와 동일한 이름의 폴더를 만듭니다.</li><li>아래 ZIP 파일을 다운로드하고 다운로드 폴더에 넣어 주세요.</li></ol>
+<header class="mb-4 flex-shrink-0 workbook-page-header"><div class="mb-2"></div><span class="workbook-part-badge">Part 1. AI Next Level</span><h1 class="text-2xl md:text-3xl font-extrabold tracking-tight leading-tight text-neutral-900 workbook-practice-title" style="word-break:keep-all">동료가 남긴 파일, 미팅 자료로 정리하기</h1></header>
+<section class="border border-[#DDDBD5] rounded-2xl p-5 md:p-6 bg-white shadow-sm flex-1 flex flex-col overflow-y-auto workbook-resource-box"><div class="workbook-resource-heading"><div class="border-b border-[#DDDBD5] pb-4 mb-4 flex-shrink-0 resource-heading-text"><h2 class="text-lg md:text-xl font-extrabold">휴가 간 동료 대신 고객사 미팅을 준비해 보세요.</h2><p class="text-sm text-neutral-600 mt-1">인수인계 자료 5개를 읽고 Word 한 페이지로 정리합니다.</p></div><div class="workbook-resource-actions" aria-label="실습 자료 및 서비스 링크"><a id="download-handover" href="download/handover.zip" download="인수인계.zip" class="inline-flex items-center justify-center rounded-lg bg-brand-500 hover:bg-brand-600 px-6 py-3 text-white font-bold workbook-resource-button">인수인계.zip 다운로드</a></div></div>
+
+<div class="warmup-steps"><article id="step1-card" class="warmup-card active"><button id="step1-toggle" type="button" class="warmup-head" aria-expanded="true" aria-controls="step1-body" onclick="setActiveStep(1)"><span><strong>Step 1</strong><span class="step-label">프로젝트 만들고 ZIP 다운로드</span></span><span class="step-arrow" aria-hidden="true">−</span></button><div id="step1-body" class="warmup-body"><ol class="list-decimal pl-5 space-y-3 text-sm text-neutral-600 leading-relaxed"><li>새 프로젝트 이름을 정하세요 (예. GPT 실습 등).</li><li>바탕화면에 프로젝트와 동일한 이름의 폴더를 만듭니다.</li><li>아래 ZIP 파일을 다운로드하고 다운로드 폴더에 넣어 주세요.</li></ol>
 
 <p class="text-sm text-neutral-600 mt-5 mb-4">메모 · 지난 회의록 · 고객 요청메일 · 진행현황 · 최근 변경사항<br>TXT 3개, Word 1개, Excel 1개가 들어 있습니다. 모두 교육용 가상 자료입니다.</p>
-<a id="download-handover" href="download/handover.zip" download="인수인계.zip" class="inline-flex items-center justify-center rounded-lg bg-brand-500 hover:bg-brand-600 px-6 py-3 text-white font-bold">인수인계.zip 다운로드</a>
+
 <p class="text-xs text-neutral-500 mt-3">실습 기준일은 자료에 적힌 2026년 10월 22일입니다.</p>
-</div><button type="button" class="step-collapsed" id="step1-collapsed" onclick="setActiveStep(1)" hidden>프로젝트와 자료 준비</button></article><article id="step2-card" class="warmup-card"><button id="step2-toggle" type="button" class="warmup-head" aria-expanded="false" aria-controls="step2-body" onclick="setActiveStep(2)"><span><strong>Step 2</strong><span class="step-label">GPT에 지시하기</span></span><span class="step-arrow" aria-hidden="true">+</span></button><div id="step2-body" class="warmup-body" hidden>
+</div><button type="button" class="step-collapsed" id="step1-collapsed" onclick="setActiveStep(1)" hidden="">프로젝트와 자료 준비</button></article><article id="step2-card" class="warmup-card"><button id="step2-toggle" type="button" class="warmup-head" aria-expanded="false" aria-controls="step2-body" onclick="setActiveStep(2)"><span><strong>Step 2</strong><span class="step-label">GPT에 지시하기</span></span><span class="step-arrow" aria-hidden="true">+</span></button><div id="step2-body" class="warmup-body" hidden="">
 
 <p class="text-sm text-neutral-600 mb-4">만든 프로젝트에서 Work 모드로 대화를 시작하고 다운로드한 ZIP을 그대로 첨부하고, 아래 요청을 복사해 붙여 넣으세요.</p>
 <label for="prompt-work" class="block font-bold mb-2">업무 요청 <span class="text-xs font-normal text-neutral-500">직접 수정할 수 있어요</span></label>
@@ -206,9 +166,9 @@
 파일명은 ‘미팅_준비자료.docx’로 해줘.
 
 (오늘만 진행할 가상 실습)</textarea>
-<div class="flex flex-wrap gap-3 justify-end mt-3"><button id="reset-prompt" class="px-4 py-3 border border-neutral-300 rounded-lg font-bold text-sm">원문으로 되돌리기</button><button id="copy-prompt" class="px-6 py-3 bg-brand-500 hover:bg-brand-600 text-white rounded-lg font-extrabold">프롬프트 복사</button></div>
+<div class="flex flex-wrap gap-3 justify-end mt-3"><button id="reset-prompt" class="px-4 py-3 border border-neutral-300 rounded-lg font-bold text-sm">원문으로 되돌리기</button><div class="workbook-copy-actions"><button id="copy-prompt" class="px-6 py-3 bg-brand-500 hover:bg-brand-600 text-white rounded-lg font-extrabold workbook-copy-button">프롬프트 복사</button></div></div>
 <details class="mt-5 border-t border-neutral-200 pt-4 text-sm"><summary class="cursor-pointer font-bold text-neutral-600">ZIP을 첨부하거나 읽을 수 없나요?</summary><p class="mt-3 text-neutral-600 leading-relaxed">ZIP의 압축을 풀고 ‘인수인계’ 폴더 안의 파일 5개를 함께 첨부하세요. 요청의 첫 문장을 ‘첨부한 파일 5개를 모두 읽어줘.’로 바꾸면 됩니다.</p></details>
-<p class="mt-5 text-sm text-neutral-600 leading-relaxed">완성된 <strong>미팅_준비자료.docx</strong>를 열어 변경된 시간, 고객 요청, 미확정 사항이 반영됐는지 확인하세요.</p></div><button type="button" class="step-collapsed" id="step2-collapsed" onclick="setActiveStep(2)" >프롬프트 복사 및 실행</button></article></div></section></main>
+<p class="mt-5 text-sm text-neutral-600 leading-relaxed">완성된 <strong>미팅_준비자료.docx</strong>를 열어 변경된 시간, 고객 요청, 미확정 사항이 반영됐는지 확인하세요.</p></div><button type="button" class="step-collapsed" id="step2-collapsed" onclick="setActiveStep(2)">프롬프트 복사 및 실행</button></article></div></section></main>
   </div>
 
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
