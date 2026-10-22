@@ -813,7 +813,7 @@
         }
         localStorage.setItem('workbook_logged_in', 'true');
         localStorage.setItem('workbook_access_code', 'workingai');
-        window.location.href = "/workingai_v1/index.html";
+        window.location.href = new URL(pendingRedirectUrl, location.href).pathname.startsWith("/gptwork/") ? pendingRedirectUrl : "/workingai_v1/index.html";
         return;
       }
 
