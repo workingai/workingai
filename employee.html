@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>직장인 AI · WORKING AI</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<style>*{box-sizing:border-box}body{margin:0;background:#f3f2ef;color:#172722;font-family:Pretendard,sans-serif}header{padding:24px 5%;border-bottom:1px solid #deded7;background:#fff}header a{color:#286c54;text-decoration:none;font-weight:800}main{max-width:1100px;margin:70px auto;padding:0 24px}.eyebrow{font-size:13px;letter-spacing:2px;color:#286c54;font-weight:700}h1{font-size:42px;margin:12px 0}p{color:#606d67;line-height:1.7}.cards{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:40px}.card{display:flex;flex-direction:column;background:#fff;border:1px solid #dddcd5;border-radius:22px;padding:36px;text-decoration:none;color:inherit;transition:transform .2s,box-shadow .2s}.card:hover{transform:translateY(-4px);box-shadow:0 14px 35px #173e2112}.day{font-size:42px;font-weight:800;color:#286c54}.card h2{font-size:25px;line-height:1.5;margin:24px 0 8px}.card p{flex:1}.enter{margin-top:28px;font-weight:700;color:#286c54}dialog{width:min(420px,calc(100% - 32px));border:0;border-radius:20px;padding:30px}dialog::backdrop{background:#10271e77}label{display:block;margin:20px 0 8px}input{width:100%;font:inherit;padding:13px;border:1px solid #bfc9c3;border-radius:8px}.actions{display:flex;gap:10px;margin-top:20px}button{font:inherit;padding:12px 20px;border-radius:8px;border:1px solid #ccd4ce;cursor:pointer;background:white}.primary{background:#286c54;color:white;border-color:#286c54}.error{color:#ae3535;min-height:24px;margin:10px 0 0}@media(max-width:640px){main{margin:35px auto}.cards{grid-template-columns:1fr}h1{font-size:32px}.card{padding:28px}}</style></head>
+<body><header><a href="/index.html">WORKING AI</a></header><main><div class="eyebrow">직장인 AI</div><h1>수강하신 과정을 선택하세요.</h1><p>강의에서 사용한 과정을 선택해 실습과 복습을 이어가세요.</p><div class="cards">
+<a class="card" href="/workshop01/01_wamingup.html"><span class="day">2026</span><h2>직장인 무기 2026</h2><p>이미지 생성 · 웹앱 제작 · NotebookLM<br>기존 강의 실습과 복습</p><span class="enter">과정 입장하기 →</span></a>
+<a class="card" href="/gptwork/01_wamingup.html"><span class="day">GPT Work</span><h2>직장인 GPT Work</h2><p>ChatGPT Work 중심의 업무 실습<br>내 파일에서 시작하는 업무 완성</p><span class="enter">과정 입장하기 →</span></a>
+</div></main><script>
+document.querySelectorAll('.card').forEach(function(card) {
+ card.addEventListener('click', function(event) {
+  event.preventDefault();
+  if (localStorage.getItem('workbook_access_code') === 'mkt1008') { alert('마케터 AI 계정으로는 직장인 AI에 접근할 수 없습니다.'); return; }
+  const target = card.getAttribute('href');
+  if (localStorage.getItem('workbook_logged_in') !== 'true') {
+   location.href = '/index.html?redirect=' + encodeURIComponent(target.slice(1));
+  } else if (target.startsWith('/workshop01/') && localStorage.getItem('workbook_access_code') === 'workingai') {
+   location.href = '/workingai_v1/index.html';
+  } else { location.href = target; }
+ });
+});
+</script></body></html>
