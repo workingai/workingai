@@ -641,8 +641,10 @@
     const GAS_API_URL = "https://script.google.com/macros/s/AKfycbwmedfL4Q8uUhXqKg3xa1yMEfGGUHYjRrRn1wjZN3_n_QcUMqnxmHUi1OMT3oIhZCBtKA/exec";
 
     let pendingRedirectUrl = "";
+    let courseLoginCompleted = false;
 
     function saveLoginCode(code) {
+      courseLoginCompleted = true;
       localStorage.setItem('workbook_logged_in', 'true');
       localStorage.setItem('workbook_access_code', code);
       localStorage.setItem('gas_api_url', GAS_API_URL);
@@ -706,9 +708,10 @@
     });
 
     function openEntranceModal(redirectUrl = "") {
+      courseLoginCompleted = false;
       pendingRedirectUrl = redirectUrl || "workshop01/ws01_index.html";
       const destination = new URL(pendingRedirectUrl, location.href);
-      if (destination.origin === location.origin) {
+      if (destination.origin === location.origin && new URLSearchParams(location.search).get('login') !== 'course') {
         const route = destination.pathname;
         const key = route.startsWith('/ssg/day2/') ? 'ssg_authenticated_261021' : route.startsWith('/ssg/') ? 'ssg_authenticated_261015' : null;
         if (key && localStorage.getItem(key) === 'true') { location.href = destination.href; return; }
@@ -735,7 +738,7 @@
 
     function closeEntranceModal() {
       document.getElementById('entrance-modal').classList.add('hidden');
-      if (localStorage.getItem('workbook_logged_in') === 'true' && pendingRedirectUrl &&
+      if ((new URLSearchParams(location.search).get('login') !== 'course' || courseLoginCompleted) && localStorage.getItem('workbook_logged_in') === 'true' && pendingRedirectUrl &&
           (!pendingRedirectUrl.includes('workshop02/') || localStorage.getItem('workbook_access_code') === 'mkt1008')) {
         let targetUrl = pendingRedirectUrl;
         const classIdInput = document.getElementById('input-pwd').value.trim();
@@ -813,7 +816,7 @@
         }
         localStorage.setItem('workbook_logged_in', 'true');
         localStorage.setItem('workbook_access_code', 'workingai');
-        window.location.href = new URL(pendingRedirectUrl, location.href).pathname.startsWith("/gptwork/") ? pendingRedirectUrl : "/workingai_v1/index.html";
+        window.location.href = "/workingai_v1/index.html";
         return;
       }
 
