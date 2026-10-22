@@ -101,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // 1. 현재 폴더 위치 분석 (워크숍 하위 폴더 여부 확인)
-  const workshopMatch = window.location.pathname.match(/\/(workshop01|workshop02|ssg)(?:\/|$)/);
+  const workshopMatch = window.location.pathname.match(/\/(workshop01|gptwork|workshop02|ssg)(?:\/|$)/);
   const isSubdir = Boolean(workshopMatch);
   const prefix = /\/ssg\/day2(?:\/|$)/.test(window.location.pathname) ? '../../' : (isSubdir ? '../' : '');
 
@@ -118,7 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
         processedHtml = processedHtml
           .replace(/href="index\.html"/g, 'href="' + prefix + 'index.html"')
           .replace(/href="mulcam01\.html"/g, 'href="' + prefix + 'mulcam01.html"')
-          .replace(/href="(workshop01|workshop02|ssg)\//g, 'href="' + prefix + '$1/')
+          .replace(/href="(workshop01|gptwork|workshop02|ssg)\//g, 'href="' + prefix + '$1/')
           .replace(/src="images\//g, 'src="' + prefix + 'images/');
       }
 
@@ -293,7 +293,7 @@ function initNavbar(isSubdir, rootPrefix = isSubdir ? '../' : '') {
       const text = anchor.textContent.trim();
       const href = anchor.getAttribute('href') || '';
       const destination = new URL(anchor.href, window.location.href);
-      const isEmployeeDestination = /\/(workshop01|workingai_v1)(?:\/|$)/.test(destination.pathname);
+      const isEmployeeDestination = /\/(workshop01|gptwork|workingai_v1)(?:\/|$)/.test(destination.pathname);
       if ((text === '직장인 AI' || isEmployeeDestination) &&
           localStorage.getItem('workbook_access_code') === 'mkt1008') {
         e.preventDefault();
@@ -317,7 +317,7 @@ function initNavbar(isSubdir, rootPrefix = isSubdir ? '../' : '') {
           return;
         }
       }
-      if (text === '직장인 AI' || href.includes('workshop01/')) {
+      if (href.includes('workshop01/')) {
         if (localStorage.getItem('workbook_access_code') === 'workingai') {
           e.preventDefault();
           window.location.href = "/workingai_v1/index.html";
