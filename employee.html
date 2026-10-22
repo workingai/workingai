@@ -11,11 +11,7 @@ document.querySelectorAll('.card').forEach(function(card) {
   event.preventDefault();
   if (localStorage.getItem('workbook_access_code') === 'mkt1008') { alert('마케터 AI 계정으로는 직장인 AI에 접근할 수 없습니다.'); return; }
   const target = card.getAttribute('href');
-  if (localStorage.getItem('workbook_logged_in') !== 'true') {
-   location.href = '/index.html?redirect=' + encodeURIComponent(target.slice(1));
-  } else if (target.startsWith('/workshop01/') && localStorage.getItem('workbook_access_code') === 'workingai') {
-   location.href = '/workingai_v1/index.html';
-  } else { location.href = target; }
+  location.href = '/index.html?login=course&redirect=' + encodeURIComponent(target.slice(1));
  });
 });
 </script></body></html>
