@@ -894,65 +894,7 @@
       }
     }
 
-    let cachedWebappUrl = null;
-
-    async function fetchWebappUrl() {
-      if (cachedWebappUrl) return cachedWebappUrl;
-      try {
-        const gasApiUrl = localStorage.getItem('gas_api_url') || "https://script.google.com/macros/s/AKfycbwmedfL4Q8uUhXqKg3xa1yMEfGGUHYjRrRn1wjZN3_n_QcUMqnxmHUi1OMT3oIhZCBtKA/exec";
-        const response = await fetch(`${gasApiUrl}?action=getWebappUrl`);
-        if (response.ok) {
-          const result = await response.json();
-          if (result.success && result.url) {
-            let targetUrl = result.url.trim();
-            if (targetUrl) {
-              if (!targetUrl.startsWith('http://') && !targetUrl.startsWith('https://') && !targetUrl.startsWith('/') && !targetUrl.startsWith('.')) {
-                targetUrl = 'https://' + targetUrl;
-              }
-              cachedWebappUrl = targetUrl;
-              return cachedWebappUrl;
-            }
-          }
-        }
-      } catch (err) {
-        console.warn("Failed to fetch webapp share URL from GAS", err);
-      }
-      return null;
-    }
-
-    async function handleWebappShareClick(e) {
-      e.preventDefault();
-      const btn = document.getElementById('webapp-share-btn');
-      
-      if (cachedWebappUrl) {
-        window.open(cachedWebappUrl, '_blank');
-        return;
-      }
-      
-      if (btn) btn.style.opacity = '0.7';
-      const url = await fetchWebappUrl();
-      if (btn) btn.style.opacity = '1';
-
-      if (url) {
-        window.open(url, '_blank');
-      } else {
-        window.open('https://docs.google.com/spreadsheets/d/1t-iA9k7jKfRCTLHctak-JMu62WfPbSqC1PTmo99HZ_w/edit?usp=sharing', '_blank');
-      }
-    }
-
-    window.addEventListener('DOMContentLoaded', () => {
-      fetchWebappUrl().then(url => {
-        if (url) {
-          const btn = document.getElementById('webapp-share-btn');
-          if (btn) btn.setAttribute('href', url);
-        }
-      });
-
-      const shareBtn = document.getElementById('webapp-share-btn');
-      if (shareBtn) {
-        shareBtn.addEventListener('click', handleWebappShareClick);
-      }
-    });
+    // Results sharing uses the fixed anchor URL directly.
 
     let toastTimer;
     function showToast(message) {
