@@ -645,6 +645,8 @@
 
     function saveLoginCode(code) {
       courseLoginCompleted = true;
+      const course = new URL(pendingRedirectUrl || 'workshop01/ws01_index.html', location.href).pathname.split('/')[1];
+      if (['gptwork', 'workshop01'].includes(course)) localStorage.setItem('workbook_course_login_' + course, 'true');
       localStorage.setItem('workbook_logged_in', 'true');
       localStorage.setItem('workbook_access_code', code);
       localStorage.setItem('gas_api_url', GAS_API_URL);
@@ -711,11 +713,21 @@
       courseLoginCompleted = false;
       pendingRedirectUrl = redirectUrl || "workshop01/ws01_index.html";
       const destination = new URL(pendingRedirectUrl, location.href);
-      if (destination.origin === location.origin && new URLSearchParams(location.search).get('login') !== 'course') {
+      if (destination.origin === location.origin) {
         const route = destination.pathname;
         const key = route.startsWith('/ssg/day2/') ? 'ssg_authenticated_261021' : route.startsWith('/ssg/') ? 'ssg_authenticated_261015' : null;
         if (key && localStorage.getItem(key) === 'true') { location.href = destination.href; return; }
         const code = localStorage.getItem('workbook_access_code');
+        const course = route.split('/')[1];
+        const loggedIn = localStorage.getItem('workbook_logged_in') === 'true';
+        const personalLogin = loggedIn && code && !['workingai', 'mkt1008'].includes(code.toLowerCase());
+        if (['gptwork', 'workshop01'].includes(course) && loggedIn &&
+            (localStorage.getItem('workbook_course_login_' + course) === 'true' || personalLogin)) {
+          localStorage.setItem('workbook_course_login_' + course, 'true');
+          location.href = destination.href;
+          return;
+        }
+
         if (route.startsWith('/workshop02/') && code === 'mkt1008') { location.href = destination.href; return; }
         if (route.startsWith('/workshop01/') && code === 'workingai') { location.href = '/workingai_v1/index.html'; return; }
       }
