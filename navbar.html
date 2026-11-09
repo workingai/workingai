@@ -10,7 +10,7 @@
     <div class="hidden md:flex items-center gap-8 text-sm md:text-base font-extrabold">
       <a href="/employee.html" class="text-neutral-700 hover:text-brand-500 transition-colors">직장인 AI</a>
       <a href="/workshop02/index.html" class="text-neutral-700 hover:text-brand-500 transition-colors">마케터 AI</a>
-      <a href="#" onclick="alert('일잘러를 위한 구글 AI 활용법 실습 페이지는 강의 중 별도로 제공된 주소로 접속해 주세요.'); return false;" class="text-neutral-700 hover:text-brand-500 transition-colors">구글 AI</a>
+      <a href="#" onclick="if(document.body.classList.contains('menu-open'))toggleMobileMenu(); document.getElementById('google-ai-notice').showModal(); return false;" class="text-neutral-700 hover:text-brand-500 transition-colors">구글 AI</a>
       <a href="/workshop.html" class="text-neutral-700 hover:text-brand-500 transition-colors">AI 워크숍</a>
       <button id="nav-login-btn" class="text-neutral-700 hover:text-brand-500 transition-colors text-sm font-extrabold border border-neutral-200 hover:border-brand-200 px-3.5 py-1.5 rounded-lg">로그인</button>
       <button id="nav-logout-btn" class="text-neutral-400 hover:text-red-500 transition-colors text-xs border border-neutral-200 hover:border-red-200 px-3 py-1.5 rounded-lg hidden font-bold">로그아웃</button>
@@ -33,8 +33,30 @@
   </div>
   <a href="/employee.html" style="color:#333;text-decoration:none;padding:10px 0;border-bottom:1px solid #f5f4f2;font-family:Pretendard,sans-serif;">직장인 AI</a>
   <a href="/workshop02/index.html" style="color:#333;text-decoration:none;padding:10px 0;border-bottom:1px solid #f5f4f2;font-family:Pretendard,sans-serif;">마케터 AI</a>
-  <a href="#" onclick="alert('일잘러를 위한 구글 AI 활용법 실습 페이지는 강의 중 별도로 제공된 주소로 접속해 주세요.'); return false;" style="color:#333;text-decoration:none;padding:10px 0;border-bottom:1px solid #f5f4f2;font-family:Pretendard,sans-serif;">구글 AI</a>
+  <a href="#" onclick="if(document.body.classList.contains('menu-open'))toggleMobileMenu(); document.getElementById('google-ai-notice').showModal(); return false;" style="color:#333;text-decoration:none;padding:10px 0;border-bottom:1px solid #f5f4f2;font-family:Pretendard,sans-serif;">구글 AI</a>
   <a href="/workshop.html" style="color:#333;text-decoration:none;padding:10px 0;border-bottom:1px solid #f5f4f2;font-family:Pretendard,sans-serif;">AI 워크숍</a>
   <button id="mobile-login-btn" class="" style="width:100%;height:44px;border:1px solid #E5E3DF;background:#fff;color:#333;border-radius:12px;font-weight:800;font-size:14px;cursor:pointer;margin-top:auto;font-family:Pretendard,sans-serif;">로그인</button>
   <button id="mobile-logout-btn" class="hidden" style="width:100%;height:44px;border:1px solid #E5E3DF;background:#fff;color:#B0AEA8;border-radius:12px;font-weight:700;font-size:14px;cursor:pointer;margin-top:auto;font-family:Pretendard,sans-serif;">로그아웃</button>
 </div>
+<!-- Google AI practice access notice -->
+<style>
+  #google-ai-notice{width:calc(100% - 32px);max-width:448px;margin:auto;padding:32px;border:1px solid #E5E3DF;border-radius:24px;background:#fff;color:#1A1A18;box-shadow:0 25px 50px -12px #0004;font-family:Pretendard,-apple-system,sans-serif;text-align:center;overflow:visible;}
+  #google-ai-notice::backdrop{background:rgba(26,26,24,.6);backdrop-filter:blur(12px);}
+  #google-ai-notice .notice-close{position:absolute;top:16px;right:16px;width:32px;height:32px;border:0;background:transparent;color:#8A8881;font-size:26px;line-height:1;cursor:pointer;}
+  #google-ai-notice .notice-label{display:inline-block;margin:0 0 16px;padding:4px 12px;border-radius:999px;background:#F2F8F5;color:#2A6B52;font-size:12px;font-weight:800;letter-spacing:1px;}
+  #google-ai-notice h2{margin:0 0 16px;font-size:24px;font-weight:900;line-height:1.4;}
+  #google-ai-notice p{margin:0;color:#605E59;font-size:16px;line-height:1.8;word-break:keep-all;}
+  #google-ai-notice .notice-confirm{display:block;width:100%;margin-top:28px;padding:13px 20px;border:0;border-radius:12px;background:#2A6B52;color:#fff;font:800 16px Pretendard,sans-serif;cursor:pointer;}
+  #google-ai-notice .notice-confirm:hover{background:#1D4E3A;}
+  #google-ai-notice button:focus-visible{outline:3px solid #2A6B52;outline-offset:4px;}
+  @media(max-width:480px){#google-ai-notice{padding:32px 24px 24px;}}
+</style>
+<dialog id="google-ai-notice" aria-labelledby="google-ai-notice-title" aria-describedby="google-ai-notice-description" onclick="if(event.target===this){const r=this.getBoundingClientRect();if(event.clientX<r.left||event.clientX>r.right||event.clientY<r.top||event.clientY>r.bottom)this.close();}">
+  <form method="dialog">
+    <button class="notice-close" aria-label="닫기" value="close">×</button>
+    <span class="notice-label">구글 AI</span>
+    <h2 id="google-ai-notice-title">실습 페이지 접속 안내</h2>
+    <p id="google-ai-notice-description">일잘러를 위한 구글 AI 활용법 실습 페이지는 강의 중 별도로 제공된 주소로 접속해 주세요.</p>
+    <button class="notice-confirm" value="confirm" autofocus>확인</button>
+  </form>
+</dialog>
